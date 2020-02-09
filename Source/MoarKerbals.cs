@@ -38,21 +38,22 @@ namespace MoarKerbals
                 accidentRate = accidentRate * 100;
 
             kloning_success = gameObject.AddComponent<AudioSource>();
-            kloning_success.clip = GameDatabase.Instance.GetAudioClip("KKP/MoarKerbals/Sounds/kloning");
+            kloning_success.clip = GameDatabase.Instance.GetAudioClip("MoarKerbals/Sounds/kloning");
             kloning_success.volume = 0.8f;
-            kloning_success.panLevel = 0;
+            kloning_success.panStereo = 0;
             kloning_success.rolloffMode = AudioRolloffMode.Linear;
             kloning_success.Stop();
 
             overload = gameObject.AddComponent<AudioSource>();
-            overload.clip = GameDatabase.Instance.GetAudioClip("KKP/MoarKerbals/Sounds/overload");
+            overload.clip = GameDatabase.Instance.GetAudioClip("MoarKerbals/Sounds/overload");
             overload.volume = 0.9f;
-            overload.panLevel = 0;
+            overload.panStereo = 0;
             overload.rolloffMode = AudioRolloffMode.Linear;
             overload.Stop();
         }
 
         [KSPEvent(active = true, guiActive = true, guiName = "Initiate Kloning!")]
+        [Obsolete]
         public void ActivateKlone()
         {
             if (PartHasRoom(part) && GatherResources(part))
@@ -104,6 +105,7 @@ namespace MoarKerbals
             GameEvents.onVesselChange.Fire(FlightGlobals.ActiveVessel);
         }
 
+        [Obsolete]
         private bool GatherResources(Part part)
         {
             //Steps through to gather resources
@@ -182,6 +184,7 @@ namespace MoarKerbals
         }
 
         [KSPEvent(active = true, guiActive = true, guiName = "Initiate Kloning!")]
+        [Obsolete]
         public void ActivateKlone()
         {
             if (PartHasRoom(part) && GatherResources(part))
@@ -197,6 +200,7 @@ namespace MoarKerbals
             }
         }
 
+        [Obsolete]
         private bool GatherResources(Part part)
         {
             //Steps through to gather resources

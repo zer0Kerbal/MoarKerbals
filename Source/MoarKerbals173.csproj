@@ -1,0 +1,151 @@
+﻿<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{49ACA87F-8951-4D8A-A7E5-7483EEB07D99}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <AssemblyName>MoarKerbals</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RootNamespace>MoarKerbals</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="$(DevDir173)\KSP_x64_Data\Managed\Assembly-CSharp*.dll">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="C:\Games\Dev173\KSP_x64_Data\Managed\Assembly-CSharp-firstpass.dll">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="C:\Games\Dev173\KSP_x64_Data\Managed\Assembly-CSharp.dll">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="C:\Games\Dev173\KSP_x64_Data\Managed\Assembly-UnityScript-firstpass.dll">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="C:\Games\Dev173\KSP_x64_Data\Managed\Assembly-UnityScript.dll">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="C:\Games\Dev173\KSP_x64_Data\Managed\Boo.Lang.dll">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="C:\Games\Dev173\KSP_x64_Data\Managed\I18N.CJK.dll">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="C:\Games\Dev173\KSP_x64_Data\Managed\I18N.dll">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="C:\Games\Dev173\KSP_x64_Data\Managed\I18N.MidEast.dll">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="C:\Games\Dev173\KSP_x64_Data\Managed\I18N.Other.dll">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="C:\Games\Dev173\KSP_x64_Data\Managed\I18N.Rare.dll">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="C:\Games\Dev173\KSP_x64_Data\Managed\I18N.West.dll">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="C:\Games\Dev173\KSP_x64_Data\Managed\Ionic.Zip.dll">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="C:\Games\Dev173\KSP_x64_Data\Managed\KSPAssets.dll">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="C:\Games\Dev173\KSP_x64_Data\Managed\KSPTrackIR.dll">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="C:\Games\Dev173\KSP_x64_Data\Managed\Mono.Cecil.dll">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="C:\Games\Dev173\KSP_x64_Data\Managed\Mono.Security.dll">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="C:\Games\Dev173\KSP_x64_Data\Managed\mscorlib.dll">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="C:\Games\Dev173\KSP_x64_Data\Managed\System.Core.dll">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="C:\Games\Dev173\KSP_x64_Data\Managed\System.dll">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="C:\Games\Dev173\KSP_x64_Data\Managed\System.Xml.dll">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="C:\Games\Dev173\KSP_x64_Data\Managed\TDx.TDxInput.dll">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="C:\Games\Dev173\KSP_x64_Data\Managed\UnityEngine.Analytics.dll">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="C:\Games\Dev173\KSP_x64_Data\Managed\UnityEngine.dll">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="C:\Games\Dev173\KSP_x64_Data\Managed\UnityEngine.Networking.dll">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="C:\Games\Dev173\KSP_x64_Data\Managed\UnityEngine.Timeline.dll">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="C:\Games\Dev173\KSP_x64_Data\Managed\UnityEngine.UI.dll">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="C:\Games\Dev173\KSP_x64_Data\Managed\UnityScript.Lang.dll">
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="InstallChecker.cs" />
+    <Compile Include="Log.cs" />
+    <Compile Include="MoarKerbals.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Version.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Version.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Utilities.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Properties\Version.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Version.cs</LastGenOutput>
+    </Content>
+    <Content Include="stuff\kloning.wav" />
+    <Content Include="stuff\overload.wav" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
+  <ProjectExtensions>
+    <VisualStudio AllowExistingFolder="true" />
+  </ProjectExtensions>
+</Project>

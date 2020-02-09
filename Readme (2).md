@@ -19,9 +19,3 @@ Textures originally made by RoverDude distributed under the CC 4.0 BY-NC-SA, mod
 ================
 Change Log
 ================
-v1.1
--Twice as many parts as before!  Orbital station as well as ground station version.
--Textures adapted from RoverDude's parts, designed to fit in with his style
--Added success/failure sounds
-v1.0
--Initial release

@@ -29,21 +29,62 @@ KerbalStuff Download
 
 Source and license are included in the zip.
 
-Change Log
+Depends: KSP/ModuleManager
 
-v1.1
+Recomends: SimpleLife/SimpleConstruction/SimpleLogistics/ODFC
 
--Now with 100% more parts, includes an OKS branded orbital pod and an MKS branded ground version. Original textures from the awesome RoverDude.
+## Features
+- No extra parts
+- No RAM usage
+- Added functionality for the Mobile Processing Lab in the late game
+- Simple, configurable and adds levels of depth to the gameplay without a learning curve
 
--Added success/failure sounds
+<hr>
 
-v1.0
+#### Installation Directions 
+- Use CKAN
+or
+- Manually (assumes basic KSP mod installation knowledge):
+ - Extract to your KSP folder.
+ - Install related ModuleManager patches.
 
--Initial Release
+### Changelog Summary
+*See [ChangeLog](https://github.com/zer0Kerbal/MoarKerbals/blob/master/Changelog.md) for full details of mod changes*
+<hr>
+### Requires
+ - [Kerbal Space Program](https://kerbalspaceprogram.com) v1.8.1, ***may*** work on earlier versions
 
-License
+### Depends
+ - [Module Manager](http://forum.kerbalspaceprogram.com/index.php?/topic/50533-105-*)
+ 
+### Recomends
+- [KerbalStats](https://forum.kerbalspaceprogram.com/index.php?/topic/89285-*)
+ - [Community Resource Pack](https://forum.kerbalspaceprogram.com/index.php?/topic/166314-*)
 
+### Suggests
+ - [Mining Expansion](http://forum.kerbalspaceprogram.com/index.php?/topic/130325-*)
+ - [Hot Beverages Irradiated](https://github.com/zer0Kerbal/HotBeverageIrradiated)
+ - [KGEx (coming soon)](https://github.com/zer0Kerbal/)
+ - [B9StockPatches](https://forum.kerbalspaceprogram.com/index.php?/topic/190870-*)
+ - [Kerbal Inventory System](http://forum.kerbalspaceprogram.com/index.php?/topic/149848-*)
+ - [Kerbal Attachment System](http://forum.kerbalspaceprogram.com/index.php?/topic/142594-*)
+ - [Not So SimpleConstruction (NSSC)](http://forum.kerbalspaceprogram.com/index.php?/topic/152309-*)
+ - [Infernal Robotics - Next](https://forum.kerbalspaceprogram.com/index.php?/topic/184787-*)
+
+### Supports
+ - [Kerbal Change Log](https://forum.kerbalspaceprogram.com/index.php?/topic/179207-*)
+
+### Conflicts
+- [ExtraPlanatary Launchpads](https://forum.kerbalspaceprogram.com/index.php?/topic/54284-*)
+## License
 CC 4.0 BY-NC-SA
+
+- ***All bundled mods are distributed under their own licenses***<br>
+- ***All art assets (textures, models, animations) are distributed under their own licenses***<br>
+
+<!--
+CC BY-NC-SA-4.0
+zer0Kerbal-->
 
 Screenshots
 ![](https://imgur.com/a/ucN1S)
@@ -52,3 +93,10 @@ Screenshots
     [Javascript is disabled. View full album](https://imgur.com/a/ucN1S)
 
 Edited December 28, 2014 by strideknight 
+
+Original:
+Thread: https://forum.kerbalspaceprogram.com/index.php?/topic/94517-*
+Source: 
+License: 
+
+###### v1.3.1.0 original: 11 Aug 2018 zed'K | updated: 09 Feb 2020 zed'K
