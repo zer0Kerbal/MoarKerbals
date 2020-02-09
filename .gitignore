@@ -30,3 +30,21 @@
 *.exe
 *.out
 *.app
+Source\.vs\*
+*.vcxproj*
+\Source\.vs\
+Source/.vs/Biomatic/v16/.suo
+*.db
+*.opendb
+*.log
+*.lastbuildstate
+*.rar
+bin/
+obj/
+.vs/
+*.7z
+*.7z
+*.zip
+ *.rar
+Doc/ *.bat *.markdown
+*.psd
