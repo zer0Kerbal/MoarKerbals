@@ -48,3 +48,4 @@ obj/
  *.rar
 Doc/ *.bat *.markdown
 *.psd
+*.cache
