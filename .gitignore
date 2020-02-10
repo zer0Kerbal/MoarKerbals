@@ -51,3 +51,4 @@ Doc/ *.bat *.markdown
 *.cache
 Source\obj\
 Source/obj/
+Source/.vs/MoarKerbals/v16/
