@@ -16,18 +16,24 @@ Also available on CKAN. -->
 adopted for curation by ***[zer0Kerbal](https://forum.kerbalspaceprogram.com/index.php?/profile/190933-*/)*** <br>
 Originally created by [***strideknight***](https://forum.kerbalspaceprogram.com/index.php?/profile/67555-strideknight/)
 
-![MoarKerbals](http:// "MoarKerbals")
+![MoarKerbals](https://i.imgur.com/PCGwS6R.png "MoarKerbals")
 
+#### Kerbthulhu Kinetics Program's 
 # MoarKerbals
-Populate your colony in space!
+##### Populate your colony in space!
 
 This mod installs a Klone Bay that you can use to replicate new kerbals wherever you feel like.  It takes a fair amount of electricity, and when combined with USI's MKS mod or TAC Life Support, it will require biomatter as well.
 
 There is a small chance for a freakish accident to occur, which can be disabled in the part's .cfg file, or you can just quicksave before kloning ;)
 
-Kerbthulhu Kinetics Program's MoarKerbals
 
-This is a fairly simple mod that adds two parts, an orbital station and ground station Klone Bay, that lets you klone your kerbals. There's a small chance that an accident can happen - this is experimental technology after all :wink: You can disable accidents or change the requirements in the part's .cfg file if you want, or just save before operating.
+This is a fairly simple mod that adds the ability to use resources to create a new kerbal. Requires resources and the presence of a living kerbal. There's a small chance that an accident can happen - this is experimental technology after all. :wink: 
+
+You can disable accidents or change the requirements in the part's .cfg file if you want, or just save before operating.
+
+MoarKerbals adds two parts:
+- orbital station 
+- ground station (Klone Bay)
 
 It requires a large amount of electricity to operate, and [strideknight] has always played with Roverdude's MKS and TAC's Life Support, so it automatically integrates with them to require Biomass or other materials. Also, [strideknight] included configs for the Community Tech Tree. Both require ModuleManager to integrate.
 
