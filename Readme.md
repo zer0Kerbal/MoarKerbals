@@ -8,7 +8,7 @@ Also available on CKAN. -->
 
 # MoarKerbals
 ![Mod Version](https://img.shields.io/github/v/release/zer0Kerbal/MoarKerbals?include_prereleases) 
-![KSP 1.8.x](https://img.shields.io/badge/KSP%20version-1.8.x-66ccff.svg?style=flat-square) 
+![KSP 1.7.3](https://img.shields.io/badge/KSP%20version-1.7.3-66ccff.svg?style=flat-square) 
 ![CKAN listed](https://img.shields.io/badge/CKAN-Indexed-brightgreen.svg) ![CC BY-NC-SA 4.0](https://img.shields.io/badge/license-GPLv3-success "CC BY-NC-SA 4.0") 
 
 > ***Populate your colony in space!*** 
@@ -56,7 +56,7 @@ Known bugs
 <hr>
 
 ### Requires
- - [Kerbal Space Program](https://kerbalspaceprogram.com) v1.8.1, ***may*** work on earlier versions
+ - [Kerbal Space Program](https://kerbalspaceprogram.com) v1.7.3, ***may*** work on earlier versions
 
 ### Depends
  - [Module Manager](http://forum.kerbalspaceprogram.com/index.php?/topic/50533-105-*)
