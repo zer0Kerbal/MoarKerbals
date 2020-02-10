@@ -54,6 +54,7 @@ Known bugs
 ### Changelog Summary
 *See [ChangeLog](https://github.com/zer0Kerbal/MoarKerbals/blob/master/Changelog.md) for full details of mod changes*
 <hr>
+
 ### Requires
  - [Kerbal Space Program](https://kerbalspaceprogram.com) v1.8.1, ***may*** work on earlier versions
 
@@ -85,7 +86,7 @@ Known bugs
  - [SimpleLife]()
 
 ### Conflicts
-- [ExtraPlanatary Launchpads](https://forum.kerbalspaceprogram.com/index.php?/topic/54284-*)
+- 
 
 ## License
 > ### Source: [GitHub](https://github.com/zer0Kerbal/MoarKerbals)
@@ -98,8 +99,8 @@ Known bugs
 
 
 Screenshots
-![](https://imgur.com/a/ucN1S)
-![](https://i.imgur.com/fxpDZqn.png)
+![MoarKerbals](https://imgur.com/a/ucN1S)
+![MoarKerbals](https://i.imgur.com/fxpDZqn.png)
 
 [Javascript is disabled. View full album](https://imgur.com/a/ucN1S)
 
