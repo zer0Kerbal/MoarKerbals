@@ -49,3 +49,4 @@ obj/
 Doc/ *.bat *.markdown
 *.psd
 *.cache
+*.cache
