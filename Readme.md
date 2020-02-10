@@ -7,9 +7,9 @@ updated: 10 Feb 2020 -->
 Also available on CKAN. -->
 
 # MoarKerbals
-<!--center-->![Mod Version](https://img.shields.io/github/v/release/zer0Kerbal/MoarKerbals?include_prereleases) 
+![Mod Version](https://img.shields.io/github/v/release/zer0Kerbal/MoarKerbals?include_prereleases) 
 ![KSP 1.7.3](https://img.shields.io/badge/KSP%20version-1.7.3-66ccff.svg?style=flat-square) 
-![CKAN listed](https://img.shields.io/badge/CKAN-Indexed-brightgreen.svg) ![CC BY-NC-SA 4.0](https://img.shields.io/badge/license-GPLv3-success "CC BY-NC-SA 4.0") <!--/center-->
+![CKAN listed](https://img.shields.io/badge/CKAN-Indexed-brightgreen.svg) ![CC BY-NC-SA 4.0](https://img.shields.io/badge/license-GPLv3-success "CC BY-NC-SA 4.0")
 
 > ***Populate your colony in space!*** 
 ## Author
@@ -35,7 +35,7 @@ MoarKerbals was inspired by [strideknight]'s desire to have a small colony of Ke
 
 This is [strideknight]'s first mod and it runs fine installs, so let me know if you find any bugs. All constructive feedback/suggestions are also welcome. Enjoy!
 
-###Known issue
+### Known issue
 Because I use the stock lander can for internals, which is only sized internally for two, if you clone a third kerbal into the bay it won't show up in the kerbal profiles at the bottom right. They will show up properly once you transfer them to another module though.
 
 
@@ -98,11 +98,10 @@ Because I use the stock lander can for internals, which is only sized internally
 
 
 Screenshots
-![MoarKerbals](https://imgur.com/a/ucN1S)
 ![MoarKerbals](https://i.imgur.com/fxpDZqn.png)
 
 [Javascript is disabled. View full album](https://imgur.com/a/ucN1S)
-
+<hr>
 
 Original: [Thread:](https://forum.kerbalspaceprogram.com/index.php?/topic/94517-*)
 Source/License: [Source and license are included in the zip.](https://www.dropbox.com/s/yc2zymblmjgrik8/MoarKerbals-v1.1.rar?dl=0))
