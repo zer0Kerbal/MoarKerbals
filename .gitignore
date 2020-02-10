@@ -49,4 +49,5 @@ obj/
 Doc/ *.bat *.markdown
 *.psd
 *.cache
-*.cache
+Source\obj\
+Source/obj/
