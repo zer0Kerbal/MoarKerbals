@@ -55,3 +55,6 @@ Source/.vs/MoarKerbals/v16/
 Source/assets/
 *.cache
 *.mdb
+*.suo
+*.lock
+*.idle
