@@ -90,9 +90,6 @@
     <Reference Include="C:\Games\Dev173\KSP_x64_Data\Managed\mscorlib.dll">
       <Private>False</Private>
     </Reference>
-    <Reference Include="C:\Games\Dev173\KSP_x64_Data\Managed\System.Core.dll">
-      <Private>False</Private>
-    </Reference>
     <Reference Include="C:\Games\Dev173\KSP_x64_Data\Managed\System.dll">
       <Private>False</Private>
     </Reference>
@@ -131,6 +128,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Version.tt</DependentUpon>
     </Compile>
+    <Compile Include="Settings.cs" />
     <Compile Include="Utilities.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -141,8 +139,11 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Version.cs</LastGenOutput>
     </Content>
-    <Content Include="stuff\kloning.wav" />
-    <Content Include="stuff\overload.wav" />
+    <Content Include="assets\kloning.wav" />
+    <Content Include="assets\overload.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="assets\MoarKerbals.version" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
   <ProjectExtensions>
