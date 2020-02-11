@@ -119,15 +119,15 @@ namespace MoarKerbals
             //Steps through to gather resources
             for (int i = 0; i < resourceList.Length; i++)
             {
-                double available = part.RequestResource(resourceList[i], (resourceAmounts[i] * HighLogic.CurrentGame.Parameters.CustomParams<MoarKerbals_Options>().globalKloningCostMultiplier));
+                double available = part.RequestResource(resourceList[i], resourceAmounts[i]);
 
-                if (available != (resourceAmounts[i] * HighLogic.CurrentGame.Parameters.CustomParams<MoarKerbals_Options>().globalKloningCostMultiplier))
+                if (available != resourceAmounts[i])
                 {
                     //Upon not having enough of a resource, returns all previously collected
-                    part.RequestResource(resourceList[i], (-available * HighLogic.CurrentGame.Parameters.CustomParams<MoarKerbals_Options>().globalKloningCostMultiplier));
+                    part.RequestResource(resourceList[i], -available);
                     for (int j = 0; j < i; j++)
-                        part.RequestResource(resourceList[j], (-resourceAmounts[j] * HighLogic.CurrentGame.Parameters.CustomParams<MoarKerbals_Options>().globalKloningCostMultiplier));
-                    ScreenMessages.PostScreenMessage("Insufficient " + resourceList[i] + " to start Kloning (" + available.ToString() + "/" + (resourceAmounts[i] * HighLogic.CurrentGame.Parameters.CustomParams<MoarKerbals_Options>().globalKloningCostMultiplier).ToString() + ")", 3.5f, ScreenMessageStyle.UPPER_CENTER);
+                        part.RequestResource(resourceList[j], -resourceAmounts[j]);
+                    ScreenMessages.PostScreenMessage("Insufficient " + resourceList[i] + " to start Kloning (" + available.ToString() + "/" + resourceAmounts[i].ToString() + ")", 3.5f, ScreenMessageStyle.UPPER_CENTER);
                     return false;
                 }
             }
