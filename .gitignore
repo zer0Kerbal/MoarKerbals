@@ -53,3 +53,5 @@ Source\obj\
 Source/obj/
 Source/.vs/MoarKerbals/v16/
 Source/assets/
+*.cache
+*.mdb
