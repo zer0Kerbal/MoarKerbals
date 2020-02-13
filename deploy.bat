@@ -16,14 +16,14 @@ set README="Readme.*"
 set CHANGELOG="Changelog.*"
 set LICENSE="License.*"
 
-rem copy /Y "%1%2" "%GAMEDATA%\%GAMEDIR%\Plugins"
+copy /Y "%1%2" "%GAMEDATA%\%GAMEDIR%\Plugins"
 copy /Y %VERSIONFILE% %GAMEDATA%\%GAMEDIR%
 copy /Y %README% %GAMEDATA%\%GAMEDIR%
 copy /Y %CHANGELOG% %GAMEDATA%\%GAMEDIR%
 copy /Y %LICENSE% %GAMEDATA%\%GAMEDIR%
 
-REM xcopy /y /s /I %GAMEDATA%\%GAMEDIR% "%H%\GameData\%GAMEDIR%"
+xcopy /y /s /I %GAMEDATA%\%GAMEDIR% "%H%\GameData\%GAMEDIR%"
 REM xcopy /y /s /I %GAMEDATA%\%GAMEDIR2% "%H%\GameData\%GAMEDIR2%"
-xcopy /y /s /I "%GAMEDATA%\%GAMEDIR%" "%H%\GameData\%GAMEDIR%"
+REM xcopy /y /s /I "%GAMEDATA%\%GAMEDIR%" "%H%\GameData\%GAMEDIR%"
 
 pause

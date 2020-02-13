@@ -35,10 +35,12 @@
     <RootNamespace>MoarKerbals</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
     <Reference Include="$(DevDir173)\KSP_x64_Data\Managed\Assembly-CSharp*.dll">
       <Private>False</Private>
     </Reference>
@@ -122,17 +124,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="InstallChecker.cs" />
-    <Compile Include="Log.cs" />
     <Compile Include="MoarKerbals.cs" />
+    <Compile Include="Log.cs" />
+    <Compile Include="Settings.cs" />
+    <Compile Include="Utilities.cs" />
+    <Compile Include="InstallChecker.cs" />
+    <Compile Include="SettingsInterface.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Version.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Version.tt</DependentUpon>
     </Compile>
-    <Compile Include="Settings.cs" />
-    <Compile Include="Utilities.cs" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
@@ -148,8 +151,31 @@
   <ItemGroup>
     <None Include="assets\MoarKerbals.version" />
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
+    <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
+  <PropertyGroup>
+    <PostBuildEvent>start /D $(ProjectDir)..\  /WAIT deploy.bat  $(TargetDir) $(TargetFileName)
+if $(ConfigurationName) == Release start /D $(ProjectDir)..\   /WAIT buildRelease.bat $(TargetDir) $(TargetFileName)
+    </PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <!-- <PreBuildEvent>set textTemplatingPath="$(DevEnvDir)texttransform.exe"
+%25textTemplatingPath%25 "$(ProjectDir)AssemblyVersion.tt"</PreBuildEvent> -->
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
   <ProjectExtensions>
+    <MonoDevelop>
+      <Properties>
+        <Policies>
+          <TextStylePolicy TabWidth="4" IndentWidth="4" RemoveTrailingWhitespace="True" NoTabsAfterNonTabs="False" EolMarker="Native" FileWidth="132" TabsToSpaces="False" scope="text/plain" />
+          </Policies>
+        </Properties>
+      </MonoDevelop>
     <VisualStudio AllowExistingFolder="true" />
   </ProjectExtensions>
 </Project>

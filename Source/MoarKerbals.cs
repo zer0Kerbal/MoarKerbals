@@ -67,8 +67,8 @@ namespace MoarKerbals
                         kerbal.seat.SpawnCrew();
                 
                     //ScreenMessages.PostScreenMessage("Kloning Success!  " + kerbal.name + " has joined your space program", 3.5f, ScreenMessageStyle.UPPER_CENTER);
-                   Utilities.msg("Kloning Success!  " + kerbal.name + "(Lv " + kerbal.experienceLevel.ToString() + " "+ kerbal.experienceTrait.ToString() + ") has joined your space program");
-                   if (HighLogic.CurrentGame.Parameters.CustomParams<MoarKerbals_Options>().SoundOn) kloning_success.Play();
+                   Utilities.msg("Kloning Success!  " + kerbal.name + "(Lv " + kerbal.experienceLevel.ToString() + " "+ kerbal.experienceTrait.Title + ") has joined your space program");
+                   if (SettingsInterface.SoundOn()) kloning_success.Play();
                 }
                 else {
                     int opt = rnd.Next(0,100);
@@ -108,7 +108,7 @@ namespace MoarKerbals
                             // ScreenMessages.PostScreenMessage("The Kloning process failed.  You lost " + culprit + ", but at least you have pizza now."); 
                            Utilities.msg("The Kloning process failed.  You lost " + culprit + ", but at least you have pizza now."); 
                     }
-                    if (HighLogic.CurrentGame.Parameters.CustomParams<MoarKerbals_Options>().SoundOn) overload.Play();
+                    if (SettingsInterface.SoundOn()) overload.Play();
                 }
             }
             GameEvents.onVesselChange.Fire(FlightGlobals.ActiveVessel);
@@ -119,8 +119,10 @@ namespace MoarKerbals
             //Steps through to gather resources
             for (int i = 0; i < resourceList.Length; i++)
             {
+                Log.dbg("GlobalScale: {1}", SettingsInterface.globalKloningCostMultiplier());
                 double available = part.RequestResource(resourceList[i], resourceAmounts[i]);
-
+                //debug:
+                Log.dbg(" DEBUG: {1} : resourceAmounts: {2}", available.ToString(), resourceAmounts[i]);
                 if (available != resourceAmounts[i])
                 {
                     //Upon not having enough of a resource, returns all previously collected
@@ -137,7 +139,7 @@ namespace MoarKerbals
         //Checks to make sure there is at least one kerbal as a DNA source and that there is room to store the new kerbal
         private bool PartHasRoom(Part part)
         {
-            if ((part.protoModuleCrew.Count < part.CrewCapacity) && ((part.protoModuleCrew.Count > 0) || HighLogic.CurrentGame.Parameters.CustomParams<MoarKerbals_Options>().RequireLivingKerbal))
+            if ((part.protoModuleCrew.Count < part.CrewCapacity) && ((part.protoModuleCrew.Count > 0) || SettingsInterface.RequireLivingKerbal()))
                 return true;
             else
             {
@@ -212,17 +214,17 @@ namespace MoarKerbals
             //Steps through to gather resources
             for (int i = 0; i < resourceList.Length; i++)
             {
+                Log.dbg("GlobalScale: {1}", SettingsInterface.globalKloningCostMultiplier());
                 double available = part.RequestResource(resourceList[i], resourceAmounts[i]);
                 //debug:
-                print(" DEBUG: " + available.ToString());
+                Log.dbg(" DEBUG: {1} : resourceAmounts: {2}", available.ToString(), resourceAmounts[i]);
                 if (available != resourceAmounts[i])
                 {
                     //Upon not having enough of a resource, returns all previously collected
                     part.RequestResource(resourceList[i], -available);
                     for (int j = 0; j < i; j++)
                         part.RequestResource(resourceList[j], -resourceAmounts[j]);
-                    ScreenMessages.PostScreenMessage("Insufficient " + resourceList[i] + " to start Kloning (" + available.ToString() + "/" + resourceAmounts[i].ToString() + ")", 3.5f, ScreenMessageStyle.UPPER_CENTER);
-                    return false;
+                    ScreenMessages.PostScreenMessage("Insufficient " + resourceList[i] + " to start Kloning (" + available.ToString() + "/" + resourceAmounts[i].ToString() + ")", 3.5f, ScreenMessageStyle.UPPER_CENTER);                   return false;
                 }
             }
             return true;
@@ -231,7 +233,7 @@ namespace MoarKerbals
         //Checks to make sure there is at least one kerbal as a DNA source and that there is room to store the new kerbal
         private bool PartHasRoom(Part part)
         {
-            if ((part.protoModuleCrew.Count < part.CrewCapacity) && ((part.protoModuleCrew.Count > 0) || HighLogic.CurrentGame.Parameters.CustomParams<MoarKerbals_Options>().RequireLivingKerbal))
+            if ((part.protoModuleCrew.Count < part.CrewCapacity) && ((part.protoModuleCrew.Count > 0) || SettingsInterface.RequireLivingKerbal()))
                 return true;
             else
             {
