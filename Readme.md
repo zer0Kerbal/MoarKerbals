@@ -57,7 +57,7 @@ Because I use the stock lander can for internals, which is only sized internally
 - Use CKAN
 
 ### Changelog Summary
-*See [ChangeLog](https://github.com/zer0Kerbal/MoarKerbals/blob/master/Changelog.md) for full details of mod changes*
+*See [ChangeLog](https://github.com/zer0Kerbal/MoarKerbals/blob/master/Changelog.cfg) for full details of mod changes*
 <hr>
 
 ### Requires
@@ -79,16 +79,16 @@ Because I use the stock lander can for internals, which is only sized internally
  - [Kerbal Attachment System](http://forum.kerbalspaceprogram.com/index.php?/topic/142594-*)
  - [Not So SimpleConstruction (NSSC)](http://forum.kerbalspaceprogram.com/index.php?/topic/152309-*)
  - [Infernal Robotics - Next](https://forum.kerbalspaceprogram.com/index.php?/topic/184787-*)
- - [SimpleConstruction]()
- - [Not No SimpleConstruction (NSSC)]()
- - [SimpleLogistics]()
- - [On Demand Fuel Cells (Refueled) ]()
+ - [SimpleConstruction)](https://forum.kerbalspaceprogram.com/index.php?/topic/191424-ksp-*)
+ - [Not So SimpleConstruction (NSSC)](http://forum.kerbalspaceprogram.com/index.php?/topic/152
+ - [SimpleLogistics](https://forum.kerbalspaceprogram.com/index.php?/topic/191045-*/)
+ - [On Demand Fuel Cells (Refueled)](https://forum.kerbalspaceprogram.com/index.php?/topic/187625-*)
 
 ### Supports
  - [Kerbal Change Log](https://forum.kerbalspaceprogram.com/index.php?/topic/179207-*)
  - [USI-LS]()
  - [MKS]()
- - [SimpleLife]()
+ - [SimpleLife](https://forum.kerbalspaceprogram.com/index.php?/topic/191526-*)
 
 ### Conflicts
 - [KKPsMoarKerbals](http://forum.kerbalspaceprogram.com/threads/104853)
