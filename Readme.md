@@ -13,8 +13,7 @@ Also available on CKAN. -->
 
 > ***Populate your colony in space!*** 
 ## Author
-adopted for curation by ***[zer0Kerbal](https://forum.kerbalspaceprogram.com/index.php?/profile/190933-*/)*** <br>
-Originally created by [***strideknight***](https://forum.kerbalspaceprogram.com/index.php?/profile/67555-strideknight/)
+adopted for curation by ***[zer0Kerbal](https://forum.kerbalspaceprogram.com/index.php?/profile/190933-*/).*** Originally created by [***strideknight***](https://forum.kerbalspaceprogram.com/index.php?/profile/67555-strideknight/)
 
 ![MoarKerbals](https://i.imgur.com/PCGwS6R.png "MoarKerbals")
 
