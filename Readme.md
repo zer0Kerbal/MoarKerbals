@@ -79,7 +79,7 @@ Because I use the stock lander can for internals, which is only sized internally
  - [Not So SimpleConstruction (NSSC)](http://forum.kerbalspaceprogram.com/index.php?/topic/152309-*)
  - [Infernal Robotics - Next](https://forum.kerbalspaceprogram.com/index.php?/topic/184787-*)
  - [SimpleConstruction)](https://forum.kerbalspaceprogram.com/index.php?/topic/191424-ksp-*)
- - [Not So SimpleConstruction (NSSC)](http://forum.kerbalspaceprogram.com/index.php?/topic/152
+ - [Not So SimpleConstruction (NSSC)](https://forum.kerbalspaceprogram.com/index.php?/topic/191504-*)
  - [SimpleLogistics](https://forum.kerbalspaceprogram.com/index.php?/topic/191045-*/)
  - [On Demand Fuel Cells (Refueled)](https://forum.kerbalspaceprogram.com/index.php?/topic/187625-*)
 
