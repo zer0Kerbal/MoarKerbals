@@ -19,6 +19,7 @@ namespace MoarKerbals
         private string[] resourceList;
         private double[] resourceAmounts;
         private string[] str_amounts;
+        private string[] resList; // = recipeIngredients.Split(',');
 
         protected AudioSource overload;
         protected AudioSource kloning_success;
@@ -27,6 +28,7 @@ namespace MoarKerbals
         {
             resourceList = recipeIngredients.Split(',');
             str_amounts = recipeAmounts.Split(',');
+            resList = recipeIngredients.Split(',');
             resourceAmounts = new double[str_amounts.Length];
             for (int i = 0; i < resourceList.Length; i++)
                 resourceAmounts[i] = double.Parse(str_amounts[i]);
@@ -35,7 +37,7 @@ namespace MoarKerbals
             else if (accidentRate > 1)
                 accidentRate = 100;
             else
-                accidentRate = accidentRate * 100;
+                accidentRate *= 100;
 
             kloning_success = gameObject.AddComponent<AudioSource>();
             kloning_success.clip = GameDatabase.Instance.GetAudioClip("MoarKerbals/Sounds/kloning");
@@ -116,13 +118,14 @@ namespace MoarKerbals
 
         private bool GatherResources(Part part)
         {
+            double gblMult = HighLogic.CurrentGame.Parameters.CustomParams<MoarKerbals_Options>().globalKloningCostMultiplier ;
             //Steps through to gather resources
             for (int i = 0; i < resourceList.Length; i++)
             {
-                Log.dbg("GlobalScale: {1}", SettingsInterface.globalKloningCostMultiplier());
+                // Log.dbg("GlobalScale: {p0}", gblMult * .01);
                 double available = part.RequestResource(resourceList[i], resourceAmounts[i]);
                 //debug:
-                Log.dbg(" DEBUG: {1} : resourceAmounts: {2}", available.ToString(), resourceAmounts[i]);
+                //Log.dbg(" DEBUG: {1} : resourceAmounts: {2} need: {3}", resList[i],  available.ToString(), resourceAmounts[i].ToString());
                 if (available != resourceAmounts[i])
                 {
                     //Upon not having enough of a resource, returns all previously collected
@@ -139,16 +142,24 @@ namespace MoarKerbals
         //Checks to make sure there is at least one kerbal as a DNA source and that there is room to store the new kerbal
         private bool PartHasRoom(Part part)
         {
-            if ((part.protoModuleCrew.Count < part.CrewCapacity) && ((part.protoModuleCrew.Count > 0) || SettingsInterface.RequireLivingKerbal()))
-                return true;
+            if (!HighLogic.CurrentGame.Parameters.CustomParams<MoarKerbals_Options>().RequireLivingKerbal) 
+                ScreenMessages.PostScreenMessage("Kloning does not need a living kerbal", 3.5f, ScreenMessageStyle.UPPER_CENTER);
+            // Log.dbg("Kloning does not need a living kerbal");
             else
-            {
                 if (part.protoModuleCrew.Count == 0)
-                    ScreenMessages.PostScreenMessage("Kloning requires at least one test subject", 3.5f, ScreenMessageStyle.UPPER_CENTER);
-                else if (part.protoModuleCrew.Count == part.CrewCapacity)
-                    ScreenMessages.PostScreenMessage("No room left in Kloning Bay", 3.5f, ScreenMessageStyle.UPPER_CENTER);
+            {
+                ScreenMessages.PostScreenMessage("Kloning requires at least one test subject", 3.5f, ScreenMessageStyle.UPPER_CENTER);
+                //Log.dbg("Kloning requires at least one test subject, no one in: {0}", part.name.ToString());
                 return false;
             }
+           // Log.dbg("Crew counts {0} = {1}", part.protoModuleCrew.Count, part.CrewCapacity);
+            if (part.protoModuleCrew.Count == part.CrewCapacity)
+            {
+                ScreenMessages.PostScreenMessage("No room left in Kloning Bay", 3.5f, ScreenMessageStyle.UPPER_CENTER);
+                //Log.dbg("Kloning requires at least one test subject, No room left in: ", part.name);
+                return false;
+            }
+            return true;
         }
 
         public override string GetInfo()
@@ -180,6 +191,8 @@ namespace MoarKerbals
         [KSPField]
         public bool accidentRate;
 
+
+        private string[] resList; // = recipeIngredients.Split(',');
         private string[] resourceList;
         private double[] resourceAmounts;
         private string[] str_amounts;
@@ -188,6 +201,7 @@ namespace MoarKerbals
         {
             resourceList = recipeIngredients.Split(',');
             str_amounts = recipeAmounts.Split(',');
+            resList = recipeIngredients.Split(',');
             resourceAmounts = new double[str_amounts.Length];
             for (int i = 0; i < resourceList.Length; i++)
                 resourceAmounts[i] = double.Parse(str_amounts[i]);
@@ -217,7 +231,7 @@ namespace MoarKerbals
                 Log.dbg("GlobalScale: {1}", SettingsInterface.globalKloningCostMultiplier());
                 double available = part.RequestResource(resourceList[i], resourceAmounts[i]);
                 //debug:
-                Log.dbg(" DEBUG: {1} : resourceAmounts: {2}", available.ToString(), resourceAmounts[i]);
+                //Log.dbg("Costs: {1} : resourceAmounts: {2}", res  resList[i], resourceList[i]), available, resourceAmounts[i]);
                 if (available != resourceAmounts[i])
                 {
                     //Upon not having enough of a resource, returns all previously collected

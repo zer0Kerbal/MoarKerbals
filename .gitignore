@@ -30,6 +30,13 @@
 *.exe
 *.out
 *.app
+*.bat
+
+# excluded document types
+*.markdown
+*.psd
+*.mdb
+
 Source\.vs\*
 *.vcxproj*
 \Source\.vs\
@@ -38,23 +45,21 @@ Source/.vs/Biomatic/v16/.suo
 *.opendb
 *.log
 *.lastbuildstate
-*.rar
 bin/
 obj/
 .vs/
-*.7z
-*.7z
-*.zip
- *.rar
-Doc/ *.bat *.markdown
-*.psd
+Doc/
 *.cache
 Source\obj\
 Source/obj/
 Source/.vs/MoarKerbals/v16/
 Source/assets/
 *.cache
-*.mdb
 *.suo
 *.lock
 *.idle
+
+# archives
+*.rar
+*.7z
+*.zip

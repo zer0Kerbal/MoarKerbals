@@ -29,6 +29,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DebugSymbols>true</DebugSymbols>
     <DocumentationFile>bin\Release\MoarKerbals.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup>
@@ -41,89 +42,13 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="$(DevDir173)\KSP_x64_Data\Managed\Assembly-CSharp*.dll">
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="C:\Games\Dev173\KSP_x64_Data\Managed\Assembly-CSharp-firstpass.dll">
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="C:\Games\Dev173\KSP_x64_Data\Managed\Assembly-CSharp.dll">
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="C:\Games\Dev173\KSP_x64_Data\Managed\Assembly-UnityScript-firstpass.dll">
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="C:\Games\Dev173\KSP_x64_Data\Managed\Assembly-UnityScript.dll">
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="C:\Games\Dev173\KSP_x64_Data\Managed\Boo.Lang.dll">
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="C:\Games\Dev173\KSP_x64_Data\Managed\I18N.CJK.dll">
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="C:\Games\Dev173\KSP_x64_Data\Managed\I18N.dll">
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="C:\Games\Dev173\KSP_x64_Data\Managed\I18N.MidEast.dll">
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="C:\Games\Dev173\KSP_x64_Data\Managed\I18N.Other.dll">
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="C:\Games\Dev173\KSP_x64_Data\Managed\I18N.Rare.dll">
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="C:\Games\Dev173\KSP_x64_Data\Managed\I18N.West.dll">
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="C:\Games\Dev173\KSP_x64_Data\Managed\Ionic.Zip.dll">
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="C:\Games\Dev173\KSP_x64_Data\Managed\KSPAssets.dll">
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="C:\Games\Dev173\KSP_x64_Data\Managed\KSPTrackIR.dll">
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="C:\Games\Dev173\KSP_x64_Data\Managed\Mono.Cecil.dll">
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="C:\Games\Dev173\KSP_x64_Data\Managed\Mono.Security.dll">
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="C:\Games\Dev173\KSP_x64_Data\Managed\mscorlib.dll">
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="C:\Games\Dev173\KSP_x64_Data\Managed\System.dll">
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="C:\Games\Dev173\KSP_x64_Data\Managed\System.Xml.dll">
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="C:\Games\Dev173\KSP_x64_Data\Managed\TDx.TDxInput.dll">
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="C:\Games\Dev173\KSP_x64_Data\Managed\UnityEngine.Analytics.dll">
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="C:\Games\Dev173\KSP_x64_Data\Managed\UnityEngine.dll">
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="C:\Games\Dev173\KSP_x64_Data\Managed\UnityEngine.Networking.dll">
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="C:\Games\Dev173\KSP_x64_Data\Managed\UnityEngine.Timeline.dll">
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="C:\Games\Dev173\KSP_x64_Data\Managed\UnityEngine.UI.dll">
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="C:\Games\Dev173\KSP_x64_Data\Managed\UnityScript.Lang.dll">
-      <Private>False</Private>
-    </Reference>
+    <Reference Include="$(DevDir173)\KSP_x64_Data\Managed\Assembly-CSharp*.dll" />
+    <Reference Include="$(DevDir173)\KSP_x64_Data\Managed\UnityEngine.Analytics.dll" />
+    <Reference Include="$(DevDir173)\KSP_x64_Data\Managed\UnityEngine.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="KerbalRecruitment.cs" />
+    <Compile Include="debuggingClass.cs" />
     <Compile Include="MoarKerbals.cs" />
     <Compile Include="Log.cs" />
     <Compile Include="Settings.cs" />
@@ -151,7 +76,7 @@
   <ItemGroup>
     <None Include="assets\MoarKerbals.version" />
   </ItemGroup>
-    <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
   <PropertyGroup>
     <PostBuildEvent>start /D $(ProjectDir)..\  /WAIT deploy.bat  $(TargetDir) $(TargetFileName)
 if $(ConfigurationName) == Release start /D $(ProjectDir)..\   /WAIT buildRelease.bat $(TargetDir) $(TargetFileName)
@@ -173,9 +98,9 @@ if $(ConfigurationName) == Release start /D $(ProjectDir)..\   /WAIT buildReleas
       <Properties>
         <Policies>
           <TextStylePolicy TabWidth="4" IndentWidth="4" RemoveTrailingWhitespace="True" NoTabsAfterNonTabs="False" EolMarker="Native" FileWidth="132" TabsToSpaces="False" scope="text/plain" />
-          </Policies>
-        </Properties>
-      </MonoDevelop>
+        </Policies>
+      </Properties>
+    </MonoDevelop>
     <VisualStudio AllowExistingFolder="true" />
   </ProjectExtensions>
 </Project>

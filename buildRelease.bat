@@ -60,7 +60,7 @@ set /P patch=<tmpfile
 set /P build=<tmpfile
 del tmpfile
 del tmp.version
-set VERSION=%major%.%minor%.%patch%
+set VERSION=%major%.%minor%.%patch%.%build%
 if "%build%" NEQ "0"  set VERSION=%VERSION%.%build%
 
 echo Version:  %VERSION%

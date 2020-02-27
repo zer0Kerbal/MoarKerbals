@@ -39,7 +39,7 @@ namespace MoarKerbals
         {
             if (0 != @params.Length) msg = string.Format(msg, @params);
             ScreenMessages.PostScreenMessage(msg, 10f, ScreenMessageStyle.UPPER_CENTER, true);
-            if (HighLogic.CurrentGame.Parameters.CustomParams<MoarKerbals_Options>().InGameMail) UnityEngine.Debug.Log("[MoarKerbals] " + msg);
+            if (HighLogic.CurrentGame.Parameters.CustomParams<MoarKerbals_Options>().InGameMail) Log.dbg("[MoarKerbals] ", msg);
         }
 
         public static string GetDllVersion<T>(T t)
