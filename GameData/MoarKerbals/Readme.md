@@ -13,8 +13,7 @@ Also available on CKAN. -->
 
 > ***Populate your colony in space!*** 
 ## Author
-adopted for curation by ***[zer0Kerbal](https://forum.kerbalspaceprogram.com/index.php?/profile/190933-*/)*** <br>
-Originally created by [***strideknight***](https://forum.kerbalspaceprogram.com/index.php?/profile/67555-strideknight/)
+adopted for curation by ***[zer0Kerbal](https://forum.kerbalspaceprogram.com/index.php?/profile/190933-*/).*** Originally created by [***strideknight***](https://forum.kerbalspaceprogram.com/index.php?/profile/67555-strideknight/)
 
 ![MoarKerbals](https://i.imgur.com/PCGwS6R.png "MoarKerbals")
 
@@ -57,7 +56,7 @@ Because I use the stock lander can for internals, which is only sized internally
 - Use CKAN
 
 ### Changelog Summary
-*See [ChangeLog](https://github.com/zer0Kerbal/MoarKerbals/blob/master/Changelog.md) for full details of mod changes*
+*See [ChangeLog](https://github.com/zer0Kerbal/MoarKerbals/blob/master/Changelog.cfg) for full details of mod changes*
 <hr>
 
 ### Requires
@@ -79,16 +78,16 @@ Because I use the stock lander can for internals, which is only sized internally
  - [Kerbal Attachment System](http://forum.kerbalspaceprogram.com/index.php?/topic/142594-*)
  - [Not So SimpleConstruction (NSSC)](http://forum.kerbalspaceprogram.com/index.php?/topic/152309-*)
  - [Infernal Robotics - Next](https://forum.kerbalspaceprogram.com/index.php?/topic/184787-*)
- - [SimpleConstruction]()
- - [Not No SimpleConstruction (NSSC)]()
- - [SimpleLogistics]()
- - [On Demand Fuel Cells (Refueled) ]()
+ - [SimpleConstruction)](https://forum.kerbalspaceprogram.com/index.php?/topic/191424-ksp-*)
+ - [Not So SimpleConstruction (NSSC)](https://forum.kerbalspaceprogram.com/index.php?/topic/191504-*)
+ - [SimpleLogistics](https://forum.kerbalspaceprogram.com/index.php?/topic/191045-*/)
+ - [On Demand Fuel Cells (Refueled)](https://forum.kerbalspaceprogram.com/index.php?/topic/187625-*)
 
 ### Supports
  - [Kerbal Change Log](https://forum.kerbalspaceprogram.com/index.php?/topic/179207-*)
  - [USI-LS]()
  - [MKS]()
- - [SimpleLife]()
+ - [SimpleLife](https://forum.kerbalspaceprogram.com/index.php?/topic/191526-*)
 
 ### Conflicts
 - [KKPsMoarKerbals](http://forum.kerbalspaceprogram.com/threads/104853)
