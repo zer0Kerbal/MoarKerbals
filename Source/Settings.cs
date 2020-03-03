@@ -73,7 +73,7 @@ namespace MoarKerbals
             maxValue = 5.0f,
             stepCount = 101,
             displayFormat = "F2",
-            asPercentage = false)]
+            asPercentage = true)]
         public double globalKloningCostMultiplier = 1.0f;
 
         // If you want to have some of the game settings default to enabled,  change 

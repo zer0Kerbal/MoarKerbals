@@ -1,6 +1,6 @@
-﻿/*
-?   Based upon debuggingClass from the 'CivilianPopulation' mod for Kerbal Space Program
-    https://github.com/linuxgurugamer/CivilianPopulation
+﻿
+? Based upon debuggingClass from the 'CivilianPopulation' mod for Kerbal Space Program
+  https://github.com/linuxgurugamer/CivilianPopulation
 
     LinuxGuruGamer
     CC BY-NC 4.0 (Attribution-NonCommercial 4.0 International) (https://creativecommons.org/licenses/by-nc/4.0/)
@@ -8,7 +8,8 @@
 
     This file has been modified extensively and is released under the same license.
 
-*/
+
+
 
 using System;
 using UnityEngine;

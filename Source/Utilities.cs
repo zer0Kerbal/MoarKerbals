@@ -39,9 +39,18 @@ namespace MoarKerbals
         {
             if (0 != @params.Length) msg = string.Format(msg, @params);
             ScreenMessages.PostScreenMessage(msg, 10f, ScreenMessageStyle.UPPER_CENTER, true);
-            if (HighLogic.CurrentGame.Parameters.CustomParams<MoarKerbals_Options>().InGameMail) Log.dbg("[MoarKerbals] ", msg);
+            if (SettingsInterface.InGameMail()) UnityEngine.Debug.Log("[MoarKerbals] " + msg);
         }
 
+        [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = true)]
+        public class KSPAssemblyDependency : Attribute
+        {
+            public string name;
+            public int versionMajor;
+            public int versionMinor;
+
+            public extern KSPAssemblyDependency(string name, int versionMajor, int versionMinor);
+        }
         public static string GetDllVersion<T>(T t)
         {
             System.Reflection.Assembly assembly = t.GetType().Assembly;

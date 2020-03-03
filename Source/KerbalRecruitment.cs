@@ -21,6 +21,13 @@ namespace MoarKerbals
 {
     public class KerbalRecruitment : PartModule
     {
+        enum KerbalJob
+        {
+            Pilot,
+            Engineer,
+            Scientist
+        }
+
         [KSPEvent(guiName = "Recruit Kerbal", active = true, guiActive = true)]
         void recruitKerbal()
         {
@@ -30,17 +37,21 @@ namespace MoarKerbals
             List<ProtoCrewMember> vesselCrew = vessel.GetVesselCrew();
             foreach (ProtoCrewMember crewMember in vesselCrew)
             {
-                ScreenMessages.PostScreenMessage(crewMember.name + " : " + crewMember.trait + ": " + crewMember.type, 3.5f, ScreenMessageStyle.UPPER_CENTER);
+                Log.dbg(crewMember.name + " : " + crewMember.trait + ": " + crewMember.type, 3.5f, ScreenMessageStyle.UPPER_CENTER);
                 //if (crewMember.trait == debuggingClass.civilianTrait && changedTrait == false)
                 if (crewMember.trait == "Civilian" && changedTrait == false)
                 {
                     crewMember.trait = getRandomTrait();
+                    //crewMember.Save(.this);
                     crewMember.type = ProtoCrewMember.KerbalType.Crew;
+                    //crewMember.trait = KerbalJob.Engineer;
                     changedTrait = true;
-            ScreenMessages.PostScreenMessage(crewMember.name + " is now a " + crewMember.trait + "!", 3.5f, ScreenMessageStyle.UPPER_CENTER);
-              //      Debug.Log(debuggingClass.modName + crewMember.name + " is now a " + crewMember.trait + "!");
+                    //HighLogic.CurrentGame.CrewRoster.Save(HighLogic.CurrentGame());
+                    Utilities.msg(crewMember.name + " is now a " + crewMember.trait + "!", 3.5f, ScreenMessageStyle.UPPER_CENTER);
+                    //      Debug.Log(debuggingClass.modName + crewMember.name + " is now a " + crewMember.trait + "!");
                 }
             }
+            if (changedTrait) GameEvents.onVesselChange.Fire(FlightGlobals.ActiveVessel);
         }
 
         private string getRandomTrait()

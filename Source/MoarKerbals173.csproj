@@ -48,7 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="KerbalRecruitment.cs" />
-    <Compile Include="debuggingClass.cs" />
+    <Compile Include="KuddleShack.cs" />
     <Compile Include="MoarKerbals.cs" />
     <Compile Include="Log.cs" />
     <Compile Include="Settings.cs" />
