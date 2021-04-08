@@ -6,7 +6,10 @@ using UnityEngine;
 
 namespace MoarKerbals
 {
-	[KSPModule("KuddleShack")]
+	/// <summary>
+	/// 
+	/// </summary>
+	[KSPModule("KuddleShack")]	
 	public class KuddleShack : PartModule
 	{
 		[KSPField]

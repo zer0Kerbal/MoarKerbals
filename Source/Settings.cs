@@ -124,8 +124,27 @@ namespace MoarKerbals
         public override void SetDifficultyPreset(GameParameters.Preset preset) { }
 #endif
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="member"></param>
+        /// <param name="parameters"></param>
+        /// <returns></returns>
         public override bool Enabled(MemberInfo member, GameParameters parameters) { return true; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="member"></param>
+        /// <param name="parameters"></param>
+        /// <returns></returns>
         public override bool Interactible(MemberInfo member, GameParameters parameters) { return true; }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="member"></param>
+        /// <returns></returns>
         public override IList ValidValues(MemberInfo member) { return null; }
     }
 }

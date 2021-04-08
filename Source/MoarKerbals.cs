@@ -56,7 +56,6 @@ namespace MoarKerbals
 		}
 
 		[KSPEvent(active = true, guiActive = true, guiName = "Initiate Kloning!")]
-
 		public void ActivateKlone()
 		{
 			if (PartHasRoom(part) && GatherResources(part))
@@ -189,12 +188,14 @@ namespace MoarKerbals
 			return true;
 		}
 
-		  ProtoCrewMember CreateRandomKerbal()
+#if false
+		ProtoCrewMember CreateRandomKerbal()
         {
             var roster = HighLogic.CurrentGame.CrewRoster;
 
             var newMember = roster.GetNewKerbal(ProtoCrewMember.KerbalType.Crew);
             return newMember;
         }
+#endif
 	}
 }

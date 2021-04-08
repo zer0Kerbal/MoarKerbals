@@ -7,23 +7,19 @@ rem GAMEDATA is the name of the local GameData
 rem VERSIONFILE is the name of the version file, usually the same as GAMEDATA,
 rem    but not always
 
-set H=C:\KSP_DEV\Releases
+set H=%KSPDIR%
 set GAMEDIR=MoarKerbals
-REM set GAMEDIR2=ExtraplanetaryLaunchpads
-set GAMEDATA="GameData\"
+set GAMEDATA="GameData"
 set VERSIONFILE=%GAMEDIR%.version
-set README="Readme.*"
-set CHANGELOG="Changelog.*"
-set LICENSE="License.*"
+
+set DP0=r:\dp0\kspdev
 
 copy /Y "%1%2" "%GAMEDATA%\%GAMEDIR%\Plugins"
+copy /Y "%1%3".pdb "%GAMEDATA%\%GAMEDIR%\Plugins"
+
 copy /Y %VERSIONFILE% %GAMEDATA%\%GAMEDIR%
-copy /Y %README% %GAMEDATA%\%GAMEDIR%
-copy /Y %CHANGELOG% %GAMEDATA%\%GAMEDIR%
-copy /Y %LICENSE% %GAMEDATA%\%GAMEDIR%
 
 xcopy /y /s /I %GAMEDATA%\%GAMEDIR% "%H%\GameData\%GAMEDIR%"
-REM xcopy /y /s /I %GAMEDATA%\%GAMEDIR2% "%H%\GameData\%GAMEDIR2%"
-REM xcopy /y /s /I "%GAMEDATA%\%GAMEDIR%" "%H%\GameData\%GAMEDIR%"
+xcopy /y /s /I %GAMEDATA%\%GAMEDIR% "%DP0%\GameData\%GAMEDIR%"
 
-pause
+rem pause

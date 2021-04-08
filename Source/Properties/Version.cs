@@ -8,8 +8,8 @@ namespace MoarKerbals
         public const int major = 1;
         public const int minor = 1;
         public const int patch = 2;
-        public const int build = 0;
-        public const string Number = "1.1.2.0";
+        public const int build = 2;
+        public const string Number = "1.1.2.2";
 #if DEBUG
         public const string Text = Number + " BETA DEBUG";
 #else

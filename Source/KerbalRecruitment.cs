@@ -19,6 +19,9 @@ using KSP;
 
 namespace MoarKerbals
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class KerbalRecruitment : PartModule
     {
         enum KerbalJob
@@ -71,6 +74,11 @@ namespace MoarKerbals
            // Debug.Log(debuggingClass.modName + "Created trait:  " + kerbalTrait);
             return kerbalTrait;
         }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public override string GetInfo()
         {
             string display = "\r\nInput:\r\n One Civilian Kerbal";
