@@ -6,7 +6,9 @@ using UnityEngine;
 
 namespace MoarKerbals
 {
-
+	/// <summary>
+	/// 
+	/// </summary>
 	[KSPModule("KloneBay")]
 	public class KloneBay : PartModule
 	{
@@ -16,6 +18,10 @@ namespace MoarKerbals
 		public string recipeAmounts;
 		[KSPField]
 		public double accidentRate;
+		[KSPField]
+		public bool allowOrbital = false;
+		[KSPField]
+		public bool allowSplashedOrLanded = true;
 
 		private string[] resourceList;
 		private double[] resourceAmounts;
@@ -58,6 +64,22 @@ namespace MoarKerbals
 		[KSPEvent(active = true, guiActive = true, guiName = "Initiate Kloning!")]
 		public void ActivateKlone()
 		{
+			if (this.vessel.LandedOrSplashed)
+            {
+				if (!allowSplashedOrLanded)
+				{
+					Utilities.msg("Unable to klone kerbals while landed or splashed");
+					return;
+				}
+            }
+			else
+            {
+				if (!allowOrbital)
+				{
+					Utilities.msg("Unable to klone kerbals while in space");
+					return;
+				}
+            }
 			if (PartHasRoom(part) && GatherResources(part))
 			{
 				System.Random rnd = new System.Random();

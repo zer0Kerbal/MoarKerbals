@@ -35,8 +35,10 @@ namespace MoarKerbals
 				resourceAmounts[i] = double.Parse(str_amounts[i]);
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		[KSPEvent(active = true, guiActive = true, guiName = "Initiate Kloning!")]
-		
 		public void ActivateKlone()
 		{
 			if (PartHasRoom(part) && GatherResources(part))
