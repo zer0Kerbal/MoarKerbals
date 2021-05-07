@@ -22,6 +22,8 @@ namespace MoarKerbals
 		public bool allowOrbital = false;
 		[KSPField]
 		public bool allowSplashedOrLanded = true;
+		[KSPField]
+		public string initiateAction = "Initiate Kloning!";
 
 		private string[] resourceList;
 		private double[] resourceAmounts;
@@ -59,6 +61,8 @@ namespace MoarKerbals
 			overload.panStereo = 0;
 			overload.rolloffMode = AudioRolloffMode.Linear;
 			overload.Stop();
+
+			Events["ActivateKlone"].guiName = initiateAction;
 		}
 
 		[KSPEvent(active = true, guiActive = true, guiName = "Initiate Kloning!")]

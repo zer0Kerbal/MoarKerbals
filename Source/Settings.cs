@@ -79,6 +79,13 @@ namespace MoarKerbals
         // If you want to have some of the game settings default to enabled,  change 
         // the "if false" to "if true" and set the values as you like
 
+        [GameParameters.CustomIntParameterUI("Kuddle time needed for Kuddling (minutes)", minValue = 0, maxValue = 3600, stepSize = 10,
+            toolTip = "Two kerbals in the KuddleShack will need this much time to produce a new kerbal")]
+        public int kuddleTimeNeeded = 360; // 1 day
+
+        [GameParameters.CustomIntParameterUI("Kuddle time update intervals (seconds)", minValue = 10, maxValue = 3600, stepSize = 10,
+            toolTip = "Two kerbals in the KuddleShack will need this much time to produce a new kerbal")]
+        public int slowUpdateTime = 10; 
 
 #if true        
         /// <summary>

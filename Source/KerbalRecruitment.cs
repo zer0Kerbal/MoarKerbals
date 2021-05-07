@@ -16,6 +16,7 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 using KSP;
+using static MoarKerbals.Init;
 
 namespace MoarKerbals
 {
@@ -24,6 +25,9 @@ namespace MoarKerbals
     /// </summary>
     public class KerbalRecruitment : PartModule
     {
+        [KSPField]
+        public string initiateAction = "Recruit Kerbal";
+
         enum KerbalJob
         {
             Pilot,
@@ -31,8 +35,14 @@ namespace MoarKerbals
             Scientist
         }
 
+        public override void OnStart(PartModule.StartState state)
+        {
+            Events["RecruitKerbal"].guiName = initiateAction;
+
+        }
+
         [KSPEvent(guiName = "Recruit Kerbal", active = true, guiActive = true)]
-        void recruitKerbal()
+        void RecruitKerbal()
         {
             //Debug.Log(debuggingClass.modName + "Kerbal Recruitment Button pressed!");
             ScreenMessages.PostScreenMessage("Kerbal Recruitment Button pressed!", 3.5f, ScreenMessageStyle.UPPER_CENTER);
@@ -40,7 +50,8 @@ namespace MoarKerbals
             List<ProtoCrewMember> vesselCrew = vessel.GetVesselCrew();
             foreach (ProtoCrewMember crewMember in vesselCrew)
             {
-                Log.dbg(crewMember.name + " : " + crewMember.trait + ": " + crewMember.type, 3.5f, ScreenMessageStyle.UPPER_CENTER);
+
+                Log.Info(crewMember.name + " : " + crewMember.trait + ": " + crewMember.type);
                 //if (crewMember.trait == debuggingClass.civilianTrait && changedTrait == false)
                 if (crewMember.trait == "Civilian" && changedTrait == false)
                 {

@@ -39,6 +39,9 @@
     <RootNamespace>MoarKerbals</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="KSP_Log">
+      <HintPath>R:\KSP_1.11.2\GameData\SpaceTuxLibrary\Plugins\KSP_Log.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -59,6 +62,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AssemblyVersion.tt</DependentUpon>
     </Compile>
+    <Compile Include="Init.cs" />
     <Compile Include="KerbalRecruitment.cs" />
     <Compile Include="KuddleShack.cs" />
     <Compile Include="MoarKerbals.cs" />
