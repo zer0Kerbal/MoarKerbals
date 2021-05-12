@@ -1,22 +1,8 @@
 ﻿using System.Collections.Generic;
-using static MoarKerbals.Init;
 
 namespace MoarKerbals
 {
-    public class ResourceRequired
-    {
-        public string resource;
-        public double amount;
-        public PartResourceDefinition Resource;
 
-        public ResourceRequired(string resource, double amount)
-        {
-            this.resource = resource;
-            this.amount = amount;
-            Resource = PartResourceLibrary.Instance.GetDefinition(resource);
-
-        }
-    }
 
     public class MoarKerbalBase : PartModule
     {
@@ -33,8 +19,6 @@ namespace MoarKerbals
 
         public override void OnStart(PartModule.StartState state)
         {
-            //Log.Info("MoarKerbalBase.OnStart");
-
             if (recipeIngredients != "" && recipeAmounts != "")
             {
                 var resourceList = recipeIngredients.Split(',');
@@ -48,10 +32,7 @@ namespace MoarKerbals
                     resourceRequired.Add(new ResourceRequired(resourceList[i], resourceAmounts[i]));
                 }
 
-            //for (int i = 0; i < resourceRequired.Count; i++)
-            //    Log.Info("resourceRequired[" + i + "]: " + resourceRequired[i].resource + ": " + resourceRequired[i].amount);
             }
-
         }
 
         internal bool GatherResources(Part part)
