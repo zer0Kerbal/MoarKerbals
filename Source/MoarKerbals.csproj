@@ -42,7 +42,6 @@
     <Reference Include="KSP_Log">
       <HintPath>$(KSPDIR)\GameData\SpaceTuxLibrary\Plugins\KSP_Log.dll</HintPath>
     </Reference>
-  
     <Reference Include="$(KSPDIR)\KSP_x64_Data\Managed\Assembly*.dll">
       <Private>False</Private>
     </Reference>
@@ -60,8 +59,10 @@
     <Compile Include="Init.cs" />
     <Compile Include="KerbalRecruitment.cs" />
     <Compile Include="KuddleShack.cs" />
+    <Compile Include="MoarKerbalBase.cs" />
     <Compile Include="MoarKerbals.cs" />
     <Compile Include="Log.cs" />
+    <Compile Include="ResourceRequired.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="Utilities.cs" />
     <Compile Include="InstallChecker.cs" />
