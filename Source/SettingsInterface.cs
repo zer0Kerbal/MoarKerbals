@@ -34,7 +34,7 @@ namespace MoarKerbals
 
         internal static double kuddleTimeNeeded()
         {
-            return HighLogic.CurrentGame.Parameters.CustomParams<MoarKerbals_Options>().kuddleTimeNeeded;
+            return HighLogic.CurrentGame.Parameters.CustomParams<MoarKerbals_Options>().kuddleTimeNeeded*60;
         }
         internal static double slowUpdateTime()
         {

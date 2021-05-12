@@ -76,6 +76,7 @@ namespace MoarKerbals
             asPercentage = true)]
         public double globalKloningCostMultiplier = 1.0f;
 
+
         // If you want to have some of the game settings default to enabled,  change 
         // the "if false" to "if true" and set the values as you like
 
