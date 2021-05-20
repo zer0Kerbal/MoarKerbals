@@ -19,10 +19,10 @@ namespace MoarKerbals
 
     public class MoarKerbals_Options : GameParameters.CustomParameterNode
     {
-        public override string Title { get { return "[WIP] Default Settings"; } }
+        public override string Title { get { return "Default Settings"; } }
         public override GameParameters.GameMode GameMode { get { return GameParameters.GameMode.ANY; } }
-        public override string Section { get { return "[WIP] MoarKerbals"; } }
-        public override string DisplaySection { get { return "[WIP] MoarKerbals"; } }
+        public override string Section { get { return "MoarKerbals"; } }
+        public override string DisplaySection { get { return "MoarKerbals"; } }
         public override int SectionOrder { get { return 1; } }
 
         /// <summary>

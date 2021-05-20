@@ -25,9 +25,49 @@ namespace MoarKerbals
             GameEvents.onCrewBoardVessel.Add(onCrewBoardVessel);
             GameEvents.onCrewTransferred.Add(onCrewTransferred);
             GameEvents.onCrewOnEva.Add(onCrewOnEva);
+            GetLightingModules();
             GetMatingStatus();
             StartCoroutine(SlowUpdate());
         }
+
+        private List<PartModule> modulesLight = new List<PartModule>();
+
+        void GetLightingModules()
+        {
+            // Check for lightable modules
+            if (part.Modules.Contains<ModuleColorChanger>())
+            {
+                ModuleColorChanger partM = part.Modules.GetModule<ModuleColorChanger>();
+                modulesLight.Add(partM);
+            }
+            if (part.Modules.Contains<ModuleLight>())
+            {
+                foreach (ModuleLight partM in part.Modules.GetModules<ModuleLight>())
+                    modulesLight.Add(partM);
+            }
+            if (part.Modules.Contains<ModuleAnimateGeneric>())
+            {
+                foreach (ModuleAnimateGeneric partM in part.Modules.GetModules<ModuleAnimateGeneric>())
+                    modulesLight.Add(partM);
+            }
+            if (part.Modules.Contains("WBILight"))
+            {
+                foreach (PartModule partM in part.Modules)
+                {
+                    if (partM.ClassName == "WBILight")
+                        modulesLight.Add(partM);
+                }
+            }
+            if (part.Modules.Contains("ModuleKELight"))
+            {
+                foreach (PartModule partM in part.Modules)
+                {
+                    if (partM.ClassName == "ModuleKELight")
+                        modulesLight.Add(partM);
+                }
+            }
+        }
+
 
         bool readyToKuddle = false;
         const int SECS_IN_DAY = 21600;
@@ -111,12 +151,14 @@ namespace MoarKerbals
             {
                 startMatingTimer = Planetarium.GetUniversalTime();
                 hasMatingPair = true;
+                SwitchLight.On(modulesLight);
             }
             else
             {
                 if (!newHasMatingPair)
                 {
                     hasMatingPair = false;
+                    SwitchLight.Off(modulesLight);
                 }
             }
         }

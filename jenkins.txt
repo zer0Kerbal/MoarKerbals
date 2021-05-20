@@ -37,6 +37,8 @@
 3:MoarKerbals.version,GameData/MoarKerbals
 3:License.txt,GameData/MoarKerbals
 3:Readme.md,GameData/MoarKerbals
+3:Changelog.cfg,GameData/MoarKerbals
+
 
 # 4:SOURCDIR, DESTDIR
 #4:Textures,GameData/ManeuverQueue/Textures

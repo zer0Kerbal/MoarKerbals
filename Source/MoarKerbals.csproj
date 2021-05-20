@@ -64,6 +64,7 @@
     <Compile Include="Log.cs" />
     <Compile Include="ResourceRequired.cs" />
     <Compile Include="Settings.cs" />
+    <Compile Include="SwitchLight.cs" />
     <Compile Include="Utilities.cs" />
     <Compile Include="InstallChecker.cs" />
     <Compile Include="SettingsInterface.cs" />

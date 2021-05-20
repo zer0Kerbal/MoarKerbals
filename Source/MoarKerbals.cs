@@ -158,7 +158,7 @@ namespace MoarKerbals
         {
             base.OnStart(StartState.None);
 
-            double gblMult = 1; // HighLogic.CurrentGame.Parameters.CustomParams<MoarKerbals_Options>().globalKloningCostMultiplier;
+            //double gblMult = 1; // HighLogic.CurrentGame.Parameters.CustomParams<MoarKerbals_Options>().globalKloningCostMultiplier;
 
             string display = "\r\nInput:\r\n";
             for (int i = 0; i < resourceRequired.Count; i++)
