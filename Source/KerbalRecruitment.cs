@@ -32,7 +32,7 @@ namespace MoarKerbals
         void recruitKerbal()
         {
             //Debug.Log(debuggingClass.modName + "Kerbal Recruitment Button pressed!");
-            ScreenMessages.PostScreenMessage("Kerbal Recruitment Button pressed!", 3.5f, ScreenMessageStyle.UPPER_CENTER);
+            Log.dbg("Kerbal Recruitment Button pressed!", 3.5f, ScreenMessageStyle.UPPER_CENTER);
             bool changedTrait = false;
             List<ProtoCrewMember> vesselCrew = vessel.GetVesselCrew();
             foreach (ProtoCrewMember crewMember in vesselCrew)
@@ -42,16 +42,16 @@ namespace MoarKerbals
                 if (crewMember.trait == "Civilian" && changedTrait == false)
                 {
                     crewMember.trait = getRandomTrait();
-                    //crewMember.Save(.this);
-                    crewMember.type = ProtoCrewMember.KerbalType.Crew;
-                    //crewMember.trait = KerbalJob.Engineer;
                     changedTrait = true;
+                    // KerbalRoster.SetExperienceTrait(crewMember, KerbalRoster.pilotTrait);
+                    KerbalRoster.SetExperienceTrait(crewMember, crewMember.trait);
                     //HighLogic.CurrentGame.CrewRoster.Save(HighLogic.CurrentGame());
                     Utilities.msg(crewMember.name + " is now a " + crewMember.trait + "!", 3.5f, ScreenMessageStyle.UPPER_CENTER);
                     //      Debug.Log(debuggingClass.modName + crewMember.name + " is now a " + crewMember.trait + "!");
                 }
             }
-            if (changedTrait) GameEvents.onVesselChange.Fire(FlightGlobals.ActiveVessel);
+            if (!changedTrait) Utilities.msg("No civilians available to recruit");
+            //if (changedTrait) GameEvents.onVesselChange.Fire(FlightGlobals.ActiveVessel);
         }
 
         private string getRandomTrait()
@@ -67,8 +67,8 @@ namespace MoarKerbals
                 kerbalTrait = "Engineer";
             if (randNum == 2)
                 kerbalTrait = "Scientist";
-            ScreenMessages.PostScreenMessage("Created trait:  " + kerbalTrait, 3.5f, ScreenMessageStyle.UPPER_CENTER);
-           // Debug.Log(debuggingClass.modName + "Created trait:  " + kerbalTrait);
+            // ScreenMessages.PostScreenMessage("Created trait:  " + kerbalTrait, 3.5f, ScreenMessageStyle.UPPER_CENTER);
+            Log.dbg(String.Format("Created trait:  {0}", kerbalTrait));
             return kerbalTrait;
         }
         public override string GetInfo()

@@ -18,11 +18,9 @@ namespace MoarKerbals
         [ConditionalAttribute("DEBUG")]
         internal static void dbg(string msg, params object[] @params)
         {
-#if DEBUG
             if (0 != @params.Length) msg = string.Format(msg, @params);
             ScreenMessages.PostScreenMessage(msg, 1, ScreenMessageStyle.UPPER_CENTER, true);
             if (SettingsInterface.InGameMail()) UnityEngine.Debug.Log("[MoarKerbals] " + msg);
-#endif
         }
     }
 }

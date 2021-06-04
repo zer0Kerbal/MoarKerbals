@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MoarKerbals</name>
+    </assembly>
+    <members>
+        <member name="M:MoarKerbals.Log.dbg(System.String,System.Object[])">
+            <summary>
+            sends the specific message to ingame mail and screen if Debug is defined
+            For debugging use only.
+            </summary>
+            <param name="msg">The MSG.</param>
+            <param name="params">The parameters.</param>
+        </member>
+        <member name="F:MoarKerbals.MoarKerbals_Options.SoundOn">
+            <summary>
+            The needs EC to start in GameParameters
+            </summary>
+        </member>
+        <member name="F:MoarKerbals.MoarKerbals_Options.InGameMail">
+            <summary>
+            The automatic switch in GameParameters
+            </summary>
+        </member>
+        <member name="F:MoarKerbals.MoarKerbals_Options.RequireLivingKerbal">
+            <summary>
+            The automatic switch in GameParameters
+            </summary>
+        </member>
+        <member name="F:MoarKerbals.MoarKerbals_Options.coloredPAW">
+            <summary>
+            The colored paw
+            </summary>
+        </member>
+        <member name="F:MoarKerbals.MoarKerbals_Options.globalKloningCostMultiplier">
+            <summary>
+            Sets the globalScalingFactor in GameParameters
+            </summary>
+        </member>
+        <member name="P:MoarKerbals.MoarKerbals_Options.HasPresets">
+            <summary>
+            Gets a value indicating whether this instance has presets.
+            </summary>
+            <value>
+              <c>true</c> if this instance has presets; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="M:MoarKerbals.MoarKerbals_Options.SetDifficultyPreset(GameParameters.Preset)">
+            <summary>
+            Sets the difficulty preset.
+            </summary>
+            <param name="preset">The preset.</param>
+        </member>
+    </members>
+</doc>
