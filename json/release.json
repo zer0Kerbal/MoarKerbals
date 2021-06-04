@@ -1,0 +1,16 @@
+{
+	"MODNAME": "MoarKerbals",
+	"AUTHOR": "zer0Kerbal, strideknight",
+	"MODFOLDER": "MoarKerbals",
+	"SUBFOLDER": "",
+	"VERSIONFILE": "auto",
+	"MODTYPE": "Addon",
+	"RELEASESDIR": "Releases",
+	"CHANGELOG": "Changelog.md",
+	"DRAFT": false,
+	"PRERELEASE": false,
+	"SPACEDOCK_ID": "2324",
+	"CURSEFORGE": "moarkerbals",
+	"GITHUB": "moarkerbals",
+	"FORUM": "191525"
+}
