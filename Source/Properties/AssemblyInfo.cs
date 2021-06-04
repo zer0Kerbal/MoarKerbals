@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("MoarKerbals")]
 [assembly: AssemblyDescription("MoarKerbals - Populate your colony in space! For Kerbal Space Program (KSP)")]
 [assembly: AssemblyConfiguration("Release")]
-[assembly: AssemblyCompany("linuxgurugamer, zer0Kerbal, strideknight")]
+[assembly: AssemblyCompany("zer0Kerbal, strideknight")]
 [assembly: AssemblyProduct("MoarKerbals")]
 [assembly: AssemblyCopyright("GPLv3")]
 [assembly: AssemblyTrademark("")]
