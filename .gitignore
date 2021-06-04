@@ -48,11 +48,18 @@
 
 
 # zer0Kerbal common files
-LegalMumboJumbo/
-Archive/
-Old/
-flaticons/
-Links/
+[_][Ll]egalMumboJumbo/
+[Aa]rchive/
+[Oo]ld/
+[Ff]laticons/
+_[Ll]inks/
+[Dd]ocs/*
+[Oo]ld/*
+_NetKAN/*
+_[Aa]rchive/
+_[Oo]ld/
+_[Ff]laticons/
+_[Li]Links/
 docs/*
 old/*
 NetKAN/*
@@ -62,6 +69,7 @@ buildRelease.bat
 buildReleaseSub.bat
 deploy.bat
 deploySub.bat
+_buildJSON.bat
 _buildRelease.bat
 _buildReleaseSub.bat
 _deploy.bat
@@ -163,3 +171,6 @@ crashlytics-build.properties
 graphics/Thumbs.db
 *.cache
 *.dll
+*.pdb
+.vs
+*.7z
