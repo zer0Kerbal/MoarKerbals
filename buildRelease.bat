@@ -4,9 +4,13 @@
 rem Put the following text into the Post-build event command line:
 rem without the "rem":
 
-rem start /D C:\KSP_DEV\Workspace\ODFCr\ /WAIT deploy.bat  $(TargetDir) $(TargetFileName)
-rem
-rem if $(ConfigurationName) == Release start /D C:\KSP_DEV\Workspace\ODFCr\ /WAIT buildRelease.bat $(TargetDir) $(TargetFileName)
+rem start /D D:\Users\jbb\github\IFI-Life-Support /WAIT deploy.bat  $(TargetDir) $(TargetFileName)
+rem 
+rem if $(ConfigurationName) == Release (
+rem 
+rem start /D D:\Users\jbb\github\IFI-Life-Support /WAIT buildRelease.bat $(TargetDir) $(TargetFileName)
+rem 
+rem )
 
 
 rem Set variables here
@@ -20,26 +24,20 @@ rem LICENSE is the license file
 rem README is the readme file
 
 set GAMEDIR=MoarKerbals
-REM set GAMEDIR2=ExtraplanetaryLaunchpads
 set GAMEDATA="GameData\"
 set VERSIONFILE=%GAMEDIR%.version
-set LICENSE="License.txt"
-rem Set LICENSETEXT="CC-BY-NC-SA-4.0.txt"
-set README="Readme.md"
-set JQ=C:\ProgramData\chocolatey\lib\jq\tools\jq.exe
+set LICENSE=License.txt
+set README=ReadMe.md
 
-set RELEASEDIR=C:\KSP_DEV\Releases
+set RELEASEDIR=d:\Users\jbb\release
 set ZIP="c:\Program Files\7-zip\7z.exe"
 
 rem Copy files to GameData locations
 
-REM copy /Y "%1%2" "%GAMEDATA%\%GAMEDIR%\Plugins"
-REM copy /Y %GAMEDIR%.version %GAMEDATA%\%GAMEDIR%
-copy /Y %GAMEDIR%.version %GAMEDATA%\%GAMEDIR%
-copy /Y Changelog.cfg %GAMEDATA%\%GAMEDIR%
+copy /Y "%1%2" "%GAMEDATA%\%GAMEDIR%\Plugins"
+copy /Y %VERSIONFILE% %GAMEDATA%\%GAMEDIR%
 
 if "%LICENSE%" NEQ "" copy /y  %LICENSE% %GAMEDATA%\%GAMEDIR%
-REM if "%LICENSETEXT%" NEQ "" copy /y  %LICENSETEXT% %GAMEDATA%\%GAMEDIR%
 if "%README%" NEQ "" copy /Y %README% %GAMEDATA%\%GAMEDIR%
 
 rem Get Version info
@@ -47,20 +45,20 @@ rem Get Version info
 copy %VERSIONFILE% tmp.version
 set VERSIONFILE=tmp.version
 rem The following requires the JQ program, available here: https://stedolan.github.io/jq/download/
-%JQ% ".VERSION.MAJOR" %VERSIONFILE% >tmpfile
+c:\local\jq-win64  ".VERSION.MAJOR" %VERSIONFILE% >tmpfile
 set /P major=<tmpfile
 
-%JQ% ".VERSION.MINOR" %VERSIONFILE% >tmpfile
+c:\local\jq-win64  ".VERSION.MINOR"  %VERSIONFILE% >tmpfile
 set /P minor=<tmpfile
 
-%JQ% ".VERSION.PATCH" %VERSIONFILE% >tmpfile
+c:\local\jq-win64  ".VERSION.PATCH"  %VERSIONFILE% >tmpfile
 set /P patch=<tmpfile
 
-%JQ% ".VERSION.BUILD"  %VERSIONFILE% >tmpfile
+c:\local\jq-win64  ".VERSION.BUILD"  %VERSIONFILE% >tmpfile
 set /P build=<tmpfile
 del tmpfile
 del tmp.version
-set VERSION=%major%.%minor%.%patch%.%build%
+set VERSION=%major%.%minor%.%patch%
 if "%build%" NEQ "0"  set VERSION=%VERSION%.%build%
 
 echo Version:  %VERSION%

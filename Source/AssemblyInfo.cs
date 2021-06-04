@@ -13,7 +13,6 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyProduct("MoarKerbals")]
 [assembly: AssemblyCopyright("GPLv3")]
 [assembly: AssemblyTrademark("")]
-[assembly: AssemblyCulture("Neutral")]
 //[assembly: KSPAssemblyDependency("ToolbarController", 1, 0)]
 
 // Setting ComVisible to false makes the types in this assembly not visible
