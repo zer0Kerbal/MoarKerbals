@@ -9,11 +9,10 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("MoarKerbals")]
 [assembly: AssemblyDescription("MoarKerbals - Populate your colony in space! For Kerbal Space Program (KSP)")]
 [assembly: AssemblyConfiguration("Release")]
-[assembly: AssemblyCompany("zer0Kerbal, strideknight")]
+[assembly: AssemblyCompany("linuxgurugamer, zer0Kerbal, strideknight")]
 [assembly: AssemblyProduct("MoarKerbals")]
 [assembly: AssemblyCopyright("GPLv3")]
 [assembly: AssemblyTrademark("")]
-[assembly: AssemblyCulture("Neutral")]
 //[assembly: KSPAssemblyDependency("ToolbarController", 1, 0)]
 
 // Setting ComVisible to false makes the types in this assembly not visible

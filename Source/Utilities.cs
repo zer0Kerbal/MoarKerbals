@@ -26,10 +26,6 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-//using System.Threading.Tasks;
 
 namespace MoarKerbals
 {
@@ -41,6 +37,8 @@ namespace MoarKerbals
             ScreenMessages.PostScreenMessage(msg, 10f, ScreenMessageStyle.UPPER_CENTER, true);
             if (SettingsInterface.InGameMail()) UnityEngine.Debug.Log("[MoarKerbals] " + msg);
         }
+
+        #if false
 
         [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = true)]
         public class KSPAssemblyDependency : Attribute
@@ -135,5 +133,6 @@ namespace MoarKerbals
 
             return currentValue;
         }
+#endif 
     }
 }

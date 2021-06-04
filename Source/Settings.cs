@@ -19,10 +19,10 @@ namespace MoarKerbals
 
     public class MoarKerbals_Options : GameParameters.CustomParameterNode
     {
-        public override string Title { get { return "[WIP] Default Settings"; } }
+        public override string Title { get { return "Default Settings"; } }
         public override GameParameters.GameMode GameMode { get { return GameParameters.GameMode.ANY; } }
-        public override string Section { get { return "[WIP] MoarKerbals"; } }
-        public override string DisplaySection { get { return "[WIP] MoarKerbals"; } }
+        public override string Section { get { return "MoarKerbals"; } }
+        public override string DisplaySection { get { return "MoarKerbals"; } }
         public override int SectionOrder { get { return 1; } }
 
         /// <summary>
@@ -76,9 +76,17 @@ namespace MoarKerbals
             asPercentage = true)]
         public double globalKloningCostMultiplier = 1.0f;
 
+
         // If you want to have some of the game settings default to enabled,  change 
         // the "if false" to "if true" and set the values as you like
 
+        [GameParameters.CustomIntParameterUI("Kuddle time needed for Kuddling (minutes)", minValue = 0, maxValue = 3600, stepSize = 10,
+            toolTip = "Two kerbals in the KuddleShack will need this much time to produce a new kerbal")]
+        public int kuddleTimeNeeded = 360; // 1 day
+
+        [GameParameters.CustomIntParameterUI("Kuddle time update intervals (seconds)", minValue = 10, maxValue = 3600, stepSize = 10,
+            toolTip = "Two kerbals in the KuddleShack will need this much time to produce a new kerbal")]
+        public int slowUpdateTime = 10; 
 
 #if true        
         /// <summary>
@@ -124,8 +132,27 @@ namespace MoarKerbals
         public override void SetDifficultyPreset(GameParameters.Preset preset) { }
 #endif
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="member"></param>
+        /// <param name="parameters"></param>
+        /// <returns></returns>
         public override bool Enabled(MemberInfo member, GameParameters parameters) { return true; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="member"></param>
+        /// <param name="parameters"></param>
+        /// <returns></returns>
         public override bool Interactible(MemberInfo member, GameParameters parameters) { return true; }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="member"></param>
+        /// <returns></returns>
         public override IList ValidValues(MemberInfo member) { return null; }
     }
 }

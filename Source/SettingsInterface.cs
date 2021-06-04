@@ -31,5 +31,14 @@ namespace MoarKerbals
         {
             return HighLogic.CurrentGame.Parameters.CustomParams<MoarKerbals_Options>().globalKloningCostMultiplier;
         }
+
+        internal static double kuddleTimeNeeded()
+        {
+            return HighLogic.CurrentGame.Parameters.CustomParams<MoarKerbals_Options>().kuddleTimeNeeded*60;
+        }
+        internal static double slowUpdateTime()
+        {
+            return HighLogic.CurrentGame.Parameters.CustomParams<MoarKerbals_Options>().slowUpdateTime;
+        }
     }
 }
