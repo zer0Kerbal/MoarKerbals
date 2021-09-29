@@ -26,7 +26,8 @@ This mod installs a Klone Bay that you can use to replicate new kerbals wherever
 There is a small chance for a freakish accident to occur, which can be disabled in the part's .cfg file, or you can just quicksave before kloning ;)
 
 
-This is a fairly simple mod that adds the ability to use resources to create a new kerbal. Requires resources and the presence of a living kerbal. There's a small chance that an accident can happen - this is experimental technology after all. :wink: 
+This is a fairly simple mod that adds the ability to use resources to create a new kerbal. Requires resources and the presence of a living kerbal. There's a small chance that an accident can happen - this is experimental technology after all. :wink:
+Note: a failed process will kill every kerbal inside the Kloning bay.
 
 You can disable accidents or change the requirements in the part's .cfg file if you want, or just save before operating.
 
