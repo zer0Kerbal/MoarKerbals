@@ -1,8 +1,8 @@
 {
-  "schemaVersion": "1",
-  "label": "MoarKerbals!",
-  "labelColor": "darkgreen",
-  "message": "1.3.0.0",
-  "color": "orange",
-  "style": "plastic"
+ "schemaVersion": 1,
+ "label": "MoarKerbals",
+ "labelColor": "BADA55",
+ "message": "1.1.2.99",
+ "color": "darkgreen",
+ "style": "plastic"
 }
