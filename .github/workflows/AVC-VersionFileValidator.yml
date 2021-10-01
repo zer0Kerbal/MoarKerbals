@@ -1,3 +1,4 @@
+# v1.3.1
 # This is a standard workflow to validate all .version files
 # found in the root directory of the repository and any subdirectories,
 # whenever something is pushed to any branch in the repository, or to a "foreign" branch active in a pull request.
@@ -15,5 +16,6 @@ jobs:
         uses: actions/checkout@v2
         with:
           fetch-depth: 1
-      - name: Validate files
-        uses: DasSkelett/AVC-VersionFileValidator@v1
+      - name: KSP-AVC Version File Validator
+        uses: DasSkelett/AVC-VersionFileValidator@v1.3.1
+
