@@ -6,46 +6,46 @@
     <ProjectGuid>{49ACA87F-8951-4D8A-A7E5-7483EEB07D99}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MoarKerbals</RootNamespace>
     <AssemblyName>MoarKerbals</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <Deterministic>true</Deterministic>
+      <FileAlignment>512</FileAlignment>
+      <Deterministic>true</Deterministic>
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>..\GameData\MoarKerbals\Plugins\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>
-    </DocumentationFile>
+    <DocumentationFile>..\GameData\MoarKerbals\Plugins\MoarKerbals.xml</DocumentationFile>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>none</DebugType>
+    <DebugType>embedded</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>..\GameData\MoarKerbals\Plugins\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <DebugSymbols>true</DebugSymbols>
-    <DocumentationFile>bin\Release\MoarKerbals.xml</DocumentationFile>
+    <DocumentationFile>..\GameData\MoarKerbals\Plugins\MoarKerbals.xml</DocumentationFile>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
-  <PropertyGroup>
-    <RootNamespace>MoarKerbals</RootNamespace>
-  </PropertyGroup>
   <ItemGroup>
-    <Reference Include="KSP_Log">
-      <HintPath>$(KSPDIR)\GameData\SpaceTuxLibrary\Plugins\KSP_Log.dll</HintPath>
-    </Reference>
-    <Reference Include="$(KSPDIR)\KSP_x64_Data\Managed\Assembly*.dll">
+    <!-- <Reference Include="$(K112)\GameData\SpaceTuxLibrary\Plugins\KSP_Log.dll" >
+      <Private>False</Private>
+    </Reference> -->
+    <Reference Include="$(K112)\KSP_x64_Data\Managed\Assembly-CSharp*.dll">
       <Private>False</Private>
     </Reference>
-    <Reference Include="$(KSPDIR)\KSP_x64_Data\Managed\UnityEngine*.dll">
+    <Reference Include="$(K112)\KSP_x64_Data\Managed\Assembly*.dll">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="$(K112)\KSP_x64_Data\Managed\UnityEngine*.dll">
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
@@ -54,34 +54,26 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="$(DevDir173)\KSP_x64_Data\Managed\Assembly-CSharp*.dll">
+    <!-- <Reference Include="$(K112)\KSP_x64_Data\Managed\UnityEngine.Analytics.dll">
       <Private>False</Private>
     </Reference>
-    <Reference Include="$(DevDir173)\KSP_x64_Data\Managed\UnityEngine.Analytics.dll">
+    <Reference Include="$(K112)\KSP_x64_Data\Managed\UnityEngine.dll">
       <Private>False</Private>
-    </Reference>
-    <Reference Include="$(DevDir173)\KSP_x64_Data\Managed\UnityEngine.dll">
-      <Private>False</Private>
-    </Reference>
+    </Reference> -->
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AssemblyVersion.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>AssemblyVersion.tt</DependentUpon>
-    </Compile>
     <Compile Include="Init.cs" />
     <Compile Include="KerbalRecruitment.cs" />
     <Compile Include="KuddleShack.cs" />
     <Compile Include="MoarKerbalBase.cs" />
     <Compile Include="MoarKerbals.cs" />
-    <Compile Include="Log.cs" />
     <Compile Include="ResourceRequired.cs" />
-    <Compile Include="Settings.cs" />
     <Compile Include="SwitchLight.cs" />
-    <Compile Include="Utilities.cs" />
-    <Compile Include="InstallChecker.cs" />
-    <Compile Include="SettingsInterface.cs" />
+    <Compile Include="Support\Log.cs" />
+    <Compile Include="Support\Settings.cs" />
+    <Compile Include="Support\Utilities.cs" />
+    <Compile Include="Support\InstallChecker.cs" />
+    <Compile Include="Support\SettingsInterface.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Version.cs">
       <AutoGen>True</AutoGen>
@@ -93,60 +85,38 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="AssemblyVersion.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>AssemblyVersion.cs</LastGenOutput>
-    </Content>
     <Content Include="Properties\Version.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Version.cs</LastGenOutput>
     </Content>
-    <Content Include="assets\kloning.wav" />
-    <Content Include="assets\overload.wav" />
+    <Content Include="Assets\kloning.wav" />
+    <Content Include="Assets\overload.wav" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
-    <None Include="assets\MoarKerbals.version" />
+    <None Include="..\MoarKerbals.version" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
   <PropertyGroup>
-    <PostBuildEvent>set KSPDIR=$(KSPDIR)
-
-IF "%25KSPDIR%25"=="" (
-
-	ECHO Configuration error - KSPDIR not specified in project.
-
-	ECHO Either set KSPDIR environment variable or edit BetterLoadSaveGame.Common.props
-
+    <PostBuildEvent>
+set K112=$(K112)
+IF "%25K112%25"=="" (
+	ECHO Configuration error - K112 not specified in project.
+	ECHO Either set K112 environment variable
 	PAUSE
-
 	GOTO DONE
-
 )
 
-start /D $(SolutionDir) /WAIT deploy.bat  $(TargetDir) $(TargetFileName) $(TargetName)
+start /D $(SolutionDir) /WAIT _deploy.bat  $(TargetDir) $(TargetFileName) $(TargetName)
 
 if $(ConfigurationName) == Release (	
-
-	start /D $(SolutionDir) /WAIT buildRelease.bat $(TargetDir) $(TargetFileName) $(TargetName)
-
-)</PostBuildEvent>
+	start /D $(SolutionDir) /WAIT _buildRelease.bat $(TargetDir) $(TargetFileName) $(TargetName)
+)
+    </PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <!-- <PreBuildEvent>set textTemplatingPath="$(DevEnvDir)texttransform.exe"
-%25textTemplatingPath%25 "$(ProjectDir)AssemblyVersion.tt"</PreBuildEvent> -->
+    <PreBuildEvent>"$(DevEnvDir)\texttransform.exe" "$(ProjectDir)Version.tt"</PreBuildEvent>
   </PropertyGroup>
-  <PropertyGroup>
-    <PreBuildEvent>"$(DevEnvDir)\texttransform.exe" "$(ProjectDir)AssemblyVersion.tt"</PreBuildEvent>
-  </PropertyGroup>
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
-  <ProjectExtensions>
+<ProjectExtensions>
     <MonoDevelop>
       <Properties>
         <Policies>
