@@ -197,12 +197,12 @@ namespace MoarKerbals
 
 #if false
 		ProtoCrewMember CreateRandomKerbal()
-        {
-            var roster = HighLogic.CurrentGame.CrewRoster;
+		{
+			var roster = HighLogic.CurrentGame.CrewRoster;
 
-            var newMember = roster.GetNewKerbal(ProtoCrewMember.KerbalType.Crew);
-            return newMember;
-        }
+			var newMember = roster.GetNewKerbal(ProtoCrewMember.KerbalType.Crew);
+			return newMember;
+		}
 #endif
     }
 }
