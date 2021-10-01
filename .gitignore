@@ -1,4 +1,6 @@
-﻿# Prerequisites
+﻿# .gitignore v2.0.0.2
+
+# Prerequisites
 *.d
 
 # Compiled Object files
@@ -48,18 +50,10 @@
 
 
 # zer0Kerbal common files
-[_][Ll]egalMumboJumbo/
-[Aa]rchive/
-[Oo]ld/
-[Ff]laticons/
-_[Ll]inks/
-[Dd]ocs/*
-[Oo]ld/*
-_NetKAN/*
-_[Aa]rchive/
-_[Oo]ld/
-_[Ff]laticons/
-_[Li]Links/
+Archive/
+Old/
+flaticons/
+Links/
 docs/*
 old/*
 NetKAN/*
@@ -69,7 +63,6 @@ buildRelease.bat
 buildReleaseSub.bat
 deploy.bat
 deploySub.bat
-_buildJSON.bat
 _buildRelease.bat
 _buildReleaseSub.bat
 _deploy.bat
@@ -113,6 +106,17 @@ TestResult.xml
 # MemoryCaptures can get excessive in size.
 # They also could contain extremely sensitive data
 /[Mm]emoryCaptures/
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
 
 # Asset meta data should only be ignored when the corresponding asset is also ignored
 !/[Aa]ssets/**/*.meta
@@ -169,8 +173,4 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 graphics/Thumbs.db
-*.cache
-*.dll
-*.pdb
-.vs
-*.7z
+*.old
