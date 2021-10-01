@@ -2,7 +2,6 @@
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
@@ -11,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("Release")]
 [assembly: AssemblyCompany("zer0Kerbal, strideknight")]
 [assembly: AssemblyProduct("MoarKerbals")]
-[assembly: AssemblyCopyright("GPLv3")]
+[assembly: AssemblyCopyright("GPLv3 © 2014, 2019, 2020, 2021 zer0Kerbal")]
 [assembly: AssemblyTrademark("")]
 //[assembly: KSPAssemblyDependency("ToolbarController", 1, 0)]
 
@@ -23,16 +22,5 @@ using System.Runtime.InteropServices;
 // The following GUID is for the ID of the typelib if this project is exposed to COM
 [assembly: Guid("49ACA87F-8951-4D8A-A7E5-7483EEB07D99")]
 
-// Version information for an assembly consists of the following four values:
-//
-//      Major Version
-//      Minor Version
-//      Build Number
-//      Revision
-//
-// You can specify all the values or you can default the Build and Revision Numbers
-// by using the '*' as shown below:
-// [assembly: AssemblyVersion("1.0.*")]
-
-[assembly: AssemblyFileVersion(MoarKerbals.Version.Number)]
+// [assembly: AssemblyFileVersion(MoarKerbals.Version.Number)]
 // [assembly: AssemblyFileVersion("1.1.2.0")]
