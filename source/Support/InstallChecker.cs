@@ -17,11 +17,13 @@ using KSP.Localization;
 
 namespace MoarKerbals
 {
-    [KSPAddon(KSPAddon.Startup.MainMenu, true)]
+
+    //[KSPAddon(KSPAddon.Startup.MainMenu, true)]
+    [KSPAddon(KSPAddon.Startup.Instantly, true)]
     internal class InstallChecker : MonoBehaviour
     {
         private const string MODNAME = "MoarKerbals";
-        private const string FOLDERNAME = "MoarKerbals";
+        private const string FOLDERNAME = "KerbthulhuKineticsProgram/MoarKerbals";
         private const string EXPECTEDPATH = FOLDERNAME + "/Plugins";
 
         protected void Start()
@@ -60,8 +62,8 @@ namespace MoarKerbals
         }
 
         /*
-         * Tries to fix the install if it was installed over the top of a previous version
-         */
+		 * Tries to fix the install if it was installed over the top of a previous version
+		 */
         void CleanupOldVersions()
         {
             try

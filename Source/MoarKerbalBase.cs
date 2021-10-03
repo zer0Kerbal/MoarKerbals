@@ -3,21 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using KSP.Localization;
 
 namespace MoarKerbals
 {
-
-
     public class MoarKerbalBase : PartModule
     {
+        /// <summary>The recipe ingredients</summary>
         [KSPField]
         public string recipeIngredients = "";
+
+        /// <summary>The recipe amounts</summary>
         [KSPField]
         public string recipeAmounts = "";
+
+        /// <summary>The initiate action</summary>
         [KSPField]
-        public string initiateAction = "Initiate Kuddling!";
-
-
+        public string initiateAction = Localizer.Format("#MOAR-Base-01");
 
         internal List<ResourceRequired> resourceRequired = new List<ResourceRequired>();
 
@@ -35,26 +37,21 @@ namespace MoarKerbals
 
                     resourceRequired.Add(new ResourceRequired(resourceList[i], resourceAmounts[i]));
                 }
-
             }
         }
 
         internal bool GatherResources(Part part)
         {
-            double gblMult = HighLogic.CurrentGame.Parameters.CustomParams<MoarKerbals_Options>().globalKloningCostMultiplier;
+            double gblMult = HighLogic.CurrentGame.Parameters.CustomParams<Settings>().globalKloningCostMultiplier;
             //Steps through to gather resources
             for (int i = 0; i < resourceRequired.Count; i++)
             {
                 double amtRequired = resourceRequired[i].amount * gblMult;
 
-                //Log.dbg(String.Format("GlobalScale: {#.##}", gblMult));
+                Logging.DLog(String.Format("GlobalScale: {#.##}", gblMult));
                 double available = part.RequestResource(resourceRequired[i].Resource.id, amtRequired);
-                //debug:
-                //string dStr;
-                //dStr = " DEBUG: needs: " + resourceRequired[i].resource + "\n\nresourceAmounts: " + available.ToString() + "\n\nneed: " + amtRequired.ToString();
-                //Utilities.msg(dStr, 5f, ScreenMessageStyle.UPPER_LEFT);
 
-                //Log.dbg(String.Format(" DEBUG: {1} : resourceAmounts: {2} need: {3}", resList[i].ToString(),  available.ToString(), resourceAmounts[i].ToString()));
+                Logging.DLog(String.Format("DEBUG: {1} : resourceAmounts: {2} need: {3}", resourceRequired[i].resource, available, amtRequired));
                 if (available < amtRequired)
                 {
                     //Upon not having enough of a resource, returns all previously collected
@@ -62,14 +59,12 @@ namespace MoarKerbals
                     for (int j = 0; j < i; j++)
                         part.RequestResource(resourceRequired[j].Resource.id, -amtRequired);
 
-                    //ScreenMessages.PostScreenMessage("Insufficient " + resourceList[i] + " to start Kloning (" + available.ToString() + "/" + (resourceAmounts[i] * gblMult).ToString() + ")", 5f, ScreenMessageStyle.UPPER_CENTER);
-                    Utilities.msg("Insufficient " + resourceRequired[i].resource + " to start Kloning (" + available.ToString() + "/" + amtRequired.ToString() + ")", 5f, ScreenMessageStyle.UPPER_CENTER);
+                    //Logging.Msg("Insufficient " + resourceRequired[i].resource + " to start Kloning (" + available.ToString() + "/" + amtRequired.ToString() + ")", 5f, ScreenMessageStyle.UPPER_CENTER);
+                    Logging.Msg(Localizer.Format("#MOAR-Base-02", resourceRequired[i].resource, available, amtRequired), 5f, ScreenMessageStyle.UPPER_CENTER);
                     return false;
                 }
             }
             return true;
         }
-
-
     }
 }

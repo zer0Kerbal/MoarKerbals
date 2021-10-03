@@ -16,11 +16,15 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 using KSP;
+using KSP.Localization;
 
 namespace MoarKerbals
 {
+    /// <summary>PartModule: KerbalRecruitment</summary>
+    /// <seealso cref="PartModule" />
     public class KerbalRecruitment : PartModule
     {
+        /// <summary>KerbalJob Enum - kerbal professions</summary>
         enum KerbalJob
         {
             Pilot,
@@ -28,30 +32,26 @@ namespace MoarKerbals
             Scientist
         }
 
-        [KSPEvent(guiName = "Recruit Kerbal", active = true, guiActive = true)]
+        /// <summary>Recruits the kerbal.</summary>
+        [KSPEvent(guiName = "#MOAR-Recruitment-01", active = true, guiActive = true)]
         void recruitKerbal()
         {
-            //Debug.Log(debuggingClass.modName + "Kerbal Recruitment Button pressed!");
-            Log.dbg("Kerbal Recruitment Button pressed!", 3.5f, ScreenMessageStyle.UPPER_CENTER);
+            Logging.Msg("Kerbal Recruitment Button pressed!", 3.5f, ScreenMessageStyle.UPPER_CENTER);
+
             bool changedTrait = false;
             List<ProtoCrewMember> vesselCrew = vessel.GetVesselCrew();
             foreach (ProtoCrewMember crewMember in vesselCrew)
             {
-                Log.dbg(crewMember.name + " : " + crewMember.trait + ": " + crewMember.type, 3.5f, ScreenMessageStyle.UPPER_CENTER);
-                //if (crewMember.trait == debuggingClass.civilianTrait && changedTrait == false)
-                if (crewMember.trait == "Civilian" && changedTrait == false)
+                Logging.Msg(crewMember.name + " : " + crewMember.trait + ": " + crewMember.type, 3.5f, ScreenMessageStyle.UPPER_CENTER);
+                if (crewMember.trait == Localizer.Format("#MOAR-004") && changedTrait == false)
                 {
                     crewMember.trait = getRandomTrait();
                     changedTrait = true;
-                    // KerbalRoster.SetExperienceTrait(crewMember, KerbalRoster.pilotTrait);
                     KerbalRoster.SetExperienceTrait(crewMember, crewMember.trait);
-                    //HighLogic.CurrentGame.CrewRoster.Save(HighLogic.CurrentGame());
-                    Utilities.msg(crewMember.name + " is now a " + crewMember.trait + "!", 3.5f, ScreenMessageStyle.UPPER_CENTER);
-                    //      Debug.Log(debuggingClass.modName + crewMember.name + " is now a " + crewMember.trait + "!");
+                    Logging.Msg(crewMember.name + " is now a " + crewMember.trait + "!", 3.5f, ScreenMessageStyle.UPPER_CENTER);
                 }
             }
-            if (!changedTrait) Utilities.msg("No civilians available to recruit");
-            //if (changedTrait) GameEvents.onVesselChange.Fire(FlightGlobals.ActiveVessel);
+            if (!changedTrait) Logging.Msg("No civilians available to recruit");
         }
 
         private string getRandomTrait()
@@ -67,15 +67,18 @@ namespace MoarKerbals
                 kerbalTrait = "Engineer";
             if (randNum == 2)
                 kerbalTrait = "Scientist";
-            // ScreenMessages.PostScreenMessage("Created trait:  " + kerbalTrait, 3.5f, ScreenMessageStyle.UPPER_CENTER);
-            Log.dbg(String.Format("Created trait:  {0}", kerbalTrait));
+            Logging.Msg(String.Format("Created trait:  {0}", kerbalTrait));
             return kerbalTrait;
         }
+
         public override string GetInfo()
         {
-            string display = "\r\nInput:\r\n One Civilian Kerbal";
+            //string display = "\r\nInput:\r\n One Civilian Kerbal";
+            string display = String.Format("\r\n" + Localizer.Format("#MOAR-005") + ":\r\n" + Localizer.Format("#MOAR-Recruitment-03") + " " + Localizer.Format("#MOAR-004") + " " + Localizer.Format("#MOAR-Recruitment-04") + ".\r\n");
 
-            display += "\r\nOutput:\r\n Pilot, Engineer, Scientest Kerbal (random) eating a MinmusMint icecream cone.";
+            //display += "\r\nOutput:\r\n Pilot, Engineer, Scientist Kerbal (random) eating a MinmusMint ice cream cone.";
+            display += String.Format(Localizer.Format("#MOAR-006") + ":\r\n" + Localizer.Format("#MOAR-Recruitment-06") + ".\r\n");
+
             return display;
         }
     }

@@ -1,4 +1,5 @@
-﻿<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -9,36 +10,48 @@
     <RootNamespace>MoarKerbals</RootNamespace>
     <AssemblyName>MoarKerbals</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
-      <FileAlignment>512</FileAlignment>
-      <Deterministic>true</Deterministic>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
     <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\GameData\MoarKerbals\Plugins\</OutputPath>
+    <OutputPath>..\GameData\KerbthulhuKineticsProgram\MoarKerbals\Plugins\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>..\GameData\MoarKerbals\Plugins\MoarKerbals.xml</DocumentationFile>
+    <DocumentationFile>..\GameData\KerbthulhuKineticsProgram\MoarKerbals\Plugins\MoarKerbals.xml</DocumentationFile>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>embedded</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\GameData\MoarKerbals\Plugins\</OutputPath>
+    <OutputPath>..\GameData\KerbthulhuKineticsProgram\MoarKerbals\Plugins\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <DebugSymbols>true</DebugSymbols>
-    <DocumentationFile>..\GameData\MoarKerbals\Plugins\MoarKerbals.xml</DocumentationFile>
+    <DocumentationFile>..\GameData\KerbthulhuKineticsProgram\MoarKerbals\Plugins\MoarKerbals.xml</DocumentationFile>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TransformOnBuild>true</TransformOnBuild>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OverwriteReadOnlyOutputFiles>true</OverwriteReadOnlyOutputFiles>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TransformOutOfDateOnly>false</TransformOutOfDateOnly>
+  </PropertyGroup>
   <ItemGroup>
-    <!-- <Reference Include="$(K112)\GameData\SpaceTuxLibrary\Plugins\KSP_Log.dll" >
-      <Private>False</Private>
-    </Reference> -->
     <Reference Include="$(K112)\KSP_x64_Data\Managed\Assembly-CSharp*.dll">
       <Private>False</Private>
     </Reference>
@@ -54,24 +67,16 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <!-- <Reference Include="$(K112)\KSP_x64_Data\Managed\UnityEngine.Analytics.dll">
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="$(K112)\KSP_x64_Data\Managed\UnityEngine.dll">
-      <Private>False</Private>
-    </Reference> -->
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Init.cs" />
     <Compile Include="KerbalRecruitment.cs" />
     <Compile Include="KuddleShack.cs" />
     <Compile Include="MoarKerbalBase.cs" />
     <Compile Include="MoarKerbals.cs" />
-    <Compile Include="ResourceRequired.cs" />
-    <Compile Include="SwitchLight.cs" />
-    <Compile Include="Support\Log.cs" />
+    <Compile Include="Support\ResourceRequired.cs" />
+    <Compile Include="Support\SwitchLight.cs" />
+    <Compile Include="Support\Logging.cs" />
     <Compile Include="Support\Settings.cs" />
-    <Compile Include="Support\Utilities.cs" />
     <Compile Include="Support\InstallChecker.cs" />
     <Compile Include="Support\SettingsInterface.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -85,17 +90,30 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\kuddleshack.wav" />
+    <Content Include="Assets\misc_sound.wav" />
+    <Content Include="Assets\positive.wav" />
+    <Content Include="Assets\save.wav" />
+    <Content Include="Assets\Upper01.aif" />
+    <Content Include="Assets\kloning.wav" />
+    <Content Include="Assets\overload.wav" />
     <Content Include="Properties\Version.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Version.cs</LastGenOutput>
     </Content>
-    <Content Include="Assets\kloning.wav" />
-    <Content Include="Assets\overload.wav" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\MoarKerbals.version" />
   </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v16.0\TextTemplating\Microsoft.TextTemplating.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>"$(DevEnvDir)\TextTransform.exe" "$(ProjectDir)Properties\Version.tt" 
+    </PreBuildEvent>
+  </PropertyGroup>
   <PropertyGroup>
     <PostBuildEvent>
 set K112=$(K112)
@@ -106,17 +124,14 @@ IF "%25K112%25"=="" (
 	GOTO DONE
 )
 
-start /D $(SolutionDir) /WAIT _deploy.bat  $(TargetDir) $(TargetFileName) $(TargetName)
+start /D $(ProjectDir)..\ /WAIT _deploy.bat  $(TargetDir) $(TargetFileName) $(TargetName)
 
 if $(ConfigurationName) == Release (	
-	start /D $(SolutionDir) /WAIT _buildRelease.bat $(TargetDir) $(TargetFileName) $(TargetName)
+	start /D $(ProjectDir)..\ /WAIT _buildRelease.bat $(TargetDir) $(TargetFileName) $(TargetName)
 )
-    </PostBuildEvent>
+</PostBuildEvent>
   </PropertyGroup>
-  <PropertyGroup>
-    <PreBuildEvent>"$(DevEnvDir)\texttransform.exe" "$(ProjectDir)Version.tt"</PreBuildEvent>
-  </PropertyGroup>
-<ProjectExtensions>
+  <ProjectExtensions>
     <MonoDevelop>
       <Properties>
         <Policies>

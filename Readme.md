@@ -66,7 +66,7 @@ Because I use the stock lander can for internals, which is only sized internally
 ### Depends
  - [Module Manager](http://forum.kerbalspaceprogram.com/index.php?/topic/50533-105-*)
  
-### Recomends
+### Recommends
  - [KerbalStats](https://forum.kerbalspaceprogram.com/index.php?/topic/89285-*)
  - [Community Resource Pack](https://forum.kerbalspaceprogram.com/index.php?/topic/166314-*)
 
