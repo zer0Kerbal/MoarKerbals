@@ -175,3 +175,5 @@ crashlytics-build.properties
 graphics/Thumbs.db
 *.old
 MoarKerbalsUnity/
+source/Assets/en-us.cfg
+source/Assets/MoarKerbals.version
