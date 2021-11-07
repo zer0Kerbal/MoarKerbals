@@ -202,52 +202,42 @@ namespace MoarKerbals
                             Logging.Msg(Localizer.Format("#MOAR-KloneBay-25", true));
                             KloneKerbal();
                             // triplets? (Only if KribbleMode enabled)
-                            if (HighLogic.CurrentGame.Parameters.CustomParams<Settings2>().KribbleMode)
+                            if (AdditionalBirths(rnd) && HighLogic.CurrentGame.Parameters.CustomParams<Settings2>().KribbleMode)
                             {
-                                //if ((accidentRate >= rnd.Next(1, 1000)) && PartHasRoom(part) && GatherResources(part) && GatherCurrencies())
+                                Logging.Msg(Localizer.Format("#MOAR-KloneBay-26", true));
+                                KloneKerbal();
+                                // quadruplets?
                                 if (AdditionalBirths(rnd))
                                 {
-                                    Logging.Msg(Localizer.Format("#MOAR-KloneBay-26", true));
+                                    Logging.Msg(Localizer.Format("#MOAR-KloneBay-27", true));
                                     KloneKerbal();
-                                    // quadruplets?
-                                    //if ((accidentRate <= rnd.Next(1, 1000)) && PartHasRoom(part) && GatherResources(part) && GatherCurrencies())
+                                    // quintuplets?
                                     if (AdditionalBirths(rnd))
                                     {
-                                        Logging.Msg(Localizer.Format("#MOAR-KloneBay-27", true));
+                                        Logging.Msg(Localizer.Format("#MOAR-KloneBay-28", true));
                                         KloneKerbal();
-                                        // quintuplets?
-                                        //if ((accidentRate <= rnd.Next(1, 1000)) && PartHasRoom(part) && GatherResources(part) && GatherCurrencies())
+                                        // Sextuplets?
                                         if (AdditionalBirths(rnd))
                                         {
-                                            Logging.Msg(Localizer.Format("#MOAR-KloneBay-28", true));
+                                            Logging.Msg(Localizer.Format("#MOAR-KloneBay-29", true));
                                             KloneKerbal();
-                                            // Sextuplets?
-                                            //if ((accidentRate <= rnd.Next(1, 1000)) && PartHasRoom(part) && GatherResources(part) && GatherCurrencies())
+                                            // Septuplets?
                                             if (AdditionalBirths(rnd))
                                             {
-                                                Logging.Msg(Localizer.Format("#MOAR-KloneBay-29", true));
+                                                Logging.Msg(Localizer.Format("#MOAR-KloneBay-30", true));
                                                 KloneKerbal();
-                                                // Septuplets?
-                                                //if ((accidentRate <= rnd.Next(1, 1000)) && PartHasRoom(part) && GatherResources(part) && GatherCurrencies())
+                                                // Octuplets?
                                                 if (AdditionalBirths(rnd))
                                                 {
-                                                    Logging.Msg(Localizer.Format("#MOAR-KloneBay-30", true));
+                                                    Logging.Msg(Localizer.Format("#MOAR-KloneBay-31", true));
                                                     KloneKerbal();
-                                                    // Octuplets?
-                                                    //if ((accidentRate <= rnd.Next(1, 1000)) && PartHasRoom(part) && GatherResources(part) && GatherCurrencies())
+                                                    // Nonuplets?
                                                     if (AdditionalBirths(rnd))
                                                     {
-                                                        Logging.Msg(Localizer.Format("#MOAR-KloneBay-31", true));
+                                                        Logging.Msg(Localizer.Format("#MOAR-KloneBay-32", true));
                                                         KloneKerbal();
-                                                        // Nonuplets?
-                                                        //if ((accidentRate <= rnd.Next(1, 1000)) && PartHasRoom(part) && GatherResources(part) && GatherCurrencies())
-                                                        if (AdditionalBirths(rnd))
-                                                        {
-                                                            Logging.Msg(Localizer.Format("#MOAR-KloneBay-32", true));
-                                                            KloneKerbal();
-                                                            // no more please!
-                                                            Logging.Msg(Localizer.Format("#MOAR-KloneBay-33", true));
-                                                        }
+                                                        // no more please!
+                                                        Logging.Msg(Localizer.Format("#MOAR-KloneBay-33", true));
                                                     }
                                                 }
                                             }
@@ -282,7 +272,7 @@ namespace MoarKerbals
         private bool AdditionalBirths(System.Random rnd)
         {
             double localDouble = rnd.Next(1, 1000);
-            Logging.DLog(logMsg: "roll: {localDouble:F4} vs. {accidentRate}");
+            Logging.DLog(logMsg: $"roll: {localDouble:F4} vs. {accidentRate}");
             return (localDouble <= accidentRate) && PartHasRoom(part) && GatherResources(part) && GatherCurrencies();
         }
 
@@ -291,7 +281,7 @@ namespace MoarKerbals
         /// <returns></returns>
         private protected void ScaryMovieMode(System.Random rnd)
         {
-            Logging.DLog("Kloning: ScaryMovieMode");
+            Logging.DLog(logMsg: "Kloning: ScaryMovieMode");
             // there is always one victim
             SoloCrewBadResult(rnd);
             if (HighLogic.CurrentGame.Parameters.CustomParams<Settings2>().QuentinTarantinoMode == 0) MaximumKarnage(rnd);
@@ -305,7 +295,7 @@ namespace MoarKerbals
         // this can be combined with the 'MaximumKarnage' method, just use an if with maxFatalites.
         private protected void LetsGetBloody(System.Random rnd)
         {
-            Logging.DLog("Kloning: LetsGetBloody");
+            Logging.DLog(logMsg: "Kloning: LetsGetBloody");
             int maxFatalities = HighLogic.CurrentGame.Parameters.CustomParams<Settings2>().QuentinTarantinoMode; // 1 to 10
             int fatalities = 0; // number of victims
 
@@ -349,7 +339,7 @@ namespace MoarKerbals
         /// <returns></returns>
         private protected void MaximumKarnage(System.Random rnd)
         {
-            Logging.DLog("Kloning: MaximumKarnage");
+            Logging.DLog(logMsg: "Kloning: MaximumKarnage");
             int maxFatalities = part.protoModuleCrew.Count; // total possible number of casualties
             int fatalities = 0; // number of victims
 
@@ -363,6 +353,7 @@ namespace MoarKerbals
                     if (rnd.Next(1, 100) <= accidentRate)
                     {
                         HorrorMovieCast.Add(crewMember);
+                        Logging.DLog(logMsg: $"Kloning: {crewMember.displayName} is about to die... Needs food badly.");
                         fatalities++;
                     }
                 }
@@ -390,7 +381,7 @@ namespace MoarKerbals
         private protected void MultipleCrewBadResult(ProtoCrewMember crewman, System.Random rnd)
         {
             string culprit = crewman.displayName;
-            Logging.DLog(logMsg: "Kloning: MultipleCrewBadResult culprit{culprit} did it in the kitchen with a frozen fish.");
+            Logging.DLog(logMsg: $"Kloning: MultipleCrewBadResult culprit{culprit} did it in the kitchen with a frozen fish.");
 
             part.RemoveCrewmember(crewman);
             Logging.Msg(Localizer.Format("#MOAR-KloneBay-19", crewman.name));
