@@ -11,65 +11,171 @@
         <member name="T:MoarKerbals.KerbalRecruitment.KerbalJob">
             <summary>KerbalJob Enum - kerbal professions</summary>
         </member>
-        <member name="M:MoarKerbals.KerbalRecruitment.recruitKerbal">
+        <member name="F:MoarKerbals.KerbalRecruitment.KerbalRecruitmentEnabled">
+            <summary>KerbalRecuitmentEnabled - is the module enabled (default = false)</summary>
+        </member>
+        <member name="F:MoarKerbals.KerbalRecruitment.graduation0">
+            <summary>The graduation sound</summary>
+        </member>
+        <member name="F:MoarKerbals.KerbalRecruitment.graduation1">
+            <summary>The graduation sound</summary>
+        </member>
+        <member name="F:MoarKerbals.KerbalRecruitment.dropOut0">
+            <summary>The graduation sound</summary>
+        </member>
+        <member name="F:MoarKerbals.KerbalRecruitment.dropOut1">
+            <summary>The graduation sound</summary>
+        </member>
+        <member name="M:MoarKerbals.KerbalRecruitment.OnStart(PartModule.StartState)">
+            <summary>onStart</summary>
+        </member>
+        <member name="M:MoarKerbals.KerbalRecruitment.RecruitKerbal">
             <summary>Recruits the kerbal.</summary>
+        </member>
+        <member name="M:MoarKerbals.KerbalRecruitment.FailureSound">
+            <summary>Play sound upon failure</summary>
+        </member>
+        <member name="M:MoarKerbals.KerbalRecruitment.SuccessSound">
+            <summary>Play sound upon success</summary>
+        </member>
+        <member name="M:MoarKerbals.KerbalRecruitment.GetInfo">
+            <summary>What shows up in editor for the part</summary>
+            <returns></returns>
         </member>
         <member name="T:MoarKerbals.KuddleShack">
             <summary>KuddleShack module</summary>
         </member>
-        <member name="F:MoarKerbals.KuddleShack.kuddling_success">
+        <member name="F:MoarKerbals.KuddleShack.kuddling_success0">
+            <summary>kuddling success sound</summary>
+        </member>
+        <member name="F:MoarKerbals.KuddleShack.kuddling_success1">
+            <summary>kuddling success sound</summary>
+        </member>
+        <member name="F:MoarKerbals.KuddleShack.kuddling_failure0">
+            <summary>kuddling success sound</summary>
+        </member>
+        <member name="F:MoarKerbals.KuddleShack.kuddling_failure1">
             <summary>kuddling success sound</summary>
         </member>
         <member name="F:MoarKerbals.KuddleShack.hasMale">
-            <summary>has x kerbal</summary>
+            <summary>has a male kerbal</summary>
         </member>
         <member name="F:MoarKerbals.KuddleShack.hasFemale">
-            <summary>has y kerbal</summary>
+            <summary>has x kerbal</summary>
+            <summary>has a femalmale kerbal</summary>
         </member>
         <member name="F:MoarKerbals.KuddleShack.hasMatingPair">
-            <summary>has mating pair of kerbals</summary>
+            <summary>has y kerbal</summary>
+            <summary>has a male and female kerbal</summary>
         </member>
         <member name="F:MoarKerbals.KuddleShack.startMatingTimer">
-            <summary>start mating timer</summary>
+            <summary>has mating pair of kerbals</summary>
+            <summary>the mating timer (how long has there been a mating pair)</summary>
         </member>
         <member name="M:MoarKerbals.KuddleShack.GetMatingStatus">
+            <summary>start mating timer</summary>
             <summary>GetMatingStatus</summary>
         </member>
         <member name="M:MoarKerbals.KuddleShack.onCrewBoardVessel(GameEvents.FromToAction{Part,Part})">
-            <summary> the crew board vessel.</summary>
-            <param name="fta">The fta.</param>
+            <summary> GameEvent: crew boards vessel.</summary>
+            <param name="fta">The FromToAction.</param>
         </member>
-        <member name="M:MoarKerbals.KuddleShack.ActivateKlone">
-            <summary>
-            
-            </summary>
+        <member name="M:MoarKerbals.KuddleShack.onCrewTransferred(GameEvents.HostedFromToAction{ProtoCrewMember,Part})">
+            <summary> GameEvent: crew transfers.</summary>
+            <param name="hfta">The HostedFromToAction.</param>
         </member>
-        <member name="F:MoarKerbals.MoarKerbalBase.recipeIngredients">
-            <summary>The recipe ingredients</summary>
+        <member name="M:MoarKerbals.KuddleShack.onCrewOnEva(GameEvents.FromToAction{Part,Part})">
+            <summary> GameEvent: crew on EVA.</summary>
+            /// <param name="hfta">The hfta.</param>
+            <param name="fta">The FromToAction.</param>
         </member>
-        <member name="F:MoarKerbals.MoarKerbalBase.recipeAmounts">
-            <summary>The recipe amounts</summary>
+        <member name="M:MoarKerbals.KuddleShack.ActivateKuddling">
+            <summary>KSPEvent: Complete Kuddling</summary>
         </member>
-        <member name="F:MoarKerbals.MoarKerbalBase.initiateAction">
-            <summary>The initiate action</summary>
+        <member name="M:MoarKerbals.KuddleShack.FailureSound">
+            <summary>Play sound upon failure</summary>
+        </member>
+        <member name="M:MoarKerbals.KuddleShack.SuccessSound">
+            <summary>Play sound upon success</summary>
+        </member>
+        <member name="M:MoarKerbals.KuddleShack.GetInfo">
+            <summary>What shows up in editor for the part</summary>
+            <returns></returns>
+        </member>
+        <member name="F:MoarKerbals.MoarKerbalsBase.recipeIngredients">
+            <summary>recipeIngreadients </summary>
+        </member>
+        <member name="F:MoarKerbals.MoarKerbalsBase.recipeAmounts">
+            <summary>RecipeAmounts</summary>
+        </member>
+        <member name="F:MoarKerbals.MoarKerbalsBase.initiateAction">
+            <summary>initiateAction (defaults to #MOAR-Base-01</summary>
+        </member>
+        <member name="F:MoarKerbals.MoarKerbalsBase.costFunds">
+            <summary>costFunds (default = 0)</summary>
+        </member>
+        <member name="F:MoarKerbals.MoarKerbalsBase.costScience">
+            <summary>costScient (default - 0) </summary>
+        </member>
+        <member name="F:MoarKerbals.MoarKerbalsBase.costReputation">
+            <summary>costReputation (default = 0)</summary>
+        </member>
+        <member name="F:MoarKerbals.MoarKerbalsBase.resourceRequired">
+            <summary>internal list of resourcesRequired  </summary>
+        </member>
+        <member name="F:MoarKerbals.MoarKerbalsBase.groupName">
+            <summary>internal name of GUI groupName  </summary>
+        </member>
+        <member name="M:MoarKerbals.MoarKerbalsBase.OnStart(PartModule.StartState)">
+            <summary>onStart</summary>
+        </member>
+        <member name="M:MoarKerbals.MoarKerbalsBase.GatherResources(Part)">
+            <summary>GatherResources: determine if required resources available and debit them from part.</summary>
+            <param name="part"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MoarKerbals.MoarKerbalsBase.GatherResources(Part,System.Double)">
+            <summary>GatherResources: determine if required resources available and debit them from vessel.</summary>
+            <param name="part"></param>
+            <param name="percentage"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MoarKerbals.MoarKerbalsBase.GatherCurrencies">
+            <summary>verify science, reputation, and funds availability</summary>
+            <returns>true if success</returns>
+        </member>
+        <member name="M:MoarKerbals.MoarKerbalsBase.DebitCurrencies">
+            <summary>spend science, reputation, and funds</summary>
+            <returns>true = success</returns>
         </member>
         <member name="T:MoarKerbals.KloneBay">
             <summary>KloneBay part module</summary>
         </member>
-        <member name="F:MoarKerbals.KloneBay.accidentRate">
-            <summary>The accident rate</summary>
+        <member name="M:MoarKerbals.KloneBay.ScaryMovieMode(System.Random)">
+            <summary>Let's get bloody. Checks settings to see if their is a limits to the number of accident victims</summary>
+            <param name="rnd">The random seed.</param>
+            <returns></returns>
         </member>
-        <member name="F:MoarKerbals.KloneBay.allowOrbital">
-            <summary>allow orbital activity</summary>
+        <member name="M:MoarKerbals.KloneBay.LetsGetBloody(System.Random)">
+            <summary>Let's get bloody. Limits the number of accident victims</summary>
+            <param name="rnd">The random seed.</param>
+            <returns></returns>
         </member>
-        <member name="F:MoarKerbals.KloneBay.allowSplashedOrLanded">
-            <summary>allow splashed or landed activity</summary>
+        <member name="M:MoarKerbals.KloneBay.MaximumKarnage(System.Random)">
+            <summary>Maximizes the kerbal karnage. Unlimited number of accident victims
+            Each kerbal in part makes a save vs accidentRate, if fail, is zapped by the accident</summary>
+            <param name="rnd">The random seed.</param>
+            <returns></returns>
         </member>
-        <member name="F:MoarKerbals.KloneBay.overload">
-            <summary>overload sound</summary>
+        <member name="M:MoarKerbals.KloneBay.FailureSound">
+            <summary>Play sound upon failure</summary>
         </member>
-        <member name="F:MoarKerbals.KloneBay.kloning_success">
-            <summary>kloning success sound</summary>
+        <member name="M:MoarKerbals.KloneBay.SuccessSound">
+            <summary>Play sound upon success</summary>
+        </member>
+        <member name="M:MoarKerbals.KloneBay.GetInfo">
+            <summary>What shows up in editor for the part</summary>
+            <returns></returns>
         </member>
         <member name="T:MoarKerbals.ResourceRequired">
             <summary>ResourceRequired class</summary>
@@ -135,47 +241,32 @@
             <summary>Gets the section order.</summary>
             <value>The section order.</value>
         </member>
-        <member name="F:MoarKerbals.Settings.soundOn">
-            <summary>Turn sounds on or off GameParameters</summary>
-        </member>
-        <member name="F:MoarKerbals.Settings.gameMail">
-            <summary>Turns sending game mail on or off in GameParameters</summary>
-        </member>
-        <member name="F:MoarKerbals.Settings.requireLivingKerbal">
-            <summary>Require Living Kerbal switch in GameParameters</summary>
-        </member>
-        <member name="M:MoarKerbals.Settings.RequireLivingKerbal">
-            <summary>Returns the current game setting for requirelivingkerbal.</summary>
-            <returns>requireLivingKerbal</returns>
-        </member>
-        <member name="F:MoarKerbals.Settings.coloredPAW">
-            <summary>sets colored paw in GameParameters</summary>
-        </member>
         <member name="F:MoarKerbals.Settings.globalKloningCostMultiplier">
             <summary>Sets the globalScalingFactor in GameParameters</summary>
         </member>
         <member name="F:MoarKerbals.Settings.kuddleTimeNeeded">
             <summary>The time needed to produce a new kerbal</summary>
         </member>
-        <member name="F:MoarKerbals.Settings.soundClip0">
-            <summary>sound clip to be played during xxx events</summary>
+        <member name="F:MoarKerbals.Settings.soundClipA0">
+            <summary>sound clip to be played during kloning success events</summary>
         </member>
-        <member name="F:MoarKerbals.Settings.soundClip1">
-            <summary>sound clip to be played during xxx events</summary>
+        <member name="F:MoarKerbals.Settings.soundClipA1">
+            <summary>sound clip to be played during kloning success events</summary>
         </member>
-        <member name="F:MoarKerbals.Settings.soundClip2">
-            <summary>sound clip to be played during xxx events</summary>
+        <member name="F:MoarKerbals.Settings.soundClipB0">
+            <summary>sound clip to be played during kuddling success events</summary>
+        </member>
+        <member name="F:MoarKerbals.Settings.soundClipB1">
+            <summary>sound clip to be played during kuddling success events</summary>
+        </member>
+        <member name="F:MoarKerbals.Settings.soundClipC0">
+            <summary>sound clip to be played during recruitment success events</summary>
+        </member>
+        <member name="F:MoarKerbals.Settings.soundClipC1">
+            <summary>sound clip to be played during recruitment success events</summary>
         </member>
         <member name="F:MoarKerbals.Settings.soundVolume">
             <summary>sound clip volume</summary>
-        </member>
-        <member name="P:MoarKerbals.Settings.HasPresets">
-            <summary>Gets a value indicating whether this instance has presets.</summary>
-            <value><c>true</c> if this instance has presets; otherwise, <c>false</c>.</value>
-        </member>
-        <member name="M:MoarKerbals.Settings.SetDifficultyPreset(GameParameters.Preset)">
-            <summary>Sets the difficulty preset.</summary>
-            <param name="preset">The preset.</param>
         </member>
         <member name="M:MoarKerbals.Settings.Enabled(System.Reflection.MemberInfo,GameParameters)">
             <summary>Enabled</summary>
@@ -193,6 +284,47 @@
             <summary>ValidValues</summary>
             <param name="member"></param>
             <returns>null</returns>
+        </member>
+        <member name="P:MoarKerbals.Settings2.GameMode">
+            <summary>Gets the game mode.</summary>
+            <value>The game mode.</value>
+        </member>
+        <member name="P:MoarKerbals.Settings2.Section">
+            <summary>Gets the section.</summary>
+            <value>The section.</value>
+        </member>
+        <member name="P:MoarKerbals.Settings2.DisplaySection">
+            <summary>Gets the display section.</summary>
+            <value>The display section.</value>
+        </member>
+        <member name="P:MoarKerbals.Settings2.Title">
+            <summary>Gets the game settings section title.</summary>
+            <value>The title.</value>
+        </member>
+        <member name="P:MoarKerbals.Settings2.SectionOrder">
+            <summary>Gets the section order.</summary>
+            <value>The section order.</value>
+        </member>
+        <member name="F:MoarKerbals.Settings2.soundOn">
+            <summary>Turn sounds on or off GameParameters</summary>
+        </member>
+        <member name="F:MoarKerbals.Settings2.requireLivingKerbal">
+            <summary>Require Living Kerbal for kloning switch in GameParameters</summary>
+        </member>
+        <member name="F:MoarKerbals.Settings2.KribbleMode">
+            <summary>Enable Kribble mode: aka multiple klones/kuddles switch in GameParameters</summary>
+        </member>
+        <member name="F:MoarKerbals.Settings2.birthdaySuit">
+            <summary>which suit new kerbals start with</summary>
+        </member>
+        <member name="F:MoarKerbals.Settings2.QuentinTarantinoMode">
+            <summary>the QuentinTarantino mode</summary>
+        </member>
+        <member name="F:MoarKerbals.Settings2.gameMail">
+            <summary>Turns sending game mail on or off in GameParameters</summary>
+        </member>
+        <member name="F:MoarKerbals.Settings2.coloredPAW">
+            <summary>sets colored paw in GameParameters</summary>
         </member>
         <member name="P:MoarKerbals.DebugSettings.GameMode">
             <summary>Gets the game mode.</summary>
