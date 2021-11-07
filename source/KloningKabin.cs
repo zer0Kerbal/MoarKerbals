@@ -197,45 +197,51 @@ namespace MoarKerbals
                         KloneKerbal();
                         // twins?
 
-                        // if ((PartHasRoom(part) && (accidentRate / 2 <= rnd.Next(1, 10000)) && GatherResources(part) && GatherCurrencies()) && true)
-                        if ((accidentRate <= rnd.Next(1, 1000)) && PartHasRoom(part) && GatherResources(part) && GatherCurrencies())
+                        if (AdditionalBirths(rnd))
                         {
                             Logging.Msg(Localizer.Format("#MOAR-KloneBay-25", true));
                             KloneKerbal();
                             // triplets? (Only if KribbleMode enabled)
                             if (HighLogic.CurrentGame.Parameters.CustomParams<Settings2>().KribbleMode)
                             {
-                                if ((accidentRate <= rnd.Next(1, 1000)) && PartHasRoom(part) && GatherResources(part) && GatherCurrencies())
+                                //if ((accidentRate >= rnd.Next(1, 1000)) && PartHasRoom(part) && GatherResources(part) && GatherCurrencies())
+                                if (AdditionalBirths(rnd))
                                 {
                                     Logging.Msg(Localizer.Format("#MOAR-KloneBay-26", true));
                                     KloneKerbal();
                                     // quadruplets?
-                                    if ((accidentRate <= rnd.Next(1, 1000)) && PartHasRoom(part) && GatherResources(part) && GatherCurrencies())
+                                    //if ((accidentRate <= rnd.Next(1, 1000)) && PartHasRoom(part) && GatherResources(part) && GatherCurrencies())
+                                    if (AdditionalBirths(rnd))
                                     {
                                         Logging.Msg(Localizer.Format("#MOAR-KloneBay-27", true));
                                         KloneKerbal();
                                         // quintuplets?
-                                        if ((accidentRate <= rnd.Next(1, 1000)) && PartHasRoom(part) && GatherResources(part) && GatherCurrencies())
+                                        //if ((accidentRate <= rnd.Next(1, 1000)) && PartHasRoom(part) && GatherResources(part) && GatherCurrencies())
+                                        if (AdditionalBirths(rnd))
                                         {
                                             Logging.Msg(Localizer.Format("#MOAR-KloneBay-28", true));
                                             KloneKerbal();
                                             // Sextuplets?
-                                            if ((accidentRate <= rnd.Next(1, 1000)) && PartHasRoom(part) && GatherResources(part) && GatherCurrencies())
+                                            //if ((accidentRate <= rnd.Next(1, 1000)) && PartHasRoom(part) && GatherResources(part) && GatherCurrencies())
+                                            if (AdditionalBirths(rnd))
                                             {
                                                 Logging.Msg(Localizer.Format("#MOAR-KloneBay-29", true));
                                                 KloneKerbal();
                                                 // Septuplets?
-                                                if ((accidentRate <= rnd.Next(1, 1000)) && PartHasRoom(part) && GatherResources(part) && GatherCurrencies())
+                                                //if ((accidentRate <= rnd.Next(1, 1000)) && PartHasRoom(part) && GatherResources(part) && GatherCurrencies())
+                                                if (AdditionalBirths(rnd))
                                                 {
                                                     Logging.Msg(Localizer.Format("#MOAR-KloneBay-30", true));
                                                     KloneKerbal();
                                                     // Octuplets?
-                                                    if ((accidentRate <= rnd.Next(1, 1000)) && PartHasRoom(part) && GatherResources(part) && GatherCurrencies())
+                                                    //if ((accidentRate <= rnd.Next(1, 1000)) && PartHasRoom(part) && GatherResources(part) && GatherCurrencies())
+                                                    if (AdditionalBirths(rnd))
                                                     {
                                                         Logging.Msg(Localizer.Format("#MOAR-KloneBay-31", true));
                                                         KloneKerbal();
                                                         // Nonuplets?
-                                                        if ((accidentRate <= rnd.Next(1, 1000)) && PartHasRoom(part) && GatherResources(part) && GatherCurrencies())
+                                                        //if ((accidentRate <= rnd.Next(1, 1000)) && PartHasRoom(part) && GatherResources(part) && GatherCurrencies())
+                                                        if (AdditionalBirths(rnd))
                                                         {
                                                             Logging.Msg(Localizer.Format("#MOAR-KloneBay-32", true));
                                                             KloneKerbal();
@@ -271,6 +277,13 @@ namespace MoarKerbals
                 GameEvents.onVesselChange.Fire(FlightGlobals.ActiveVessel);
             }
             //            HorrorMovieCrew.Add(crewMember);
+        }
+
+        private bool AdditionalBirths(System.Random rnd)
+        {
+            double localDouble = rnd.Next(1, 1000);
+            Logging.DLog(logMsg: "roll: {localDouble:F4} vs. {accidentRate}");
+            return (localDouble <= accidentRate) && PartHasRoom(part) && GatherResources(part) && GatherCurrencies();
         }
 
         /// <summary>Let's get bloody. Checks settings to see if their is a limits to the number of accident victims</summary>
