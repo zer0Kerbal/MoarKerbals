@@ -196,44 +196,46 @@ namespace MoarKerbals
                     {
                         KloneKerbal();
                         // twins?
-                        if ((PartHasRoom(part) && (accidentRate / 2 <= rnd.Next(1, 10000)) && GatherResources(part) && GatherCurrencies()) && true)
+
+                        // if ((PartHasRoom(part) && (accidentRate / 2 <= rnd.Next(1, 10000)) && GatherResources(part) && GatherCurrencies()) && true)
+                        if ((accidentRate <= rnd.Next(1, 1000)) && PartHasRoom(part) && GatherResources(part) && GatherCurrencies())
                         {
                             Logging.Msg(Localizer.Format("#MOAR-KloneBay-25", true));
                             KloneKerbal();
                             // triplets? (Only if KribbleMode enabled)
                             if (HighLogic.CurrentGame.Parameters.CustomParams<Settings2>().KribbleMode)
                             {
-                                if ((PartHasRoom(part) && (accidentRate / 2 <= rnd.Next(1, 10000)) && GatherResources(part) && GatherCurrencies()) && true)
+                                if ((accidentRate <= rnd.Next(1, 1000)) && PartHasRoom(part) && GatherResources(part) && GatherCurrencies())
                                 {
                                     Logging.Msg(Localizer.Format("#MOAR-KloneBay-26", true));
                                     KloneKerbal();
                                     // quadruplets?
-                                    if ((PartHasRoom(part) && GatherResources(part) && GatherCurrencies()) && (accidentRate / 4 <= rnd.Next(1, 10000)))
+                                    if ((accidentRate <= rnd.Next(1, 1000)) && PartHasRoom(part) && GatherResources(part) && GatherCurrencies())
                                     {
                                         Logging.Msg(Localizer.Format("#MOAR-KloneBay-27", true));
                                         KloneKerbal();
                                         // quintuplets?
-                                        if ((PartHasRoom(part) && GatherResources(part) && GatherCurrencies()) && (accidentRate / 5 <= rnd.Next(1, 10000)))
+                                        if ((accidentRate <= rnd.Next(1, 1000)) && PartHasRoom(part) && GatherResources(part) && GatherCurrencies())
                                         {
                                             Logging.Msg(Localizer.Format("#MOAR-KloneBay-28", true));
                                             KloneKerbal();
                                             // Sextuplets?
-                                            if ((PartHasRoom(part) && GatherResources(part) && GatherCurrencies()) && (accidentRate / 6 <= rnd.Next(1, 10000)))
+                                            if ((accidentRate <= rnd.Next(1, 1000)) && PartHasRoom(part) && GatherResources(part) && GatherCurrencies())
                                             {
                                                 Logging.Msg(Localizer.Format("#MOAR-KloneBay-29", true));
                                                 KloneKerbal();
                                                 // Septuplets?
-                                                if ((PartHasRoom(part) && GatherResources(part) && GatherCurrencies()) && (accidentRate / 7 <= rnd.Next(1, 10000)))
+                                                if ((accidentRate <= rnd.Next(1, 1000)) && PartHasRoom(part) && GatherResources(part) && GatherCurrencies())
                                                 {
                                                     Logging.Msg(Localizer.Format("#MOAR-KloneBay-30", true));
                                                     KloneKerbal();
                                                     // Octuplets?
-                                                    if ((PartHasRoom(part) && GatherResources(part) && GatherCurrencies()) && (accidentRate / 8 <= rnd.Next(1, 10000)))
+                                                    if ((accidentRate <= rnd.Next(1, 1000)) && PartHasRoom(part) && GatherResources(part) && GatherCurrencies())
                                                     {
                                                         Logging.Msg(Localizer.Format("#MOAR-KloneBay-31", true));
                                                         KloneKerbal();
                                                         // Nonuplets?
-                                                        if ((PartHasRoom(part) && GatherResources(part) && GatherCurrencies()) && (accidentRate / 9 <= rnd.Next(1, 10000)))
+                                                        if ((accidentRate <= rnd.Next(1, 1000)) && PartHasRoom(part) && GatherResources(part) && GatherCurrencies())
                                                         {
                                                             Logging.Msg(Localizer.Format("#MOAR-KloneBay-32", true));
                                                             KloneKerbal();
@@ -253,13 +255,13 @@ namespace MoarKerbals
                     // if (!HighLogic.CurrentGame.Parameters.CustomParams<Settings2>().requireLivingKerbal) - don't need because switch factors that in
                     else switch (part.protoModuleCrew.Count)
                         {
-                            case int n when (n <= 0):
+                            case int n when n <= 0:
                                 NoCrewBadResult(rnd);
                                 break;
-                            case int n when (n == 0):
+                            case int n when n == 0:
                                 SoloCrewBadResult(rnd);
                                 break;
-                            case int n when (n > 1):
+                            case int n when n > 1:
                                 ScaryMovieMode(rnd);
                                 break;
                             default:
@@ -499,22 +501,34 @@ namespace MoarKerbals
         {
             Logging.DLog(logMsg: "Kloning: PartHasRoom");
             // see if there is room left for a new klone
-            Logging.DLog(logMsg: $"Crew counts {part.protoModuleCrew.Count} = {part.CrewCapacity}");
-            if (part.protoModuleCrew.Count == (part.CrewCapacity - 1))
+            Logging.DLog(logMsg: $"Crew counts {part.protoModuleCrew.Count} / {part.CrewCapacity} and needs living? {HighLogic.CurrentGame.Parameters.CustomParams<Settings2>().requireLivingKerbal}");
+
+            // occupiedSpace = if require a living kerbal to klone sets to 1, otherwise sets to 0
+            int occupiedSpace = (HighLogic.CurrentGame.Parameters.CustomParams<Settings2>().requireLivingKerbal ? 1 : 0);
+
+            /* logic graph
+             * 
+             * require: false && count < max then return true
+             * require: true && if count > 0 && count < max - 1 then return true
+             * else false
+             *
+            */
+
+            if (part.protoModuleCrew.Count == (part.CrewCapacity - occupiedSpace))
             {
                 Logging.Msg(Localizer.Format("#MOAR-KloneBay-17", part.partName)); // "No room left in Kloning Bay"
                 Logging.DLog(logMsg: $"Kloning, No room left in: {part.partName}");
                 return false;
             }
 
-            if (HighLogic.CurrentGame.Parameters.CustomParams<Settings2>().requireLivingKerbal && part.protoModuleCrew.Count == 0)
+            // check for needing kerbal availability
+            if (part.protoModuleCrew.Count == 0 && HighLogic.CurrentGame.Parameters.CustomParams<Settings2>().requireLivingKerbal)
             {
                 Logging.Msg(Localizer.Format("#MOAR-KloneBay-16")); // "Kloning requires at least one test subject"
                 Logging.DLog(logMsg: $"Kloning requires at least one test subject, no one in: {part.partName}");
                 return false;
             }
-
-            //Logging.Msg(Localizer.Format("#MOAR-KloneBay-15"));     // "Kloning does not need a living kerbal"
+            else Logging.DLog(logMsg: Localizer.Format(Localizer.Format("#MOAR-KloneBay-15"))); // "Kloning does not need a living kerbal"
             return true;
         }
 
