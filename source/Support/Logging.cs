@@ -30,6 +30,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Text;
 using System.Diagnostics;
 using System.Linq;
 using UnityEngine;
@@ -95,14 +96,12 @@ namespace MoarKerbals
             Logger.instance.addToLog(logMsg);
             if (xDebug || HighLogic.CurrentGame.Parameters.CustomParams<DebugSettings>().logging)
             {
+                //Debug.LogWarning(logMsg);
                 Debug.Log(logMsg);
             }
-            else
-            {
 #if DEBUG
-                Debug.Log(logMsg);
+                        else { Debug.LogWarning(s); }
 #endif
-            }
         }
 
         /// <summary>LogWarning: Add messages to the log. Prepends "MoarKerbals v{0}]: ", Version.Text</summary>
@@ -116,12 +115,9 @@ namespace MoarKerbals
             {
                 Debug.LogWarning(logMsg);
             }
-            else
-            {
 #if DEBUG
-                Debug.LogWarning(logMsg);
+                else { Debug.LogWarning(s); }
 #endif
-            }
         }
 
         /// <summary>LogError: Add messages to the log. Prepends "MoarKerbals v{0}]: ", Version.Text</summary>
@@ -135,12 +131,9 @@ namespace MoarKerbals
             {
                 Debug.LogError(logMsg);
             }
-            else
-            {
 #if DEBUG
-                Debug.LogError(logMsg);
+                else { Debug.LogError(s); }
 #endif
-            }
         }
 
         /// <summary>sends the specific message to in game mail and screen if Debug is defined
@@ -155,32 +148,18 @@ namespace MoarKerbals
             }
             Logger.instance.addToLog(s);
 
-            ScreenMessages.PostScreenMessage(s, 1, ScreenMessageStyle.UPPER_CENTER, true);
-
-            s = string.Format("[MoarKerbals v{0}][ERR]: ", Version.Text) + s;
-            if (HighLogic.CurrentGame.Parameters.CustomParams<Settings>().gameMail)
-            {
-                UnityEngine.Debug.Log(s);
-            }
-            if (HighLogic.CurrentGame.Parameters.CustomParams<Settings>().gameMail)
-            {
-                Debug.LogError(s);
-            }
-            else
-            {
-#if DEBUG
-                Debug.LogError(s);
-#endif
-            }
+            ScreenMessages.PostScreenMessage(s, (float)3.5, ScreenMessageStyle.UPPER_CENTER, true);
+            DLog(s);
         }
-
-        /// <summary>Messages to the screen in the specified format.</summary>
-        /// <param name="s">The format.</param>
-        /// <param name="args">The arguments.</param>
-        //private void Message(string s, params object[] args)
-        //{
-        //    ScreenMessages.PostScreenMessage(string.Format(s, args), 3f, 0);
-        //}
     }
 }
 
+
+/// <summary>Messages to the screen in the specified format.</summary>
+/// <param name="s">The format.</param>
+/// <param name="args">The arguments.</param>
+//private void Message(string s, params object[] args)
+//{
+//    ScreenMessages.PostScreenMessage(string.Format(s, args), 3f, 0);
+//}
+// }
