@@ -6,7 +6,7 @@
  * 
  * (C) Copyright 2019, 2021 zer0Kerbal
  * 
- * Kerbal Space Program is Copyright (C) 2013 Squad. See http://kerbalspaceprogram.com/. This
+ * Kerbal Space Program is Copyright (C) 2013 Squad. See <http://kerbalspaceprogram.com/>. This
  * project is in no way associated with nor endorsed by Squad.
  * 
  * This code is licensed under the Attribution-NonCommercial-ShareAlike 3.0 (CC BY-NC-SA 3.0)
@@ -39,23 +39,23 @@ namespace MoarKerbals
     {
         //public static bool RequireLivingKerbal()
         //{
-        //    return HighLogic.CurrentGame.Parameters.CustomParams<Settings>().requireLivingKerbal;
+        //    return HighLogic.CurrentGame.Parameters.CustomParams<Settings2>().requireLivingKerbal;
         //}
 
-        internal static bool ColoredPAW()
-        {
-            return HighLogic.CurrentGame.Parameters.CustomParams<Settings>().coloredPAW;
-        }
+        //internal static bool ColoredPAW()
+        //{
+        //    return HighLogic.CurrentGame.Parameters.CustomParams<Settings2>().coloredPAW;
+        //}
 
-        internal static bool InGameMail()
-        {
-            return HighLogic.CurrentGame.Parameters.CustomParams<Settings>().gameMail;
-        }
+        //internal static bool InGameMail()
+        //{
+        //    return HighLogic.CurrentGame.Parameters.CustomParams<Settings2>().gameMail;
+        //}
 
-        internal static bool SoundOn()
-        {
-            return HighLogic.CurrentGame.Parameters.CustomParams<Settings>().soundOn;
-        }
+        //internal static bool SoundOn()
+        //{
+        //    return HighLogic.CurrentGame.Parameters.CustomParams<Settings>().soundOn;
+        //}
 
         internal static double globalKloningCostMultiplier()
         {
