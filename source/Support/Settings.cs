@@ -71,31 +71,6 @@ namespace MoarKerbals
         /// <value>The section order.</value>
         public override int SectionOrder { get { return 1; } }
 
-        /// <summary>Turn sounds on or off GameParameters</summary>
-        [GameParameters.CustomParameterUI("#MOAR-Settings-sound", toolTip = "#MOAR-Settings-sound-tip",
-            newGameOnly = false, unlockedDuringMission = true)]
-        public bool soundOn = true;
-
-        /// <summary>Turns sending game mail on or off in GameParameters</summary>
-        [GameParameters.CustomParameterUI("#MOAR-Settings-mail", toolTip = "#MOAR-Settings-mail-tip",
-            newGameOnly = false, unlockedDuringMission = true)]
-        public bool gameMail = true;
-
-        /// <summary>Require Living Kerbal switch in GameParameters</summary>
-        [GameParameters.CustomParameterUI("#MOAR-Settings-living", toolTip = "#MOAR-Settings-living-tip",
-            newGameOnly = false, unlockedDuringMission = true)]
-        public bool requireLivingKerbal = true;
-
-        /// <summary>Returns the current game setting for requirelivingkerbal.</summary>
-        /// <returns>requireLivingKerbal</returns>
-        public static bool RequireLivingKerbal()
-        { return HighLogic.CurrentGame.Parameters.CustomParams<Settings>().requireLivingKerbal; }
-
-        /// <summary>sets colored paw in GameParameters</summary>
-        [GameParameters.CustomParameterUI("#MOAR-Settings-paw", toolTip = "#MOAR-Settings-paw-tip",
-            newGameOnly = false, unlockedDuringMission = true)]
-        public bool coloredPAW = true;
-
         /// <summary>Sets the globalScalingFactor in GameParameters</summary>
         [GameParameters.CustomFloatParameterUI("#MOAR-Settings-scale", toolTip = "#MOAR-Settings-scale-tip",
             newGameOnly = false, unlockedDuringMission = true,
@@ -113,23 +88,47 @@ namespace MoarKerbals
             minValue = 10, maxValue = 3600, stepSize = 10)]
         public int slowUpdateTime = 10;
 
-        /// <summary>sound clip to be played during xxx events</summary>
-        [GameParameters.CustomIntParameterUI("#MOAR-Settings-soundClip-0", toolTip = "#MOAR-Settings-soundClip-0-Tip",
+        /// <summary>sound clip to be played during kloning success events</summary>
+        [GameParameters.CustomIntParameterUI("#MOAR-Settings-soundClip-A0", toolTip = "#MOAR-Settings-soundClip-A0-Tip",
             newGameOnly = false, unlockedDuringMission = true,
-            minValue = 0, maxValue = 5, stepSize = 1)]
-        public int soundClip0 = 0;
+            minValue = 0, maxValue = 2, stepSize = 1)]
+        public int soundClipA0 = 1;
 
-        /// <summary>sound clip to be played during xxx events</summary>
-        [GameParameters.CustomIntParameterUI("#MOAR-Settings-soundClip-1", toolTip = "#MOAR-Settings-soundClip-1-Tip",
+        /// <summary>sound clip to be played during kloning success events</summary>
+        [GameParameters.CustomIntParameterUI("#MOAR-Settings-soundClip-A1", toolTip = "#MOAR-Settings-soundClip-A1-Tip",
             newGameOnly = false, unlockedDuringMission = true,
-            minValue = 0, maxValue = 5, stepSize = 1)]
-        public int soundClip1 = 0;
+            minValue = 0, maxValue = 2, stepSize = 1)]
+        public int soundClipA1 = 1;
 
-        /// <summary>sound clip to be played during xxx events</summary>
-        [GameParameters.CustomIntParameterUI("#MOAR-Settings-soundClip-2", toolTip = "#MOAR-Settings-soundClip-2-Tip",
+        /// <summary>sound clip to be played during kuddling success events</summary>
+        [GameParameters.CustomIntParameterUI("#MOAR-Settings-soundClip-B0", toolTip = "#MOAR-Settings-soundClip-B0-Tip",
             newGameOnly = false, unlockedDuringMission = true,
-            minValue = 0, maxValue = 5, stepSize = 1)]
-        public int soundClip2 = 0;
+            minValue = 0, maxValue = 2, stepSize = 1)]
+        public int soundClipB0 = 1;
+
+        /// <summary>sound clip to be played during kuddling success events</summary>
+        [GameParameters.CustomIntParameterUI("#MOAR-Settings-soundClip-B1", toolTip = "#MOAR-Settings-soundClip-B1-Tip",
+            newGameOnly = false, unlockedDuringMission = true,
+            minValue = 0, maxValue = 2, stepSize = 1)]
+        public int soundClipB1 = 1;
+
+        /// <summary>sound clip to be played during recruitment success events</summary>
+        [GameParameters.CustomIntParameterUI("#MOAR-Settings-soundClip-C0", toolTip = "#MOAR-Settings-soundClip-C0-Tip",
+            newGameOnly = false, unlockedDuringMission = true,
+            minValue = 0, maxValue = 2, stepSize = 1)]
+        public int soundClipC0 = 1;
+
+        /// <summary>sound clip to be played during recruitment success events</summary>
+        [GameParameters.CustomIntParameterUI("#MOAR-Settings-soundClip-C1", toolTip = "#MOAR-Settings-soundClip-C1-Tip",
+            newGameOnly = false, unlockedDuringMission = true,
+            minValue = 0, maxValue = 2, stepSize = 1)]
+        public int soundClipC1 = 1;
+
+        ///// <summary>sound clip to be played during recruitment failure events</summary>
+        //[GameParameters.CustomIntParameterUI("#MOAR-Settings-soundClip-C2", toolTip = "#MOAR-Settings-soundClip-2-Tip",
+        //    newGameOnly = false, unlockedDuringMission = true,
+        //    minValue = 0, maxValue = 2, stepSize = 1)]
+        //public int soundClip2 = 0;
 
         /// <summary>sound clip volume</summary>
         [GameParameters.CustomFloatParameterUI("#MOAR-Settings-soundVolume", toolTip = "#MOAR-Settings-soundVolume-Tip",
@@ -137,11 +136,7 @@ namespace MoarKerbals
             minValue = 0f, maxValue = 1f, stepCount = 1, displayFormat = "F2", asPercentage = true)]
         public float soundVolume = 0.75f;
 
-        [GameParameters.CustomParameterUI("#MOAR-Settings-qt", toolTip = "#MOAR-Settings-qt-Tip",
-            newGameOnly = false, unlockedDuringMission = true)]
-        public bool quietMode = false;
-
-#if true
+#if false 
         /// <summary>Gets a value indicating whether this instance has presets.</summary>
         /// <value><c>true</c> if this instance has presets; otherwise, <c>false</c>.</value>
         public override bool HasPresets { get { return true; } }
@@ -153,23 +148,23 @@ namespace MoarKerbals
             switch (preset)
             {
                 case GameParameters.Preset.Easy:
-                    requireLivingKerbal = false;
-                    globalKloningCostMultiplier = 0.75f;
+                    // requireLivingKerbal = false;
+                    // globalKloningCostMultiplier = 0.75f;
                     break;
 
                 case GameParameters.Preset.Normal:
-                    requireLivingKerbal = true;
-                    globalKloningCostMultiplier = 1.0f;
+                    // requireLivingKerbal = true;
+                    // globalKloningCostMultiplier = 1.0f;
                     break;
 
                 case GameParameters.Preset.Moderate:
-                    requireLivingKerbal = true;
-                    globalKloningCostMultiplier = 2.0f;
+                    // requireLivingKerbal = true;
+                    // globalKloningCostMultiplier = 2.0f;
                     break;
 
                 case GameParameters.Preset.Hard:
-                    requireLivingKerbal = true;
-                    globalKloningCostMultiplier = 3.0f;
+                    // requireLivingKerbal = true;
+                    // globalKloningCostMultiplier = 3.0f;
                     break;
             }
         }
@@ -196,7 +191,7 @@ namespace MoarKerbals
         /// <returns>null</returns>
         public override IList ValidValues(MemberInfo member) { return null; }
     }
-    class DebugSettings : GameParameters.CustomParameterNode
+    class Settings2 : GameParameters.CustomParameterNode
     {
         /// <summary>Gets the game mode.</summary>
         /// <value>The game mode.</value>
@@ -221,17 +216,103 @@ namespace MoarKerbals
         public bool autoPersistance = true;
         public bool newGameOnly = false;
 
+        /// <summary>Turn sounds on or off GameParameters</summary>
+        [GameParameters.CustomParameterUI("#MOAR-Settings-sound", toolTip = "#MOAR-Settings-sound-tip",
+            newGameOnly = false, unlockedDuringMission = true)]
+        public bool soundOn = true;
+
+        [GameParameters.CustomParameterUI("#MOAR-Settings-va", toolTip = "#MOAR-Settings-va-Tip",
+            newGameOnly = false, unlockedDuringMission = true)]
+        public bool entireVesselAcademy = false;
+
+        /// <summary>Require Living Kerbal for kloning switch in GameParameters</summary>
+        [GameParameters.CustomParameterUI("#MOAR-Settings-living", toolTip = "#MOAR-Settings-living-tip",
+            newGameOnly = false, unlockedDuringMission = true)]
+        public bool requireLivingKerbal = true;
+
+        /// <summary>Enable Kribble mode: aka multiple klones/kuddles switch in GameParameters</summary>
+        [GameParameters.CustomParameterUI("#MOAR-Settings-multipleBirths", toolTip = "#MOAR-Settings-multipleBirths-Tip",
+            newGameOnly = false, unlockedDuringMission = true)]
+        public bool KribbleMode = true;
+
+        [GameParameters.CustomParameterUI("#MOAR-Settings-kc", toolTip = "#MOAR-Settings-kc-Tip",
+            newGameOnly = false, unlockedDuringMission = true)]
+        public bool kloneCivilians = true;
+
+        [GameParameters.CustomParameterUI("#MOAR-Settings-bc", toolTip = "#MOAR-Settings-bc-Tip",
+            newGameOnly = false, unlockedDuringMission = true)]
+        public bool kuddleCivilians = true;
+
+        [GameParameters.CustomParameterUI("#MOAR-Settings-sa", toolTip = "#MOAR-Settings-sa-Tip",
+            newGameOnly = false, unlockedDuringMission = true)]
+        public bool situationallyAware = true;
+
+        [GameParameters.CustomParameterUI("#MOAR-Settings-do", toolTip = "#MOAR-Settings-do-Tip",
+            newGameOnly = false, unlockedDuringMission = true)]
+        public bool dropOut = true;
+
+        /// <summary>which suit new kerbals start with</summary>
+        [GameParameters.CustomIntParameterUI("#MOAR-Settings-Suit", toolTip = "#MOAR-Settings-Suit-Tip",
+            newGameOnly = false, unlockedDuringMission = true,
+            minValue = 0, maxValue = 3, stepSize = 1)]
+        public int birthdaySuit = 0;
+
+        /// <summary>the QuentinTarantino mode</summary>
+        [GameParameters.CustomIntParameterUI("#MOAR-Settings-accident", toolTip = "#MOAR-Settings-accident-Tip",
+            newGameOnly = false, unlockedDuringMission = true,
+            minValue = 0, maxValue = 11, stepSize = 1)]
+        public int QuentinTarantinoMode = 0;
+
+        /// <summary>Turns sending game mail on or off in GameParameters</summary>
+        [GameParameters.CustomParameterUI("#MOAR-Settings-mail", toolTip = "#MOAR-Settings-mail-tip",
+            newGameOnly = false, unlockedDuringMission = true)]
+        public bool gameMail = false;
+
+        /// <summary>sets colored paw in GameParameters</summary>
+        [GameParameters.CustomParameterUI("#MOAR-Settings-paw", toolTip = "#MOAR-Settings-paw-tip",
+            newGameOnly = false, unlockedDuringMission = true)]
+        public bool coloredPAW = true;
+    }
+    class DebugSettings : GameParameters.CustomParameterNode
+    {
+        /// <summary>Gets the game mode.</summary>
+        /// <value>The game mode.</value>
+        public override GameParameters.GameMode GameMode { get { return GameParameters.GameMode.ANY; } }
+
+        /// <summary>Gets the section.</summary>
+        /// <value>The section.</value>
+
+        public override string Section { get { return "#MOAR-002"; } }
+        /// <summary>Gets the display section.</summary>
+        /// <value>The display section.</value>
+        public override string DisplaySection { get { return "#MOAR-002"; } }
+
+        /// <summary>Gets the game settings section title.</summary>
+        /// <value>The title.</value>
+        public override string Title { get { return "#MOAR-Settings-Title-3"; } }
+        /// <summary>Gets the section order.</summary>
+        /// <value>The section order.</value>
+        public override int SectionOrder { get { return 2; } }
+
+        public override bool HasPresets { get { return false; } }
+        public bool autoPersistance = true;
+        public bool newGameOnly = false;
+
+        /// <summary>Displays the installed version of MoarKerbals.dll</summary>
+        [GameParameters.CustomParameterUI("MoarKerbals v: " + Version.Text)]
+        public bool throwaway = false;
+
+        [GameParameters.CustomParameterUI("#MOAR-Settings-qt", toolTip = "#MOAR-Settings-qt-Tip",
+     newGameOnly = false, unlockedDuringMission = true)]
+        public bool quietMode = false;
+
         [GameParameters.CustomParameterUI("#MOAR-Settings-log", toolTip = "#MOAR-Settings-log-Tip",
             newGameOnly = false, unlockedDuringMission = true)]
         public bool logging = false;
 
         [GameParameters.CustomParameterUI("#MOAR-Settings-dbg", toolTip = "#MOAR-Settings-dbg-Tip",
             newGameOnly = false, unlockedDuringMission = true)]
-        public bool debugMenu = true;
-
-        /// <summary>Displays the installed version of MoarKerbals.dll</summary>
-        [GameParameters.CustomParameterUI("MoarKerbals v: " + Version.Text)]
-        public bool throwaway = false;
+        public bool debugMenu = false;
     }
 }
 
