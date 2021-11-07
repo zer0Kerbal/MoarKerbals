@@ -41,15 +41,10 @@
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>false</SignAssembly>
-  </PropertyGroup>
-  <PropertyGroup>
     <TransformOnBuild>true</TransformOnBuild>
-  </PropertyGroup>
-  <PropertyGroup>
     <OverwriteReadOnlyOutputFiles>true</OverwriteReadOnlyOutputFiles>
-  </PropertyGroup>
-  <PropertyGroup>
     <TransformOutOfDateOnly>false</TransformOutOfDateOnly>
+    <RootNamespace>MoarKerbals</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="$(K112)\KSP_x64_Data\Managed\Assembly-CSharp*.dll">
@@ -67,12 +62,13 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="KSP.Localization.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="KerbalRecruitment.cs" />
     <Compile Include="KuddleShack.cs" />
-    <Compile Include="MoarKerbalBase.cs" />
-    <Compile Include="MoarKerbals.cs" />
+    <Compile Include="MoarKerbalsBase.cs" />
+    <Compile Include="KloningKabin.cs" />
     <Compile Include="Support\ResourceRequired.cs" />
     <Compile Include="Support\SwitchLight.cs" />
     <Compile Include="Support\Logging.cs" />
@@ -104,6 +100,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="..\MoarKerbals.version" />
+    <None Include="Assets\en-us.cfg" />
+    <None Include="Assets\MoarKerbals.version" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
@@ -125,9 +123,10 @@ IF "%25K112%25"=="" (
 )
 
 start /D $(ProjectDir)..\ /WAIT _deploy.bat  $(TargetDir) $(TargetFileName) $(TargetName)
-
 if $(ConfigurationName) == Release (	
-	start /D $(ProjectDir)..\ /WAIT _buildRelease.bat $(TargetDir) $(TargetFileName) $(TargetName)
+  start /D $(ProjectDir)..\ /WAIT _buildRelease.bat $(TargetDir) $(TargetFileName) $(TargetName)
+
+del $(TargetDir)\*.tmp
 )
 </PostBuildEvent>
   </PropertyGroup>
