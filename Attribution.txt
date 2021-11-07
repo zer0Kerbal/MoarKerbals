@@ -1,0 +1,12 @@
+Copyright/Attribution Notice: 
+This pack is released under the public domain CC0 license. If you want to give credit (not required): "wobbleboxx.com"
+File(s): 
+- Rise05.ogg
+
+Copyright/Attribution Notice: 
+This pack is released under the public domain CC0 license. If you want to give credit (not required): "Author: Lokif"
+
+- negative.ogg
+- positive.ogg
+- save.ogg
+- misc_sound.ogg
