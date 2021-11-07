@@ -1,7 +1,7 @@
 ﻿<#
 /*
    * Version.tt
-   * 2.0.0.2
+   * 2.0.1.0
 
    This file is licensed under the Do What the F* You Want to Public License ( http://www.wtfpl.net )
    * by zer0Kerbal.
@@ -107,6 +107,7 @@ using System.Reflection;
 
 [assembly: AssemblyFileVersion("<#= major #>.<#= minor #>.<#= patch #>.<#= revisionNumber #>")]
 [assembly: AssemblyVersion("<#= major #>.<#= minor #>.<#= patch #>.<#= build #>")]
+[assembly: KSPAssembly("<#= PROJECT_NAME #>", <#= major #>,<#= minor #>,<#= patch #>)]
 
 namespace <#= PROJECT_NAME #>
 {
