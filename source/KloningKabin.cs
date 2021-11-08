@@ -599,6 +599,8 @@ namespace MoarKerbals
 
             //string display = "\r\n<color=#BADA55>Input:</color>\r\n";
             string display = String.Format("\r\n<color=#BADA55>" + Localizer.Format("#MOAR-005") + ":</color>\r\n");
+            //display += "\r\n May or May not need a living Kerbal. Could also use frozen MinimusMint Ice Cream.";
+            display += String.Format("\r\n\t" + Localizer.Format("#MOAR-KloneBay-24"));
 
             for (int i = 0; i < resourceRequired.Count; i++)
                 display += String.Format("\t{0:0,0}", resourceRequired[i].amount) + " " + resourceRequired[i].resource + "\r\n";
@@ -616,8 +618,6 @@ namespace MoarKerbals
             //        display += "\r\n Frozen sample used, does not needs living Kerbal.";
             //        break;
             //}
-            //display += "\r\n May or May not need a living Kerbal. Could also use frozen MinimusMint Ice Cream.";
-            display += String.Format("\r\n" + Localizer.Format("#MOAR-KloneBay-24"));
 
             return display;
         }
