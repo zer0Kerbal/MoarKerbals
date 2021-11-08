@@ -79,7 +79,7 @@ namespace MoarKerbals
                 double available = part.RequestResource(resourceRequired[i].Resource.id, amtRequired);
 
                 // Logging.DLog(logMsg: $"MoarKerbals: DEBUG: {1} : resourceAmounts: {2} need: {3}", resourceRequired[i].resource.ToString(), available.ToString(), amtRequired.ToString()));
-                Logging.DLog(logMsg: $"MoarKerbals: DEBUG: {resourceRequired[i].resource} : resourceAmounts: {available:F2} need: {amtRequired:F2}");
+                Logging.DLog(logMsg: $"MoarKerbals: {resourceRequired[i].resource} : have: {available:F2} need: {amtRequired:F2}");
                 if (available + 0.0001f < amtRequired)
                 {
                     //Upon not having enough of a resource, returns all previously collected
@@ -92,6 +92,7 @@ namespace MoarKerbals
 
                     //Logging.Msg("Insufficient " + resourceRequired[i].resource + " to start Kloning (" + available.ToString() + "/" + amtRequired.ToString() + ")", 5f, ScreenMessageStyle.UPPER_CENTER);
                     //Logging.Msg(Localizer.Format("#MOAR-Base-02", resourceRequired[i].resource, available.ToString(), amtRequired.ToString()));
+                    Logging.Msg(s: $"{Localizer.Format("#MOAR-Base-02")} {resourceRequired[i].resource} : have: {available:F2} need: {amtRequired:F2}");
                     return false;
                 }
             }
