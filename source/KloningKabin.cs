@@ -132,7 +132,7 @@ namespace MoarKerbals
         public void OnFixedUpdate()
         {
             if (HighLogic.CurrentGame.Parameters.CustomParams<Settings2>().coloredPAW)
-                Fields["KloningKabinEnabled"].group.displayName = System.String.Format("<color=#BADA55>" + groupName + "</color>");
+                Fields["KloningKabinEnabled"].group.displayName = String.Format("<color=#BADA55>" + groupName + "</color>");
             else
                 Fields["KloningKabinEnabled"].group.displayName = groupName;
         }
@@ -159,7 +159,7 @@ namespace MoarKerbals
                     switch (vessel.situation)
                     {
                         case Vessel.Situations.LANDED:
-                            Logging.DLog(logMsg: $"Vessel Situation: {vessel.Situation.LANDED}");
+                            Logging.DLog(logMsg: $"Vessel Situation: {Vessel.Situations.LANDED}");
                             if (!allowSplashedOrLanded)
                             {
                                 Logging.Msg(Localizer.Format("#MOAR-KloneBay-02-l"));
@@ -167,7 +167,7 @@ namespace MoarKerbals
                             }
                             break;
                         case Vessel.Situations.SPLASHED:
-                            Logging.DLog(logMsg: $"Vessel Situation: {vessel.Situation.SPLASHED}");
+                            Logging.DLog(logMsg: $"Vessel Situation: {Vessel.Situations.SPLASHED}");
                             if (!allowSplashedOrLanded)
                             {
                                 Logging.Msg(Localizer.Format("#MOAR-KloneBay-02-s"));
@@ -175,7 +175,7 @@ namespace MoarKerbals
                             }
                             break;
                         case Vessel.Situations.ORBITING:
-                            Logging.DLog(logMsg: $"Vessel Situation: {vessel.Situation.ORBITING}");
+                            Logging.DLog(logMsg: $"Vessel Situation: {Vessel.Situations.ORBITING}");
                             if (!allowOrbital)
                             {
                                 Logging.Msg(Localizer.Format("#MOAR-KloneBay-03"));
@@ -183,7 +183,7 @@ namespace MoarKerbals
                             }
                             break;
                         default:
-                            Logging.DLog(logMsg: $"Vessel Situation (other): {vessel.Situation}");
+                            Logging.DLog(logMsg: $"Vessel Situation (other): {vessel.situation}");
                             break;
                     }
                 }
@@ -192,9 +192,10 @@ namespace MoarKerbals
                 if (PartHasRoom(part) && GatherResources(part) && GatherCurrencies())
                 {
                     var rnd = new System.Random();
-                    if (accidentRate <= rnd.Next(1, 100))
+                    double localDouble = rnd.Next(1, 100);
+                    if (accidentRate <= localDouble)
                     {
-                        Logging.DLog(logMsg: $"Accident: roll {rnd} vs {accidentRate}");
+                        Logging.DLog(logMsg: $"Accident: roll {localDouble:F0} vs {accidentRate}");
                         KloneKerbal();
                         // twins?
 
@@ -444,8 +445,9 @@ namespace MoarKerbals
 
         private static void NoCrewBadResult(System.Random rnd)
         {
-            Logging.DLog(logMsg: "Kloning: noCrewBadResults");
-            switch (rnd.Next(0, 100))
+            double localDouble = rnd.Next(0, 100);
+            Logging.DLog(logMsg: $"Kloning: noCrewBadResults roll: {localDouble:F0}");
+            switch (localDouble)
             {
                 case < 05:
                     Logging.Msg(Localizer.Format("#MOAR-KloneBay-23") + ".");
@@ -456,7 +458,7 @@ namespace MoarKerbals
                 case < 60:
                     Logging.Msg(Localizer.Format("#MOAR-KloneBay-21") + ".");
                     break;
-                case < 80:
+                case <= 100:
                     Logging.Msg(Localizer.Format("#MOAR-KloneBay-22") + ".");
                     break;
                 default:
@@ -598,16 +600,21 @@ namespace MoarKerbals
             //gblMult = 1;
 
             //string display = "\r\n<color=#BADA55>Input:</color>\r\n";
-            string display = String.Format("\r\n<color=#BADA55>" + Localizer.Format("#MOAR-005") + ":</color>\r\n");
+            string display = String.Format("\r\n<color=#FFFF19>" + Localizer.Format("#MOAR-005") + ":</color>\r\n");
             //display += "\r\n May or May not need a living Kerbal. Could also use frozen MinimusMint Ice Cream.";
-            display += String.Format("\r\n\t" + Localizer.Format("#MOAR-KloneBay-24"));
+            display += String.Format("\r\n" + Localizer.Format("#MOAR-KloneBay-24") + "\r\n<color=#FFFF19>" + Localizer.Format("#MOAR-005") + ":</color>\r\n");
 
             for (int i = 0; i < resourceRequired.Count; i++)
-                display += String.Format("\t{0:0,0}", resourceRequired[i].amount) + " " + resourceRequired[i].resource + "\r\n";
+                //display += String.Format("{0:0,0}", resourceRequired[i].amount) + " " + resourceRequired[i].resource + "\r\n");
+                display += String.Format(resourceRequired[i].resource + ": " + resourceRequired[i].amount + "\r\n");
 
+            if (costFunds != 0) display += $"\r\n{costFunds:F0} {Localizer.Format("#autoLOC_7001031")}";
+            if (costScience != 0) display += $"\r\n{costScience:F0} {Localizer.Format("#autoLOC_7001032")}";
+            if (costReputation != 0) display += $"\r\n{costReputation:F0} {Localizer.Format("#autoLOC_7001033")}";
+            //if (costReputation != 0) display += String.Format("\r\n" + Localizer.Format("#autoLOC_7001033") + ": " + costReputation);
 
             //display += "\r\n<color=#BADA55>Output:</color>\r\n Anything from one Kerbal to a deep dish pizza.";
-            display += String.Format("\r\n<color=#BADA55>" + Localizer.Format("#MOAR-006") + ":</color>\r\n" + Localizer.Format("#MOAR-KloneBay-18") + ".");
+            display += String.Format("\r\n<color=#FFFF19>" + Localizer.Format("#MOAR-006") + ":</color>\r\n" + Localizer.Format("#MOAR-KloneBay-18") + ".");
 
             //switch (HighLogic.CurrentGame.Parameters.CustomParams<Settings2>().requireLivingKerbal)
             //{
