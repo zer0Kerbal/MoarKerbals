@@ -248,10 +248,15 @@ namespace MoarKerbals
         public override string GetInfo()
         {
             //string display = "\r\n<color=#BADA55>Input:</color>\r\n One Civilian Kerbal";
-            string display = String.Format("\r\n<color=#BADA55>" + Localizer.Format("#MOAR-005") + ":</color>\r\n" + Localizer.Format("#MOAR-Academy-03") + " " + Localizer.Format("#MOAR-004") + " " + Localizer.Format("#MOAR-Academy-04") + ".\r\n");
+            string display = String.Format("\r\n<color=#FFFF19>" + Localizer.Format("#MOAR-005") + ":</color>\r\n" + Localizer.Format("#MOAR-Academy-03") + " " + Localizer.Format("#MOAR-004") + " " + Localizer.Format("#MOAR-Academy-04") + ".\r\n");
+            
+            display += String.Format("\r\n\t" + Localizer.Format("#MOAR-Kuddle-13") + "\r\n");
+
+            for (int i = 0; i < resourceRequired.Count; i++)
+                display += String.Format("\t{0:0,0}", resourceRequired[i].amount) + " " + resourceRequired[i].resource + "\r\n";
 
             //display += "\r\n<color=#BADA55>Output:</color>\r\n Pilot, Engineer, Scientist Kerbal (random)\reating a MinmusMint ice cream cone.";
-            display += String.Format("\r\n<color=#BADA55>" + Localizer.Format("#MOAR-006") + ":</color>\r\n" + Localizer.Format("#MOAR-Academy-05") + ".\r\n");
+            display += String.Format("\r\n<color=#FFFF19>" + Localizer.Format("#MOAR-006") + ":</color>\r\n" + Localizer.Format("#MOAR-Academy-05") + ".\r\n");
 
             return display;
         }
