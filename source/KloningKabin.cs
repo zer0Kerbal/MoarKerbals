@@ -147,19 +147,19 @@ namespace MoarKerbals
                   guiActiveUnfocused = true)]
         public void ActivateKloning()
         {
-            Logging.DLog("Kloning: ActivateKloning");
+            Logging.DLog(logMsg: "Kloning: ActivateKloning");
             if (KloningKabinEnabled)
             {
-                Logging.DLog("KloningKabinEnabled");
+                Logging.DLog(logMsg: "Kloning Kabin Enabled");
                 // determine if vessel is landed or splashed or orbiting and if it kloning is allowed
                 // display message if not allowed and return
                 if (HighLogic.CurrentGame.Parameters.CustomParams<Settings2>().situationallyAware)
                 {
-                    Logging.DLog("SituationallyAware");
+                    Logging.DLog(logMsg: "Situationally Aware");
                     switch (vessel.situation)
                     {
                         case Vessel.Situations.LANDED:
-                            Logging.DLog("Vessel Situation: {vessel.Situation.LANDED}");
+                            Logging.DLog(logMsg: $"Vessel Situation: {vessel.Situation.LANDED}");
                             if (!allowSplashedOrLanded)
                             {
                                 Logging.Msg(Localizer.Format("#MOAR-KloneBay-02-l"));
@@ -167,7 +167,7 @@ namespace MoarKerbals
                             }
                             break;
                         case Vessel.Situations.SPLASHED:
-                            Logging.DLog("Vessel Situation: {vessel.Situation.SPLASHED}");
+                            Logging.DLog(logMsg: $"Vessel Situation: {vessel.Situation.SPLASHED}");
                             if (!allowSplashedOrLanded)
                             {
                                 Logging.Msg(Localizer.Format("#MOAR-KloneBay-02-s"));
@@ -175,7 +175,7 @@ namespace MoarKerbals
                             }
                             break;
                         case Vessel.Situations.ORBITING:
-                            Logging.DLog("Vessel Situation: {vessel.Situation.ORBITING}");
+                            Logging.DLog(logMsg: $"Vessel Situation: {vessel.Situation.ORBITING}");
                             if (!allowOrbital)
                             {
                                 Logging.Msg(Localizer.Format("#MOAR-KloneBay-03"));
@@ -183,7 +183,7 @@ namespace MoarKerbals
                             }
                             break;
                         default:
-                            Logging.DLog("Vessel Situation (other): {vessel.Situation}");
+                            Logging.DLog(logMsg: $"Vessel Situation (other): {vessel.Situation}");
                             break;
                     }
                 }
@@ -194,6 +194,7 @@ namespace MoarKerbals
                     var rnd = new System.Random();
                     if (accidentRate <= rnd.Next(1, 100))
                     {
+                        Logging.DLog(logMsg: $"Accident: roll {rnd} vs {accidentRate}");
                         KloneKerbal();
                         // twins?
 
@@ -271,8 +272,8 @@ namespace MoarKerbals
 
         private bool AdditionalBirths(System.Random rnd)
         {
-            double localDouble = rnd.Next(1, 1000);
-            Logging.DLog(logMsg: $"roll: {localDouble:F4} vs. {accidentRate}");
+            double localDouble = rnd.Next(1, 100);
+            Logging.DLog(logMsg: $"AdditionalBirths: roll: {localDouble:F0} vs. {accidentRate}");
             return (localDouble <= accidentRate) && PartHasRoom(part) && GatherResources(part) && GatherCurrencies();
         }
 
@@ -381,7 +382,7 @@ namespace MoarKerbals
         private protected void MultipleCrewBadResult(ProtoCrewMember crewman, System.Random rnd)
         {
             string culprit = crewman.displayName;
-            Logging.DLog(logMsg: $"Kloning: MultipleCrewBadResult culprit{culprit} did it in the kitchen with a frozen fish.");
+            Logging.DLog(logMsg: $"Kloning: MultipleCrewBadResult culprit{culprit} did it in the kitchen with a frozen fish stick and custard!");
 
             part.RemoveCrewmember(crewman);
             Logging.Msg(Localizer.Format("#MOAR-KloneBay-19", crewman.name));
