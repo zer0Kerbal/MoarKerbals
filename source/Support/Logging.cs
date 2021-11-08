@@ -100,7 +100,7 @@ namespace MoarKerbals
                 Debug.Log(logMsg);
             }
 #if DEBUG
-                        else { Debug.LogWarning(s); }
+                        else { Debug.Log(s); }
 #endif
         }
 
