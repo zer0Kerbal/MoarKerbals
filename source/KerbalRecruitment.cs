@@ -114,7 +114,7 @@ namespace MoarKerbals
             Logging.DLog(logMsg: $"Academy: RecruitKerbal");
             if (KerbalRecruitmentEnabled)
             {
-                Logging.Msg("Kerbal Recruitment Button pressed!");
+                Logging.DLog(logMsg: "Academy: Recruitment Button pressed!");
 
                 bool changedTrait = false;
                 List<ProtoCrewMember> vesselCrew;
@@ -248,7 +248,7 @@ namespace MoarKerbals
         public override string GetInfo()
         {
             //string display = "\r\n<color=#BADA55>Input:</color>\r\n One Civilian Kerbal";
-            string display = String.Format("\r\n<color=#BADA55>" + Localizer.Format("#MOAR-005") + ":/<color>\r\n" + Localizer.Format("#MOAR-Academy-03") + " " + Localizer.Format("#MOAR-004") + " " + Localizer.Format("#MOAR-Academy-04") + ".\r\n");
+            string display = String.Format("\r\n<color=#BADA55>" + Localizer.Format("#MOAR-005") + ":</color>\r\n" + Localizer.Format("#MOAR-Academy-03") + " " + Localizer.Format("#MOAR-004") + " " + Localizer.Format("#MOAR-Academy-04") + ".\r\n");
 
             //display += "\r\n<color=#BADA55>Output:</color>\r\n Pilot, Engineer, Scientist Kerbal (random)\reating a MinmusMint ice cream cone.";
             display += String.Format("\r\n<color=#BADA55>" + Localizer.Format("#MOAR-006") + ":</color>\r\n" + Localizer.Format("#MOAR-Academy-05") + ".\r\n");
