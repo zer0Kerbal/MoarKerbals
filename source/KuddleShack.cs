@@ -438,13 +438,13 @@ namespace MoarKerbals
             // base.OnStart(StartState.None);
 
             //string display = "\r\n<color=#BADA55>Input:</color>\r\n";
-            string display = String.Format("\r\n<color=#BADA55>" + Localizer.Format("#MOAR-005") + ":</color>\r\n");
+            string display = String.Format("\r\n<color=#FFFF19>" + Localizer.Format("#MOAR-005") + ":</color>\r\n");
 
             for (int i = 0; i < resourceRequired.Count; i++)
                 display += String.Format("{0:0,0}", resourceRequired[i].amount) + " " + resourceRequired[i].resource + "\r\n";
 
             //display += "\r\n<color=#BADA55>Output:\r\n A brand new Kerbal.</color>";
-            display += String.Format("\r\n<color=#BADA55>" + Localizer.Format("#MOAR-006") + ":</color>\r\n" + Localizer.Format("#MOAR-Kuddle-10") + ".");
+            display += String.Format("\r\n<color=#FFFF19>" + Localizer.Format("#MOAR-006") + ":</color>\r\n" + Localizer.Format("#MOAR-Kuddle-10") + ".");
 
             return display;
         }
