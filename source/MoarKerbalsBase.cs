@@ -70,7 +70,7 @@ namespace MoarKerbals
         private protected bool GatherResources(Part part)
         {
             double gblMult = HighLogic.CurrentGame.Parameters.CustomParams<Settings>().globalKloningCostMultiplier;
-            Logging.DLog(logMsg: $"MoarKerbals: Global Multiplier: {gblMult:F4}");
+            Logging.DLog(logMsg: $"MoarKerbals: Global Multiplier: {gblMult:F2}");
 
             //Steps through to gather resources
             for (int i = 0; i < resourceRequired.Count; i++)
@@ -78,7 +78,8 @@ namespace MoarKerbals
                 double amtRequired = resourceRequired[i].amount * gblMult; // uses globalMultiplier
                 double available = part.RequestResource(resourceRequired[i].Resource.id, amtRequired);
 
-                //Logging.DLog(String.Format("MoarKerbals: DEBUG: {1} : resourceAmounts: {2} need: {3}", resourceRequired[i].resource.ToString(), available.ToString(), amtRequired.ToString()));
+                // Logging.DLog(logMsg: $"MoarKerbals: DEBUG: {1} : resourceAmounts: {2} need: {3}", resourceRequired[i].resource.ToString(), available.ToString(), amtRequired.ToString()));
+                Logging.DLog(logMsg: $"MoarKerbals: DEBUG: {resourceRequired[i].resource} : resourceAmounts: {available:F2} need: {amtRequired:F2}");
                 if (available + 0.0001f < amtRequired)
                 {
                     //Upon not having enough of a resource, returns all previously collected
