@@ -225,6 +225,14 @@ namespace MoarKerbals
             newGameOnly = false, unlockedDuringMission = true)]
         public bool entireVesselAcademy = false;
 
+        [GameParameters.CustomParameterUI("#MOAR-Settings-recruitOnlyOne", toolTip = "#MOAR-Settings-recruitOnlyOne-Tip",
+            newGameOnly = false, unlockedDuringMission = true)]
+        public bool recruitOnlyOne = true;
+
+        [GameParameters.CustomParameterUI("#MOAR-Settings-do", toolTip = "#MOAR-Settings-do-Tip",
+            newGameOnly = false, unlockedDuringMission = true)]
+        public bool dropOut = true;
+
         /// <summary>Require Living Kerbal for kloning switch in GameParameters</summary>
         [GameParameters.CustomParameterUI("#MOAR-Settings-living", toolTip = "#MOAR-Settings-living-tip",
             newGameOnly = false, unlockedDuringMission = true)]
@@ -247,10 +255,6 @@ namespace MoarKerbals
             newGameOnly = false, unlockedDuringMission = true)]
         public bool situationallyAware = true;
 
-        [GameParameters.CustomParameterUI("#MOAR-Settings-do", toolTip = "#MOAR-Settings-do-Tip",
-            newGameOnly = false, unlockedDuringMission = true)]
-        public bool dropOut = true;
-
         /// <summary>which suit new kerbals start with</summary>
         [GameParameters.CustomIntParameterUI("#MOAR-Settings-Suit", toolTip = "#MOAR-Settings-Suit-Tip",
             newGameOnly = false, unlockedDuringMission = true,
@@ -262,18 +266,8 @@ namespace MoarKerbals
             newGameOnly = false, unlockedDuringMission = true,
             minValue = 0, maxValue = 11, stepSize = 1)]
         public int QuentinTarantinoMode = 0;
-
-        /// <summary>Turns sending game mail on or off in GameParameters</summary>
-        [GameParameters.CustomParameterUI("#MOAR-Settings-mail", toolTip = "#MOAR-Settings-mail-tip",
-            newGameOnly = false, unlockedDuringMission = true)]
-        public bool gameMail = false;
-
-        /// <summary>sets colored paw in GameParameters</summary>
-        [GameParameters.CustomParameterUI("#MOAR-Settings-paw", toolTip = "#MOAR-Settings-paw-tip",
-            newGameOnly = false, unlockedDuringMission = true)]
-        public bool coloredPAW = true;
     }
-    class DebugSettings : GameParameters.CustomParameterNode
+    class Settings3 : GameParameters.CustomParameterNode
     {
         /// <summary>Gets the game mode.</summary>
         /// <value>The game mode.</value>
@@ -301,6 +295,16 @@ namespace MoarKerbals
         /// <summary>Displays the installed version of MoarKerbals.dll</summary>
         [GameParameters.CustomParameterUI("MoarKerbals v: " + Version.Text)]
         public bool throwaway = false;
+
+        /// <summary>Turns sending game mail on or off in GameParameters</summary>
+        [GameParameters.CustomParameterUI("#MOAR-Settings-mail", toolTip = "#MOAR-Settings-mail-tip",
+            newGameOnly = false, unlockedDuringMission = true)]
+        public bool gameMail = false;
+
+        /// <summary>sets colored paw in GameParameters</summary>
+        [GameParameters.CustomParameterUI("#MOAR-Settings-paw", toolTip = "#MOAR-Settings-paw-tip",
+            newGameOnly = false, unlockedDuringMission = true)]
+        public bool coloredPAW = true;
 
         [GameParameters.CustomParameterUI("#MOAR-Settings-qt", toolTip = "#MOAR-Settings-qt-Tip",
      newGameOnly = false, unlockedDuringMission = true)]

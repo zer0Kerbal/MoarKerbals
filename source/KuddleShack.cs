@@ -46,7 +46,7 @@ namespace MoarKerbals
             Logging.DLog("KuddleShack.OnStart");
             base.OnStart(state);
 
-            if (HighLogic.CurrentGame.Parameters.CustomParams<Settings2>().coloredPAW)
+            if (HighLogic.CurrentGame.Parameters.CustomParams<Settings3>().coloredPAW)
                 Fields["KuddleShackEnabled"].group.displayName = System.String.Format("<color=#BADA55>" + groupName + "</color>");
             else
                 Fields["KuddleShackEnabled"].group.displayName = groupName;
@@ -106,7 +106,7 @@ namespace MoarKerbals
 
         private protected void OnFixedUpdate()
         {
-            if (HighLogic.CurrentGame.Parameters.CustomParams<Settings2>().coloredPAW)
+            if (HighLogic.CurrentGame.Parameters.CustomParams<Settings3>().coloredPAW)
                 Fields["KuddleShackEnabled"].group.displayName = System.String.Format("<color=#BADA55>" + groupName + "</color>");
             else
                 Fields["KuddleShackEnabled"].group.displayName = groupName;

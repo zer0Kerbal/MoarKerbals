@@ -94,7 +94,7 @@ namespace MoarKerbals
         {
             logMsg = string.Format("[MoarKerbals v{0}]: ", Version.Text) + logMsg;
             Logger.instance.addToLog(logMsg);
-            if (xDebug || HighLogic.CurrentGame.Parameters.CustomParams<DebugSettings>().logging)
+            if (xDebug || HighLogic.CurrentGame.Parameters.CustomParams<Settings3>().logging)
             {
                 //Debug.LogWarning(logMsg);
                 Debug.Log(logMsg);
@@ -111,7 +111,7 @@ namespace MoarKerbals
         {
             logMsg = string.Format("[MoarKerbals v{0}][WRN]: ", Version.Text) + logMsg;
             Logger.instance.addToLog(logMsg);
-            if (xDebug || HighLogic.CurrentGame.Parameters.CustomParams<DebugSettings>().logging)
+            if (xDebug || HighLogic.CurrentGame.Parameters.CustomParams<Settings3>().logging)
             {
                 Debug.LogWarning(logMsg);
             }
@@ -127,7 +127,7 @@ namespace MoarKerbals
         {
             logMsg = string.Format("[MoarKerbals v{0}][ERR]: ", Version.Text) + logMsg;
             Logger.instance.addToLog(logMsg);
-            if (xDebug || HighLogic.CurrentGame.Parameters.CustomParams<DebugSettings>().logging)
+            if (xDebug || HighLogic.CurrentGame.Parameters.CustomParams<Settings3>().logging)
             {
                 Debug.LogError(logMsg);
             }
@@ -147,8 +147,7 @@ namespace MoarKerbals
                 s = string.Format(s, @params);
             }
             Logger.instance.addToLog(s);
-
-            ScreenMessages.PostScreenMessage(s, (float)3.5, ScreenMessageStyle.UPPER_CENTER, true);
+            if (!HighLogic.CurrentGame.Parameters.CustomParams<Settings3>().quietMode) ScreenMessages.PostScreenMessage(s, (float)3.5, ScreenMessageStyle.UPPER_CENTER, true);
             DLog(s);
         }
     }

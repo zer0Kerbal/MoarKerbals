@@ -56,7 +56,7 @@ namespace MoarKerbals
             base.OnStart(state);
             Logging.DLog("KerbalAcademy.OnStart");
 
-            if (HighLogic.CurrentGame.Parameters.CustomParams<Settings2>().coloredPAW)
+            if (HighLogic.CurrentGame.Parameters.CustomParams<Settings3>().coloredPAW)
                 Fields["KerbalRecruitmentEnabled"].group.displayName = System.String.Format("<color=#BADA55>" + groupName + "</color>");
             else
                 Fields["KerbalRecruitmentEnabled"].group.displayName = groupName;
@@ -97,7 +97,7 @@ namespace MoarKerbals
             // base.OnFixedUpdate();
             //Logging.DLog("KerbalAcademy.FixedUpdate", true);
 
-            if (HighLogic.CurrentGame.Parameters.CustomParams<Settings2>().coloredPAW)
+            if (HighLogic.CurrentGame.Parameters.CustomParams<Settings3>().coloredPAW)
                 Fields["KerbalRecruitmentEnabled"].group.displayName = System.String.Format("<color=#BADA55>" + groupName + "</color>");
             else
                 Fields["KerbalRecruitmentEnabled"].group.displayName = groupName;
@@ -110,7 +110,6 @@ namespace MoarKerbals
                   guiActive = true)]
         void RecruitKerbal()
         {
-
             Logging.DLog(logMsg: $"Academy: RecruitKerbal");
             if (KerbalRecruitmentEnabled)
             {
@@ -125,14 +124,14 @@ namespace MoarKerbals
                     vesselCrew = vessel.GetVesselCrew();
                 }
                 else
-                { // false - not implemented yet
-                  // List<ProtoCrewMember> vesselCrew = vessel.GetVesselCrew();
+                {
+                    // List<ProtoCrewMember> vesselCrew = vessel.GetVesselCrew();
                     vesselCrew = this.part.protoModuleCrew;
                 }
                 foreach (ProtoCrewMember crewMember in vesselCrew)
                 {
                     //Logging.Msg(crewMember.name + " : " + crewMember.trait + ": " + crewMember.type, 3.5f, ScreenMessageStyle.UPPER_CENTER);
-                    Logging.Msg(Localizer.Format("#MOAR-Academy-06", crewMember.name, crewMember.trait, crewMember.type));
+                    Logging.DLog(logMsg: Localizer.Format("#MOAR-Academy-06", crewMember.name, crewMember.trait, crewMember.type));
 
                     //if (crewMember.trait == "Civilian" && changedTrait == false)
                     if (crewMember.trait == Localizer.Format("#MOAR-004") && changedTrait == false)
@@ -144,25 +143,28 @@ namespace MoarKerbals
                             if (crewMember.trait == Localizer.Format("#MOAR-004"))
                             {
 
-                                Logging.Msg(Localizer.Format("#MOAR-Academy-08", crewMember.name));
+                                Logging.Msg(s: Localizer.Format("#MOAR-Academy-08", crewMember.name));
+                                if (HighLogic.CurrentGame.Parameters.CustomParams<Settings2>().soundOn) FailureSound();
                                 return;
                             }
                             crewMember.type = ProtoCrewMember.KerbalType.Crew;
-                            changedTrait = true;
-                            KerbalRoster.SetExperienceTrait(crewMember, getRandomTrait());
-                            //Logging.Msg(crewMember.name + " is now a " + crewMember.trait + "!", 5.5f, ScreenMessageStyle.UPPER_CENTER);
-                            Logging.Msg(Localizer.Format("#MOAR-Academy-07", crewMember.name, crewMember.trait));
+                            if (HighLogic.CurrentGame.Parameters.CustomParams<Settings2>().recruitOnlyOne) changedTrait = true;
+                            //KerbalRoster.SetExperienceTrait(crewMember, getRandomTrait());
+                            KerbalRoster.SetExperienceTrait(crewMember, crewMember.trait);
+
+                            Logging.Msg(s: Localizer.Format("#MOAR-Academy-07", crewMember.name, crewMember.trait)); // crewMember.name + " is now a " + crewMember.trait + "!"
                             if (HighLogic.CurrentGame.Parameters.CustomParams<Settings2>().soundOn) SuccessSound();
                         }
                     }
+                    if (!HighLogic.CurrentGame.Parameters.CustomParams<Settings2>().recruitOnlyOne) changedTrait = true;
                 }
                 if (changedTrait) GameEvents.onVesselChange.Fire(FlightGlobals.ActiveVessel);
-                else Logging.Msg("No civilians available to recruit");
+                else Logging.Msg(s: "No civilians available to recruit");
             }
         }
 
         /// <summary>Play sound upon failure</summary>
-        private void FailureSound()
+        private protected void FailureSound()
         {
             Logging.DLog(logMsg: $"Academy: Failure Sound");
             int _soundSelection = HighLogic.CurrentGame.Parameters.CustomParams<Settings>().soundClipC0;
@@ -187,7 +189,7 @@ namespace MoarKerbals
         }
 
         /// <summary>Play sound upon success</summary>
-        private void SuccessSound()
+        private protected void SuccessSound()
         {
             Logging.DLog(logMsg: $"Academy: Success Sound");
             int _soundSelection = HighLogic.CurrentGame.Parameters.CustomParams<Settings>().soundClipC1;
@@ -211,7 +213,7 @@ namespace MoarKerbals
             }
         }
 
-        private string getRandomTrait()
+        private protected string getRandomTrait()
         {
             Logging.DLog(logMsg: $"Academy: getRandomTrait");
 
@@ -239,7 +241,7 @@ namespace MoarKerbals
                 default:
                     break;
             }
-            Logging.Msg(String.Format("Created trait:  {0}", kerbalTrait));
+            Logging.Msg(s: String.Format("Created trait:  {0}", kerbalTrait));
             return kerbalTrait;
         }
 
@@ -249,7 +251,7 @@ namespace MoarKerbals
         {
             //string display = "\r\n<color=#BADA55>Input:</color>\r\n One Civilian Kerbal";
             string display = String.Format("\r\n<color=#FFFF19>" + Localizer.Format("#MOAR-005") + ":</color>\r\n" + Localizer.Format("#MOAR-Academy-03") + " " + Localizer.Format("#MOAR-004") + " " + Localizer.Format("#MOAR-Academy-04") + ".\r\n");
-            
+
             display += String.Format("\r\n\t" + Localizer.Format("#MOAR-Kuddle-13") + "\r\n");
 
             for (int i = 0; i < resourceRequired.Count; i++)
