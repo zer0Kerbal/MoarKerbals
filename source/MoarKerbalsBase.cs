@@ -162,9 +162,9 @@ namespace MoarKerbals
                     }
                     else
                     {
-                        Logging.Msg(Localizer.Format("MOAR-Insufficient-Rep", Reputation.Instance.reputation, costReputation));
-                        Logging.Msg(Localizer.Format("MOAR-Insufficient-Funds", Funding.Instance.Funds, costFunds));
-                        Logging.Msg(Localizer.Format("MOAR-Insufficient-Sci", ResearchAndDevelopment.Instance.Science, costScience));
+                        Logging.Msg(Localizer.Format("#MOAR-Insufficient-Rep", Reputation.Instance.reputation, costReputation));
+                        Logging.Msg(Localizer.Format("#MOAR-Insufficient-Funds", Funding.Instance.Funds, costFunds));
+                        Logging.Msg(Localizer.Format("#MOAR-Insufficient-Sci", ResearchAndDevelopment.Instance.Science, costScience));
                     }
                     break;
                 case Game.Modes.SCENARIO:
@@ -176,7 +176,7 @@ namespace MoarKerbals
                     if ((costScience < ResearchAndDevelopment.Instance.Science) &&
                         (costFunds < Funding.Instance.Funds))
                         return true;
-                    else Logging.Msg(Localizer.Format("MOAR-Insufficient-Sci", ResearchAndDevelopment.Instance.Science, costScience));
+                    else Logging.Msg(Localizer.Format("#MOAR-Insufficient-Sci", ResearchAndDevelopment.Instance.Science, costScience));
                     break;
                 default:
                     Logging.DLog("CurrentGame.Mode: Other");
