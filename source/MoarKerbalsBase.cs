@@ -88,13 +88,8 @@ namespace MoarKerbals
                     // part.RequestResource(resourceRequired[i].Resource.id, -available, false);
                     for (int j = 0; j < i; j++)
                         vessel.RequestResource(part, resourceRequired[j].Resource.id, -amtRequired, false);
-                    //part.RequestResource(resourceRequired[j].Resource.id, -amtRequired);
 
-                    //Logging.Msg("Insufficient " + resourceRequired[i].resource + " to start Kloning (" + available.ToString() + "/" + amtRequired.ToString() + ")", 5f, ScreenMessageStyle.UPPER_CENTER);
-                    //Logging.Msg(Localizer.Format("#MOAR-Base-02", resourceRequired[i].resource, available.ToString(), amtRequired.ToString()));
-                    //Logging.Msg(s: $"{Localizer.Format("#MOAR-Base-02")} {resourceRequired[i].resource} : have: {available:F2} need: {amtRequired:F2}");
-
-                    Logging.Msg(s: String.Format(Localizer.Format("#MOAR-Insufficient", resourceRequired[i].resource, available, amtRequired)));
+                    Logging.Msg(s: Localizer.Format("#MOAR-Insufficient", resourceRequired[i].resource, available, amtRequired));
                     return false;
                 }
             }
