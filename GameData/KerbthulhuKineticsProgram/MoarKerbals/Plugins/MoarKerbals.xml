@@ -320,34 +320,34 @@
         <member name="F:MoarKerbals.Settings2.QuentinTarantinoMode">
             <summary>the QuentinTarantino mode</summary>
         </member>
-        <member name="F:MoarKerbals.Settings2.gameMail">
-            <summary>Turns sending game mail on or off in GameParameters</summary>
-        </member>
-        <member name="F:MoarKerbals.Settings2.coloredPAW">
-            <summary>sets colored paw in GameParameters</summary>
-        </member>
-        <member name="P:MoarKerbals.DebugSettings.GameMode">
+        <member name="P:MoarKerbals.Settings3.GameMode">
             <summary>Gets the game mode.</summary>
             <value>The game mode.</value>
         </member>
-        <member name="P:MoarKerbals.DebugSettings.Section">
+        <member name="P:MoarKerbals.Settings3.Section">
             <summary>Gets the section.</summary>
             <value>The section.</value>
         </member>
-        <member name="P:MoarKerbals.DebugSettings.DisplaySection">
+        <member name="P:MoarKerbals.Settings3.DisplaySection">
             <summary>Gets the display section.</summary>
             <value>The display section.</value>
         </member>
-        <member name="P:MoarKerbals.DebugSettings.Title">
+        <member name="P:MoarKerbals.Settings3.Title">
             <summary>Gets the game settings section title.</summary>
             <value>The title.</value>
         </member>
-        <member name="P:MoarKerbals.DebugSettings.SectionOrder">
+        <member name="P:MoarKerbals.Settings3.SectionOrder">
             <summary>Gets the section order.</summary>
             <value>The section order.</value>
         </member>
-        <member name="F:MoarKerbals.DebugSettings.throwaway">
+        <member name="F:MoarKerbals.Settings3.throwaway">
             <summary>Displays the installed version of MoarKerbals.dll</summary>
+        </member>
+        <member name="F:MoarKerbals.Settings3.gameMail">
+            <summary>Turns sending game mail on or off in GameParameters</summary>
+        </member>
+        <member name="F:MoarKerbals.Settings3.coloredPAW">
+            <summary>sets colored paw in GameParameters</summary>
         </member>
     </members>
 </doc>
