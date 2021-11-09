@@ -192,7 +192,7 @@ namespace MoarKerbals
                 if (PartHasRoom(part) && GatherResources(part) && GatherCurrencies())
                 {
                     var rnd = new System.Random();
-                    double localDouble = rnd.Next(1, 100);
+                    double localDouble = rnd.Next(1, 101);
                     if (accidentRate <= localDouble)
                     {
                         Logging.DLog(logMsg: $"Accident: roll {localDouble:F0} vs {accidentRate}");
@@ -273,7 +273,7 @@ namespace MoarKerbals
 
         private bool AdditionalBirths(System.Random rnd)
         {
-            double localDouble = rnd.Next(1, 100);
+            double localDouble = rnd.Next(1, 101);
             Logging.DLog(logMsg: $"AdditionalBirths: roll: {localDouble:F0} vs. {accidentRate}");
             return (localDouble <= accidentRate) && PartHasRoom(part) && GatherResources(part) && GatherCurrencies();
         }
@@ -303,12 +303,12 @@ namespace MoarKerbals
 
             List<ProtoCrewMember> HorrorMovieCast = new List<ProtoCrewMember>(); // list of victims
 
-            // until the maximum fatalities are reached, do foreach part.protomodulecrew and add members who fail rnd.Next(1, 100) <= accidentRate to the list of casualties
+            // until the maximum fatalities are reached, do foreach part.protomodulecrew and add members who fail rnd.Next(1, 101) <= accidentRate to the list of casualties
             foreach (ProtoCrewMember crewMember in part.protoModuleCrew)
             {
                 if (fatalities <= maxFatalities)
                 {
-                    if (rnd.Next(1, 100) <= accidentRate)
+                    if (rnd.Next(1, 101) <= accidentRate)
                     {
                         HorrorMovieCast.Add(crewMember);
                         fatalities++;
@@ -347,12 +347,12 @@ namespace MoarKerbals
 
             List<ProtoCrewMember> HorrorMovieCast = new List<ProtoCrewMember>(); // list of victims
 
-            // until the maximum fatalities are reached, do foreach part.protomodulecrew and add members who fail rnd.Next(1, 100) <= accidentRate to the list of casualties
+            // until the maximum fatalities are reached, do foreach part.protomodulecrew and add members who fail rnd.Next(1, 101) <= accidentRate to the list of casualties
             foreach (ProtoCrewMember crewMember in part.protoModuleCrew)
             {
                 if (fatalities <= maxFatalities)
                 {
-                    if (rnd.Next(1, 100) <= accidentRate)
+                    if (rnd.Next(1, 101) <= accidentRate)
                     {
                         HorrorMovieCast.Add(crewMember);
                         Logging.DLog(logMsg: $"Kloning: {crewMember.displayName} is about to die... Needs food badly.");
@@ -391,7 +391,7 @@ namespace MoarKerbals
             crewman.Die();
             if (HighLogic.CurrentGame.Parameters.CustomParams<Settings2>().soundOn) FailureSound();
 
-            switch (rnd.Next(0, 100))
+            switch (rnd.Next(0, 101))
             {
                 case < 10:
                     Logging.Msg(Localizer.Format("#MOAR-KloneBay-05") + ".");
@@ -418,8 +418,7 @@ namespace MoarKerbals
         private void SoloCrewBadResult(System.Random rnd)
         {
             Logging.DLog(logMsg: "Kloning: SoloCrewBadResult");
-            zapCrewmember();
-            switch (rnd.Next(0, 100))
+            switch (rnd.Next(0, 101))
             {
                 case < 05:
                     Logging.Msg(Localizer.Format("#MOAR-KloneBay-10", part.protoModuleCrew.First().name) + ".");
@@ -441,11 +440,12 @@ namespace MoarKerbals
                     Logging.Msg(Localizer.Format("#MOAR-KloneBay-14", part.protoModuleCrew.First().name) + ".");
                     break;
             }
+            zapCrewmember();
         }
 
         private static void NoCrewBadResult(System.Random rnd)
         {
-            double localDouble = rnd.Next(0, 100);
+            double localDouble = rnd.Next(0, 101);
             Logging.DLog(logMsg: $"Kloning: noCrewBadResults roll: {localDouble:F0}");
             switch (localDouble)
             {
