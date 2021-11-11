@@ -77,11 +77,10 @@ namespace MoarKerbals
                 double amtRequired = resourceRequired[i].amount * gblMult; // uses globalMultiplier
                 double available = part.RequestResource(resourceRequired[i].Resource.id, amtRequired);
 
-                Logging.DLog(logMsg: $"GatherResources: {resourceRequired[i].resource} : have: {available:F2} need: {amtRequired:F2} |  Global Multiplier: {gblMult:F2}");
+                Logging.DLog(logMsg: $"GatherResources: {resourceRequired[i].resource} : have: {available:F2} need: {amtRequired:F2} |  Global Multiplier: {gblMult:P2}");
                 if (available + 0.0001f < amtRequired)
                 {
                     //Upon not having enough of a resource, returns all previously collected
-
                     vessel.RequestResource(part, resourceRequired[i].Resource.id, -available, false);
                     for (int j = 0; j < i; j++)
                         vessel.RequestResource(part, resourceRequired[j].Resource.id, -amtRequired, false);
@@ -99,7 +98,6 @@ namespace MoarKerbals
         /// <returns></returns>
         private protected bool GatherResources(Part part, double percentage = 1f)
         {
-            Logging.DLog(logMsg: "GatherResourcesB: GatherResources");
             double gblMult = HighLogic.CurrentGame.Parameters.CustomParams<Settings>().globalKloningCostMultiplier;
 
             //Steps through to gather resources
@@ -108,8 +106,7 @@ namespace MoarKerbals
                 double amtRequired = resourceRequired[i].amount * percentage * gblMult; // uses globalMultiplier
                 double available = vessel.RequestResource(part, resourceRequired[i].Resource.id, amtRequired, false);
 
-                //debug:
-                Logging.DLog(logMsg: $"GatherResourcesB: Resource: {resourceRequired[i].resource:F4}, need: {amtRequired:F4}, available: {available:F4}");
+                Logging.DLog(logMsg: $"GatherResourcesT: {resourceRequired[i].resource} : have: {available:F2} need: {amtRequired:F2} |  Global Multiplier: {gblMult:P2}");
 
                 if (available + 0.0001f < amtRequired)
                 {
@@ -119,10 +116,7 @@ namespace MoarKerbals
                     for (int j = 0; j < i; j++)
                         vessel.RequestResource(part, resourceRequired[j].Resource.id, -amtRequired, false);
 
-                    //Logging.Msg("Insufficient " + resourceRequired[i].resource + " to start/continue Kuddling (" + available.ToString("F1") + "/" + amtRequired.ToString("F1") + ")", 5f, ScreenMessageStyle.UPPER_CENTER);
-                    //Logging.Msg(Localizer.Format("#MOAR-Shack-07", resourceRequired[i].resource, available.ToString(), amtRequired.ToString()), 5f, ScreenMessageStyle.UPPER_CENTER);
-                    Logging.Msg(Localizer.Format("#MOAR-Shack-07", resourceRequired[i].resource, amtRequired, available));
-
+                    Logging.Msg(s: Localizer.Format("#MOAR-Insufficient", resourceRequired[i].resource, available, amtRequired));
                     return false;
                 }
             }
