@@ -22,12 +22,7 @@ namespace MoarKerbals
     public class KerbalRecruitment : MoarKerbalsBase // PartModule
     {
         /// <summary>KerbalJob Enum - kerbal professions</summary>
-        enum KerbalJob
-        {
-            Pilot,
-            Engineer,
-            Scientist
-        }
+        enum KerbalJob { Pilot, Engineer, Scientist }
 
         /// <summary>KerbalRecuitmentEnabled - is the module enabled (default = false)</summary>
         [KSPField(guiName = "#MOAR-Academy-00",
@@ -120,47 +115,111 @@ namespace MoarKerbals
 
                 // need to be able to only affect one part
                 if (HighLogic.CurrentGame.Parameters.CustomParams<Settings2>().entireVesselAcademy)
-                {
                     vesselCrew = vessel.GetVesselCrew();
-                }
                 else
-                {
-                    // List<ProtoCrewMember> vesselCrew = vessel.GetVesselCrew();
-                    vesselCrew = this.part.protoModuleCrew;
-                }
+                    vesselCrew = part.protoModuleCrew;
+
                 foreach (ProtoCrewMember crewMember in vesselCrew)
                 {
-                    //Logging.Msg(crewMember.name + " : " + crewMember.trait + ": " + crewMember.type, 3.5f, ScreenMessageStyle.UPPER_CENTER);
                     Logging.DLog(logMsg: Localizer.Format("#MOAR-Academy-06", crewMember.name, crewMember.trait, crewMember.type));
-
-                    //if (crewMember.trait == "Civilian" && changedTrait == false)
-                    if (crewMember.trait == Localizer.Format("#MOAR-004") && changedTrait == false)
+                    if (crewMember.trait == Localizer.Format("#MOAR-004"))  // && changedTrait == false) // "Civilian"
                     {
                         if (GatherResources(part) && GatherCurrencies())
                         {
                             DebitCurrencies();
                             crewMember.trait = getRandomTrait();
-                            if (crewMember.trait == Localizer.Format("#MOAR-004"))
-                            {
+                            Logging.Msg(s: Localizer.Format("#MOAR-Academy-08", crewMember.name));
 
-                                Logging.Msg(s: Localizer.Format("#MOAR-Academy-08", crewMember.name));
-                                if (HighLogic.CurrentGame.Parameters.CustomParams<Settings2>().soundOn) FailureSound();
-                                return;
-                            }
-                            crewMember.type = ProtoCrewMember.KerbalType.Crew;
-                            if (HighLogic.CurrentGame.Parameters.CustomParams<Settings2>().recruitOnlyOne) changedTrait = true;
-                            //KerbalRoster.SetExperienceTrait(crewMember, getRandomTrait());
+                            // just in case
+                            if (crewMember.type != ProtoCrewMember.KerbalType.Crew) crewMember.type = ProtoCrewMember.KerbalType.Crew;
+                            // update the roster
                             KerbalRoster.SetExperienceTrait(crewMember, crewMember.trait);
-
-                            Logging.Msg(s: Localizer.Format("#MOAR-Academy-07", crewMember.name, crewMember.trait)); // crewMember.name + " is now a " + crewMember.trait + "!"
-                            if (HighLogic.CurrentGame.Parameters.CustomParams<Settings2>().soundOn) SuccessSound();
+                            changedTrait = true;
+                            switch (crewMember.trait == Localizer.Format("#MOAR-004"))
+                            {
+                                case false: // positive outcome
+                                    Logging.Msg(s: Localizer.Format("#MOAR-Academy-07", crewMember.name, crewMember.trait), true); // crewMember.name + " is now a " + crewMember.trait + "!"
+                                    break;
+                                case true: // negative outcome
+                                    BadOutcome(crewMember);
+                                    break;
+                            }
                         }
+                        // if (HighLogic.CurrentGame.Parameters.CustomParams<Settings2>().recruitOnlyOne) break; // changedTrait = true;
                     }
-                    if (!HighLogic.CurrentGame.Parameters.CustomParams<Settings2>().recruitOnlyOne) changedTrait = true;
+                    if (!HighLogic.CurrentGame.Parameters.CustomParams<Settings2>().recruitOnlyOne) break; // changedTrait = true;
                 }
+                // changedTrait = false;
                 if (changedTrait) GameEvents.onVesselChange.Fire(FlightGlobals.ActiveVessel);
                 else Logging.Msg(s: "No civilians available to recruit");
             }
+        }
+
+        private void BadOutcome(ProtoCrewMember crewMember)
+        {
+            var rnd = new System.Random();
+            double localDouble = rnd.Next(0, 101);
+            Logging.DLog(logMsg: $"Academy: BadOutcome roll: {localDouble:F0}");
+            switch (localDouble)
+            {
+                case < 05:
+                    Logging.Msg(Localizer.Format("#MOAR-Academy-08", crewMember.displayName) + ".");
+                    break;
+                case < 30:
+                    Logging.Msg(Localizer.Format("#MOAR-Academy-09", crewMember.displayName) + ".");
+                    break;
+                case < 60:
+                    Logging.Msg(Localizer.Format("#MOAR-Academy-10", crewMember.displayName) + ".");
+                    break;
+                case <= 80:
+                    Logging.Msg(Localizer.Format("#MOAR-Academy-11", crewMember.displayName) + ".");
+                    break;
+                case <= 90:
+                    Logging.Msg(Localizer.Format("#MOAR-Academy-12", crewMember.displayName) + ".");
+                    break;
+                case <= 100:
+                    Logging.Msg(Localizer.Format("#MOAR-Academy-13", crewMember.displayName) + ".");
+                    break;
+                default:
+                    Logging.DLogWarning(logMsg: "Academy: BadOutcome out of bounds.");
+                    break;
+            }
+        }
+
+        private protected string getRandomTrait()
+        {
+            Logging.DLog(logMsg: $"Academy: getRandomTrait");
+
+            int numberOfClasses = 3;
+            if (HighLogic.CurrentGame.Parameters.CustomParams<Settings2>().dropOut) numberOfClasses = 4;
+
+            string kerbalTrait = "";
+            System.Random newRand = new System.Random();
+
+            switch (newRand.Next() % numberOfClasses)
+            {
+                case 0:
+                    kerbalTrait = Localizer.Format("#autoLOC_8005006"); //  "Pilot";
+                    if (HighLogic.CurrentGame.Parameters.CustomParams<Settings2>().soundOn) SuccessSound();
+                    break;
+                case 1:
+                    kerbalTrait = Localizer.Format("#autoLOC_8005007"); // "Engineer"; 
+                    if (HighLogic.CurrentGame.Parameters.CustomParams<Settings2>().soundOn) SuccessSound();
+                    break;
+                case 2:
+                    kerbalTrait = Localizer.Format("#autoLOC_8005008"); // "Scientist"; 
+                    if (HighLogic.CurrentGame.Parameters.CustomParams<Settings2>().soundOn) SuccessSound();
+                    break;
+                case 3:
+                    kerbalTrait = Localizer.Format("#MOAR-004"); // "Civilian"; 
+                    if (HighLogic.CurrentGame.Parameters.CustomParams<Settings2>().soundOn) FailureSound();
+                    Logging.Msg(s: String.Format("Created trait:  {0}", kerbalTrait));
+                    break;
+                default:
+                    break;
+            }
+            Logging.DLog(logMsg: String.Format("Created trait:  {0}", kerbalTrait));
+            return kerbalTrait;
         }
 
         /// <summary>Play sound upon failure</summary>
@@ -211,38 +270,6 @@ namespace MoarKerbals
                 default:
                     return;
             }
-        }
-
-        private protected string getRandomTrait()
-        {
-            Logging.DLog(logMsg: $"Academy: getRandomTrait");
-
-            int numberOfClasses = 3;
-            if (HighLogic.CurrentGame.Parameters.CustomParams<Settings2>().dropOut) numberOfClasses = 4;
-
-            string kerbalTrait = "";
-            System.Random newRand = new System.Random();
-
-            switch (newRand.Next() % numberOfClasses)
-            {
-                case 0:
-                    kerbalTrait = Localizer.Format("#autoLOC_8005006"); //  "Pilot";
-                    break;
-                case 1:
-                    kerbalTrait = Localizer.Format("#autoLOC_8005007"); // "Engineer"; 
-                    break;
-                case 2:
-                    kerbalTrait = Localizer.Format("#autoLOC_8005008"); // "Scientist"; 
-                    break;
-                case 3:
-                    kerbalTrait = Localizer.Format("#MOAR-004"); // "Civilian"; 
-                    if (HighLogic.CurrentGame.Parameters.CustomParams<Settings2>().soundOn) FailureSound();
-                    break;
-                default:
-                    break;
-            }
-            Logging.Msg(s: String.Format("Created trait:  {0}", kerbalTrait));
-            return kerbalTrait;
         }
 
         /// <summary>What shows up in editor for the part</summary>
