@@ -79,7 +79,7 @@ namespace MoarKerbals
             base.OnStart(state);
             Logging.DLog("Kloning: OnStart");
 
-            RequireLivingKerbal = HighLogic.CurrentGame.Parameters.CustomParams<Settings2>().requireLivingKerbal
+            RequireLivingKerbal = HighLogic.CurrentGame.Parameters.CustomParams<Settings2>().requireLivingKerbal;
 
             if (HighLogic.CurrentGame.Parameters.CustomParams<Settings3>().coloredPAW)
                 Fields["KloningKabinEnabled"].group.displayName = System.String.Format("<color=#BADA55>" + groupName + "</color>");
@@ -133,7 +133,7 @@ namespace MoarKerbals
 
         public void OnFixedUpdate()
         {
-            RequireLivingKerbal = HighLogic.CurrentGame.Parameters.CustomParams<Settings2>().requireLivingKerbal
+            RequireLivingKerbal = HighLogic.CurrentGame.Parameters.CustomParams<Settings2>().requireLivingKerbal;
 
             if (HighLogic.CurrentGame.Parameters.CustomParams<Settings3>().coloredPAW)
                 Fields["KloningKabinEnabled"].group.displayName = String.Format("<color=#BADA55>" + groupName + "</color>");
@@ -704,10 +704,10 @@ namespace MoarKerbals
                 switch (RequireLivingKerbal)
                 {
                     case true:
-                        info += "\r\n Needs living Kerbal.";
+                        info += "\r\nNeeds living Kerbal.";
                         break;
                     case false:
-                        info += "\r\n Frozen sample used, does not needs living Kerbal.";
+                        info += "\r\nFrozen sample used, does not needs living Kerbal.";
                         break;
                 }
 
