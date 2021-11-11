@@ -197,88 +197,144 @@ namespace MoarKerbals
                 {
                     var rnd = new System.Random();
                     double localDouble = rnd.Next(1, 101);
-                    if (accidentRate <= localDouble)
+                    // No accidents
+                    if (accidentRate == 0)
                     {
-                        Logging.DLog(logMsg: $"Accident: roll {localDouble:F0} vs {accidentRate}");
-                        KloneKerbal();
-                        // twins?
-
-                        if (AdditionalBirths(rnd))
+                        localDouble = 100d;
+                    }
+                    else
+                    {
+                        if (accidentRate <= localDouble)
                         {
-                            Logging.Msg(Localizer.Format("#MOAR-KloneBay-25", true));
+                            Logging.DLog(logMsg: $"Accident: roll {localDouble:F0} vs {accidentRate}");
                             KloneKerbal();
-                            // triplets? (Only if KribbleMode enabled)
-                            if (AdditionalBirths(rnd) && HighLogic.CurrentGame.Parameters.CustomParams<Settings2>().KribbleMode)
+                            // twins?
+                            if (AdditionalBirths(rnd))
                             {
-                                Logging.Msg(Localizer.Format("#MOAR-KloneBay-26", true));
-                                KloneKerbal();
-                                // quadruplets?
-                                if (AdditionalBirths(rnd))
+                                int count = 2;
+                                while (accidentRate <= localDouble && count <= 9 && HighLogic.CurrentGame.Parameters.CustomParams<Settings2>().KribbleMode)
                                 {
-                                    Logging.Msg(Localizer.Format("#MOAR-KloneBay-27", true));
                                     KloneKerbal();
-                                    // quintuplets?
-                                    if (AdditionalBirths(rnd))
+                                    switch (count)
                                     {
-                                        Logging.Msg(Localizer.Format("#MOAR-KloneBay-28", true));
-                                        KloneKerbal();
-                                        // Sextuplets?
-                                        if (AdditionalBirths(rnd))
-                                        {
+                                        case 2: // twins
+                                            Logging.Msg(Localizer.Format("#MOAR-KloneBay-25", true));
+                                            break;
+                                        case 3: // triplets
+                                            Logging.Msg(Localizer.Format("#MOAR-KloneBay-26", true));
+                                            break;
+                                        case 4: // quadruplets?
+                                            Logging.Msg(Localizer.Format("#MOAR-KloneBay-27", true));
+                                            break;
+                                        case 5: // quintuplets?
+                                            Logging.Msg(Localizer.Format("#MOAR-KloneBay-28", true));
+                                            break;
+                                        case 6: // Sextuplets?
                                             Logging.Msg(Localizer.Format("#MOAR-KloneBay-29", true));
-                                            KloneKerbal();
-                                            // Septuplets?
-                                            if (AdditionalBirths(rnd))
-                                            {
-                                                Logging.Msg(Localizer.Format("#MOAR-KloneBay-30", true));
-                                                KloneKerbal();
-                                                // Octuplets?
-                                                if (AdditionalBirths(rnd))
-                                                {
-                                                    Logging.Msg(Localizer.Format("#MOAR-KloneBay-31", true));
-                                                    KloneKerbal();
-                                                    // Nonuplets?
-                                                    if (AdditionalBirths(rnd))
-                                                    {
-                                                        Logging.Msg(Localizer.Format("#MOAR-KloneBay-32", true));
-                                                        KloneKerbal();
-                                                        // no more please!
-                                                        Logging.Msg(Localizer.Format("#MOAR-KloneBay-33", true));
-                                                    }
-                                                }
-                                            }
-                                        }
+                                            break;
+                                        case 7: // Septuplets?
+                                            Logging.Msg(Localizer.Format("#MOAR-KloneBay-30", true));
+                                            break;
+                                        case 8: // Octuplets?
+                                            Logging.Msg(Localizer.Format("#MOAR-KloneBay-31", true));
+                                            break;
+                                        case 9: // Nonuplets?
+                                            Logging.Msg(Localizer.Format("#MOAR-KloneBay-32", true));
+                                            // no more please!
+                                            Logging.Msg(Localizer.Format("#MOAR-KloneBay-33", true));
+                                            break;
+                                        default:
+                                            break;
                                     }
+                                    count++;
                                 }
                             }
                         }
-                    }
-                    // bad events follow
-                    // if (!HighLogic.CurrentGame.Parameters.CustomParams<Settings2>().requireLivingKerbal) - don't need because switch factors that in
-                    else switch (part.protoModuleCrew.Count)
+
+
+                        //if (AdditionalBirths(rnd))
+                        //{
+                        //    Logging.Msg(Localizer.Format("#MOAR-KloneBay-25", true));
+                        //    KloneKerbal();
+                        //    // triplets? (Only if KribbleMode enabled)
+                        //    if (AdditionalBirths(rnd) && HighLogic.CurrentGame.Parameters.CustomParams<Settings2>().KribbleMode)
+                        //    {
+                        //        Logging.Msg(Localizer.Format("#MOAR-KloneBay-26", true));
+                        //        KloneKerbal();
+                        //        // quadruplets?
+                        //        if (AdditionalBirths(rnd))
+                        //        {
+                        //            Logging.Msg(Localizer.Format("#MOAR-KloneBay-27", true));
+                        //            KloneKerbal();
+                        //            // quintuplets?
+                        //            if (AdditionalBirths(rnd))
+                        //            {
+                        //                Logging.Msg(Localizer.Format("#MOAR-KloneBay-28", true));
+                        //                KloneKerbal();
+                        //                // Sextuplets?
+                        //                if (AdditionalBirths(rnd))
+                        //                {
+                        //                    Logging.Msg(Localizer.Format("#MOAR-KloneBay-29", true));
+                        //                    KloneKerbal();
+                        //                    // Septuplets?
+                        //                    if (AdditionalBirths(rnd))
+                        //                    {
+                        //                        Logging.Msg(Localizer.Format("#MOAR-KloneBay-30", true));
+                        //                        KloneKerbal();
+                        //                        // Octuplets?
+                        //                        if (AdditionalBirths(rnd))
+                        //                        {
+                        //                            Logging.Msg(Localizer.Format("#MOAR-KloneBay-31", true));
+                        //                            KloneKerbal();
+                        //                            // Nonuplets?
+                        //                            if (AdditionalBirths(rnd))
+                        //                            {
+                        //                                Logging.Msg(Localizer.Format("#MOAR-KloneBay-32", true));
+                        //                                KloneKerbal();
+                        //                                // no more please!
+                        //                                Logging.Msg(Localizer.Format("#MOAR-KloneBay-33", true));
+                        //                            }
+                        //                        }
+                        //                    }
+                        //                }
+                        //            }
+                        //        }
+                        //    }
+                        // bad events follow
+                        // if (!HighLogic.CurrentGame.Parameters.CustomParams<Settings2>().requireLivingKerbal) - don't need because switch factors that in
+                        else
                         {
-                            case int n when n <= 0:
-                                NoCrewBadResult(rnd);
-                                break;
-                            case int n when n == 0:
-                                SoloCrewBadResult(rnd);
-                                break;
-                            case int n when n > 1:
-                                ScaryMovieMode(rnd);
-                                break;
-                            default:
-                                break;
+                            switch (part.protoModuleCrew.Count)
+                            {
+                                case int n when n <= 0:
+                                    NoCrewBadResult(rnd);
+                                    break;
+                                case int n when n == 0:
+                                    SoloCrewBadResult(rnd);
+                                    break;
+                                case int n when n > 1:
+                                    ScaryMovieMode(rnd);
+                                    break;
+                                default:
+                                    break;
+                            }
                         }
+                    }
+                    GameEvents.onVesselChange.Fire(FlightGlobals.ActiveVessel);
                 }
-                GameEvents.onVesselChange.Fire(FlightGlobals.ActiveVessel);
+                //            HorrorMovieCrew.Add(crewMember);
             }
-            //            HorrorMovieCrew.Add(crewMember);
         }
 
         private bool AdditionalBirths(System.Random rnd)
         {
-            double localDouble = rnd.Next(0, 500);
-            Logging.DLog(logMsg: $"AdditionalBirths: roll: {localDouble:F0} vs. {accidentRate}");
+            double localDouble = 0d;
+            if (accidentRate != 0)
+            {
+                localDouble = rnd.Next(0, 500);
+                Logging.DLog(logMsg: $"AdditionalBirths: roll: {localDouble:F0} vs. {accidentRate}");
+            }
+            else Logging.DLog(logMsg: $"Accidents disabled by setting accidentRate to {accidentRate}");
             return (localDouble <= accidentRate) && PartHasRoom(part) && GatherResources(part) && GatherCurrencies();
         }
 
