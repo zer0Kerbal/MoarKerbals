@@ -70,7 +70,6 @@ namespace MoarKerbals
         private protected bool GatherResources(Part part)
         {
             double gblMult = HighLogic.CurrentGame.Parameters.CustomParams<Settings>().globalKloningCostMultiplier;
-            Logging.DLog(logMsg: $"GatherResources: Global Multiplier: {gblMult:F2}");
 
             //Steps through to gather resources
             for (int i = 0; i < resourceRequired.Count; i++)
@@ -78,14 +77,12 @@ namespace MoarKerbals
                 double amtRequired = resourceRequired[i].amount * gblMult; // uses globalMultiplier
                 double available = part.RequestResource(resourceRequired[i].Resource.id, amtRequired);
 
-                // Logging.DLog(logMsg: $"MoarKerbals: DEBUG: {1} : resourceAmounts: {2} need: {3}", resourceRequired[i].resource.ToString(), available.ToString(), amtRequired.ToString()));
-                Logging.DLog(logMsg: $"GatherResources: {resourceRequired[i].resource} : have: {available:F2} need: {amtRequired:F2}");
+                Logging.DLog(logMsg: $"GatherResources: {resourceRequired[i].resource} : have: {available:F2} need: {amtRequired:F2} |  Global Multiplier: {gblMult:F2}");
                 if (available + 0.0001f < amtRequired)
                 {
                     //Upon not having enough of a resource, returns all previously collected
 
                     vessel.RequestResource(part, resourceRequired[i].Resource.id, -available, false);
-                    // part.RequestResource(resourceRequired[i].Resource.id, -available, false);
                     for (int j = 0; j < i; j++)
                         vessel.RequestResource(part, resourceRequired[j].Resource.id, -amtRequired, false);
 
@@ -104,7 +101,6 @@ namespace MoarKerbals
         {
             Logging.DLog(logMsg: "GatherResourcesB: GatherResources");
             double gblMult = HighLogic.CurrentGame.Parameters.CustomParams<Settings>().globalKloningCostMultiplier;
-            Logging.DLog(logMsg: $"MoarKerbals: Global Multiplier: {gblMult:F4} percentage {percentage:P2}", true);
 
             //Steps through to gather resources
             for (int i = 0; i < resourceRequired.Count; i++)
@@ -113,7 +109,6 @@ namespace MoarKerbals
                 double available = vessel.RequestResource(part, resourceRequired[i].Resource.id, amtRequired, false);
 
                 //debug:
-                //Logging.DLog("Resource = " + resourceRequired[i].resource + ", Needed: " + amtRequired + ", available: " + available);
                 Logging.DLog(logMsg: $"GatherResourcesB: Resource: {resourceRequired[i].resource:F4}, need: {amtRequired:F4}, available: {available:F4}");
 
                 if (available + 0.0001f < amtRequired)
