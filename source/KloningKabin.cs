@@ -79,6 +79,8 @@ namespace MoarKerbals
             base.OnStart(state);
             Logging.DLog("Kloning: OnStart");
 
+            RequireLivingKerbal = HighLogic.CurrentGame.Parameters.CustomParams<Settings2>().requireLivingKerbal
+
             if (HighLogic.CurrentGame.Parameters.CustomParams<Settings3>().coloredPAW)
                 Fields["KloningKabinEnabled"].group.displayName = System.String.Format("<color=#BADA55>" + groupName + "</color>");
             else
@@ -131,6 +133,8 @@ namespace MoarKerbals
 
         public void OnFixedUpdate()
         {
+            RequireLivingKerbal = HighLogic.CurrentGame.Parameters.CustomParams<Settings2>().requireLivingKerbal
+
             if (HighLogic.CurrentGame.Parameters.CustomParams<Settings3>().coloredPAW)
                 Fields["KloningKabinEnabled"].group.displayName = String.Format("<color=#BADA55>" + groupName + "</color>");
             else
@@ -598,56 +602,82 @@ namespace MoarKerbals
             }
         }
 
+        /// <summary>Module information shown in editors</summary>
+        private string info = string.Empty;
+
+        private bool RequireLivingKerbal = true;
+
         /// <summary>What shows up in editor for the part</summary>
         /// <returns></returns>
         public override string GetInfo()
         {
-            // Logging.DLog(logMsg: "GetInfo");
-            // base.OnStart(StartState.None);
-
-            // double gblMult = HighLogic.CurrentGame.Parameters.CustomParams<Settings>().globalKloningCostMultiplier;
-            //gblMult = 1;
-
-            //Input:</color>\r\n";
-            string display = String.Format("\r\n<color=#FFFF19>" + Localizer.Format("#MOAR-005") + ":</color>\r\n");
-
-            display += String.Format("\r\n" + Localizer.Format("#MOAR-KloneBay-24" + "\r\n")); // May or May not need a living Kerbal. Could also use frozen MinimusMint Ice Cream."
-
-            // section header
-            display += String.Format("\r\n<color=#FFFF19>" + Localizer.Format("#MOAR-008") + ":</color>\r\n"); // Required Resources:
-            for (int i = 0; i < resourceRequired.Count; i++)
+            double gblMult = HighLogic.CurrentGame.Parameters.CustomParams<Settings>().globalKloningCostMultiplier;
+            if (info == string.Empty)
             {
-                //display += String.Format("{0:0,0}", resourceRequired[i].amount) + " " + resourceRequired[i].resource + "\r\n");
-                //display += String.Format("\t" + resourceRequired[i].resource + ": " + resourceRequired[i].amount + "\r\n");
-                display += $"\t{resourceRequired[i].resource}: {resourceRequired[i].amount:F2} \r\n";
+
+                /* :::This is what it should look like with default settings:::
+                 * 
+                 * MoarKerbals
+                 * Kerbthulhu Kinetics Program
+                 * v 1.3.0.0
+                 * 
+                 * Input: (color)
+                 * May or May not need a living Kerbal. Could also use frozen MinimusMint Ice Cream.
+                 * 
+                 * Required Resources: (color)
+                 *   ElectricCharge: 8000
+                 *   Oxidizer: 100
+                 *   Ore: 500
+                 * 
+                 * Required Currency: (color)
+                 *   Funds 1000
+                 *   Science: 1
+                 *   Reputation: 2
+                 * 
+                 * Output:
+                 * Anything from one Kerbal to a deep dish pizza.
+                 * 
+                 */
+                info += Localizer.Format("#MOAR_manu"); // #MOAR_manu = Kerbthulhu Kinetics Program
+                info += "\n v" + Version.SText; // mod Version Number text
+
+                info = String.Format("\r\n<color=#FFFF19>" + Localizer.Format("#MOAR-005") + ":</color>\r\n"); // Input
+
+                info += String.Format(Localizer.Format("#MOAR-KloneBay-24" + "\r\n")); // May or May not need a living Kerbal. Could also use frozen MinimusMint Ice Cream."
+
+                switch (RequireLivingKerbal)
+                {
+                    case true:
+                        info += "\r\n Needs living Kerbal.";
+                        break;
+                    case false:
+                        info += "\r\n Frozen sample used, does not needs living Kerbal.";
+                        break;
+                }
+
+                // resource section header
+                info += String.Format("\r\n<color=#FFFF19>" + Localizer.Format("#MOAR-008") + ":</color>\r\n"); // Required Resources:
+                for (int i = 0; i < resourceRequired.Count; i++)
+                {
+                    //display += String.Format("{0:0,0}", resourceRequired[i].amount) + " " + resourceRequired[i].resource + "\r\n");
+                    info += $"\t{resourceRequired[i].resource}: {resourceRequired[i].amount:F2} \r\n";
+                }
+
+                // currency section header
+                if ((costFunds != 0) || (costScience != 0) || (costReputation != 0))
+                {
+                    info += String.Format("\r\n<color=#FFFF19>" + Localizer.Format("#MOAR-009") + "</color>\r\n");
+                }
+
+                if (costFunds != 0) info += $"\r\n\t{costFunds:F0} {Localizer.Format("#autoLOC_7001031")}";
+                if (costScience != 0) info += $"\r\n\t{costScience:F0} {Localizer.Format("#autoLOC_7001032")}";
+                if (costReputation != 0) info += $"\r\n\t{costReputation:F0} {Localizer.Format("#autoLOC_7001033")}";
+
+                info = String.Format("\r\n<color=#FFFF19>" + Localizer.Format("#MOAR-006") + ":</color>\r\n"); // Output:
+                info += String.Format(Localizer.Format("#MOAR-KloneBay-18") + "."); // Anything from one Kerbal to a deep dish pizza."
+
             }
-
-            // section header
-            if ((costFunds != 0) || (costScience != 0) || (costReputation != 0))
-            {
-                display += String.Format("\r\n<color=#FFFF19>" + Localizer.Format("#MOAR-009") + "</color>\r\n");
-            }
-
-            if (costFunds != 0) display += $"\r\n{costFunds:F0} {Localizer.Format("#autoLOC_7001031")}";
-            if (costScience != 0) display += $"\r\n{costScience:F0} {Localizer.Format("#autoLOC_7001032")}";
-            if (costReputation != 0) display += $"\r\n{costReputation:F0} {Localizer.Format("#autoLOC_7001033")}";
-            //if (costReputation != 0) display += String.Format("\r\n" + Localizer.Format("#autoLOC_7001033") + ": " + costReputation);
-
-            //display += "\r\r<color=#BADA55>Output:</color>\r\n 
-            display = String.Format("\r\n<color=#FFFF19>" + Localizer.Format("#MOAR-006") + ":</color>\r\n");
-            display += String.Format(Localizer.Format("#MOAR-KloneBay-18") + "."); // Anything from one Kerbal to a deep dish pizza."
-
-            //switch (HighLogic.CurrentGame.Parameters.CustomParams<Settings2>().requireLivingKerbal)
-            //{
-            //    case true:
-            //        display += "\r\n Needs living Kerbal.";
-            //        break;
-            //    case false:
-            //        display += "\r\n Frozen sample used, does not needs living Kerbal.";
-            //        break;
-            //}
-
-            return display;
+            return info;
         }
     }
 }

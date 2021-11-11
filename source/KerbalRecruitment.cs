@@ -6,7 +6,7 @@
     CC BY-NC 4.0 (Attribution-NonCommercial 4.0 International) (https://creativecommons.org/licenses/by-nc/4.0/)
     specifically: https://github.com/linuxgurugamer/CivilianPopulation
 
-    This file has been modified extensively and is released under the same license.
+    This file has been modified extensively.
 
 */
 

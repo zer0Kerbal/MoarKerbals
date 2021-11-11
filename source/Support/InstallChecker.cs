@@ -1,13 +1,14 @@
-﻿//**
-// * Based on the InstallChecker from the Kethane mod for Kerbal Space Program.
-// * https://github.com/Majiir/Kethane/blob/b93b1171ec42b4be6c44b257ad31c7efd7ea1702/Plugin/InstallChecker.cs
-// * 
-// * Original is (C) Copyright Majiir.
-// * CC0 Public Domain (http://creativecommons.org/publicdomain/zero/1.0/)
-// * http://forum.kerbalspaceprogram.com/threads/65395-CompatibilityChecker-Discussion-Thread?p=899895&viewfull=1#post899895
-// * 
-// * This file has been modified extensively and is released under the same license.
-// */
+﻿/*
+ * InstallChecker.cs
+ * version 2.1.0.0
+*/
+
+/* 
+ * Based on the InstallChecker from the Kethane mod for Kerbal Space Program by Majiir.
+ * https://github.com/Majiir/Kethane/blob/b93b1171ec42b4be6c44b257ad31c7efd7ea1702/Plugin/InstallChecker.cs
+ * 
+ * This file has been modified extensively by zer0Kerbal (zer0Kerbal@hotmail.com).
+ */
 using System;
 using System.IO;
 using System.Linq;
@@ -17,9 +18,8 @@ using KSP.Localization;
 
 namespace MoarKerbals
 {
-
-    //[KSPAddon(KSPAddon.Startup.MainMenu, true)]
-    [KSPAddon(KSPAddon.Startup.Instantly, true)]
+    /// <summary>MainMenu feedback</summary>
+    [KSPAddon(KSPAddon.Startup.MainMenu, true)]
     internal class InstallChecker : MonoBehaviour
     {
         private const string MODNAME = "MoarKerbals";
@@ -33,21 +33,20 @@ namespace MoarKerbals
             if (assemblies.Any())
             {
                 var badPaths = assemblies.Select(a => a.path).Select(p => Uri.UnescapeDataString(new Uri(Path.GetFullPath(KSPUtil.ApplicationRootPath)).MakeRelativeUri(new Uri(p)).ToString().Replace('/', Path.DirectorySeparatorChar)));
-                PopupDialog.SpawnPopupDialog
+                _ = PopupDialog.SpawnPopupDialog
                 (
-                    new Vector2(0.5f, 0.5f),
-                    new Vector2(0.5f, 0.5f),
-                    "test",
-                    Localizer.Format("#MoarKerbals_InstallChecker_title", MODNAME),//"Incorrect " +  + " Installation" 
-                    MODNAME + " has been installed incorrectly and will not function properly. All files should be located in KSP/GameData/" + FOLDERNAME + ". Do not move any files from inside that folder.\n\nIncorrect path(s):\n" + String.Join("\n", badPaths.ToArray()),
-                    "OK",
-                    false,
-                    HighLogic.UISkin
+                    anchorMin: new Vector2(0.5f, 0.5f),
+                    anchorMax: new Vector2(0.5f, 0.5f),
+                    dialogName: "InstallChecker",
+                    title: Localizer.Format("#MOAR-IC-00" + " InstallChecker", Version.SText),
+                    message: Localizer.Format("#MOAR-IC-01", Version.Text, Localizer.Format("#MOAR-IC-00"), FOLDERNAME, String.Join("\n", badPaths.ToArray())),
+                    //"Incorrect <<1>> v<<2>> installation.\n<<1>> has been installed incorrectly and will not function properly. All files should be located in KSP/GameData/<<3>>. Do not move any files from inside that folder.\n\nIncorrect path(s):\n<<4>>
+                    buttonMessage: "OK",
+                    persistAcrossScenes: false,
+                    skin: HighLogic.UISkin
                 );
-                Debug.Log("Incorrect " + MODNAME + " Installation: " + MODNAME + " has been installed incorrectly and will not function properly. All files should be located in KSP/GameData/" + EXPECTEDPATH + ". Do not move any files from inside that folder.\n\nIncorrect path(s):\n" + String.Join("\n", badPaths.ToArray())
-
-                     );
-
+                //Debug.Log("Incorrect " + MODNAME + " Installation: " + MODNAME + " has been installed incorrectly and will not function properly. All files should be located in KSP/GameData/" + EXPECTEDPATH + ". Do not move any files from inside that folder.\n\nIncorrect path(s):\n" + String.Join("\n", badPaths.ToArray())
+                Debug.Log(logMsg: $"[{MODNAME}] Incorrect {MODNAME} v {Version.Text} Installation: {MODNAME} has been installed incorrectly and will not function properly. All files should be located in KSP/GameData/{EXPECTEDPATH}. Do not move any files from inside that folder.\n\nIncorrect path(s):\n{String.Join("\n", badPaths.ToArray())}.");
             }
 
             //// Check for Module Manager
@@ -61,9 +60,29 @@ namespace MoarKerbals
             CleanupOldVersions();
         }
 
-        /*
-		 * Tries to fix the install if it was installed over the top of a previous version
-		 */
+        [KSPAddon(KSPAddon.Startup.Instantly, true)]
+        internal class Startup : MonoBehaviour
+        {
+            /// <summary>the meat and potatoes</summary>
+            private void Start()
+            {
+                string v = "n/a";
+                AssemblyTitleAttribute attributes = (AssemblyTitleAttribute)Attribute.GetCustomAttribute(Assembly.GetExecutingAssembly(), typeof(AssemblyTitleAttribute), false);
+                string title = attributes?.Title;
+                if (title == null)
+                {
+                    title = "TitleNotAvailable";
+                }
+                v = Assembly.GetExecutingAssembly().FullName;
+                if (v == null)
+                {
+                    v = "VersionNotAvailable";
+                }
+                Debug.Log("[" + title + "] Version " + v);
+            }
+        }
+
+        /// <summary>Tries to fix the install if it was installed over the top of a previous version</summary>
         void CleanupOldVersions()
         {
             try
@@ -78,5 +97,3 @@ namespace MoarKerbals
         }
     }
 }
-
-
