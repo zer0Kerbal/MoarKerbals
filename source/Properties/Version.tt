@@ -1,7 +1,7 @@
 ﻿<#
 /*
    * Version.tt
-   * 2.0.1.0
+   * 2.0.2.0
 
    This file is licensed under the Do What the F* You Want to Public License ( http://www.wtfpl.net )
    * by zer0Kerbal.
@@ -119,9 +119,10 @@ namespace <#= PROJECT_NAME #>
 		public const int build = <#= build #>;
 		public const string Number = "<#= major #>.<#= minor #>.<#= patch #>.<#= build #>";
 #if DEBUG
-        public const string Text = Number + "-zed'K DEBUG";
+		public const string Text = Number + "-zed'K DEBUG";
 #else
-        public const string Text = Number + "-prerelease zed'K ";
+		public const string Text = Number + "-prerelease zed'K ";
+		public const string SText = Number;
 #endif
 	}
 }

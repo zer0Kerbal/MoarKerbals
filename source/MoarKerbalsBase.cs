@@ -35,7 +35,7 @@ namespace MoarKerbals
         internal List<ResourceRequired> resourceRequired = new List<ResourceRequired>();
 
         /// <summary>internal name of GUI groupName  </summary>
-        internal static string groupName = Localizer.Format("#MOAR-003", Version.Text);
+        internal static string groupName = Localizer.Format("#MOAR-003", Version.SText);
 
         /// <summary>onStart</summary>
         public override void OnStart(PartModule.StartState state)
