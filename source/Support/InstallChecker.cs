@@ -46,7 +46,7 @@ namespace MoarKerbals
                     skin: HighLogic.UISkin
                 );
                 //Debug.Log("Incorrect " + MODNAME + " Installation: " + MODNAME + " has been installed incorrectly and will not function properly. All files should be located in KSP/GameData/" + EXPECTEDPATH + ". Do not move any files from inside that folder.\n\nIncorrect path(s):\n" + String.Join("\n", badPaths.ToArray())
-                Debug.Log(logMsg: $"[{MODNAME}] Incorrect {MODNAME} v {Version.Text} Installation: {MODNAME} has been installed incorrectly and will not function properly. All files should be located in KSP/GameData/{EXPECTEDPATH}. Do not move any files from inside that folder.\n\nIncorrect path(s):\n{String.Join("\n", badPaths.ToArray())}.");
+                Debug.Log($"[{MODNAME}] Incorrect {MODNAME} v {Version.Text} Installation: {MODNAME} has been installed incorrectly and will not function properly. All files should be located in KSP/GameData/{EXPECTEDPATH}. Do not move any files from inside that folder.\n\nIncorrect path(s):\n{String.Join("\n", badPaths.ToArray())}.");
             }
 
             //// Check for Module Manager

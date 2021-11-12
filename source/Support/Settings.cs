@@ -94,10 +94,10 @@ namespace MoarKerbals
             minValue = 0, maxValue = 2, stepSize = 1)]
         public int soundClipA0 = 1;
 
-        /// <summary>sound clip to be played during kloning success events</summary>
+        /// <summary>sound clip to be played during kloning failure events</summary>
         [GameParameters.CustomIntParameterUI("#MOAR-Settings-soundClip-A1", toolTip = "#MOAR-Settings-soundClip-A1-Tip",
             newGameOnly = false, unlockedDuringMission = true,
-            minValue = 0, maxValue = 2, stepSize = 1)]
+            minValue = 0, maxValue = 3, stepSize = 1)]
         public int soundClipA1 = 1;
 
         /// <summary>sound clip to be played during kuddling success events</summary>
@@ -106,7 +106,7 @@ namespace MoarKerbals
             minValue = 0, maxValue = 2, stepSize = 1)]
         public int soundClipB0 = 1;
 
-        /// <summary>sound clip to be played during kuddling success events</summary>
+        /// <summary>sound clip to be played during kuddling failure events</summary>
         [GameParameters.CustomIntParameterUI("#MOAR-Settings-soundClip-B1", toolTip = "#MOAR-Settings-soundClip-B1-Tip",
             newGameOnly = false, unlockedDuringMission = true,
             minValue = 0, maxValue = 2, stepSize = 1)]
@@ -118,7 +118,7 @@ namespace MoarKerbals
             minValue = 0, maxValue = 2, stepSize = 1)]
         public int soundClipC0 = 1;
 
-        /// <summary>sound clip to be played during recruitment success events</summary>
+        /// <summary>sound clip to be played during recruitment failure events</summary>
         [GameParameters.CustomIntParameterUI("#MOAR-Settings-soundClip-C1", toolTip = "#MOAR-Settings-soundClip-C1-Tip",
             newGameOnly = false, unlockedDuringMission = true,
             minValue = 0, maxValue = 2, stepSize = 1)]

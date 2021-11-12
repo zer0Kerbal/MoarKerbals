@@ -110,7 +110,6 @@ namespace MoarKerbals
             {
                 Logging.DLog(logMsg: "Academy: Recruitment Button pressed!");
 
-                bool changedTrait = false;
                 List<ProtoCrewMember> vesselCrew;
 
                 // need to be able to only affect one part
@@ -119,6 +118,9 @@ namespace MoarKerbals
                 else
                     vesselCrew = part.protoModuleCrew;
 
+                int count = 0;
+                bool onlyOne = HighLogic.CurrentGame.Parameters.CustomParams<Settings2>().recruitOnlyOne;
+                bool changedTrait = false;
                 foreach (ProtoCrewMember crewMember in vesselCrew)
                 {
                     Logging.DLog(logMsg: Localizer.Format("#MOAR-Academy-06", crewMember.name, crewMember.trait, crewMember.type));
@@ -128,33 +130,41 @@ namespace MoarKerbals
                         {
                             DebitCurrencies();
                             crewMember.trait = getRandomTrait();
-                            Logging.Msg(s: Localizer.Format("#MOAR-Academy-08", crewMember.name));
+                            Logging.DLog(logMsg: $"{crewMember.displayName} is now a {crewMember.trait}");
 
                             // just in case
                             if (crewMember.type != ProtoCrewMember.KerbalType.Crew) crewMember.type = ProtoCrewMember.KerbalType.Crew;
                             // update the roster
-                            KerbalRoster.SetExperienceTrait(crewMember, crewMember.trait);
-                            changedTrait = true;
-                            switch (crewMember.trait == Localizer.Format("#MOAR-004"))
+                            if (crewMember.trait == Localizer.Format("#MOAR-004"))
                             {
-                                case false: // positive outcome
-                                    Logging.Msg(s: Localizer.Format("#MOAR-Academy-07", crewMember.name, crewMember.trait), true); // crewMember.name + " is now a " + crewMember.trait + "!"
-                                    break;
-                                case true: // negative outcome
-                                    BadOutcome(crewMember);
-                                    break;
+                                BadOutcome(crewMember); // negative outcome
+                            }
+                            else
+                            { // positive outcome
+                                Logging.Msg(s: Localizer.Format("#MOAR-Academy-07", crewMember.name, crewMember.trait), true); // crewMember.name + " is now a " + crewMember.trait + "!"
+                                KerbalRoster.SetExperienceTrait(crewMember, crewMember.trait);
+                                changedTrait = true;
+                                count++;
                             }
                         }
-                        // if (HighLogic.CurrentGame.Parameters.CustomParams<Settings2>().recruitOnlyOne) break; // changedTrait = true;
+                        if (HighLogic.CurrentGame.Parameters.CustomParams<Settings2>().recruitOnlyOne) changedTrait = true; // tried break;
                     }
-                    if (!HighLogic.CurrentGame.Parameters.CustomParams<Settings2>().recruitOnlyOne) break; // changedTrait = true;
+                    if (onlyOne && changedTrait) break;
                 }
-                // changedTrait = false;
-                if (changedTrait) GameEvents.onVesselChange.Fire(FlightGlobals.ActiveVessel);
-                else Logging.Msg(s: "No civilians available to recruit");
+                if (changedTrait || (count > 0))
+                {
+                    Logging.DLog(logMsg: $"Academy: Count {count} out of {vesselCrew.Count}");
+                    GameEvents.onVesselChange.Fire(FlightGlobals.ActiveVessel);
+
+                }
+                else Logging.Msg(s: "No civilians available to recruit", true);
             }
         }
 
+        /// <summary>
+        /// BadOutCome - if accident rate is greater than 0 and random is less than or equal to
+        /// </summary>
+        /// <param name="crewMember"></param>
         private void BadOutcome(ProtoCrewMember crewMember)
         {
             var rnd = new System.Random();
@@ -186,6 +196,10 @@ namespace MoarKerbals
             }
         }
 
+        /// <summary>
+        /// getRandomTrait - returns random trait (Pilot, Engineer, Scientist - with a chance of remaining a Civilian
+        /// </summary>
+        /// <returns>kerbalTrait</returns>
         private protected string getRandomTrait()
         {
             Logging.DLog(logMsg: $"Academy: getRandomTrait");
@@ -230,7 +244,7 @@ namespace MoarKerbals
             if (_soundSelection == 0)
             {
                 System.Random newRand = new System.Random();
-                _soundSelection = newRand.Next(1, 3);
+                _soundSelection = newRand.Next(1, 2);
             }
             switch (_soundSelection)
             {
@@ -255,7 +269,7 @@ namespace MoarKerbals
             if (_soundSelection == 0)
             {
                 System.Random newRand = new System.Random();
-                _soundSelection = newRand.Next(1, 3);
+                _soundSelection = newRand.Next(1, 2);
             }
             switch (_soundSelection)
             {
@@ -273,7 +287,7 @@ namespace MoarKerbals
         }
 
         /// <summary>What shows up in editor for the part</summary>
-        /// <returns></returns>
+        /// <returns>string: display</returns>
         public override string GetInfo()
         {
             //string display = "\r\n<color=#BADA55>Input:</color>\r\n One Civilian Kerbal";

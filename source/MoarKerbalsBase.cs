@@ -7,6 +7,8 @@ namespace MoarKerbals
 {
     public class MoarKerbalsBase : PartModule
     {
+        #region KSPFields
+
         /// <summary>recipeIngreadients </summary>
         [KSPField]
         public string recipeIngredients = "";
@@ -31,11 +33,15 @@ namespace MoarKerbals
         [KSPField(isPersistant = false)]
         public float costReputation = 0f;
 
+        #endregion
+        #region Variables | Constants
+
         /// <summary>internal list of resourcesRequired  </summary>
         internal List<ResourceRequired> resourceRequired = new List<ResourceRequired>();
 
         /// <summary>internal name of GUI groupName  </summary>
         internal static string groupName = Localizer.Format("#MOAR-003", Version.SText);
+        #endregion
 
         /// <summary>onStart</summary>
         public override void OnStart(PartModule.StartState state)
@@ -43,7 +49,7 @@ namespace MoarKerbals
             base.OnStart(state);
             Logging.DLog(logMsg: "MoarKerbalsBase.OnStart");
 
-            if (recipeIngredients != "" && recipeAmounts != "")
+            if (recipeIngredients != string.Empty && recipeAmounts != string.Empty)
             {
                 var resourceList = recipeIngredients.Split(',');
                 var str_amounts = recipeAmounts.Split(',');
@@ -58,6 +64,9 @@ namespace MoarKerbals
             }
         }
 
+        /// <summary>
+        /// Unity FixedUpdate
+        /// </summary>
         private protected void FixedUpdate()
         {
             base.OnFixedUpdate();

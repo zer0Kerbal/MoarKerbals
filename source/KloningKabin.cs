@@ -34,8 +34,6 @@
 #endregion
 
 
-#define DEBUG
-
 using System;
 using System.Linq;
 using UnityEngine;
@@ -63,6 +61,9 @@ namespace MoarKerbals
 
         protected AudioSource overload1;
         protected AudioSource kloning_success1;
+
+        protected AudioSource overload2;
+        protected AudioSource kloning_success2;
 
         [KSPField(guiName = "#MOAR-KloneBay-00",
                   groupName = "MoarKerbals",
@@ -114,6 +115,13 @@ namespace MoarKerbals
             overload1.rolloffMode = AudioRolloffMode.Linear;
             overload1.Stop();
 
+            overload2 = gameObject.AddComponent<AudioSource>();
+            overload2.clip = GameDatabase.Instance.GetAudioClip("KerbthulhuKineticsProgram/MoarKerbals/Sounds/wilhelm");
+            overload2.volume = HighLogic.CurrentGame.Parameters.CustomParams<Settings>().soundVolume;
+            overload2.panStereo = 0;
+            overload2.rolloffMode = AudioRolloffMode.Linear;
+            overload2.Stop();
+
             switch (accidentRate)
             {
                 default:
@@ -154,7 +162,6 @@ namespace MoarKerbals
             Logging.DLog(logMsg: "Kloning: ActivateKloning");
             if (KloningKabinEnabled)
             {
-                Logging.DLog(logMsg: "Kloning Kabin Enabled");
                 // determine if vessel is landed or splashed or orbiting and if it kloning is allowed
                 // display message if not allowed and return
                 if (HighLogic.CurrentGame.Parameters.CustomParams<Settings2>().situationallyAware)
@@ -324,6 +331,7 @@ namespace MoarKerbals
                 }
                 //            HorrorMovieCrew.Add(crewMember);
             }
+            else Logging.DLog(logMsg: $"Kloning: Kloning Disenabled {part.partName}");
         }
 
         private bool AdditionalBirths(System.Random rnd)
@@ -331,7 +339,10 @@ namespace MoarKerbals
             double localDouble = 0d;
             if (accidentRate != 0)
             {
-                localDouble = rnd.Next(0, 500);
+                #region MyRegion
+                localDouble = rnd.Next(0, 100); // 500
+
+                #endregion
                 Logging.DLog(logMsg: $"AdditionalBirths: roll: {localDouble:F0} vs. {accidentRate}");
             }
             else Logging.DLog(logMsg: $"Accidents disabled by setting accidentRate to {accidentRate}");
@@ -404,8 +415,8 @@ namespace MoarKerbals
         /// <returns></returns>
         private protected void MaximumKarnage(System.Random rnd)
         {
-            Logging.DLog(logMsg: "Kloning: MaximumKarnage");
             int maxFatalities = part.protoModuleCrew.Count; // total possible number of casualties
+            Logging.DLog(logMsg: $"Kloning: MaximumKarnage possible fatalities {maxFatalities}");
             int fatalities = 0; // number of victims
 
             List<ProtoCrewMember> HorrorMovieCast = new List<ProtoCrewMember>(); // list of victims
@@ -429,12 +440,14 @@ namespace MoarKerbals
 
             // now we have a list of casualties, let's kill them
             // while CrewCount > 0 fatalities < maxFatalities 
+            Logging.DLog(logMsg: $"Kloning: MaximumKarnage HorrorMovieCast Count {HorrorMovieCast.Count}");
             foreach (ProtoCrewMember victim in HorrorMovieCast)
             {
+                Logging.DLog(logMsg: $"Kloning: MaximumKarnage HorrorMovieCast Count {HorrorMovieCast.Count}");
                 switch (part.protoModuleCrew.Count)
                 {
                     case < 1:
-                        SoloCrewBadResult(rnd);
+                        NoCrewBadResult(rnd);
                         return;
                     case 1:
                         SoloCrewBadResult(rnd);
@@ -481,6 +494,8 @@ namespace MoarKerbals
                     Logging.Msg(Localizer.Format("#MOAR-KloneBay-09") + ".");
                     break;
             }
+            // needs to update the PAW/RMB
+            GameEvents.onVesselChange.Fire(FlightGlobals.ActiveVessel);
         }
 
         private void SoloCrewBadResult(System.Random rnd)
@@ -512,7 +527,7 @@ namespace MoarKerbals
             zapCrewmember();
         }
 
-        private static void NoCrewBadResult(System.Random rnd)
+        private protected void NoCrewBadResult(System.Random rnd)
         {
             double localDouble = rnd.Next(0, 101);
             Logging.DLog(logMsg: $"Kloning: noCrewBadResults roll: {localDouble:F0}");
@@ -534,6 +549,7 @@ namespace MoarKerbals
                     Logging.DLogWarning(logMsg: "Kloning: NoCrewBadResult out of bounds.");
                     break;
             }
+            if (HighLogic.CurrentGame.Parameters.CustomParams<Settings2>().soundOn) FailureSound();
         }
 
         private protected void KloneKerbal()
@@ -560,16 +576,17 @@ namespace MoarKerbals
 
         private protected void zapCrewmember()
         {
-            Logging.DLog("Kloning: zapCrewmember");
             ProtoCrewMember crewman = part.protoModuleCrew.First();
 
-            Logging.DLog(logMsg: $"Kloning: zapCrewmember {crewman.displayName}");
-
+            // Logging.DLog(logMsg: $"Kloning: zapCrewmember {crewman.displayName}");
+            Logging.Msg(Localizer.Format("#MOAR-KloneBay-19", crewman.displayName), true);
             part.RemoveCrewmember(crewman);
 
-            Logging.Msg(Localizer.Format("#MOAR-KloneBay-19", crewman.name));
             crewman.Die();
             if (HighLogic.CurrentGame.Parameters.CustomParams<Settings2>().soundOn) FailureSound();
+
+            // needs to update the PAW/RMB
+            GameEvents.onVesselChange.Fire(FlightGlobals.ActiveVessel);
         }
 
         //Checks to make sure there is at least one kerbal as a DNA source and that there is room to store the new kerbal
@@ -628,6 +645,10 @@ namespace MoarKerbals
                     overload1.volume = HighLogic.CurrentGame.Parameters.CustomParams<Settings>().soundVolume;
                     overload1.Play();
                     return;
+                case 3:
+                    overload2.volume = HighLogic.CurrentGame.Parameters.CustomParams<Settings>().soundVolume;
+                    overload2.Play();
+                    return;
                 default:
                     return;
             }
@@ -641,7 +662,7 @@ namespace MoarKerbals
             if (_soundSelection == 0)
             {
                 var newRand = new System.Random();
-                _soundSelection = newRand.Next(1, 3);
+                _soundSelection = newRand.Next(1, 2);
             }
             switch (_soundSelection)
             {
@@ -667,72 +688,87 @@ namespace MoarKerbals
         /// <returns></returns>
         public override string GetInfo()
         {
-            double gblMult = HighLogic.CurrentGame.Parameters.CustomParams<Settings>().globalKloningCostMultiplier;
-            if (info == string.Empty)
+            // double gblMult = HighLogic.CurrentGame.Parameters.CustomParams<Settings>().globalKloningCostMultiplier;
+            //if (info == string.Empty)
+            //{
+
+            /* :::This is what it should look like with default settings:::
+             * 
+             * MoarKerbals
+             * Kerbthulhu Kinetics Program
+             * v 1.3.0.0
+             * 
+             * Input: (color)
+             * May or May not need a living Kerbal. Could also use frozen MinimusMint Ice Cream.
+             * 
+             * Required Resources: (color)
+             *   ElectricCharge: 8000
+             *   Oxidizer: 100
+             *   Ore: 500
+             * 
+             * Required Currency: (color)
+             *   Funds 1000
+             *   Science: 1
+             *   Reputation: 2
+             * 
+             * Output:
+             * Anything from one Kerbal to a deep dish pizza.
+             * 
+             */
+            info += String.Format(Localizer.Format("#MOAR-Manu") + "\r\n"); // Kerbthulhu Kinetics Program
+            info += String.Format(Localizer.Format("#MOAR-003", Version.SText) + "\r\n"); // MoarKerbals v Version Number text
+            info += "\r\n";
+
+            info += String.Format("\r\n<color=#FFFF19>" + Localizer.Format("#MOAR-005") + ":</color>\r\n"); // Input
+            switch (RequireLivingKerbal)
             {
-
-                /* :::This is what it should look like with default settings:::
-                 * 
-                 * MoarKerbals
-                 * Kerbthulhu Kinetics Program
-                 * v 1.3.0.0
-                 * 
-                 * Input: (color)
-                 * May or May not need a living Kerbal. Could also use frozen MinimusMint Ice Cream.
-                 * 
-                 * Required Resources: (color)
-                 *   ElectricCharge: 8000
-                 *   Oxidizer: 100
-                 *   Ore: 500
-                 * 
-                 * Required Currency: (color)
-                 *   Funds 1000
-                 *   Science: 1
-                 *   Reputation: 2
-                 * 
-                 * Output:
-                 * Anything from one Kerbal to a deep dish pizza.
-                 * 
-                 */
-                info += Localizer.Format("#MOAR_manu"); // #MOAR_manu = Kerbthulhu Kinetics Program
-                info += "\n v" + Version.SText; // mod Version Number text
-
-                info = String.Format("\r\n<color=#FFFF19>" + Localizer.Format("#MOAR-005") + ":</color>\r\n"); // Input
-
-                info += String.Format(Localizer.Format("#MOAR-KloneBay-24" + "\r\n")); // May or May not need a living Kerbal. Could also use frozen MinimusMint Ice Cream."
-
-                switch (RequireLivingKerbal)
-                {
-                    case true:
-                        info += "\r\nNeeds living Kerbal.";
-                        break;
-                    case false:
-                        info += "\r\nFrozen sample used, does not needs living Kerbal.";
-                        break;
-                }
-
-                // resource section header
-                info += String.Format("\r\n<color=#FFFF19>" + Localizer.Format("#MOAR-008") + ":</color>\r\n"); // Required Resources:
-                for (int i = 0; i < resourceRequired.Count; i++)
-                {
-                    //display += String.Format("{0:0,0}", resourceRequired[i].amount) + " " + resourceRequired[i].resource + "\r\n");
-                    info += $"\t{resourceRequired[i].resource}: {resourceRequired[i].amount:F2} \r\n";
-                }
-
-                // currency section header
-                if ((costFunds != 0) || (costScience != 0) || (costReputation != 0))
-                {
-                    info += String.Format("\r\n<color=#FFFF19>" + Localizer.Format("#MOAR-009") + "</color>\r\n");
-                }
-
-                if (costFunds != 0) info += $"\r\n\t{costFunds:F0} {Localizer.Format("#autoLOC_7001031")}";
-                if (costScience != 0) info += $"\r\n\t{costScience:F0} {Localizer.Format("#autoLOC_7001032")}";
-                if (costReputation != 0) info += $"\r\n\t{costReputation:F0} {Localizer.Format("#autoLOC_7001033")}";
-
-                info = String.Format("\r\n<color=#FFFF19>" + Localizer.Format("#MOAR-006") + ":</color>\r\n"); // Output:
-                info += String.Format(Localizer.Format("#MOAR-KloneBay-18") + "."); // Anything from one Kerbal to a deep dish pizza."
-
+                case true:
+                    info += Localizer.Format("#MOAR-KloneBay-34") + "\r\n";
+                    break;
+                case false:
+                    info += Localizer.Format("#MOAR-KloneBay-35") + "\r\n";
+                    info += Localizer.Format("#MOAR-KloneBay-34") + "\r\n";
+                    break;
             }
+
+            info += String.Format(Localizer.Format("#MOAR-KloneBay-24") + "\r\n"); // May or May not need a living Kerbal. Could also use frozen MinimusMint Ice Cream."
+            info += "\r\n";
+
+            // resource section header
+            info += String.Format("\r\n<color=#00CC00>" + Localizer.Format("#MOAR-008") + ":</color>\r\n"); // Resources: <color=#E600E6>
+
+            // create string with all resourceRequired.name and resourceRequired.amount
+            foreach (ResourceRequired resources in resourceRequired)
+            {
+                info += String.Format("{0}: {1}\r\n", resources.resource, resources.amount);
+            }
+
+            for (int i = 0; i < resourceRequired.Count; i++)
+            {
+                info += String.Format("{0:0,0}", resourceRequired[i].amount.ToString() + " " + resourceRequired[i].resource + "\r\n");
+                info += $"\r\n\t{resourceRequired[i].resource}: {resourceRequired[i].amount:F2} \r\n";
+                info += resourceRequired[i].resource + "\r\n";
+            }
+
+            //double amtRequired = resourceRequired[i].amount * gblMult; // uses globalMultiplier
+            //double available = part.RequestResource(resourceRequired[i].Resource.id, amtRequired);
+
+            //                 Logging.DLog(logMsg: $"GatherResources: {resourceRequired[i].resource} : have: {available:F2} need: {amtRequired:F2} |  Global Multiplier: {gblMult:P2}");
+
+            // currency section header
+            if ((costFunds != 0) || (costScience != 0) || (costReputation != 0))
+            {
+                info += String.Format("\r\n<color=#00CC00>" + Localizer.Format("#MOAR-009") + ":</color>"); // Currency:
+                if (costFunds != 0) info += $"\r\n- {Localizer.Format("#autoLOC_7001031")}: {costFunds:n0}";
+                if (costScience != 0) info += $"\r\n- {Localizer.Format("#autoLOC_7001032")}: {costScience:n0}";
+                if (costReputation != 0) info += $"\r\n- {Localizer.Format("#autoLOC_7001033")}: {costReputation:n0}";
+                //info += "\r\n"; // line return
+            }
+
+            info += String.Format("\r\n<color=#00CC00>" + Localizer.Format("#MOAR-006") + ":</color>\r\n"); // Output:
+            info += String.Format(Localizer.Format("#MOAR-KloneBay-18") + "."); // Anything from one Kerbal to a deep dish pizza."
+
+            //}
             return info;
         }
     }

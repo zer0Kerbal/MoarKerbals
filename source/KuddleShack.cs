@@ -27,7 +27,7 @@ namespace MoarKerbals
                   guiActive = true,
                   guiActiveEditor = true,
                   isPersistant = false)]
-        public string timeRemaining = "#MOAR-Kuddle-12";
+        public string timeRemaining = Localizer.Format("#MOAR-Kuddle-13");
 
         /// <summary>kuddling success sound</summary>
         protected AudioSource kuddling_success0;
@@ -110,11 +110,11 @@ namespace MoarKerbals
                 Fields["KuddleShackEnabled"].group.displayName = System.String.Format("<color=#BADA55>" + groupName + "</color>");
             else
                 Fields["KuddleShackEnabled"].group.displayName = groupName;
+            GetLightingModules();
+            GetMatingStatus();
             if (KuddleShackEnabled)
             {
 
-                GetLightingModules();
-                GetMatingStatus();
                 StartCoroutine(SlowUpdate());
             }
         }
@@ -199,7 +199,8 @@ namespace MoarKerbals
                             time += seconds + " seconds";
                             //Logging.Msg("Kuddle Time: " + time, 5f, ScreenMessageStyle.UPPER_CENTER);
                             Logging.Msg(Localizer.Format("#MOAR-Kuddle-01", time.ToString()));
-                            timeRemaining = Localizer.Format("#MOAR-Kuddle-13", time);
+
+                            timeRemaining = Localizer.Format("#MOAR-Kuddle-12", time);
                         }
 
                         if (Planetarium.GetUniversalTime() - startMatingTimer >= SettingsInterface.kuddleTimeNeeded())
@@ -389,7 +390,7 @@ namespace MoarKerbals
             if (_soundSelection == 0)
             {
                 System.Random newRand = new System.Random();
-                _soundSelection = newRand.Next(1, 3);
+                _soundSelection = newRand.Next(1, 2);
             }
             switch (_soundSelection)
             {
@@ -414,7 +415,7 @@ namespace MoarKerbals
             if (_soundSelection == 0)
             {
                 System.Random newRand = new System.Random();
-                _soundSelection = newRand.Next(1, 3);
+                _soundSelection = newRand.Next(1, 2);
             }
             switch (_soundSelection)
             {
