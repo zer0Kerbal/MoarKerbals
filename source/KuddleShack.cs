@@ -29,6 +29,8 @@ namespace MoarKerbals
                   isPersistant = false)]
         public string timeRemaining = Localizer.Format("#MOAR-Kuddle-13");
 
+        #region SoundVars
+
         /// <summary>kuddling success sound</summary>
         protected AudioSource kuddling_success0;
 
@@ -40,7 +42,12 @@ namespace MoarKerbals
 
         /// <summary>kuddling success sound</summary>
         protected AudioSource kuddling_failure1;
+        #endregion
 
+        /// <summary>
+        /// Unity OnStart()
+        /// </summary>
+        /// <param name="state"></param>
         public override void OnStart(PartModule.StartState state)
         {
             Logging.DLog("KuddleShack.OnStart");
@@ -50,7 +57,6 @@ namespace MoarKerbals
                 Fields["KuddleShackEnabled"].group.displayName = System.String.Format("<color=#BADA55>" + groupName + "</color>");
             else
                 Fields["KuddleShackEnabled"].group.displayName = groupName;
-
 
             kuddling_success0 = gameObject.AddComponent<AudioSource>();
             kuddling_success0.clip = GameDatabase.Instance.GetAudioClip("KerbthulhuKineticsProgram/MoarKerbals/Sounds/kuddleshack");
@@ -88,35 +94,18 @@ namespace MoarKerbals
 
             GetLightingModules();
             GetMatingStatus();
-            //if (KuddleShackEnabled)
-            //{
-
-            //    StartCoroutine(SlowUpdate());
-            //}
+            StartCoroutine(SlowUpdate());
         }
 
-        private void OnAwake()
-        {
-            if (KuddleShackEnabled)
-            {
-
-                StartCoroutine(SlowUpdate());
-            }
-        }
-
+        /// <summary>
+        /// Unity OnFixedUpdate ()
+        /// </summary>
         private protected void OnFixedUpdate()
         {
             if (HighLogic.CurrentGame.Parameters.CustomParams<Settings3>().coloredPAW)
                 Fields["KuddleShackEnabled"].group.displayName = System.String.Format("<color=#BADA55>" + groupName + "</color>");
             else
                 Fields["KuddleShackEnabled"].group.displayName = groupName;
-            GetLightingModules();
-            GetMatingStatus();
-            if (KuddleShackEnabled)
-            {
-
-                StartCoroutine(SlowUpdate());
-            }
         }
 
         private List<PartModule> modulesLight = new List<PartModule>();
@@ -170,7 +159,7 @@ namespace MoarKerbals
                 yield return new WaitForSeconds((float)SettingsInterface.slowUpdateTime());
                 if (!readyToKuddle)
                     Events["ActivateKuddling"].guiActive = false;
-                if (hasMatingPair)
+                if (hasMatingPair && KuddleShackEnabled)
                 {
                     if (GatherResources(part, (float)SettingsInterface.slowUpdateTime() / SettingsInterface.kuddleTimeNeeded()))
                     {
@@ -197,18 +186,16 @@ namespace MoarKerbals
                             }
                             if (time.Length > 0) time += ", ";
                             time += seconds + " seconds";
-                            //Logging.Msg("Kuddle Time: " + time, 5f, ScreenMessageStyle.UPPER_CENTER);
                             Logging.Msg(Localizer.Format("#MOAR-Kuddle-01", time.ToString()));
 
-                            timeRemaining = Localizer.Format("#MOAR-Kuddle-12", time);
+                            timeRemaining = $" {time}";
                         }
 
                         if (Planetarium.GetUniversalTime() - startMatingTimer >= SettingsInterface.kuddleTimeNeeded())
                         {
                             readyToKuddle = true;
                             Events["ActivateKuddling"].guiActive = true;
-                            //Logging.Msg("Minimum Kuddle Time Reached", 5f, ScreenMessageStyle.UPPER_CENTER);
-                            Logging.Msg(Localizer.Format("#MOAR-Kuddle-02"));
+                            Logging.Msg(s: Localizer.Format("#MOAR-Kuddle-02")); // "Minimum Kuddle Time Reached"
                         }
                     }
                     else
@@ -301,35 +288,37 @@ namespace MoarKerbals
         public void ActivateKuddling()
         {
             Logging.DLog(logMsg: $"Kuddle: ActivateKuddling");
-            if (KuddleShackEnabled)
+            //{
+            //Logging.DLog(logMsg: $"Kuddle: KuddleShackEnabled");
+
+            if (hasMatingPair && Planetarium.GetUniversalTime() - startMatingTimer >= SettingsInterface.kuddleTimeNeeded())
             {
-                Logging.DLog(logMsg: $"Kuddle: KuddleShackEnabled");
-
-                if (hasMatingPair && Planetarium.GetUniversalTime() - startMatingTimer >= SettingsInterface.kuddleTimeNeeded())
+                if (PartHasRoom(part) && GatherResources(part))
                 {
-                    if (PartHasRoom(part) && GatherResources(part))
-                    {
-                        KuddleKerbal();
-
-                        GameEvents.onVesselChange.Fire(FlightGlobals.ActiveVessel);
-                    }
-                }
-                else
-                {
-                    if (hasMatingPair)
-                        Logging.Msg(Localizer.Format("#MOAR-Kuddle-04")); // "Insufficient time for reproduction"
-                    else
-                    {
-                        if (part.protoModuleCrew.Count == 2) Logging.Msg(Localizer.Format("#MOAR-Kuddle-05")); // "One kerbal of each gender is needed for kuddling"
-                        else Logging.Msg(Localizer.Format("#MOAR-Kuddle-06")); // Two kerbals are needed for kuddling
-                    }
+                    KuddleKerbal();
+                    startMatingTimer = 0d;
+                    GameEvents.onVesselChange.Fire(FlightGlobals.ActiveVessel);
                 }
             }
+            else
+            {
+                if (hasMatingPair)
+                    Logging.Msg(s: Localizer.Format("#MOAR-Kuddle-04")); // "Insufficient time for reproduction"
+                else
+                {
+                    if (part.protoModuleCrew.Count == 2) Logging.Msg(Localizer.Format("#MOAR-Kuddle-05")); // "One kerbal of each gender is needed for kuddling"
+                    else Logging.Msg(s: Localizer.Format("#MOAR-Kuddle-06")); // Two kerbals are needed for kuddling
+                }
+            }
+            //}
         }
 
+        /// <summary>
+        /// Where the kerbal meets kerbal
+        /// </summary>
         private protected void KuddleKerbal()
         {
-            Debug.Log(message: "MoarKerbals: KuddleKerbal");
+            Logging.DLog(logMsg: "Kuddle: KuddleKerbal");
             DebitCurrencies();
             ProtoCrewMember kerbal = HighLogic.CurrentGame.CrewRoster.GetNewKerbal();
             kerbal.suit = (ProtoCrewMember.KerbalSuit)HighLogic.CurrentGame.Parameters.CustomParams<Settings2>().birthdaySuit;
@@ -346,7 +335,7 @@ namespace MoarKerbals
             if (HighLogic.CurrentGame.Parameters.CustomParams<Settings2>().kuddleCivilians) KerbalRoster.SetExperienceTrait(kerbal, Localizer.Format("#MOAR-004"));
 
             // "Kuddling Success!  " + kerbal.name + "(Lv " + kerbal.experienceLevel.ToString() + " " + kerbal.experienceTrait.Title + ") has joined your space program");
-            Logging.Msg(Localizer.Format("#MOAR-Kuddle-11", kerbal.name, kerbal.experienceLevel.ToString(), kerbal.experienceTrait.Title), true);
+            Logging.Msg(s: Localizer.Format("#MOAR-Kuddle-11", kerbal.name, kerbal.experienceLevel.ToString(), kerbal.experienceTrait.Title), true);
 
             if (HighLogic.CurrentGame.Parameters.CustomParams<Settings2>().soundOn) SuccessSound();
         }
@@ -432,22 +421,69 @@ namespace MoarKerbals
             }
         }
 
+        /// <summary>Module information shown in editors</summary>
+        private string info = string.Empty;
+
         /// <summary>What shows up in editor for the part</summary>
         /// <returns></returns>
         public override string GetInfo()
         {
-            // base.OnStart(StartState.None);
+            base.OnStart(StartState.None);
 
-            //string display = "\r\n<color=#BADA55>Input:</color>\r\n";
-            string display = String.Format("\r\n<color=#FFFF19>" + Localizer.Format("#MOAR-005") + ":</color>\r\n");
+            /* :::This is what it should look like with default settings:::
+             * 
+             * MoarKerbals
+             * Kerbthulhu Kinetics Program
+             * v 1.3.0.0
+             * 
+             * Input: (color)
+             * One kerbal of each gender is needed for kuddling
+             * 
+             * Required Resources: (color)
+             * - ElectricCharge: 8000
+             * - Oxidizer: 100
+             * - Ore: 500
+             * 
+             * Required Currency: (color)
+             * - Funds 1000
+             * - Science: 1
+             * - Reputation: 2
+             * 
+             * Output:
+             * A brand new Kerbal.
+             * 
+             */
+            info += Localizer.Format("#MOAR-Manu") + "\r\n"; // Kerbthulhu Kinetics Program
+            info += Localizer.Format("#MOAR-003", Version.SText) + "\r\n"; // MoarKerbals v Version Number text
 
-            for (int i = 0; i < resourceRequired.Count; i++)
-                display += String.Format("{0:0,0}", resourceRequired[i].amount) + " " + resourceRequired[i].resource + "\r\n";
+            info += $"\r\n<color=#FFFF19>{Localizer.Format("#MOAR-005")}:</color>\r\n"; // Input
+            info += $"{Localizer.Format("#MOAR-Kuddle-05")}\r\n"; // One kerbal of each gender is needed for kuddling
 
-            //display += "\r\n<color=#BADA55>Output:\r\n A brand new Kerbal.</color>";
-            display += String.Format("\r\n<color=#FFFF19>" + Localizer.Format("#MOAR-006") + ":</color>\r\n" + Localizer.Format("#MOAR-Kuddle-10") + ".");
+            info += $"\r\n\t{Localizer.Format("#MOAR-Kuddle-13")}\r\n"; // "what, no disco music?"
 
-            return display;
+            // info += $"Global Cost Multiplier of {gblMult:P2} (is not included)\r\n";
+
+            // resource section header
+            info += String.Format("\r\n<color=#00CC00>" + Localizer.Format("#MOAR-008") + ":</color>\r\n"); // Resources: <color=#E600E6>
+
+            // create string with all resourceRequired.name and resourceRequired.amount
+            foreach (ResourceRequired resources in resourceRequired)
+                info += String.Format("- {0}: {1:n0}\r\n", resources.resource, resources.amount);
+
+            // currency section header
+            if ((costFunds != 0) || (costScience != 0) || (costReputation != 0))
+            {
+                info += String.Format("\r\n<color=#00CC00>" + Localizer.Format("#MOAR-009") + ":</color>"); // Currency:
+                if (costFunds != 0) info += $"\r\n- {Localizer.Format("#autoLOC_7001031")}: {costFunds:n0}";
+                if (costScience != 0) info += $"\r\n- {Localizer.Format("#autoLOC_7001032")}: {costScience:n0}";
+                if (costReputation != 0) info += $"\r\n- {Localizer.Format("#autoLOC_7001033")}: {costReputation:n0}";
+                info += "\r\n"; // line return
+            }
+
+            info += $"\r\n<color=#FFFF19>{Localizer.Format("#MOAR-006")}:</color>\r\n"; // Output:
+            info += $"{Localizer.Format("#MOAR-Kuddle-10")}."; // A brand new Kerbal.
+
+            return info;
         }
 
     }

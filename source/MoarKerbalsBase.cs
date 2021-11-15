@@ -43,11 +43,18 @@ namespace MoarKerbals
         internal static string groupName = Localizer.Format("#MOAR-003", Version.SText);
         #endregion
 
+        /// <summary>The Global Cost Multiplier
+        /// Need this to be used in GetInfo()
+        /// updated in OnStart() and OnFixedUpdate()
+        /// </summary>
+        internal double gblMult;
+
         /// <summary>onStart</summary>
         public override void OnStart(PartModule.StartState state)
         {
             base.OnStart(state);
-            Logging.DLog(logMsg: "MoarKerbalsBase.OnStart");
+            //Logging.DLog(logMsg: "MoarKerbalsBase.OnStart");
+            // Debug.Log(message: "MoarKerbalsBase.OnStart");
 
             if (recipeIngredients != string.Empty && recipeAmounts != string.Empty)
             {
@@ -67,11 +74,7 @@ namespace MoarKerbals
         /// <summary>
         /// Unity FixedUpdate
         /// </summary>
-        private protected void FixedUpdate()
-        {
-            base.OnFixedUpdate();
-            // Logging.DLog(logMsg: "MoarKerbalsBase.FixedUpdate", true);
-        }
+        private protected void FixedUpdate() => base.OnFixedUpdate();
 
         /// <summary>GatherResources: determine if required resources available and debit them from part.</summary>
         /// <param name="part"></param>

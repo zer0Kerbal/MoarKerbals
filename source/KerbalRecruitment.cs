@@ -286,22 +286,68 @@ namespace MoarKerbals
             }
         }
 
+        /// <summary>Module information shown in editors</summary>
+        private string info = string.Empty;
+
         /// <summary>What shows up in editor for the part</summary>
         /// <returns>string: display</returns>
         public override string GetInfo()
         {
-            //string display = "\r\n<color=#BADA55>Input:</color>\r\n One Civilian Kerbal";
-            string display = String.Format("\r\n<color=#FFFF19>" + Localizer.Format("#MOAR-005") + ":</color>\r\n" + Localizer.Format("#MOAR-Academy-03") + " " + Localizer.Format("#MOAR-004") + " " + Localizer.Format("#MOAR-Academy-04") + ".\r\n");
+            base.OnStart(StartState.None);
 
-            display += String.Format("\r\n\t" + Localizer.Format("#MOAR-Kuddle-13") + "\r\n");
+            /* :::This is what it should look like with default settings:::
+             * Kerbal Recruitment
+             * MoarKerbals
+             * Kerbthulhu Kinetics Program
+             * v 1.3.0.0
+             * 
+             * Input: (color)
+             * One or more living Civilians.
+             * 
+             * Required Resources: (color)
+             *   ElectricCharge: 8000
+             *   Oxidizer: 100
+             *   Ore: 500
+             * 
+             * Required Currency: (color)
+             *   Funds 1000
+             *   Science: 1
+             *   Reputation: 2
+             * 
+             * Output:
+             * Anything from one Kerbal to a deep dish pizza.
+             * 
+             */
+            info += Localizer.Format("#MOAR-Manu") + "\r\n"; // Kerbthulhu Kinetics Program
+            info += Localizer.Format("#MOAR-003", Version.SText) + "\r\n"; // MoarKerbals v Version Number text
 
-            for (int i = 0; i < resourceRequired.Count; i++)
-                display += String.Format("\t{0:0,0}", resourceRequired[i].amount) + " " + resourceRequired[i].resource + "\r\n";
 
-            //display += "\r\n<color=#BADA55>Output:</color>\r\n Pilot, Engineer, Scientist Kerbal (random)\reating a MinmusMint ice cream cone.";
-            display += String.Format("\r\n<color=#FFFF19>" + Localizer.Format("#MOAR-006") + ":</color>\r\n" + Localizer.Format("#MOAR-Academy-05") + ".\r\n");
+            info += $"\r\n<color=#FFFF19>{Localizer.Format("#MOAR-005")}:</color>\r\n"; // Input
 
-            return display;
+            // "Input: One Civilian Kerbal";
+            info = $"{Localizer.Format("#MOAR-Academy-03")} {Localizer.Format("#MOAR-004")} {Localizer.Format("#MOAR-Academy-04")}.\r\n";
+
+            // resource section header
+            info += String.Format("\r\n<color=#00CC00>" + Localizer.Format("#MOAR-008") + ":</color>\r\n"); // Resources: <color=#E600E6>
+
+            // create string with all resourceRequired.name and resourceRequired.amount
+            foreach (ResourceRequired resources in resourceRequired)
+                info += String.Format("- {0}: {1:n0}\r\n", resources.resource, resources.amount);
+
+            // currency section header
+            if ((costFunds != 0) || (costScience != 0) || (costReputation != 0))
+            {
+                info += String.Format("\r\n<color=#00CC00>" + Localizer.Format("#MOAR-009") + ":</color>"); // Currency:
+                if (costFunds != 0) info += $"\r\n- {Localizer.Format("#autoLOC_7001031")}: {costFunds:n0}";
+                if (costScience != 0) info += $"\r\n- {Localizer.Format("#autoLOC_7001032")}: {costScience:n0}";
+                if (costReputation != 0) info += $"\r\n- {Localizer.Format("#autoLOC_7001033")}: {costReputation:n0}";
+                info += "\r\n"; // line return
+            }
+
+            info += $"\r\n<color=#FFFF19>{Localizer.Format("#MOAR-006")}:</color>"; // Output:
+            info += $"\r\n- {Localizer.Format("#MOAR-Academy-05")}.\r\n"; // "-  Pilot, Engineer, Scientist Kerbal (random)\reating a MinmusMint ice cream cone."
+
+            return info;
         }
     }
 }

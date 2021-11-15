@@ -46,7 +46,9 @@ namespace MoarKerbals
     [KSPModule("KloneBay")]
     public class KloneBay : MoarKerbalsBase
     {
-        // private const string V = groupName; Localizer.Format("#MOAR-003", Version.Text);
+        public bool KloningKabinEnabled = false;
+
+        #region KSP Fields/Actions/Events
         [KSPField]
         public double accidentRate;
 
@@ -56,14 +58,6 @@ namespace MoarKerbals
         [KSPField]
         public bool allowSplashedOrLanded = true;
 
-        protected AudioSource overload0;
-        protected AudioSource kloning_success0;
-
-        protected AudioSource overload1;
-        protected AudioSource kloning_success1;
-
-        protected AudioSource overload2;
-        protected AudioSource kloning_success2;
 
         [KSPField(guiName = "#MOAR-KloneBay-00",
                   groupName = "MoarKerbals",
@@ -73,7 +67,19 @@ namespace MoarKerbals
                   guiActiveEditor = true,
                   isPersistant = true),
                   UI_Toggle(disabledText = "Off", enabledText = "On")]
-        public bool KloningKabinEnabled = false;
+
+        #endregion
+        #region AudioVar
+
+        protected AudioSource overload0;
+        protected AudioSource kloning_success0;
+
+        protected AudioSource overload1;
+        protected AudioSource kloning_success1;
+
+        protected AudioSource overload2;
+        protected AudioSource kloning_success2;
+        #endregion
 
         public override void OnStart(PartModule.StartState state)
         {
@@ -81,6 +87,9 @@ namespace MoarKerbals
             Logging.DLog("Kloning: OnStart");
 
             RequireLivingKerbal = HighLogic.CurrentGame.Parameters.CustomParams<Settings2>().requireLivingKerbal;
+
+            // update gblMult
+            // gblMult = HighLogic.CurrentGame.Parameters.CustomParams<Settings>().globalKloningCostMultiplier;
 
             if (HighLogic.CurrentGame.Parameters.CustomParams<Settings3>().coloredPAW)
                 Fields["KloningKabinEnabled"].group.displayName = System.String.Format("<color=#BADA55>" + groupName + "</color>");
@@ -143,13 +152,15 @@ namespace MoarKerbals
         {
             RequireLivingKerbal = HighLogic.CurrentGame.Parameters.CustomParams<Settings2>().requireLivingKerbal;
 
+            // update gblMult
+            // gblMult = HighLogic.CurrentGame.Parameters.CustomParams<Settings>().globalKloningCostMultiplier;
+
             if (HighLogic.CurrentGame.Parameters.CustomParams<Settings3>().coloredPAW)
                 Fields["KloningKabinEnabled"].group.displayName = String.Format("<color=#BADA55>" + groupName + "</color>");
             else
                 Fields["KloningKabinEnabled"].group.displayName = groupName;
         }
 
-        //guiName = "Activate Kloning!"
         [KSPEvent(guiName = "Initiate Kloning! ", //"#MOAR-KloneBay-01",
                   groupName = "MoarKerbals",
                   isPersistent = true,
@@ -211,7 +222,7 @@ namespace MoarKerbals
                     }
                     else
                     {
-                        if (accidentRate <= localDouble)
+                        if ((accidentRate <= localDouble) && PartHasRoom(part) && GatherResources(part) && GatherCurrencies())
                         {
                             Logging.DLog(logMsg: $"Accident: roll {localDouble:F0} vs {accidentRate}");
                             KloneKerbal();
@@ -219,7 +230,7 @@ namespace MoarKerbals
                             if (AdditionalBirths(rnd))
                             {
                                 int count = 2;
-                                while (accidentRate <= localDouble && count <= 9 && HighLogic.CurrentGame.Parameters.CustomParams<Settings2>().KribbleMode)
+                                while (accidentRate <= localDouble && count <= 9 && PartHasRoom(part) && GatherResources(part) && GatherCurrencies() && HighLogic.CurrentGame.Parameters.CustomParams<Settings2>().KribbleMode)
                                 {
                                     KloneKerbal();
                                     switch (count)
@@ -257,56 +268,6 @@ namespace MoarKerbals
                                 }
                             }
                         }
-
-
-                        //if (AdditionalBirths(rnd))
-                        //{
-                        //    Logging.Msg(Localizer.Format("#MOAR-KloneBay-25", true));
-                        //    KloneKerbal();
-                        //    // triplets? (Only if KribbleMode enabled)
-                        //    if (AdditionalBirths(rnd) && HighLogic.CurrentGame.Parameters.CustomParams<Settings2>().KribbleMode)
-                        //    {
-                        //        Logging.Msg(Localizer.Format("#MOAR-KloneBay-26", true));
-                        //        KloneKerbal();
-                        //        // quadruplets?
-                        //        if (AdditionalBirths(rnd))
-                        //        {
-                        //            Logging.Msg(Localizer.Format("#MOAR-KloneBay-27", true));
-                        //            KloneKerbal();
-                        //            // quintuplets?
-                        //            if (AdditionalBirths(rnd))
-                        //            {
-                        //                Logging.Msg(Localizer.Format("#MOAR-KloneBay-28", true));
-                        //                KloneKerbal();
-                        //                // Sextuplets?
-                        //                if (AdditionalBirths(rnd))
-                        //                {
-                        //                    Logging.Msg(Localizer.Format("#MOAR-KloneBay-29", true));
-                        //                    KloneKerbal();
-                        //                    // Septuplets?
-                        //                    if (AdditionalBirths(rnd))
-                        //                    {
-                        //                        Logging.Msg(Localizer.Format("#MOAR-KloneBay-30", true));
-                        //                        KloneKerbal();
-                        //                        // Octuplets?
-                        //                        if (AdditionalBirths(rnd))
-                        //                        {
-                        //                            Logging.Msg(Localizer.Format("#MOAR-KloneBay-31", true));
-                        //                            KloneKerbal();
-                        //                            // Nonuplets?
-                        //                            if (AdditionalBirths(rnd))
-                        //                            {
-                        //                                Logging.Msg(Localizer.Format("#MOAR-KloneBay-32", true));
-                        //                                KloneKerbal();
-                        //                                // no more please!
-                        //                                Logging.Msg(Localizer.Format("#MOAR-KloneBay-33", true));
-                        //                            }
-                        //                        }
-                        //                    }
-                        //                }
-                        //            }
-                        //        }
-                        //    }
                         // bad events follow
                         // if (!HighLogic.CurrentGame.Parameters.CustomParams<Settings2>().requireLivingKerbal) - don't need because switch factors that in
                         else
@@ -339,10 +300,7 @@ namespace MoarKerbals
             double localDouble = 0d;
             if (accidentRate != 0)
             {
-                #region MyRegion
-                localDouble = rnd.Next(0, 100); // 500
-
-                #endregion
+                localDouble = rnd.Next(0, 250); // 500
                 Logging.DLog(logMsg: $"AdditionalBirths: roll: {localDouble:F0} vs. {accidentRate}");
             }
             else Logging.DLog(logMsg: $"Accidents disabled by setting accidentRate to {accidentRate}");
@@ -688,9 +646,7 @@ namespace MoarKerbals
         /// <returns></returns>
         public override string GetInfo()
         {
-            // double gblMult = HighLogic.CurrentGame.Parameters.CustomParams<Settings>().globalKloningCostMultiplier;
-            //if (info == string.Empty)
-            //{
+            base.OnStart(StartState.None);
 
             /* :::This is what it should look like with default settings:::
              * 
@@ -715,45 +671,29 @@ namespace MoarKerbals
              * Anything from one Kerbal to a deep dish pizza.
              * 
              */
-            info += String.Format(Localizer.Format("#MOAR-Manu") + "\r\n"); // Kerbthulhu Kinetics Program
-            info += String.Format(Localizer.Format("#MOAR-003", Version.SText) + "\r\n"); // MoarKerbals v Version Number text
-            info += "\r\n";
+            info += Localizer.Format("#MOAR-Manu") + "\r\n"; // Kerbthulhu Kinetics Program
+            info += Localizer.Format("#MOAR-003", Version.SText) + "\r\n"; // MoarKerbals v Version Number text
 
-            info += String.Format("\r\n<color=#FFFF19>" + Localizer.Format("#MOAR-005") + ":</color>\r\n"); // Input
+            info += $"\r\n<color=#FFFF19>{Localizer.Format("#MOAR-005")}:</color>\r\n"; // Input
             switch (RequireLivingKerbal)
             {
                 case true:
-                    info += Localizer.Format("#MOAR-KloneBay-34") + "\r\n";
+                    info += $"{Localizer.Format("#MOAR-KloneBay-34")}\r\n"; // Needs a living Kerbal.
+                    info += $"{Localizer.Format("#MOAR-KloneBay-24")}\r\n"; // A <color=#3EB489>MinmusMint ice cream cone</color> may be substituted.
                     break;
                 case false:
-                    info += Localizer.Format("#MOAR-KloneBay-35") + "\r\n";
-                    info += Localizer.Format("#MOAR-KloneBay-34") + "\r\n";
+                    info += $"{Localizer.Format("#MOAR-KloneBay-34")}\r\n"; // Frozen sample used in place of a living Kerbal.
                     break;
             }
 
-            info += String.Format(Localizer.Format("#MOAR-KloneBay-24") + "\r\n"); // May or May not need a living Kerbal. Could also use frozen MinimusMint Ice Cream."
-            info += "\r\n";
+            // info += $@"Global Cost Multiplier of {gblMult:P2} (is not included)\r\n";
 
             // resource section header
             info += String.Format("\r\n<color=#00CC00>" + Localizer.Format("#MOAR-008") + ":</color>\r\n"); // Resources: <color=#E600E6>
 
             // create string with all resourceRequired.name and resourceRequired.amount
             foreach (ResourceRequired resources in resourceRequired)
-            {
-                info += String.Format("{0}: {1}\r\n", resources.resource, resources.amount);
-            }
-
-            for (int i = 0; i < resourceRequired.Count; i++)
-            {
-                info += String.Format("{0:0,0}", resourceRequired[i].amount.ToString() + " " + resourceRequired[i].resource + "\r\n");
-                info += $"\r\n\t{resourceRequired[i].resource}: {resourceRequired[i].amount:F2} \r\n";
-                info += resourceRequired[i].resource + "\r\n";
-            }
-
-            //double amtRequired = resourceRequired[i].amount * gblMult; // uses globalMultiplier
-            //double available = part.RequestResource(resourceRequired[i].Resource.id, amtRequired);
-
-            //                 Logging.DLog(logMsg: $"GatherResources: {resourceRequired[i].resource} : have: {available:F2} need: {amtRequired:F2} |  Global Multiplier: {gblMult:P2}");
+                info += String.Format("- {0}: {1:n0}\r\n", resources.resource, resources.amount);
 
             // currency section header
             if ((costFunds != 0) || (costScience != 0) || (costReputation != 0))
@@ -762,13 +702,12 @@ namespace MoarKerbals
                 if (costFunds != 0) info += $"\r\n- {Localizer.Format("#autoLOC_7001031")}: {costFunds:n0}";
                 if (costScience != 0) info += $"\r\n- {Localizer.Format("#autoLOC_7001032")}: {costScience:n0}";
                 if (costReputation != 0) info += $"\r\n- {Localizer.Format("#autoLOC_7001033")}: {costReputation:n0}";
-                //info += "\r\n"; // line return
+                info += "\r\n"; // line return
             }
 
-            info += String.Format("\r\n<color=#00CC00>" + Localizer.Format("#MOAR-006") + ":</color>\r\n"); // Output:
-            info += String.Format(Localizer.Format("#MOAR-KloneBay-18") + "."); // Anything from one Kerbal to a deep dish pizza."
+            info += $"\r\n<color=#FFFF19>{Localizer.Format("#MOAR-006")}:</color>\r\n"; // Output:
+            info += $"{Localizer.Format("#MOAR-KloneBay-18")}."; // Anything from one Kerbal to a deep dish pizza."
 
-            //}
             return info;
         }
     }

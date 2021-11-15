@@ -50,6 +50,9 @@
         <member name="M:MoarKerbals.KerbalRecruitment.SuccessSound">
             <summary>Play sound upon success</summary>
         </member>
+        <member name="F:MoarKerbals.KerbalRecruitment.info">
+            <summary>Module information shown in editors</summary>
+        </member>
         <member name="M:MoarKerbals.KerbalRecruitment.GetInfo">
             <summary>What shows up in editor for the part</summary>
             <returns>string: display</returns>
@@ -68,6 +71,17 @@
         </member>
         <member name="F:MoarKerbals.KuddleShack.kuddling_failure1">
             <summary>kuddling success sound</summary>
+        </member>
+        <member name="M:MoarKerbals.KuddleShack.OnStart(PartModule.StartState)">
+            <summary>
+            Unity OnStart()
+            </summary>
+            <param name="state"></param>
+        </member>
+        <member name="M:MoarKerbals.KuddleShack.OnFixedUpdate">
+            <summary>
+            Unity OnFixedUpdate ()
+            </summary>
         </member>
         <member name="F:MoarKerbals.KuddleShack.hasMale">
             <summary>has a male kerbal</summary>
@@ -104,11 +118,19 @@
         <member name="M:MoarKerbals.KuddleShack.ActivateKuddling">
             <summary>KSPEvent: Complete Kuddling</summary>
         </member>
+        <member name="M:MoarKerbals.KuddleShack.KuddleKerbal">
+            <summary>
+            Where the kerbal meets kerbal
+            </summary>
+        </member>
         <member name="M:MoarKerbals.KuddleShack.FailureSound">
             <summary>Play sound upon failure</summary>
         </member>
         <member name="M:MoarKerbals.KuddleShack.SuccessSound">
             <summary>Play sound upon success</summary>
+        </member>
+        <member name="F:MoarKerbals.KuddleShack.info">
+            <summary>Module information shown in editors</summary>
         </member>
         <member name="M:MoarKerbals.KuddleShack.GetInfo">
             <summary>What shows up in editor for the part</summary>
@@ -137,6 +159,12 @@
         </member>
         <member name="F:MoarKerbals.MoarKerbalsBase.groupName">
             <summary>internal name of GUI groupName  </summary>
+        </member>
+        <member name="F:MoarKerbals.MoarKerbalsBase.gblMult">
+            <summary>The Global Cost Multiplier
+            Need this to be used in GetInfo()
+            updated in OnStart() and OnFixedUpdate()
+            </summary>
         </member>
         <member name="M:MoarKerbals.MoarKerbalsBase.OnStart(PartModule.StartState)">
             <summary>onStart</summary>
