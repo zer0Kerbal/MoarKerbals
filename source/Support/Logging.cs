@@ -1,8 +1,6 @@
 ﻿// Logging.cs v1.0.0.0
 #region CC BY-NC-SA 3.0
-/* Log.cs v1.0.0.0
- * 
- * KGEx's library for the Kerbal Space Program, by zer0Kerbal
+/* KGEx's library for the Kerbal Space Program, by zer0Kerbal
  * 
  * (C) Copyright 2019, 2021 zer0Kerbal
  * 
@@ -37,8 +35,25 @@ using UnityEngine;
 using System.IO;
 using Debug = UnityEngine.Debug;
 
+
 namespace MoarKerbals
 {
+
+    //    [KSPAddon(KSPAddon.Startup.MainMenu, true)]
+    //    public class Init : MonoBehaviour
+    //    {
+    //        internal static Log Log;
+    //        void Start()
+    //        {
+    //            if (HighLogic.CurrentGame.Parameters.CustomParams<Settings3>().logging)
+    //            {
+    //                Log = new Log("MoarKerbals", Log.LEVEL.INFO);
+    //#if DEBUG
+    //                Log = new Log("MoarKerbals", Log.LEVEL.ERROR);
+    //#endif
+    //            }
+    //        }
+    //    }
 
     [KSPAddon(KSPAddon.Startup.MainMenu, false)]
     class Logger : MonoBehaviour
@@ -100,7 +115,7 @@ namespace MoarKerbals
                 Debug.Log(logMsg);
             }
 #if DEBUG
-                        else { Debug.Log(s); }
+                        else { Debug.Log(logMsg); }
 #endif
         }
 
@@ -116,7 +131,7 @@ namespace MoarKerbals
                 Debug.LogWarning(logMsg);
             }
 #if DEBUG
-                else { Debug.LogWarning(s); }
+                else { Debug.LogWarning(logMsg); }
 #endif
         }
 
@@ -132,7 +147,7 @@ namespace MoarKerbals
                 Debug.LogError(logMsg);
             }
 #if DEBUG
-                else { Debug.LogError(s); }
+                else { Debug.LogError(logMsg); }
 #endif
         }
 
@@ -147,7 +162,7 @@ namespace MoarKerbals
                 s = string.Format(s, @params);
             }
             Logger.instance.addToLog(s);
-            if (!HighLogic.CurrentGame.Parameters.CustomParams<Settings3>().quietMode) ScreenMessages.PostScreenMessage(s, (float)3.5, ScreenMessageStyle.UPPER_CENTER, true);
+            if (!HighLogic.CurrentGame.Parameters.CustomParams<Settings3>().quietMode) ScreenMessages.PostScreenMessage(s, (float)4.5, ScreenMessageStyle.UPPER_CENTER, true);
             DLog(s);
         }
     }
