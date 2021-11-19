@@ -234,7 +234,7 @@ View full albums: [here][IMGUR:0] [here][IMGUR:1]
 ###### v1.3.0.0 original: 01 Jul 2018 zed'K | updated: 16 Nov 2021 zed'K
 
 <!-- mod links -->
-[MOD:forum]: https://forum.kerbalspaceprogram.com/index.php?/topic/204186-* "MoarKerbals Forum Thread"
+[MOD:forum]: https://forum.kerbalspaceprogram.com/index.php?/topic/191525-* "MoarKerbals Forum Thread"
 
 [MOD:chlog]: https://github.com/zer0Kerbal/MoarKerbals/Changelog.cfg "Changelog"
 [MOD:contr]: https://github.com/zer0Kerbal/MoarKerbals/blob/master/.github/CONTRIBUTING.md "Contributing"
@@ -251,7 +251,7 @@ View full albums: [here][IMGUR:0] [here][IMGUR:1]
 [CODE:shd]: https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/zer0Kerbal/MoarKerbals/master/json/code.json
 
 <!--- original mod -->
-[MOD:org:source]: https://spacedock.info/mod/831 "SpaceDock"  
+[MOD:org:source]: https://spacedock.info/mod/2324 "SpaceDock"  
 [MOD:org:thread]: https://forum.kerbalspaceprogram.com/index.php?/topic/94517-* "Original Thread"  
 [MOD:org:download]: https://www.dropbox.com/s/yc2zymblmjgrik8/MoarKerbals-v1.1.rar?dl=0) "Dropbox" 
  
@@ -322,7 +322,7 @@ View full albums: [here][IMGUR:0] [here][IMGUR:1]
 [thread:KDVA]: http://forum.kerbalspaceprogram.com/index.php?/topic/202945-* "Keridian Dynamics Vessel Assembly (KDVA)"
 [thread:KGEX]: https://forum.kerbalspaceprogram.com/index.php?/topic/192696-* "KerGuise Experimental Engineering"
 [thread:KPLX]: https://forum.kerbalspaceprogram.com/index.php?/topic/202749-* "Komplexity (KMPX)"
-[thread:MSRC]: https://forum.kerbalspaceprogram.com/index.php?/topic/204186-* "Mini Sample Return Capsule (MSRC)"
+[thread:MSRC]: https://forum.kerbalspaceprogram.com/index.php?/topic/191525-* "Mini Sample Return Capsule (MSRC)"
 [thread:MSRV]: https://forum.kerbalspaceprogram.com/index.php?/topic/192742-* "Pteron (MSRV)"
 [thread:NSSC]: https://forum.kerbalspaceprogram.com/index.php?/topic/191504-* "Not So SimpleConstructon!"
 [thread:ODFC]: https://forum.kerbalspaceprogram.com/index.php?/topic/187625-* "On Demand Fuel Cells"
@@ -377,9 +377,7 @@ View full albums: [here][IMGUR:0] [here][IMGUR:1]
 
 [BMCC:img]: https://img.shields.io/badge/Buy%20Me%20a%20-Snack!-FFDD00?style=for-the-badge&logo=buymeacoffee "Buy Me A Snack"
 [BMCC:url]: https://buymeacoffee.com/zer0Kerbal "Buy Me A Snack"
-
-<!-- https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif "PayPal"  
-https://paypal.me/zer0Kerbal?locale.x=en_US -->
+pal.me/zer0Kerbal?locale.x=en_US -->
 
 <!-- Localization -->
 [EN]: https://raw.githubusercontent.com/zer0Kerbal/zer0Kerbal/zed'K/Localization/img/American-flag-sm.png "American English"  
