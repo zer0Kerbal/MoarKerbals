@@ -46,15 +46,23 @@ namespace MoarKerbals
     [KSPModule("KloneBay")]
     public class KloneBay : MoarKerbalsBase
     {
-        public bool KloningKabinEnabled = false;
 
         #region KSP Fields/Actions/Events
+        /// <summary>
+        /// accidentRate
+        /// </summary>
         [KSPField]
         public double accidentRate;
 
+        /// <summary>
+        /// allowOrbital
+        /// </summary>
         [KSPField]
         public bool allowOrbital = false;
 
+        /// <summary>
+        /// allowSplashedOrLanded
+        /// </summary>
         [KSPField]
         public bool allowSplashedOrLanded = true;
 
@@ -67,6 +75,7 @@ namespace MoarKerbals
                   guiActiveEditor = true,
                   isPersistant = true),
                   UI_Toggle(disabledText = "Off", enabledText = "On")]
+        public bool KloningKabinEnabled = false;
 
         #endregion
         #region AudioVar
@@ -84,7 +93,7 @@ namespace MoarKerbals
         public override void OnStart(PartModule.StartState state)
         {
             base.OnStart(state);
-            Logging.DLog("Kloning: OnStart");
+            //Logging.DLog("Kloning: OnStart");
 
             RequireLivingKerbal = HighLogic.CurrentGame.Parameters.CustomParams<Settings2>().requireLivingKerbal;
 
@@ -144,16 +153,13 @@ namespace MoarKerbals
                     break;
             }
 
-            //Events["ActivateKuddling"].guiName = "#MOAR-Kuddle-00"; // initiateAction;
             Events["ActivateKloning"].guiName = Localizer.Format("#MOAR-KloneBay-01"); //  initiateAction;
         }
 
         public void OnFixedUpdate()
         {
+            //base.OnFixedUpdate();
             RequireLivingKerbal = HighLogic.CurrentGame.Parameters.CustomParams<Settings2>().requireLivingKerbal;
-
-            // update gblMult
-            // gblMult = HighLogic.CurrentGame.Parameters.CustomParams<Settings>().globalKloningCostMultiplier;
 
             if (HighLogic.CurrentGame.Parameters.CustomParams<Settings3>().coloredPAW)
                 Fields["KloningKabinEnabled"].group.displayName = String.Format("<color=#BADA55>" + groupName + "</color>");
@@ -349,7 +355,6 @@ namespace MoarKerbals
             }
 
             // now we have a list of casualties, let's kill them
-            // while CrewCount > 0 fatalities < maxFatalities 
             foreach (ProtoCrewMember victim in HorrorMovieCast)
             {
                 switch (part.protoModuleCrew.Count)
@@ -396,8 +401,7 @@ namespace MoarKerbals
                 else break;
             }
 
-            // now we have a list of casualties, let's kill them
-            // while CrewCount > 0 fatalities < maxFatalities 
+            // now we have a list of casualties, let's kill them 
             Logging.DLog(logMsg: $"Kloning: MaximumKarnage HorrorMovieCast Count {HorrorMovieCast.Count}");
             foreach (ProtoCrewMember victim in HorrorMovieCast)
             {

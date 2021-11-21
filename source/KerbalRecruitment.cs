@@ -49,7 +49,7 @@ namespace MoarKerbals
         public override void OnStart(PartModule.StartState state)
         {
             base.OnStart(state);
-            Logging.DLog("KerbalAcademy.OnStart");
+            // Logging.DLog("KerbalAcademy.OnStart");
 
             if (HighLogic.CurrentGame.Parameters.CustomParams<Settings3>().coloredPAW)
                 Fields["KerbalRecruitmentEnabled"].group.displayName = System.String.Format("<color=#BADA55>" + groupName + "</color>");
@@ -89,9 +89,6 @@ namespace MoarKerbals
 
         private protected void OnFixedUpdate()
         {
-            // base.OnFixedUpdate();
-            //Logging.DLog("KerbalAcademy.FixedUpdate", true);
-
             if (HighLogic.CurrentGame.Parameters.CustomParams<Settings3>().coloredPAW)
                 Fields["KerbalRecruitmentEnabled"].group.displayName = System.String.Format("<color=#BADA55>" + groupName + "</color>");
             else

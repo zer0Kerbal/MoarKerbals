@@ -1,19 +1,60 @@
-Copyright/Attribution Notice: 
-This is released under the public domain CC0 license. If you want to give credit (not required): "wobbleboxx.com"
-File(s): 
+# Attributions
+
+## MoarKerbals (MOAR)
+
+### CC BY-NC-SA 4.0
+
+####  and zer0Kerbal (zer0Kerbal@hotmail.com)
+
+
+***Add on library for Kerbal Space Program***
+- code 
+- configs (CC BY-SA 3.0)
+- everything else
+- originally by strideknight
+
+-----
+
+Copyright/Attribution Notice:
+
+##  Sound
+This is released under the public domain CC0 license. 
+If you want to give credit (not required): "wobbleboxx.com"
+
 - Rise05.ogg
 
+-----
+
 Copyright/Attribution Notice: 
-This is released under the public domain CC0 license. If you want to give credit (not required): "Author: Lokif"
+
+## Sound
+This is released under the public domain CC0 license. 
+If you want to give credit (not required): "Author: Lokif"
 
 - negative.ogg
 - positive.ogg
 - save.ogg
 - misc_sound.ogg
 
+-----
+
 Copyright/Attribution Notice: 
-This is released under the CC Sampling Plus 1.0 license.
-https://creativecommons.org/licenses/sampling+/1.0/
+
+## Sound
+This is released under the [CC Sampling Plus 1.0 license](https://creativecommons.org/licenses/sampling+/1.0/).
 "Author: SweetNeo85
-https://freesound.org/people/SweetNeo85/sounds/13797/
+
+- [wilhelm](https://freesound.org/people/SweetNeo85/sounds/13797/)
+
+-----
+
+Copyright/Attribution Notice: 
+
+## Sound
+This is released under the public domain. 
+If you want to give credit (not required): "Author: 
+
+- kuddleshack
+
+
 

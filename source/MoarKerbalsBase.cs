@@ -47,12 +47,12 @@ namespace MoarKerbals
         /// Need this to be used in GetInfo()
         /// updated in OnStart() and OnFixedUpdate()
         /// </summary>
-        internal double gblMult;
+        //internal double gblMult;
 
         /// <summary>onStart</summary>
         public override void OnStart(PartModule.StartState state)
         {
-            base.OnStart(state);
+            //base.OnStart(state);
             //Logging.DLog(logMsg: "MoarKerbalsBase.OnStart");
             // Debug.Log(message: "MoarKerbalsBase.OnStart");
 
@@ -74,7 +74,10 @@ namespace MoarKerbals
         /// <summary>
         /// Unity FixedUpdate
         /// </summary>
-        private protected void FixedUpdate() => base.OnFixedUpdate();
+        //private protected void FixedUpdate()
+        //{
+        //    base.OnFixedUpdate();
+        //}
 
         /// <summary>GatherResources: determine if required resources available and debit them from part.</summary>
         /// <param name="part"></param>

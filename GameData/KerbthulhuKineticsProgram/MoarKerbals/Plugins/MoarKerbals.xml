@@ -120,7 +120,7 @@
         </member>
         <member name="M:MoarKerbals.KuddleShack.KuddleKerbal">
             <summary>
-            Where the kerbal meets kerbal
+            Where kerbal meets kerbal
             </summary>
         </member>
         <member name="M:MoarKerbals.KuddleShack.FailureSound">
@@ -160,19 +160,8 @@
         <member name="F:MoarKerbals.MoarKerbalsBase.groupName">
             <summary>internal name of GUI groupName  </summary>
         </member>
-        <member name="F:MoarKerbals.MoarKerbalsBase.gblMult">
-            <summary>The Global Cost Multiplier
-            Need this to be used in GetInfo()
-            updated in OnStart() and OnFixedUpdate()
-            </summary>
-        </member>
         <member name="M:MoarKerbals.MoarKerbalsBase.OnStart(PartModule.StartState)">
             <summary>onStart</summary>
-        </member>
-        <member name="M:MoarKerbals.MoarKerbalsBase.FixedUpdate">
-            <summary>
-            Unity FixedUpdate
-            </summary>
         </member>
         <member name="M:MoarKerbals.MoarKerbalsBase.GatherResources(Part)">
             <summary>GatherResources: determine if required resources available and debit them from part.</summary>
@@ -195,6 +184,21 @@
         </member>
         <member name="T:MoarKerbals.KloneBay">
             <summary>KloneBay part module</summary>
+        </member>
+        <member name="F:MoarKerbals.KloneBay.accidentRate">
+            <summary>
+            accidentRate
+            </summary>
+        </member>
+        <member name="F:MoarKerbals.KloneBay.allowOrbital">
+            <summary>
+            allowOrbital
+            </summary>
+        </member>
+        <member name="F:MoarKerbals.KloneBay.allowSplashedOrLanded">
+            <summary>
+            allowSplashedOrLanded
+            </summary>
         </member>
         <member name="M:MoarKerbals.KloneBay.ScaryMovieMode(System.Random)">
             <summary>Let's get bloody. Checks settings to see if their is a limits to the number of accident victims</summary>

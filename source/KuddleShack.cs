@@ -50,7 +50,7 @@ namespace MoarKerbals
         /// <param name="state"></param>
         public override void OnStart(PartModule.StartState state)
         {
-            Logging.DLog("KuddleShack.OnStart");
+            //Logging.DLog("KuddleShack.OnStart");
             base.OnStart(state);
 
             if (HighLogic.CurrentGame.Parameters.CustomParams<Settings3>().coloredPAW)
@@ -291,12 +291,13 @@ namespace MoarKerbals
             //{
             //Logging.DLog(logMsg: $"Kuddle: KuddleShackEnabled");
 
-            if (hasMatingPair && Planetarium.GetUniversalTime() - startMatingTimer >= SettingsInterface.kuddleTimeNeeded())
+            //if (hasMatingPair && Planetarium.GetUniversalTime() - startMatingTimer >= SettingsInterface.kuddleTimeNeeded())
+            if (hasMatingPair)
             {
                 if (PartHasRoom(part) && GatherResources(part))
                 {
                     KuddleKerbal();
-                    startMatingTimer = 0d;
+                    //startMatingTimer = 0d;
                     GameEvents.onVesselChange.Fire(FlightGlobals.ActiveVessel);
                 }
             }
@@ -314,7 +315,7 @@ namespace MoarKerbals
         }
 
         /// <summary>
-        /// Where the kerbal meets kerbal
+        /// Where kerbal meets kerbal
         /// </summary>
         private protected void KuddleKerbal()
         {
