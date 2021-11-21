@@ -122,7 +122,7 @@ If you use a third party mod to transfer kerbals, like ShipManifest, the PAW/RMB
 
 ### Recommends  
 
-- [x]  [MoarKerbals  Parts! (MOARP)][thread:MOARP!]  Beautiful parts meant for MoarKerbals!
+- [x]  [MoarKerbals  Parts! (MOARP)][thread:MOARP]  Beautiful parts meant for MoarKerbals!
  
 ### Suggests  
 
@@ -148,7 +148,7 @@ If you use a third party mod to transfer kerbals, like ShipManifest, the PAW/RMB
 - [x]  [Komplexity (KPLX)][thread:KPLX]  
 - [x]  [Pteron (MSRV)][thread:MSRV] 
 - [x]  [Jack-O'Lantern (JACK)][thread:JACK]  
-- [x]  [Halloween! (HLWN)][thread:HWLN] 
+- [x]  [Halloween! (HLWN)][thread:HLWN] 
 - [x]  [Mini Sample Return Capsule (MSRC))][thread:MSRC] 
 - [x]  [Docking Port Descriptions(DPD)][thread:DPD]  
 - [x]  [PicoPort Shielded (PPS)][thread:PPS]  
@@ -234,7 +234,7 @@ View full albums: [here][IMGUR:0] [here][IMGUR:1]
 ###### v1.3.0.0 original: 01 Jul 2018 zed'K | updated: 16 Nov 2021 zed'K
 
 <!-- mod links -->
-[MOD:forum]: https://forum.kerbalspaceprogram.com/index.php?/topic/191525-* "MoarKerbals Forum Thread"
+[MOD:url]: https://forum.kerbalspaceprogram.com/index.php?/topic/191525-* "MoarKerbals Forum Thread"
 
 [MOD:chlog]: https://github.com/zer0Kerbal/MoarKerbals/Changelog.cfg "Changelog"
 [MOD:contr]: https://github.com/zer0Kerbal/MoarKerbals/blob/master/.github/CONTRIBUTING.md "Contributing"
@@ -253,7 +253,7 @@ View full albums: [here][IMGUR:0] [here][IMGUR:1]
 <!--- original mod -->
 [MOD:org:source]: https://spacedock.info/mod/2324 "SpaceDock"  
 [MOD:org:thread]: https://forum.kerbalspaceprogram.com/index.php?/topic/94517-* "Original Thread"  
-[MOD:org:download]: https://www.dropbox.com/s/yc2zymblmjgrik8/MoarKerbals-v1.1.rar?dl=0) "Dropbox" 
+[MOD:org:download]: https://www.dropbox.com/s/yc2zymblmjgrik8/MoarKerbals-v1.1.rar?dl=0 "Dropbox" 
  
 <!--- license  -->
 [LIC:url]:  https://creativecommons.org/licenses/by-nc-sa/4.0/ "CC-BY-NC-SA-4.0"
@@ -357,7 +357,7 @@ View full albums: [here][IMGUR:0] [here][IMGUR:1]
 [^3]: this isn't a mod. ;P
 
 <!--- misc logos -->
-[IMG:flg:0]: https://via.placeholder.com/256x160png/ffffff/bada55?text=KGEx "MoarKerbals Flag"
+[IMG:flg:0]: https://raw.githubusercontent.com/zer0Kerbal/MoarKerbals/master/img/strideknight_flag.jpg "MoarKerbals Flag"
 
 [IMG:hero:0]: https://i.imgur.com/PCGwS6R.png "MoarKerbals"  
 [IMG:hero:1]: https: "MoarKerbals"
@@ -377,7 +377,6 @@ View full albums: [here][IMGUR:0] [here][IMGUR:1]
 
 [BMCC:img]: https://img.shields.io/badge/Buy%20Me%20a%20-Snack!-FFDD00?style=for-the-badge&logo=buymeacoffee "Buy Me A Snack"
 [BMCC:url]: https://buymeacoffee.com/zer0Kerbal "Buy Me A Snack"
-pal.me/zer0Kerbal?locale.x=en_US -->
 
 <!-- Localization -->
 [EN]: https://raw.githubusercontent.com/zer0Kerbal/zer0Kerbal/zed'K/Localization/img/American-flag-sm.png "American English"  
