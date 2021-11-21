@@ -10,7 +10,9 @@ Also available on CKAN. -->
 ![Mod Version](https://img.shields.io/github/v/release/zer0Kerbal/MoarKerbals?include_prereleases) 
 ![KSP 1.7.3](https://img.shields.io/badge/KSP%20version-1.7.3-66ccff.svg?style=flat-square) 
 ![CKAN listed](https://img.shields.io/badge/CKAN-Indexed-brightgreen.svg) ![License CC 4.0 BY-NC-SA](https://img.shields.io/badge/License-CC--4.0--BY--SA-lightgrey)
-
+<a href="https://github.com/zer0kerbal/MoarKerbals/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=zer0kerbal/MoarKerbals" />
+</a>
 > ***Populate your colony in space!*** 
 ## Author
 adopted for curation by ***[zer0Kerbal](https://forum.kerbalspaceprogram.com/index.php?/profile/190933-*/).*** Originally created by [***strideknight***](https://forum.kerbalspaceprogram.com/index.php?/profile/67555-strideknight/)
