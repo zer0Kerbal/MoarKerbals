@@ -16,7 +16,7 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 5.0.x
+        dotnet-version: 4.7.2
     - name: Build moarKerbals
-      run: dotnet build  ./Source/MoarKerbals173
+      run: dotnet build  ./Source/MoarKerbals.csproj
 
