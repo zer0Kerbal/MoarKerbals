@@ -34,7 +34,7 @@ This mod installs a KloneKabin, KuddleShack, and Academy that you can use to rep
 
 Kloning, Kuddling, and Teaching require a fair amount of electricity, and other resources.  You can also change the requirements via Module Manager patches.
 
-There is a small chance for a freakish accident to occur, both positive and negative results can occur. This is experimental technology after all. :wink: Note: a failed kloning process has a very LOW chance to kill every kerbal inside the KloningKabin. The deceases may or may not respawn back at the KSC depending upon your game and difficulty settings. You can adjust or even disable accidents with Module Manager Patches. 
+There is a small chance for a freakish accident to occur, both positive and negative results can occur. This is experimental technology after all. Note: a failed kloning process has a very LOW chance to kill every kerbal inside the KloningKabin. The deceased may or may not respawn back at the KSC depending upon your game and difficulty settings. You can adjust or even disable accidents with Module Manager Patches. 
 
 In either case, you can just quicksave before operating.
 
