@@ -14,7 +14,6 @@ updated: 08 Oct 2021 -->
 
 Populate your colony in space! A simple add on that adds the ability to use resources to create and train new kerbal(s) for Kerbal Space Program.
 
-
 #### Author [`@zer0Kerbal`][LINK:zer0Kerbal], originally created by [@`strideknight`][LINK:strideknight]  
 
 [![Mod Version][MOD:shd:latest]][MOD:url] [![KSP version][KSP:shd]][KSP:url]  [![License CC BY-NC-SA 4.0][LIC:shd]][LIC:url]  
@@ -109,7 +108,6 @@ If you use a third party mod to transfer kerbals, like ShipManifest, the PAW/RMB
 
 ***
 
-
 ### Installation Directions  
 
 - Use [^3]   
@@ -136,6 +134,7 @@ If you use a third party mod to transfer kerbals, like ShipManifest, the PAW/RMB
 - [x]  [On Demand Fuel Cells (ODFC))][thread:ODFC]  
 - [x]  [Biomatic (BIO)][thread:BIO]
 - [x]  [KerbalStats][thread:ks]  
+- [x]  [Community Trait Icons][thread:cti]
 - [x]  [SIMPLEX Colonies][thread:scol] 
 
 
@@ -172,6 +171,7 @@ If you use a third party mod to transfer kerbals, like ShipManifest, the PAW/RMB
 ### Supports
 
 - [x]  [SimpleLife! (SLIFE!)][thread:SLIF!]
+- [x]  [Community Trait Icons][thread:cti]
 - [x]  [TweakScale][thread:twk]
 - [x]  [Community Resource Pack][thread:CRP]
 - [x]  [Kerbal Changelog][thread:kcl] 
@@ -338,6 +338,7 @@ View full albums: [here][IMGUR:0] [here][IMGUR:1]
 [thread:mm]: https://forum.kerbalspaceprogram.com/index.php?/topic/50533-* "Module Manager"
 [thread:ks]: https://forum.kerbalspaceprogram.com/index.php?/topic/89285-* "KerbalStats"  
 [thread:crp]: https://forum.kerbalspaceprogram.com/index.php?/topic/83007-* "Community Resource Pack"
+[thread:cti]: https://forum.kerbalspaceprogram.com/index.php?/topic/162509-* "Community Trait Icons"
 [thread:ics]: https://forum.kerbalspaceprogram.com/index.php?/topic/74182-* " Ioncross Crew Support"   
 [thread:kcl]: https://forum.kerbalspaceprogram.com/index.php?/topic/179207-* "Kerbal ChangeLog"
 [thread:twk]: https://forum.kerbalspaceprogram.com/index.php?/topic/179030-* "TweakScale"
