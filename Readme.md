@@ -16,7 +16,7 @@ Populate your colony in space! A simple add on that adds the ability to use reso
 
 #### Author [`@zer0Kerbal`][LINK:zer0Kerbal], originally created by [@`strideknight`][LINK:strideknight]  
 
-[![Mod Version][MOD:shd:latest]][MOD:url] [![KSP version][KSP:shd]][KSP:url]  [![License CC BY-NC-SA 4.0][LIC:shd]][LIC:url]  
+[![Mod Version][MOD:shd:latest]][MOD:forum] [![KSP version][KSP:shd]][KSP:url]  [![License CC BY-NC-SA 4.0][LIC:shd]][LIC:url]  
 [![Curseforge][CURSFG:shd]][CURSFG:url] [![CKAN][CKAN:shd]][CKAN:url] [![GitHub][GITHUB:shd]][GITHUB:url] [![SpaceDock][SPCDCK:shd]][SPCDCK:url]  
 
 ![Code][CODE:shd] ![KSP-AVC][AVC:shd] ![Validate AVC .version files][AVCVLD:shd] 
@@ -145,10 +145,10 @@ If you use a third party mod to transfer kerbals, like ShipManifest, the PAW/RMB
 - [ ]  [Foundations (FND) - beta][thread:FND] ***Helps prevent ground constructions from floating away :)*** 
 - [x]  [Stork Delivery System (SDS)][thread:SDS]
 - [x]  [Komplexity (KPLX)][thread:KPLX]  
+- [x]  [Mini Sample Return Capsule (MSRC))][thread:MSRC] 
 - [x]  [Pteron (MSRV)][thread:MSRV] 
 - [x]  [Jack-O'Lantern (JACK)][thread:JACK]  
 - [x]  [Halloween! (HLWN)][thread:HLWN] 
-- [x]  [Mini Sample Return Capsule (MSRC))][thread:MSRC] 
 - [x]  [Docking Port Descriptions(DPD)][thread:DPD]  
 - [x]  [PicoPort Shielded (PPS)][thread:PPS]  
 - [x]  [Transparent Command Pods) (TCP)][thread:TCP]  
@@ -175,11 +175,16 @@ If you use a third party mod to transfer kerbals, like ShipManifest, the PAW/RMB
 - [x]  [TweakScale][thread:twk]
 - [x]  [Community Resource Pack][thread:CRP]
 - [x]  [Kerbal Changelog][thread:kcl] 
-- [x]  [SIMPLEX Colonies][thread:SCol] 
-- [x]  [USI-LS][thread:usils]
-- [ ]  ~~[MKS][thread:usmks]~~ not yet
-- [ ]  ~~[Snacks!][thread:snacks]~~ not yet
-- [ ]  ~~[Ioncross Crew Support!][[thread:ics]]~~
+- [ ]  [TAC-LS][thread:tac-ls] 
+
+### Future mods that hopefully will have compatibility patches 
+
+- [ ]  [SIMPLEX Colonies][thread:SCol] 
+- [ ]  [USI-LS][thread:usils] 
+- [ ]  [MKS][thread:mks]
+- [ ]  [Snacks!][thread:snacks]
+- [ ]  [Modular Kolonization System (MKS)][thread:mks]
+- [ ]  [Ioncross Crew Support!][[thread:ics]
 
 ### Conflicts  
 
@@ -202,8 +207,8 @@ If you use a third party mod to transfer kerbals, like ShipManifest, the PAW/RMB
 
 ### Credits and Special Thanks 
 
+- [@`strideknight`][LINK:strideknight] - original author
 - [@`linuxgurugamer`][LINK:linuxgurugamer] - code assistance
-- [@`strideknight`][LINK:strideknight] - this add on 
 
 ### Legal Mumbo Jumbo (License _provenance_)
 
@@ -234,7 +239,7 @@ View full albums: [here][IMGUR:0] [here][IMGUR:1]
 ###### v1.3.0.0 original: 01 Jul 2018 zed'K | updated: 16 Nov 2021 zed'K
 
 <!-- mod links -->
-[MOD:url]: https://forum.kerbalspaceprogram.com/index.php?/topic/191525-* "MoarKerbals Forum Thread"
+[MOD:forum]: https://forum.kerbalspaceprogram.com/index.php?/topic/191525-* "MoarKerbals Forum Thread"
 
 [MOD:chlog]: https://github.com/zer0Kerbal/MoarKerbals/Changelog.cfg "Changelog"
 [MOD:contr]: https://github.com/zer0Kerbal/MoarKerbals/blob/master/.github/CONTRIBUTING.md "Contributing"
@@ -263,7 +268,6 @@ View full albums: [here][IMGUR:0] [here][IMGUR:1]
 [LIC:org:url]:  https://creativecommons.org/licenses/by-nc-sa/4.0/ "CC-BY-NC-SA-4.0"
 [LIC:org:logo]: https://licensebuttons.net/i/l/by-nc-sa/transparent/33/66/99/76x22.png "CC BY-NC-SA 4.0"
 [LIC:org:shd]: https://img.shields.io/badge/license-CC--SA--BY--NC--4.0-ef9421?style=plastic&labelColor=black&logoColor=ef9421&logo=creativecommons "CC BY-NC-SA 4.0"
-
 
 <!--- AVC -->
 [AVC:shd]:  https://img.shields.io/badge/KSP-AVC--supported-00C961.svg?labelColor=black&style=plastic  
@@ -342,10 +346,14 @@ View full albums: [here][IMGUR:0] [here][IMGUR:1]
 [thread:ics]: https://forum.kerbalspaceprogram.com/index.php?/topic/74182-* " Ioncross Crew Support"   
 [thread:kcl]: https://forum.kerbalspaceprogram.com/index.php?/topic/179207-* "Kerbal ChangeLog"
 [thread:twk]: https://forum.kerbalspaceprogram.com/index.php?/topic/179030-* "TweakScale"
+[thread:mks]: http://forum.kerbalspaceprogram.com/index.php?/topic/154587-* "Modular Kolonization System (MKS)"  
 [thread:usils]: https://forum.kerbalspaceprogram.com/index.php?/topic/105202-* "USI Life Support"  
-[thread:usmks]: http://forum.kerbalspaceprogram.com/index.php?/topic/154587-* "USI MKS"  
-[thread:scol]: https://forum.kerbalspaceprogram.com/index.php?/topic/205078-* "SIMPLEX Colonies"
 [thread:snacks]: https://forum.kerbalspaceprogram.com/index.php?/topic/149604-* "Snacks"  
+[thread:scol]: https://forum.kerbalspaceprogram.com/index.php?/topic/205078-* "SIMPLEX Colonies"
+[thread:tacls]: https://github.com/KSP-RO/TacLifeSupport/wiki "TAC Life Support"
+[thread:usils]: http://umbraspaceindustries.github.io/UmbraSpaceIndustries/ "USI Life Support"
+
+[thread:ics]: https://forum.kerbalspaceprogram.com/index.php?/topic/74182-* " Ioncross Crew Support"
 
 <!--- statics -->
 [LINK:linuxgurugamer]: https://forum.kerbalspaceprogram.com/index.php?/profile/129964-linuxgurugamer/ "linuxgurugamer"
@@ -368,7 +376,7 @@ View full albums: [here][IMGUR:0] [here][IMGUR:1]
 
 <!-- financial support -->
 [PAYPAL:img]: https://img.shields.io/badge/Buy%20me%20some%20-LFO-BADA55?style=for-the-badge&logo=paypal&labelColor=FFDD00 "PayPal"
-[PAYPAL:url]: https://www.paypal.com/donate?hosted_button_id=R9ACWD7VREBCY "PayPal"
+[PAYPAL:url]: https://www.paypal.com/donate?hosted_button_id=DC22YHMEJREKL "PayPal"
 
 [PATREON:img]: https://img.shields.io/badge/Patreon%20-Patreonize-FF424D?style=for-the-badge&logo=patreon "Patreon"
 [PATREON:url]: https://www.patreon.com/bePatron?u=23390503 "Patreon"
