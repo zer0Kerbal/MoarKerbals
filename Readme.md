@@ -109,7 +109,6 @@ If you use a third party mod to transfer kerbals, like ShipManifest, the PAW/RMB
 
 ***
 
-
 ### Installation Directions  
 
 - Use [^3]   
@@ -348,7 +347,7 @@ View full albums: [here][IMGUR:0] [here][IMGUR:1]
 [thread:snacks]: https://forum.kerbalspaceprogram.com/index.php?/topic/149604-* "Snacks"  
 
 <!--- statics -->
-[LINK:staticalliam7]: https://forum.kerbalspaceprogram.com/index.php?/profile/216180-staticalliam7/ "[staticalliam7"  
+[LINK:staticalliam7]: https://forum.kerbalspaceprogram.com/index.php?/profile/216180-staticalliam7/ "staticalliam7"  
 [LINK:linuxgurugamer]: https://forum.kerbalspaceprogram.com/index.php?/profile/129964-linuxgurugamer/ "linuxgurugamer"
 [LINK:zer0Kerbal]: https://forum.kerbalspaceprogram.com/index.php?/profile/190933-zer0kerbal/ "zer0Kerbal"
 [LINK:strideknight]: https://forum.kerbalspaceprogram.com/index.php?/profile/67555-strideknight/ "strideknight"  
