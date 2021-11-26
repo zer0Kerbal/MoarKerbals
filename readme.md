@@ -209,6 +209,8 @@ If you use a third party mod to transfer kerbals, like ShipManifest, the PAW/RMB
 
 ### Credits and Special Thanks 
 
+
+- [@`staticalliam7'][LINK:staticalliam7] - Spanish and German translations  
 - [@`strideknight`][LINK:strideknight] - original author
 - [@`staticalliam7`][LINK:staticalliam7] - Spanish and German translations
 - [@`linuxgurugamer`][LINK:linuxgurugamer] - code assistance
