@@ -88,6 +88,8 @@ If you use a third party mod to transfer kerbals, like ShipManifest, the PAW/RMB
 ### Localization _work in progress_
 
 > - [ ]  ![][EN] English - in progress
+> - [ ]  ![][DE] German (Deutsch)- thank you [@`staticalliam7'][LINK:staticalliam7]  
+> - [ ]  ![][ES] Spanish (Español)- thank you [@`staticalliam7'][LINK:staticalliam7]
 > - [ ]  ***your translation here***
 >
 > HELP WANTED - See the [README in the Localization folder][MOD:local] for instructions for adding or improving translations. [GitHub][GitHub:url] push is the best way to contribute. *Additions and corrections solicited and welcome!* 
@@ -208,6 +210,7 @@ If you use a third party mod to transfer kerbals, like ShipManifest, the PAW/RMB
 ### Credits and Special Thanks 
 
 - [@`strideknight`][LINK:strideknight] - original author
+- [@`staticalliam7`][LINK:staticalliam7] - Spanish and German translations
 - [@`linuxgurugamer`][LINK:linuxgurugamer] - code assistance
 
 ### Legal Mumbo Jumbo (License _provenance_)
@@ -356,6 +359,7 @@ View full albums: [here][IMGUR:0] [here][IMGUR:1]
 [thread:ics]: https://forum.kerbalspaceprogram.com/index.php?/topic/74182-* " Ioncross Crew Support"
 
 <!--- statics -->
+[LINK:staticalliam7]: https://forum.kerbalspaceprogram.com/index.php?/profile/216180-staticalliam7/ "staticalliam7"  
 [LINK:linuxgurugamer]: https://forum.kerbalspaceprogram.com/index.php?/profile/129964-linuxgurugamer/ "linuxgurugamer"
 [LINK:zer0Kerbal]: https://forum.kerbalspaceprogram.com/index.php?/profile/190933-zer0kerbal/ "zer0Kerbal"
 [LINK:strideknight]: https://forum.kerbalspaceprogram.com/index.php?/profile/67555-strideknight/ "strideknight"  
