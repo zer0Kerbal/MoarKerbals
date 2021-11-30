@@ -88,8 +88,8 @@ If you use a third party mod to transfer kerbals, like ShipManifest, the PAW/RMB
 ### Localization _work in progress_
 
 > - [ ]  ![][EN] English - in progress
-> - [ ]  ![][DE] German (Deutsch)- thank you [@`staticalliam7'][LINK:staticalliam7]  
-> - [ ]  ![][ES] Spanish (Español)- thank you [@`staticalliam7'][LINK:staticalliam7]
+> - [x]  ![][DE] German (Deutsch)- thank you [@`staticalliam7'][LINK:staticalliam7]  
+> - [x]  ![][ES] Spanish (Español)- thank you [@`staticalliam7'][LINK:staticalliam7]
 > - [ ]  ***your translation here***
 >
 > HELP WANTED - See the [README in the Localization folder][MOD:local] for instructions for adding or improving translations. [GitHub][GitHub:url] push is the best way to contribute. *Additions and corrections solicited and welcome!* 
@@ -210,9 +210,8 @@ If you use a third party mod to transfer kerbals, like ShipManifest, the PAW/RMB
 ### Credits and Special Thanks 
 
 
-- [@`staticalliam7'][LINK:staticalliam7] - Spanish and German translations  
 - [@`strideknight`][LINK:strideknight] - original author
-- [@`staticalliam7`][LINK:staticalliam7] - Spanish and German translations
+- [@`staticalliam7`][LINK:staticalliam7] -  Several translations and Github upkeep
 - [@`linuxgurugamer`][LINK:linuxgurugamer] - code assistance
 
 ### Legal Mumbo Jumbo (License _provenance_)
