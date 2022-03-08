@@ -15,8 +15,6 @@ updated: 07 Mar 2022 -->
 
 # MoarKerbals (MOAR)
 
-[TOC]
-
 ## has been translated into the following languages
 
 * [ ] ![American English][EN] American English <us-en.cfg>  
