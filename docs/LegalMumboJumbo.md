@@ -12,8 +12,6 @@ updated: 07 Mar 2022
 
 # MoarKerbals (MOAR)
 
-[TOC]
-
 ## License
 
 * [LegalMumboJumbo](/LegalMumboJumbo/License.htm)
