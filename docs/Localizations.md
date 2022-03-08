@@ -17,14 +17,14 @@ updated: 07 Mar 2022 -->
 
 ## has been translated into the following languages
 
-* [ ] ![American English][EN] American English <us-en.cfg>  
-* [ ] ![Deutsch][DE] German (Deutsch)  <de.cfg>  
-* [ ] ![Español][ES] Spanish (Español) <es-es.cfg>  
-* [ ] ![Français][FR] French (Français) <fr-fr.cfg>  
-* [ ] ![Italiano][IT] Italian (Italiano) <it-it.cfg>  
-* [ ] ![Русский][RU] Russian (Русский) <ru.cfg>  
+* [x]  ![American English][EN] American English <us-en.cfg>  
+* [x]  ![Deutsch][DE] German (Deutsch)  <de.cfg>  
+* [x]  ![Español][ES] Spanish (Español) <es-es.cfg>  
+* [x]  ![Français][FR] French (Français) <fr-fr.cfg>  
+* [x]  ![Italiano][IT] Italian (Italiano) <it-it.cfg>  
+* [x]  ![Русский][RU] Russian (Русский) <ru.cfg>  
 
-* [ ] ![Polski][PO] Polish (Polski)] <pl.cfg>  
+* [x]  ![Polski][PO] Polish (Polski)] <pl.cfg>  
 
 ## These localizations for KSP and its DLC's are available through Steam:
 
