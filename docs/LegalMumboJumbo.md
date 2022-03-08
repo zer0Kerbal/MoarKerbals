@@ -14,7 +14,7 @@ updated: 07 Mar 2022
 
 ## License
 
-* [LegalMumboJumbo](/LegalMumboJumbo/License.htm)
+* [LegalMumboJumbo](/LegalMumboJumbo/License.md)
 
 ## Legal Mumbo Jumbo (provenance)
 
