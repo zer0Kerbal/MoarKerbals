@@ -1,5 +1,5 @@
 ---
-permalink: /License.html
+permalink: /License.htm
 title: CC BY-NC-SA 4.0
 ---
 
