@@ -32,6 +32,6 @@ jobs:
           5.0.x
           6.0.x
         include-prerelease: true
-    - name: Build KSPChromaControl
-      run: dotnet build  ./source/KSPChromaControl.csproj
+    - name: Build MoarKerbals
+      run: dotnet build  ./source/MoarKerbals.csproj
       # - run: dotnet build <my project>
