@@ -6,7 +6,8 @@
 
 name: Greetings
 
-on: [pull_request, issues, issue_comment, discussion_comment, fork, gollum]
+on: [pull_request, issues, issue_comment, discussion_comment, fork, gollum, workflow_dispatch]
+    
 
 jobs:
   greeting:
