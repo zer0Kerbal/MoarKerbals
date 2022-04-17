@@ -12,13 +12,13 @@ repository:
   name: MoarKerbals
 
   # A short description of the repository that will show up on GitHub
-  description: Populate your colony in space! An addon plugin for Kerbal Space Program.
+  description: Populate your colony in space! An addon for Kerbal Space Program.
 
   # A URL with more information about the repository
-  homepage: https://forum.kerbalspaceprogram.com/index.php?/topic/191525-*/
+  homepage: https://forum.kerbalspaceprogram.com/index.php?/topic/191525-*
 
   # A comma-separated list of topics to set on the repository
-  topics: klone,clone,kuddle,populate,birth,growth,kerbal,kerbalspaceprogram,ksp,ksp-mods,ksp-parts,kerbal-space,kerbal-space-program,kerbal-mods,zedk,strideknight
+  topics: klone,clone,kuddle,populate,birth,growth,kerbal,kerbalspaceprogram,ksp,ksp-mods,kerbal-space,kerbal-space-program,kerbal-mods,zedk,strideknight
 
   # Either `true` to make the repository private, or `false` to make it public.
   private: false
