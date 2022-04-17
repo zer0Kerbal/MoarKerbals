@@ -16,10 +16,10 @@ repository:
 
   # A URL with more information about the repository
   homepage: https://forum.kerbalspaceprogram.com/index.php?/topic/191525-*/
-  
+
   # A comma-separated list of topics to set on the repository
   topics: klone,clone,kuddle,populate,birth,growth,kerbal,kerbalspaceprogram,ksp,ksp-mods,ksp-parts,kerbal-space,kerbal-space-program,kerbal-mods,zedk,strideknight
-  
+
   # Either `true` to make the repository private, or `false` to make it public.
   private: false
 
@@ -266,11 +266,11 @@ milestones:
   - title: 1.1.2.99-prerelease
     description: progress toward version 1.1.2.99-prerelease
     state: closed
-    
+
   - title: Localization - Code
     description: progress toward CODE localization (only for add-ons - plugins - etc)
     state: closed
-    
+
   - title: Localization - English (United States) <en-us.cfg>
     description: progress toward English (United States) <en-us.cfg> localization
     state: closed
