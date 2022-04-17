@@ -1,1 +1,4 @@
+# config v1.0.1.0
+logo: /img/HeroLogo_1920x1920.jpg
+description: An Add'On for <a href="https://www.kerbalspaceprogram.com" target="_blank">Kerbal Space Program</a>.
 theme: jekyll-theme-architect
