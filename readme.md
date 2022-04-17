@@ -80,8 +80,9 @@ MoarKerbals was inspired by [@`strideknight`][LINK:strideknight] 's desire to ha
 
 This was [@`strideknight`][LINK:strideknight]'s first mod and it runs fine, so let me know if you find any bugs. All constructive feedback/suggestions are also welcome. Enjoy!
 
-#### Known issue
-If you use a third party mod to transfer kerbals, like ShipManifest, the PAW/RMB might have ghost listings until a the vessel is reloaded.
+#### Known issue(s)
+
+- If you use a third party mod to transfer kerbals, like ShipManifest, the PAW/RMB might have ghost listings until a the vessel is reloaded.
 
 ***
 
@@ -246,12 +247,12 @@ View full albums: [here][IMGUR:0] [here][IMGUR:1]
 [MOD:forum]: https://forum.kerbalspaceprogram.com/index.php?/topic/191525-* "MoarKerbals Forum Thread"
 
 [MOD:chlog]: https://github.com/zer0Kerbal/MoarKerbals/Changelog.cfg "Changelog"
-[MOD:contr]: https://github.com/zer0Kerbal/MoarKerbals/blob/master/.github/CONTRIBUTING.md "Contributing"
+[MOD:contr]: https://github.com/zer0Kerbal/.github/blob/master/.github/CONTRIBUTING.md "Contributing"
 [MOD:discu]: https://github.com/zer0Kerbal/MoarKerbals/discussions "Discussions"
-[MOD:issue]:  https://github.com/zer0Kerbal/MoarKerbals/wiki/Known-Issues "GitHub Issues"
-[MOD:licns]: https://github.com/zer0Kerbal/MoarKerbals/blob/master/LICENSE "Github License"
+[MOD:issue]: https://github.com/zer0Kerbal/MoarKerbals/Known-Issues "GitHub Issues"
 [MOD:known]: https://github.com/zer0Kerbal/MoarKerbals/wiki/Known-Issues "Known Issues"
-[MOD:local]: https://github.com/zer0Kerbal/MoarKerbals/blob/master/GameData/MoarKerbals/Localization/readme.md "Localization"
+[MOD:licns]: https://github.com/zer0Kerbal/MoarKerbals/blob/master/LICENSE "Github License"
+[MOD:local]: https://github.com/zer0Kerbal/MoarKerbals/tree/master/GameData/KerbthulhuKineticsProgram/MoarKerbals/Localization "Localization"
 [MOD:wiki]: https://github.com/zer0Kerbal/MoarKerbals/ "Wiki"
 
 <!--- mod -->
@@ -274,8 +275,8 @@ View full albums: [here][IMGUR:0] [here][IMGUR:1]
 [LIC:org:shd]: https://img.shields.io/badge/license-CC--SA--BY--NC--4.0-ef9421?style=plastic&labelColor=black&logoColor=ef9421&logo=creativecommons "CC BY-NC-SA 4.0"
 
 <!--- AVC -->
-[AVC:shd]:  https://img.shields.io/badge/KSP-AVC--supported-00C961.svg?labelColor=black&style=plastic  
-[AVCVLD:shd]: https://github.com/zer0Kerbal/OhScrap/workflows/Validate%20AVC%20.version%20files/badge.svg?labelColor=black&style=plastic "AVC-Valid"
+[AVC:shd]:  https://img.shields.io/badge/KSP-AVC--supported-00C961.svg?labelColor=black&style=plastic "AVC"  
+[AVCVLD:shd]: https://github.com/zer0Kerbal/MoarKerbals/workflows/Validate%20AVC%20.version%20files/badge.svg?labelColor=black&style=plastic "AVC-Valid"
 
 <!--- CKAN -->
 [CKAN:img]: https://i.postimg.cc/x8XSVg4R/sj507JC.png "CKAN"
