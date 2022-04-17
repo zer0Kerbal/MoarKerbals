@@ -1,34 +1,30 @@
-<!-- Readme.md v1.5.4.3
+<!-- readme.md v1.6.6.3
 MoarKerbals (MOAR)
-created: 17 Jul 18
-updated: 08 Oct 2021 -->
+created: 17 Jul 2017
+updated: 15 Apr 2022 -->
 
-[MODVERSION]: 1.2.99.0-prerelease
-[KSPVERSION]: 1.12.2
+<!--this file: CC BY-ND 4.0 unported by zer0Kerbal-->
 
-## Download on [Curseforge][CURSFG:url] or [Github][GITHUB:url] or [SpaceDock][SPCDCK:url]. 
+[![MOD-NAME][MOD:shd:latest]][MOD:forum] [![KSP version][KSP:shd]][KSP:url]  [![License][LIC:shd]][LIC:url]  
+[![Curseforge][CURSFG:shd]][CURSFG:url] [![CKAN][CKAN:shd]][CKAN:url] [![GitHub][GITHUB:shd]][GITHUB:url] [![SpaceDock][SPCDCK:shd]][SPCDCK:url]  
+![Code][CODE:shd] ![KSP-AVC][AVC:shd] ![Validate AVC .version files][AVCVLD:shd] [![GitHub Pages][MOD:pages:shd]][MOD:pages]
 
-##### Available on [CKAN][CKAN:url] as _`MoarKerbals`._
+
 
 # Kerbthulhu Kinetics Program's MoarKerbals (MOAR)
 
 Populate your colony in space! A simple add on that adds the ability to use resources to create and train new kerbal(s) for Kerbal Space Program.
 
 
-#### Author [`@zer0Kerbal`][LINK:zer0Kerbal], originally created by [@`strideknight`][LINK:strideknight]  
+## By [`@zer0Kerbal`][zer0Kerbal], originally created by [`strideknight`][strideknight]
 
-[![Mod Version][MOD:shd:latest]][MOD:url] [![KSP version][KSP:shd]][KSP:url]  [![License CC BY-NC-SA 4.0][LIC:shd]][LIC:url]  
-[![Curseforge][CURSFG:shd]][CURSFG:url] [![CKAN][CKAN:shd]][CKAN:url] [![GitHub][GITHUB:shd]][GITHUB:url] [![SpaceDock][SPCDCK:shd]][SPCDCK:url]  
+adopted with *express* permission and brought to you by *KerbSimpleCo*
 
-![Code][CODE:shd] ![KSP-AVC][AVC:shd] ![Validate AVC .version files][AVCVLD:shd] 
-
-###### _brought to you by KGEx_
-
-***
+---
 
 ## Description 
 
-### Preamble by [@`strideknight`][LINK:strideknight]  
+### Preamble by [@`strideknight`][strideknight]  
 
 This mod installs a KloneKabin, KuddleShack, and Academy that you can use to replicate and train new Civilian (kerbals) wherever you feel like.  
 
@@ -38,30 +34,31 @@ There is a small chance for a freakish accident to occur, both positive and nega
 
 In either case, you can just quicksave before operating.
 
-## Features 
+## Features
 
-- No extra parts
-- No RAM usage
-- Uses Module Manager to add functionality to stock parts
-- Simple, configurable and adds levels of depth to the gameplay without a learning curve
-- Includes an upgrade to the stock Science Lab from two to six seats (including the IVA)
-- Community Trait Icon configs are included.
+* No extra parts
+* No RAM usage
+* Uses Module Manager to add functionality to stock parts
+* Simple, configurable and adds levels of depth to the gameplay without a learning curve
+* Includes an upgrade to the stock Science Lab from two to six seats (including the IVA)
+* Community Trait Icon configs are included.
 
 MoarKerbals adds functionality to the following parts:
-- KloningBay (Kloning)
-  - Science Lab
-  - mk1 Crew Cabin
-  - mk3 Crew Cabin
-  - mk2 Lander Can
-- KuddleShack (Kuddling)
-  - Hitchhiker's
-  - mk2 Crew Cabin
-- KerbalRecruitment (Academy)
-  - Cupola
-  - mk1 Lander Can
-  - Science Lab
 
-***
+* KloningBay (Kloning)
+  * Science Lab
+  * mk1 Crew Cabin
+  * mk3 Crew Cabin
+  * mk2 Lander Can
+* KuddleShack (Kuddling)
+  * Hitchhiker's
+  * mk2 Crew Cabin
+* KerbalRecruitment (Academy)
+  * Cupola
+  * mk1 Lander Can
+  * Science Lab
+
+---
 
 ![Flag][IMG:flg:0]  
 ![Hero Image][IMG:hero:0]  
@@ -75,17 +72,17 @@ MoarKerbals adds functionality to the following parts:
 > - Have a request? Glad to have them, kindly submit through GitHub.
 > - Want to add support for life support and colony mods. Drop a patch through GitHub to have it included. :D
 
-~~It requires a large amount of electricity to operate, and [@`strideknight`][LINK:strideknight] always played with Roverdude's MKS and TAC's Life Support, so it automatically integrates with them to require Biomass or other materials. Also, [strideknight] included configs for the Community Tech Tree. Both require ModuleManager to integrate.~~
+~~It requires a large amount of electricity to operate, and [@`strideknight`][strideknight] always played with Roverdude's MKS and TAC's Life Support, so it automatically integrates with them to require Biomass or other materials. Also, [strideknight] included configs for the Community Tech Tree. Both require ModuleManager to integrate.~~
 
-MoarKerbals was inspired by [@`strideknight`][LINK:strideknight] 's desire to have a small colony of kerbals living in zeppelins around Jool who populate the planet, evolve their own society, and then to go to war with the "grounders" back on Kerbin.
+MoarKerbals was inspired by [@`strideknight`][strideknight] 's desire to have a small colony of kerbals living in zeppelins around Jool who populate the planet, evolve their own society, and then to go to war with the "grounders" back on Kerbin.
 
-This was [@`strideknight`][LINK:strideknight]'s first mod and it runs fine, so let me know if you find any bugs. All constructive feedback/suggestions are also welcome. Enjoy!
+This was [@`strideknight`][strideknight]'s first mod and it runs fine, so let me know if you find any bugs. All constructive feedback/suggestions are also welcome. Enjoy!
 
 #### Known issue(s)
 
-- If you use a third party mod to transfer kerbals, like ShipManifest, the PAW/RMB might have ghost listings until a the vessel is reloaded.
+* If you use a third party mod to transfer kerbals, like ShipManifest, the PAW/RMB might have ghost listings until a the vessel is reloaded.
 
-***
+---
 
 ### Localization _work in progress_
 
@@ -94,107 +91,107 @@ This was [@`strideknight`][LINK:strideknight]'s first mod and it runs fine, so l
 >
 > HELP WANTED - See the [README in the Localization folder][MOD:local] for instructions for adding or improving translations. [GitHub][GitHub:url] push is the best way to contribute. *Additions and corrections solicited and welcome!* 
 
-***
+---
 
-### How to support this and other great mods by [`zer0Kerbal`][LINK:zer0Kerbal]  
+### How to support this and other great mods by [`zer0Kerbal`][zer0Kerbal]  
 
 [![Support][PAYPAL:img]][PAYPAL:url] [![Github Sponsor][GSPONS:img]][GSPONS:url] [![Patreon][PATREON:img]][PATREON:url] [![Buy zer0Kerbal a snack][BMCC:img]][BMCC:url] 
 
-***
+---
 
 ### See More
 
-- Discussions and news on this mod: See [Discussions][MOD:discu] or [KSP Forums][MOD:forum]  
-- Changelog Summary for more details of changes : See [ChangeLog][MOD:chlog]  
-- Known Issues for more details of feature requests and known issues : See [Known Issues][MOD:known]  
+* Discussions and news on this mod: See [Discussions][MOD:discu] or [KSP Forums][MOD:forum]  
+* Changelog Summary for more details of changes : See [ChangeLog][MOD:chlog]  
+* Known Issues for more details of feature requests and known issues : See [Known Issues][MOD:known]  
 
-***
+---
 
 
 ### Installation Directions  
 
-- Use [^3]   
+* Use [^3]   
 [![CKAN][CKAN:img]][CKAN:url]
 
 ### Dependencies  
 
-- [x]  [Kerbal Space Program][KSP:url] [![][KSP:shd]][KSP:url] [^1]
-- [x]  [Module Manager][thread:mm] [^2]  
+* [x]  [Kerbal Space Program][KSP:url] [![][KSP:shd]][KSP:url] [^1]
+* [x]  [Module Manager][mm] [^2]  
 
 ### Recommends  
 
-- [x]  [MoarKerbals  Parts! (MOARP)][thread:MOARP]  Beautiful parts meant for MoarKerbals!
+* [x]  [MoarKerbals  Parts! (MOARP)][MOARP]  Beautiful parts meant for MoarKerbals!
  
 ### Suggests  
 
 #### Mods that benefit MoarKerbals (MOAR)
 
-- [x]  [SimpleLogistics! (SLOG!)][thread:SLOG!]  
-- [x]  [SimpleConstructon! (SCON!)][thread:SCON!] 
-- [x]  [Field Training Facility (FTF)][thread:FTF]  
-- [x]  [Field Training Lab (FTL)][thread:FTL]  
-- [x]  [KaboOom! (BOOM)][thread:BOOM] another way to not go to space today  
-- [x]  [On Demand Fuel Cells (ODFC))][thread:ODFC]  
-- [x]  [Biomatic (BIO)][thread:BIO]
-- [x]  [KerbalStats][thread:ks]  
-- [x]  [SIMPLEX Colonies][thread:scol] 
+* [x]  [SimpleLogistics! (SLOG!)][SLOG!]  
+* [x]  [SimpleConstructon! (SCON!)][SCON!] 
+* [x]  [Field Training Facility (FTF)][FTF]  
+* [x]  [Field Training Lab (FTL)][FTL]  
+* [x]  [KaboOom! (BOOM)][BOOM] another way to not go to space today  
+* [x]  [On Demand Fuel Cells (ODFC))][ODFC]  
+* [x]  [Biomatic (BIO)][BIO]
+* [x]  [KerbalStats][ks]  
+* [x]  [SIMPLEX Colonies][scol] 
 
 
-#### Other fun mods by [`zed'K`][LINK:zer0Kerbal] 
+#### Other fun mods by [`zed'K`][zer0Kerbal] 
 
-- [x]  [Solar Science (SOLS)][thread:SOLS]  
-- [x]  [Not So SimpleConstructon! (NSSC)][thread:NSSC] 
-- [ ]  [Foundations (FND) - beta][thread:FND] ***Helps prevent ground constructions from floating away :)*** 
-- [x]  [Stork Delivery System (SDS)][thread:SDS]
-- [x]  [Komplexity (KPLX)][thread:KPLX]  
-- [x]  [Pteron (MSRV)][thread:MSRV] 
-- [x]  [Jack-O'Lantern (JACK)][thread:JACK]  
-- [x]  [Halloween! (HLWN)][thread:HLWN] 
-- [x]  [Mini Sample Return Capsule (MSRC))][thread:MSRC] 
-- [x]  [Docking Port Descriptions(DPD)][thread:DPD]  
-- [x]  [PicoPort Shielded (PPS)][thread:PPS]  
-- [x]  [Transparent Command Pods) (TCP)][thread:TCP]  
-- [x]  [More Hitchhikers) (MHH)][thread:MHH]  
-- [x]  [B9 Stock Patches (B9S)][thread:B9S]
-- [x]  [ScrapYard][thread:SYD]  
-- [x]  [Oh Scrap!][thread:OHS]  
-- [x]  [DaMichel's AeroRadial (DAR)][thread:DAR]  
-- [x]  [DaMichel's Fuselage (DMF)][thread:DMF]  
-- [x]  [DaMichel's Spherical Tanks (DST)][thread:DST]  
-- [x]  [DaMichel's CargoBays (DCB)][thread:DCB]  
-- [x]  [Simple Cargo Solutions (SCS)][thread:SCS]
-- [x]  [KerGuise Experimental Engineering (KGEx)][thread:KGEX]  
-- [x]  [The Gold Standard (GOLD)][thread:GOLD]  
-- [x]  [Keridian Dynamics Vessel Assembly (KDVA)][thread:KDVA]
-- [x]  [Olympic's ARP Icons (ARPI)][thread:ARPI]  
-- [x]  [Stack Inline Lights (SIL)][thread:SIL]  
-- [x]  [Stack Inline Lights - Patches (SILP)][thread:SILP] 
+* [x]  [Solar Science (SOLS)][SOLS]  
+* [x]  [Not So SimpleConstructon! (NSSC)][NSSC] 
+* [ ]  [Foundations (FND) - beta][FND] ***Helps prevent ground constructions from floating away :)*** 
+* [x]  [Stork Delivery System (SDS)][SDS]
+* [x]  [Komplexity (KPLX)][KPLX]  
+* [x]  [Pteron (MSRV)][MSRV] 
+* [x]  [Jack-O'Lantern (JACK)][JACK]  
+* [x]  [Halloween! (HLWN)][HLWN] 
+* [x]  [Mini Sample Return Capsule (MSRC))][MSRC] 
+* [x]  [Docking Port Descriptions(DPD)][DPD]  
+* [x]  [PicoPort Shielded (PPS)][PPS]  
+* [x]  [Transparent Command Pods) (TCP)][TCP]  
+* [x]  [More Hitchhikers) (MHH)][MHH]  
+* [x]  [B9 Stock Patches (B9S)][B9S]
+* [x]  [ScrapYard][SYD]  
+* [x]  [Oh Scrap!][OHS]  
+* [x]  [DaMichel's AeroRadial (DAR)][DAR]  
+* [x]  [DaMichel's Fuselage (DMF)][DMF]  
+* [x]  [DaMichel's Spherical Tanks (DST)][DST]  
+* [x]  [DaMichel's CargoBays (DCB)][DCB]  
+* [x]  [Simple Cargo Solutions (SCS)][SCS]
+* [x]  [KerGuise Experimental Engineering (KGEx)][KGEX]  
+* [x]  [The Gold Standard (GOLD)][GOLD]  
+* [x]  [Keridian Dynamics Vessel Assembly (KDVA)][KDVA]
+* [x]  [Olympic's ARP Icons (ARPI)][ARPI]  
+* [x]  [Stack Inline Lights (SIL)][SIL]  
+* [x]  [Stack Inline Lights - Patches (SILP)][SILP] 
 
 ### Supports
 
-- [x]  [SimpleLife! (SLIFE!)][thread:SLIF!]
-- [x]  [TweakScale][thread:twk]
-- [x]  [Community Resource Pack][thread:CRP]
-- [x]  [Kerbal Changelog][thread:kcl] 
-- [x]  [SIMPLEX Colonies][thread:SCol] 
-- [x]  [USI-LS][thread:usils]
-- [ ]  ~~[MKS][thread:usmks]~~ not yet
-- [ ]  ~~[Snacks!][thread:snacks]~~ not yet
-- [ ]  ~~[Ioncross Crew Support!][[thread:ics]]~~
+* [x]  [SimpleLife! (SLIFE!)][SLIF!]
+* [x]  [TweakScale][twk]
+* [x]  [Community Resource Pack][CRP]
+* [x]  [Kerbal Changelog][kcl] 
+* [x]  [SIMPLEX Colonies][SCol] 
+* [x]  [USI-LS][usils]
+* [ ]  ~~[MKS][usmks]~~ not yet
+* [ ]  ~~[Snacks!][snacks]~~ not yet
+* [ ]  ~~[Ioncross Crew Support!][[ics]]~~
 
 ### Conflicts  
 
-- none
+* none
 
 ### Replaces  
 
-- none
+* none
 
 ### Tags  
 
-- parts, config, career, uncrewed, crewed
+* parts, config, career, uncrewed, crewed
 
-***
+---
 
 <div style="border:0.5px solid Tomato; background-color: #BADA55; color: #FF0000; text-align:center">
 <p><b>*red box below is a link to forum post on how to get support*</p>  
@@ -203,13 +200,13 @@ This was [@`strideknight`][LINK:strideknight]'s first mod and it runs fine, so l
 
 ### Credits and Special Thanks 
 
-- [@`staticalliam7`][LINK:staticalliam7] - translations and GitHub
-- [@`linuxgurugamer`][LINK:linuxgurugamer] - code assistance
-- [@`strideknight`][LINK:strideknight] - this add on 
+* [@`staticalliam7`][staticalliam7] - translations and GitHub
+* [@`linuxgurugamer`][linuxgurugamer] - code assistance
+* [@`strideknight`][strideknight] - this add on 
 
 ### Legal Mumbo Jumbo (License _provenance_)
 
-#### Current (1) - [`zer0Kerbal`][LINK:zer0Kerbal] 
+#### Current (1) - [`zer0Kerbal`][zer0Kerbal] 
 
 > Forum: [Thread][MOD:forum] - Source: [GitHub][GITHUB:url]  
 > License: [![License CC BY-NC-SA 4.0][LIC:shd]][LIC:url]  
@@ -217,12 +214,12 @@ This was [@`strideknight`][LINK:strideknight]'s first mod and it runs fine, so l
 > *** All bundled mods are distributed under their own licenses ***  
 > *** All art assets (textures, models, animations, sounds) are distributed under their own licenses ***  
 
-#### Original (0) - Author: [@`strideknight`][LINK:strideknight]
+#### Original (0) - Author: [@`strideknight`][strideknight]
 
 > [Thread][MOD:org:thread]  - [Download][MOD:org:download] - Source: [GitHub][MOD:org:source] 
 > License: [![License CC BY-NC-SA 4.0][LIC:org:shd]][LIC:org:url] 
 
------
+---
 
 <!-- graphical links to downloads -->
 
@@ -294,65 +291,65 @@ View full albums: [here][IMGUR:0] [here][IMGUR:1]
 [KSP:shd]: https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/zer0Kerbal/MoarKerbals/master/json/ksp.json&logo=data:image/webp;base64,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 "Kerbal Space Program"
 
 <!-- zer0Kerbal mods -->
-[thread:MOAR]: https://forum.kerbalspaceprogram.com/index.php?/topic/191525-* "MoarKerbals"
-[thread:MOARP]: https://www.curseforge.com/kerbal/ksp-mods/moarkerbalsparts "MoarKerbals Parts"
-[thread:B9S]: https://forum.kerbalspaceprogram.com/index.php?/topic/190870-* "B9 Stock Switches"
-[thread:BIO]: https://forum.kerbalspaceprogram.com/index.php?/topic/191426-* "Biomatic"
-[thread:DAR]: https://forum.kerbalspaceprogram.com/index.php?/topic/191719-* "DaMichel's AeroRadial"
-[thread:DCB]: https://forum.kerbalspaceprogram.com/index.php?/topic/191719-* "DaMichel's CargoBays"
-[thread:DMF]: https://forum.kerbalspaceprogram.com/index.php?/topic/191719-* "DaMichel's Fuselage"
-[thread:DPD]: https://forum.kerbalspaceprogram.com/index.php?/topic/192184-* "Docking Port Descriptions"
-[thread:DST]: https://forum.kerbalspaceprogram.com/index.php?/topic/191719-* "DaMichel's Spherical Tanks"
-[thread:FTF]: https://forum.kerbalspaceprogram.com/index.php?/topic/188841-* "Field Training Facility"
-[thread:FTL]: https://forum.kerbalspaceprogram.com/index.php?/topic/188841-* "Field Training Lab"
-[thread:FND]: https://forum.kerbalspaceprogram.com/index.php?/topic/51430-* "Foundations - in beta now"
-[thread:JET]: http://forum.kerbalspaceprogram.com/index.php?/topic/138441-* "Jettison"
-[thread:MHH]: https://forum.kerbalspaceprogram.com/index.php?/topic/188246-* "More Hitchhikers"
-[thread:NUK]: https://forum.kerbalspaceprogram.com/index.php?/topic/21466-* "Nuke Tiny Parts"
-[thread:OHS]: https://forum.kerbalspaceprogram.com/index.php?/topic/192360-* "Oh Scrap!"
-[thread:PPS]: https://forum.kerbalspaceprogram.com/index.php?/topic/192187-*  "Shielded PicoPort"
-[thread:SCS]: https://github.com/zer0Kerbal/SimpleCargo "Simple Cargo Solutions (SCS)"
-[thread:SDS]: https://forum.kerbalspaceprogram.com/index.php?/topic/191719-* "Stork Delivery System (SDS)"
-[thread:SIL]: https://forum.kerbalspaceprogram.com/index.php?/topic/193050-* "Stock Inline Lights"
-[thread:SYD]: https://forum.kerbalspaceprogram.com/index.php?/topic/192360-* "ScrapYard"
-[thread:TCP]: https://forum.kerbalspaceprogram.com/index.php?/topic/187495-* "Transparent Command Pods"
-[thread:ARPI]: https://forum.kerbalspaceprogram.com/index.php?/topic/193078-* "Olympic1's ARP Icons"
-[thread:BOOM]: https://forum.kerbalspaceprogram.com/index.php?/topic/192938-* "KaboOom!"
-[thread:GOLD]: https://forum.kerbalspaceprogram.com/index.php?/topic/203990-* "[The Gold Standard! (GOLD)"
-[thread:HLWN]: https://forum.kerbalspaceprogram.com/index.php?/topic/205185-* "Halloween"
-[thread:JACK]: https://forum.kerbalspaceprogram.com/index.php?/topic/189466-* "Jack-O'-Lantern"
-[thread:KDVA]: http://forum.kerbalspaceprogram.com/index.php?/topic/202945-* "Keridian Dynamics Vessel Assembly (KDVA)"
-[thread:KGEX]: https://forum.kerbalspaceprogram.com/index.php?/topic/192696-* "KerGuise Experimental Engineering"
-[thread:KPLX]: https://forum.kerbalspaceprogram.com/index.php?/topic/202749-* "Komplexity (KMPX)"
-[thread:MSRC]: https://forum.kerbalspaceprogram.com/index.php?/topic/191525-* "Mini Sample Return Capsule (MSRC)"
-[thread:MSRV]: https://forum.kerbalspaceprogram.com/index.php?/topic/192742-* "Pteron (MSRV)"
-[thread:NSSC]: https://forum.kerbalspaceprogram.com/index.php?/topic/191504-* "Not So SimpleConstructon!"
-[thread:ODFC]: https://forum.kerbalspaceprogram.com/index.php?/topic/187625-* "On Demand Fuel Cells"
-[thread:QBMF]: https://forum.kerbalspaceprogram.com/index.php?/topic/204753-* "Monero Flags"
-[thread:QBTT]: https://forum.kerbalspaceprogram.com/index.php?/topic/204750-* "ISRU Thanks But No Tanks (KBTT)"
-[thread:SILP]: https://forum.kerbalspaceprogram.com/index.php?/topic/193051-* "Stock Inline Lights Patches"
-[thread:SOLS]: https://forum.kerbalspaceprogram.com/index.php?/topic/192489-* "Solar Science (SOLS)"
-[thread:SCON!]: https://forum.kerbalspaceprogram.com/index.php?/topic/191424-* "SimpleConstructon!"
-[thread:SLIF!]: https://forum.kerbalspaceprogram.com/index.php?/topic/191526-* "SimpleLife!"
-[thread:SLOG!]: https://forum.kerbalspaceprogram.com/index.php?/topic/191045-* "SimpleLogistics!"
+[MOAR]: https://forum.kerbalspaceprogram.com/index.php?/topic/191525-* "MoarKerbals"
+[MOARP]: https://www.curseforge.com/kerbal/ksp-mods/moarkerbalsparts "MoarKerbals Parts"
+[B9S]: https://forum.kerbalspaceprogram.com/index.php?/topic/190870-* "B9 Stock Switches"
+[BIO]: https://forum.kerbalspaceprogram.com/index.php?/topic/191426-* "Biomatic"
+[DAR]: https://forum.kerbalspaceprogram.com/index.php?/topic/191719-* "DaMichel's AeroRadial"
+[DCB]: https://forum.kerbalspaceprogram.com/index.php?/topic/191719-* "DaMichel's CargoBays"
+[DMF]: https://forum.kerbalspaceprogram.com/index.php?/topic/191719-* "DaMichel's Fuselage"
+[DPD]: https://forum.kerbalspaceprogram.com/index.php?/topic/192184-* "Docking Port Descriptions"
+[DST]: https://forum.kerbalspaceprogram.com/index.php?/topic/191719-* "DaMichel's Spherical Tanks"
+[FTF]: https://forum.kerbalspaceprogram.com/index.php?/topic/188841-* "Field Training Facility"
+[FTL]: https://forum.kerbalspaceprogram.com/index.php?/topic/188841-* "Field Training Lab"
+[FND]: https://forum.kerbalspaceprogram.com/index.php?/topic/51430-* "Foundations - in beta now"
+[JET]: http://forum.kerbalspaceprogram.com/index.php?/topic/138441-* "Jettison"
+[MHH]: https://forum.kerbalspaceprogram.com/index.php?/topic/188246-* "More Hitchhikers"
+[NUK]: https://forum.kerbalspaceprogram.com/index.php?/topic/21466-* "Nuke Tiny Parts"
+[OHS]: https://forum.kerbalspaceprogram.com/index.php?/topic/192360-* "Oh Scrap!"
+[PPS]: https://forum.kerbalspaceprogram.com/index.php?/topic/192187-*  "Shielded PicoPort"
+[SCS]: https://github.com/zer0Kerbal/SimpleCargo "Simple Cargo Solutions (SCS)"
+[SDS]: https://forum.kerbalspaceprogram.com/index.php?/topic/191719-* "Stork Delivery System (SDS)"
+[SIL]: https://forum.kerbalspaceprogram.com/index.php?/topic/193050-* "Stock Inline Lights"
+[SYD]: https://forum.kerbalspaceprogram.com/index.php?/topic/192360-* "ScrapYard"
+[TCP]: https://forum.kerbalspaceprogram.com/index.php?/topic/187495-* "Transparent Command Pods"
+[ARPI]: https://forum.kerbalspaceprogram.com/index.php?/topic/193078-* "Olympic1's ARP Icons"
+[BOOM]: https://forum.kerbalspaceprogram.com/index.php?/topic/192938-* "KaboOom!"
+[GOLD]: https://forum.kerbalspaceprogram.com/index.php?/topic/203990-* "[The Gold Standard! (GOLD)"
+[HLWN]: https://forum.kerbalspaceprogram.com/index.php?/topic/205185-* "Halloween"
+[JACK]: https://forum.kerbalspaceprogram.com/index.php?/topic/189466-* "Jack-O'-Lantern"
+[KDVA]: http://forum.kerbalspaceprogram.com/index.php?/topic/202945-* "Keridian Dynamics Vessel Assembly (KDVA)"
+[KGEX]: https://forum.kerbalspaceprogram.com/index.php?/topic/192696-* "KerGuise Experimental Engineering"
+[KPLX]: https://forum.kerbalspaceprogram.com/index.php?/topic/202749-* "Komplexity (KMPX)"
+[MSRC]: https://forum.kerbalspaceprogram.com/index.php?/topic/191525-* "Mini Sample Return Capsule (MSRC)"
+[MSRV]: https://forum.kerbalspaceprogram.com/index.php?/topic/192742-* "Pteron (MSRV)"
+[NSSC]: https://forum.kerbalspaceprogram.com/index.php?/topic/191504-* "Not So SimpleConstructon!"
+[ODFC]: https://forum.kerbalspaceprogram.com/index.php?/topic/187625-* "On Demand Fuel Cells"
+[QBMF]: https://forum.kerbalspaceprogram.com/index.php?/topic/204753-* "Monero Flags"
+[QBTT]: https://forum.kerbalspaceprogram.com/index.php?/topic/204750-* "ISRU Thanks But No Tanks (KBTT)"
+[SILP]: https://forum.kerbalspaceprogram.com/index.php?/topic/193051-* "Stock Inline Lights Patches"
+[SOLS]: https://forum.kerbalspaceprogram.com/index.php?/topic/192489-* "Solar Science (SOLS)"
+[SCON!]: https://forum.kerbalspaceprogram.com/index.php?/topic/191424-* "SimpleConstructon!"
+[SLIF!]: https://forum.kerbalspaceprogram.com/index.php?/topic/191526-* "SimpleLife!"
+[SLOG!]: https://forum.kerbalspaceprogram.com/index.php?/topic/191045-* "SimpleLogistics!"
 
 <!-- other mods -->
-[thread:mm]: https://forum.kerbalspaceprogram.com/index.php?/topic/50533-* "Module Manager"
-[thread:ks]: https://forum.kerbalspaceprogram.com/index.php?/topic/89285-* "KerbalStats"  
-[thread:crp]: https://forum.kerbalspaceprogram.com/index.php?/topic/83007-* "Community Resource Pack"
-[thread:ics]: https://forum.kerbalspaceprogram.com/index.php?/topic/74182-* " Ioncross Crew Support"   
-[thread:kcl]: https://forum.kerbalspaceprogram.com/index.php?/topic/179207-* "Kerbal ChangeLog"
-[thread:twk]: https://forum.kerbalspaceprogram.com/index.php?/topic/179030-* "TweakScale"
-[thread:usils]: https://forum.kerbalspaceprogram.com/index.php?/topic/105202-* "USI Life Support"  
-[thread:usmks]: http://forum.kerbalspaceprogram.com/index.php?/topic/154587-* "USI MKS"  
-[thread:scol]: https://forum.kerbalspaceprogram.com/index.php?/topic/205078-* "SIMPLEX Colonies"
-[thread:snacks]: https://forum.kerbalspaceprogram.com/index.php?/topic/149604-* "Snacks"  
+[mm]: https://forum.kerbalspaceprogram.com/index.php?/topic/50533-* "Module Manager"
+[ks]: https://forum.kerbalspaceprogram.com/index.php?/topic/89285-* "KerbalStats"  
+[crp]: https://forum.kerbalspaceprogram.com/index.php?/topic/83007-* "Community Resource Pack"
+[ics]: https://forum.kerbalspaceprogram.com/index.php?/topic/74182-* " Ioncross Crew Support"   
+[kcl]: https://forum.kerbalspaceprogram.com/index.php?/topic/179207-* "Kerbal ChangeLog"
+[twk]: https://forum.kerbalspaceprogram.com/index.php?/topic/179030-* "TweakScale"
+[usils]: https://forum.kerbalspaceprogram.com/index.php?/topic/105202-* "USI Life Support"  
+[usmks]: http://forum.kerbalspaceprogram.com/index.php?/topic/154587-* "USI MKS"  
+[scol]: https://forum.kerbalspaceprogram.com/index.php?/topic/205078-* "SIMPLEX Colonies"
+[snacks]: https://forum.kerbalspaceprogram.com/index.php?/topic/149604-* "Snacks"  
 
 <!--- statics -->
-[LINK:staticalliam7]: https://forum.kerbalspaceprogram.com/index.php?/profile/216180-staticalliam7/ "[staticalliam7"  
-[LINK:linuxgurugamer]: https://forum.kerbalspaceprogram.com/index.php?/profile/129964-linuxgurugamer/ "linuxgurugamer"
-[LINK:zer0Kerbal]: https://forum.kerbalspaceprogram.com/index.php?/profile/190933-zer0kerbal/ "zer0Kerbal"
-[LINK:strideknight]: https://forum.kerbalspaceprogram.com/index.php?/profile/67555-strideknight/ "strideknight"  
+[staticalliam7]: https://forum.kerbalspaceprogram.com/index.php?/profile/216180-staticalliam7/ "[staticalliam7"  
+[linuxgurugamer]: https://forum.kerbalspaceprogram.com/index.php?/profile/129964-linuxgurugamer/ "linuxgurugamer"
+[zer0Kerbal]: https://forum.kerbalspaceprogram.com/index.php?/profile/190933-zer0kerbal/ "zer0Kerbal"
+[strideknight]: https://forum.kerbalspaceprogram.com/index.php?/profile/67555-strideknight/ "strideknight"  
 
 <!-- footnotes -->
 [^1]: ***may*** work on other versions (YMMV)
