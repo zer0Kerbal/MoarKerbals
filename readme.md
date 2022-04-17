@@ -20,9 +20,11 @@ Populate your colony in space! A simple add on that adds the ability to use reso
 
 adopted with *express* permission and brought to you by *KerbSimpleCo*
 
+<img src="https://github.com/zer0Kerbal/MoarKerbals/blob/master/img/HeroLogo_1920x1920.jpg?raw=true" alt="MoarKerbals logo" width="75%" height="75%">
+
 ---
 
-## Description 
+## Description
 
 ### Preamble by [@`strideknight`][strideknight]  
 
