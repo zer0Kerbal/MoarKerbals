@@ -58,7 +58,25 @@ updated: 03 Jun 2022
 
 ### Art Asset(s)
 
-* Flags
+####  Sound
+
+* Author: "wobbleboxx.com"
+  * [![Public Domain][LIC:CC0:shd]][LIC:CC0:url] ![Public Domain][LIC:CC0:log]
+  * Rise05.ogg
+* Author: Lokif
+  * [![Public Domain][LIC:CC0:shd]][LIC:CC0:url] ![Public Domain][LIC:CC0:log]
+  * negative.ogg
+  * positive.ogg
+  * save.ogg
+  * misc_sound.ogg
+
+* Author: SweetNeo85
+  * [![Public Domain][LIC:CCS+:shd]][LIC:CCS+:url]
+  * [wilhelm](https://freesound.org/people/SweetNeo85/sounds/13797/)
+
+* Author: 
+  * [![Public Domain][LIC:CC0:shd]][LIC:CC0:url] ![Public Domain][LIC:CC0:log]
+  * kuddleshack
 
 ### Testing and Support
 
@@ -96,5 +114,12 @@ updated: 03 Jun 2022
 [SW]: https://raw.githubusercontent.com/zer0Kerbal/zer0Kerbal/master/img/SW.png "Svenska"  
 [TR]: https://raw.githubusercontent.com/zer0Kerbal/zer0Kerbal/master/img/TR.png "Türk"  
 [TW]: https://raw.githubusercontent.com/zer0Kerbal/zer0Kerbal/master/img/TW.png "国语"
+
+[LIC:CC0:url]: https://creativecommons.org/share-your-work/public-domain/cc0/ "No Rights Reserved"
+[LIC:CC0:log]: https://licensebuttons.net/i/p/cc-zero/transparent/33/66/99/76x22.png "No Rights Reserved"
+[LIC:CC0:shd]: https://img.shields.io/badge/license-CC0-ef9421?style=plastic&labelColor=black&logoColor=ef9421&logo=creativecommons "No Rights Reserved"
+
+[LIC:CCS+:url]: https://creativecommons.org/licenses/sampling+/1.0/ "Sampling Plus 1.0"
+[LIC:CCS+:shd]: https://img.shields.io/badge/license-CC%20Sampling%20Plus%201.0-ef9421?style=plastic&labelColor=black&logoColor=ef9421&logo=creativecommons "Sampling Plus 1.0"
 
 <!-- this file CC BY-ND 4.0 by zer0Kerbal -->
