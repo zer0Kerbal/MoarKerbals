@@ -1,4 +1,4 @@
-# settings.yml 1.0.9.6
+# settings.yml 1.0.9.7
 # this file: CC BY-ND 4.0
 # zer0Kerbal
 # created 01 Jan 2022
@@ -228,6 +228,34 @@ labels:
   - name: "state: won't fix"
     color: e6e6e6
     description: No action will be taken at this time
+
+  - name: "hacktoberfest"
+    color: ff9900
+    description: flag for entry into hacktoberfest
+
+  - name: "hacktoberfest-accepted"
+    color: ff9900
+    description: flag for stating PR is accepted as appropriate for hacktoberfest
+
+  - name: "good-first-issue"
+    color: AEF923
+    description: flag for inclusion into good-first-issues listing
+
+  - name: "contributions-welcome"
+    color: AEF923
+    description: flag for inclusion into contributions-welcome listing
+
+  - name: "beginner-friendly"
+    color: AEF923
+    description: flag for inclusion into beginner-friendly listing
+
+  - name: "invalid"
+    color: FFFF00
+    description: flagged as invalid
+
+  - name: "spam"
+    color: EB212E
+    description: spam flag
 
 # Milestones: define milestones for Issues and Pull Requests
 milestones:
