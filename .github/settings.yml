@@ -17,7 +17,7 @@ repository:
   homepage: https://forum.kerbalspaceprogram.com/index.php?/topic/191525-*/
 
   # A comma-separated list of topics to set on the repository
-  topics: klone,clone,kuddle,populate,birth,growth,mod,kerbal,kerbalspaceprogram,ksp,kerbal-space,kerbal-space-program,zedk,strideknight
+  topics: klone,clone,kuddle,populate,birth,growth,kerbal,kerbalspaceprogram,ksp,ksp-mods,ksp-parts,kerbal-mods,zedk,strideknight,contributions-welcome,hacktoberfest,mods
 
 # Labels: define labels for Issues and Pull Requests
 labels:
