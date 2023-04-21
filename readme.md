@@ -5,9 +5,10 @@ updated: 15 Apr 2022 -->
 
 <!--this file: CC BY-ND 4.0 unported by zer0Kerbal-->
 
-[![MoarKerbals][MOD:shd:latest]][MOD:forum] [![KSP version][KSP:shd]][KSP:url]  [![License][LIC:shd]][LIC:url]  
-[![Curseforge][CURSFG:shd]][CURSFG:url] [![CKAN][CKAN:shd]][CKAN:url] [![GitHub][GITHUB:shd]][GITHUB:url] [![SpaceDock][SPCDCK:shd]][SPCDCK:url]  
-![Code][CODE:shd] ![KSP-AVC][AVC:shd] ![Validate AVC .version files][AVCVLD:shd] [![GitHub Pages][MOD:pages:shd]][MOD:pages]
+[![MoarKerbals][MOD:shd:latest]][MOD:forum]  
+[![KSP version][KSP:shd]][KSP:url] [![License][LIC:shd]][LIC:url]  
+[![Curseforge][CURSFG:shd]][CURSFG:url] [![GitHub][GITHUB:shd]][GITHUB:url]
+![Code][CODE:shd] ![KSP-AVC][AVC:shd] [![GitHub Pages][MOD:pages:shd]][MOD:pages]
 
 
 
