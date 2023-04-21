@@ -7,8 +7,9 @@ updated: 15 Apr 2022 -->
 
 [![MoarKerbals][MOD:shd:latest]][MOD:forum]  
 [![KSP version][KSP:shd]][KSP:url] [![License][LIC:shd]][LIC:url]  
-[![Curseforge][CURSFG:shd]][CURSFG:url] [![GitHub][GITHUB:shd]][GITHUB:url]
-![Code][CODE:shd] ![KSP-AVC][AVC:shd] [![GitHub Pages][MOD:pages:shd]][MOD:pages]
+[![Curseforge][CURSFG:shd]][CURSFG:url] [![GitHub][GITHUB:shd]][GITHUB:url] [![GitHub Pages][MOD:pages:shd]][MOD:pages]  
+
+![Code][CODE:shd] 
 
 
 
