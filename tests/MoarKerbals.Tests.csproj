@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup><OutputType>Exe</OutputType><TargetFramework>net8.0</TargetFramework><ImplicitUsings>enable</ImplicitUsings><TreatWarningsAsErrors>true</TreatWarningsAsErrors></PropertyGroup>
+  <ItemGroup><Compile Include="../source/Core/Rules.cs" Link="Rules.cs" /></ItemGroup>
+  <ItemGroup><Compile Include="../source/Core/GenderLabels.cs" Link="GenderLabels.cs" /></ItemGroup>
+  <ItemGroup><Compile Remove="Runtime/**/*.cs" /></ItemGroup>
+  <ItemGroup><Compile Remove="ResourceRuntime/**/*.cs" /></ItemGroup>
+  <ItemGroup><Compile Remove="SettingsRuntime/**/*.cs" /></ItemGroup>
+  <ItemGroup><Compile Remove="CloneRuntime/**/*.cs" /></ItemGroup>
+</Project>

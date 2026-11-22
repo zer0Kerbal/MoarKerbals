@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType><TargetFramework>net8.0</TargetFramework><ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>disable</Nullable><TreatWarningsAsErrors>true</TreatWarningsAsErrors><NoWarn>$(NoWarn);1701;1702</NoWarn>
+    <KspRoot Condition="'$(KspRoot)' == ''">C:\Program Files (x86)\Steam\steamapps\common\Kerbal Space Program</KspRoot>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="$(KspRoot)\KSP_x64_Data\Managed\Assembly-CSharp.dll" />
+    <Reference Include="$(KspRoot)\KSP_x64_Data\Managed\Assembly-CSharp-firstpass.dll" />
+    <Reference Include="$(KspRoot)\KSP_x64_Data\Managed\UnityEngine*.dll" />
+    <Compile Include="../../source/Support/Settings.cs" Link="Settings.cs" />
+    <Compile Include="../../source/Support/SettingsPersistence.cs" Link="SettingsPersistence.cs" />
+  </ItemGroup>
+</Project>

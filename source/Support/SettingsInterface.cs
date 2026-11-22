@@ -1,4 +1,4 @@
-﻿// SettingsInterface.cs v1.0.0.0
+// SettingsInterface.cs v1.0.0.0
 #region CC BY-NC-SA 3.0
 /** SettingsInterface.cs
  * 
@@ -39,36 +39,36 @@ namespace MoarKerbals
     {
         //public static bool RequireLivingKerbal()
         //{
-        //    return HighLogic.CurrentGame.Parameters.CustomParams<Settings2>().requireLivingKerbal;
+        //    return HighLogic.CurrentGame.Parameters.CustomParams<MoarKerbalsGameplaySettings>().requireLivingKerbal;
         //}
 
         //internal static bool ColoredPAW()
         //{
-        //    return HighLogic.CurrentGame.Parameters.CustomParams<Settings2>().coloredPAW;
+        //    return HighLogic.CurrentGame.Parameters.CustomParams<MoarKerbalsGameplaySettings>().coloredPAW;
         //}
 
         //internal static bool InGameMail()
         //{
-        //    return HighLogic.CurrentGame.Parameters.CustomParams<Settings2>().gameMail;
+        //    return HighLogic.CurrentGame.Parameters.CustomParams<MoarKerbalsGameplaySettings>().gameMail;
         //}
 
         //internal static bool SoundOn()
         //{
-        //    return HighLogic.CurrentGame.Parameters.CustomParams<Settings>().soundOn;
+        //    return HighLogic.CurrentGame.Parameters.CustomParams<MoarKerbalsGeneralSettings>().soundOn;
         //}
 
         internal static double globalKloningCostMultiplier()
         {
-            return HighLogic.CurrentGame.Parameters.CustomParams<Settings>().globalKloningCostMultiplier;
+            return HighLogic.CurrentGame.Parameters.CustomParams<MoarKerbalsGeneralSettings>().globalKloningCostMultiplier;
         }
 
         internal static double kuddleTimeNeeded()
         {
-            return HighLogic.CurrentGame.Parameters.CustomParams<Settings>().kuddleTimeNeeded * 60;
+            return HighLogic.CurrentGame.Parameters.CustomParams<MoarKerbalsGeneralSettings>().kuddleTimeNeeded * 60;
         }
         internal static double slowUpdateTime()
         {
-            return HighLogic.CurrentGame.Parameters.CustomParams<Settings>().slowUpdateTime;
+            return HighLogic.CurrentGame.Parameters.CustomParams<MoarKerbalsGeneralSettings>().slowUpdateTime;
         }
     }
 }

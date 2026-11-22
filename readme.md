@@ -1,3 +1,9 @@
+## KSP 1.12.5 feature update
+
+The update includes compatible crew creation and recruitment, independent KuddleShack timers, scaled cabin seats, optional KIS and MKS support, and migration for legacy settings. See [feature and build notes](docs/MODERN-KSP.md) for behaviour and verification.
+
+Build with PowerShell 7 and the .NET 8 SDK using `./build.ps1 -Configuration Release -Package`. The build stages a package locally.
+
 <!-- readme.md v1.6.6.3
 MoarKerbals (MOAR)
 created: 17 Jul 2017

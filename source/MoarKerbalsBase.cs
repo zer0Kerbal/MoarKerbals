@@ -1,228 +1,218 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using KSP.Localization;
 using UnityEngine;
+using MoarKerbals.Core;
 
 namespace MoarKerbals
 {
     public class MoarKerbalsBase : PartModule
     {
-        #region KSPFields
+        [KSPField] public string recipeIngredients = "";
+        [KSPField] public string recipeAmounts = "";
+        [KSPField] public string initiateAction = "";
+        [KSPField] public float costFunds;
+        [KSPField] public float costScience;
+        [KSPField] public float costReputation;
+        internal readonly List<ResourceRequired> resourceRequired = new List<ResourceRequired>();
+        internal static string groupName => Localizer.Format("#MOAR-003", Version.SText);
+        private Ingredient[] recipe = new Ingredient[0];
+        private bool recipeValid;
+        private string recipeError = "Recipe not initialized";
+        protected static readonly System.Random Random = new System.Random();
 
-        /// <summary>recipeIngreadients </summary>
-        [KSPField]
-        public string recipeIngredients = "";
-
-        /// <summary>RecipeAmounts</summary>
-        [KSPField]
-        public string recipeAmounts = "";
-
-        /// <summary>initiateAction (defaults to #MOAR-Base-01</summary>
-        [KSPField]
-        public string initiateAction = Localizer.Format("#MOAR-Base-01");
-
-        /// <summary>costFunds (default = 0)</summary>
-        [KSPField(isPersistant = false)]
-        public float costFunds = 0f;
-
-        /// <summary>costScient (default - 0) </summary>
-        [KSPField(isPersistant = false)]
-        public float costScience = 0f;
-
-        /// <summary>costReputation (default = 0)</summary>
-        [KSPField(isPersistant = false)]
-        public float costReputation = 0f;
-
-        #endregion
-        #region Variables | Constants
-
-        /// <summary>internal list of resourcesRequired  </summary>
-        internal List<ResourceRequired> resourceRequired = new List<ResourceRequired>();
-
-        /// <summary>internal name of GUI groupName  </summary>
-        internal static string groupName = Localizer.Format("#MOAR-003", Version.SText);
-        #endregion
-
-        /// <summary>The Global Cost Multiplier
-        /// Need this to be used in GetInfo()
-        /// updated in OnStart() and OnFixedUpdate()
-        /// </summary>
-        //internal double gblMult;
-
-        /// <summary>onStart</summary>
-        public override void OnStart(PartModule.StartState state)
+        public override void OnStart(StartState state)
         {
-            //base.OnStart(state);
-            //Logging.DLog(logMsg: "MoarKerbalsBase.OnStart");
-            // Debug.Log(message: "MoarKerbalsBase.OnStart");
-
-            if (recipeIngredients != string.Empty && recipeAmounts != string.Empty)
-            {
-                var resourceList = recipeIngredients.Split(',');
-                var str_amounts = recipeAmounts.Split(',');
-                var resourceAmounts = new double[str_amounts.Length];
-                for (int i = 0; i < resourceList.Length; i++)
-                {
-                    resourceList[i] = resourceList[i].Trim();
-                    resourceAmounts[i] = double.Parse(str_amounts[i]);
-
-                    resourceRequired.Add(new ResourceRequired(resourceList[i], resourceAmounts[i]));
-                }
-            }
+            base.OnStart(state);
+            InitializeRecipe();
+            if (HighLogic.CurrentGame == null) return;
+            string title = HighLogic.CurrentGame.Parameters.CustomParams<MoarKerbalsDisplaySettings>().coloredPAW ? "<color=#BADA55>" + groupName + "</color>" : groupName;
+            foreach (BaseField field in Fields) if (field.group != null && field.group.name == "MoarKerbals") field.group.displayName = title;
         }
 
-        /// <summary>
-        /// Unity FixedUpdate
-        /// </summary>
-        //private protected void FixedUpdate()
-        //{
-        //    base.OnFixedUpdate();
-        //}
-
-        /// <summary>GatherResources: determine if required resources available and debit them from part.</summary>
-        /// <param name="part"></param>
-        /// <returns></returns>
-        private protected bool GatherResources(Part part)
+        protected void InitializeRecipe()
         {
-            double gblMult = HighLogic.CurrentGame.Parameters.CustomParams<Settings>().globalKloningCostMultiplier;
-
-            //Steps through to gather resources
-            for (int i = 0; i < resourceRequired.Count; i++)
+            resourceRequired.Clear();
+            recipeValid = false;
+            try
             {
-                double amtRequired = resourceRequired[i].amount * gblMult; // uses globalMultiplier
-                double available = part.RequestResource(resourceRequired[i].Resource.id, amtRequired);
-
-                Logging.DLog(logMsg: $"GatherResources: {resourceRequired[i].resource} : have: {available:F2} need: {amtRequired:F2} |  Global Multiplier: {gblMult:P2}");
-                if (available + 0.0001f < amtRequired)
+                recipe = Rules.ParseRecipe(recipeIngredients, recipeAmounts);
+                foreach (var item in recipe)
                 {
-                    //Upon not having enough of a resource, returns all previously collected
-                    vessel.RequestResource(part, resourceRequired[i].Resource.id, -available, false);
-                    for (int j = 0; j < i; j++)
-                        vessel.RequestResource(part, resourceRequired[j].Resource.id, -amtRequired, false);
+                    var resource = new ResourceRequired(item.Name, item.Amount);
+                    if (resource.Resource == null) throw new FormatException("Unknown resource: " + item.Name);
+                    resourceRequired.Add(resource);
+                }
+                if (!Rules.FiniteNonNegative(costFunds) || !Rules.FiniteNonNegative(costScience) || !Rules.FiniteNonNegative(costReputation))
+                    throw new FormatException("Costs must be finite and non-negative.");
+                recipeValid = true;
+                recipeError = "";
+            }
+            catch (Exception error) { recipeError = error.Message; Logging.DLogError("Invalid recipe: " + error.Message); }
+        }
 
-                    Logging.Msg(s: Localizer.Format("#MOAR-Insufficient", resourceRequired[i].resource, available, amtRequired));
+        // Read-only preflight for the PAW. ExecutePaid still validates and charges atomically on click.
+        protected string CompletionBlocker()
+        {
+            if (!recipeValid) return "invalid configuration: " + recipeError;
+            if (HighLogic.CurrentGame == null || part == null) return "game unavailable";
+            double multiplier = HighLogic.CurrentGame.Parameters.CustomParams<MoarKerbalsGeneralSettings>().globalKloningCostMultiplier;
+            if (!Rules.FiniteNonNegative(multiplier)) return "invalid cost multiplier";
+            var mode = HighLogic.CurrentGame.Mode;
+            if (mode == Game.Modes.CAREER)
+            {
+                if (Funding.Instance == null || Reputation.Instance == null || ResearchAndDevelopment.Instance == null)
+                    return "career balances unavailable";
+                if (!Rules.CanAfford(Funding.Instance.Funds, costFunds)) return "insufficient funds (need " + costFunds + ")";
+                if (!Rules.CanAfford(Reputation.Instance.reputation, costReputation)) return "insufficient reputation (need " + costReputation + ")";
+            }
+            if (mode == Game.Modes.CAREER || mode == Game.Modes.SCIENCE_SANDBOX)
+                if (ResearchAndDevelopment.Instance == null || !Rules.CanAfford(ResearchAndDevelopment.Instance.Science, costScience))
+                    return "insufficient science (need " + costScience + ")";
+            var resources = new RecipeResources(part);
+            foreach (var item in recipe)
+            {
+                double needed = item.Amount * multiplier;
+                if (!Rules.FiniteNonNegative(needed)) return "invalid resource cost";
+                if (needed == 0) continue;
+                double available, capacity;
+                resources.Totals(item.Name, out available, out capacity);
+                if (available + 1e-7 < needed)
+                    return string.Format(System.Globalization.CultureInfo.InvariantCulture,
+                        "need {0:0.##} {1} (available {2:0.##})", needed, item.Name, available);
+            }
+            return "";
+        }
+
+        protected bool ExecutePaid(Func<bool> operation)
+        {
+            if (!HighLogic.LoadedSceneIsFlight || vessel == null) return false;
+            try
+            {
+                string blocker = CompletionBlocker();
+                if (blocker.Length != 0)
+                {
+                    Logging.Msg("MoarKerbals: " + blocker + ". No payment taken.");
                     return false;
                 }
+                var resources = new RecipeResources(part);
+                bool result = Rules.Transact(recipe, HighLogic.CurrentGame.Parameters.CustomParams<MoarKerbalsGeneralSettings>().globalKloningCostMultiplier,
+                    CanAfford, resources.Request,
+                    operation, DebitCurrencies);
+                if (!result) Logging.Msg("MoarKerbals: operation unavailable, or insufficient resources/currency. No payment taken.");
+                return result;
             }
-            return true;
+            catch (Exception error) { Logging.DLogError("Operation failed: " + error); return false; }
         }
 
-        /// <summary>GatherResources: determine if required resources available and debit them from vessel.</summary>
-        /// <param name="part"></param>
-        /// <param name="percentage"></param>
-        /// <returns></returns>
-        private protected bool GatherResources(Part part, double percentage = 1f)
+        private bool CanAfford()
         {
-            double gblMult = HighLogic.CurrentGame.Parameters.CustomParams<Settings>().globalKloningCostMultiplier;
+            var mode = HighLogic.CurrentGame.Mode;
+            if (mode == Game.Modes.CAREER)
+                return Funding.Instance != null && Reputation.Instance != null && ResearchAndDevelopment.Instance != null &&
+                    Rules.CanAfford(Funding.Instance.Funds, costFunds) && Rules.CanAfford(Reputation.Instance.reputation, costReputation) &&
+                    Rules.CanAfford(ResearchAndDevelopment.Instance.Science, costScience);
+            return mode != Game.Modes.SCIENCE_SANDBOX || (ResearchAndDevelopment.Instance != null && Rules.CanAfford(ResearchAndDevelopment.Instance.Science, costScience));
+        }
 
-            //Steps through to gather resources
-            for (int i = 0; i < resourceRequired.Count; i++)
+        private void DebitCurrencies()
+        {
+            var mode = HighLogic.CurrentGame.Mode;
+            if (mode == Game.Modes.CAREER)
             {
-                double amtRequired = resourceRequired[i].amount * percentage * gblMult; // uses globalMultiplier
-                double available = vessel.RequestResource(part, resourceRequired[i].Resource.id, amtRequired, false);
+                if (costFunds != 0) Funding.Instance.AddFunds(-costFunds, TransactionReasons.CrewRecruited);
+                if (costReputation != 0) Reputation.Instance.AddReputation(-costReputation, TransactionReasons.CrewRecruited);
+            }
+            if ((mode == Game.Modes.CAREER || mode == Game.Modes.SCIENCE_SANDBOX) && costScience != 0)
+                ResearchAndDevelopment.Instance.AddScience(-costScience, TransactionReasons.CrewRecruited);
+        }
 
-                Logging.DLog(logMsg: $"GatherResourcesT: {resourceRequired[i].resource} : have: {available:F2} need: {amtRequired:F2} |  Global Multiplier: {gblMult:P2}");
+        protected static bool TraitExists(string name)
+        {
+            Experience.ExperienceTraitConfig config;
+            return KerbalRoster.TryGetExperienceTraitConfig(name, out config);
+        }
 
-                if (available + 0.0001f < amtRequired)
+        protected bool CreateCrew(bool civilian, ProtoCrewMember source = null)
+        {
+            if (!Rules.HasRoom(part.protoModuleCrew.Count, part.CrewCapacity, false) ||
+                (source == null && civilian && !TraitExists("Civilian")) ||
+                (source != null && (!part.protoModuleCrew.Contains(source) || !TraitExists(source.trait)))) return false;
+            var roster = HighLogic.CurrentGame.CrewRoster;
+            ProtoCrewMember kerbal = null;
+            try
+            {
+                if (source != null)
                 {
-                    //Upon not having enough of a resource, returns all previously collected
-                    vessel.RequestResource(part, resourceRequired[i].Resource.id, -available, false);
-
-                    for (int j = 0; j < i; j++)
-                        vessel.RequestResource(part, resourceRequired[j].Resource.id, -amtRequired, false);
-
-                    Logging.Msg(s: Localizer.Format("#MOAR-Insufficient", resourceRequired[i].resource, available, amtRequired));
-                    return false;
+                    // Generate a new identity; never rename or shallow-copy a roster member.
+                    for (int attempt = 0; attempt < 100 && kerbal == null; attempt++)
+                    {
+                        string name = CrewGenerator.GetRandomName(source.gender, Random);
+                        var candidate = KerbalCloning.Create(source, name, HighLogic.CurrentGame.Mode);
+                        if (roster.AddCrewMember(candidate)) kerbal = candidate;
+                    }
+                    if (kerbal == null) throw new InvalidOperationException("Could not allocate a unique clone name.");
                 }
+                else
+                {
+                    kerbal = roster.GetNewKerbal(ProtoCrewMember.KerbalType.Crew);
+                    var suit = (ProtoCrewMember.KerbalSuit)HighLogic.CurrentGame.Parameters.CustomParams<MoarKerbalsGameplaySettings>().birthdaySuit;
+                    if (Enum.IsDefined(typeof(ProtoCrewMember.KerbalSuit), suit)) kerbal.suit = suit;
+                    if (civilian) KerbalRoster.SetExperienceTrait(kerbal, "Civilian");
+                }
+                if (!part.AddCrewmember(kerbal)) throw new InvalidOperationException("No seat available.");
+                kerbal.rosterStatus = ProtoCrewMember.RosterStatus.Assigned;
+                vessel.SpawnCrew();
+                return true;
             }
-            return true;
+            catch (Exception error)
+            {
+                if (kerbal != null)
+                {
+                    if (part.protoModuleCrew.Contains(kerbal)) part.RemoveCrewmember(kerbal);
+                    roster.Remove(kerbal);
+                }
+                Logging.DLogError("Crew creation rolled back: " + error.Message);
+                return false;
+            }
         }
 
-        /// <summary>verify science, reputation, and funds availability</summary>
-        /// <returns>true if success</returns>
-        private protected bool GatherCurrencies()
+        protected void NotifyCrewChanged()
         {
-            // Debug.Log(message: "MoarKerbals: GatherCurrencies");
-            Logging.DLog(logMsg: "MoarKerbals: GatherCurrencies");
+            CrewInventoryRefresh.Refresh(part);
+            GameEvents.onVesselChange.Fire(vessel);
+            GameEvents.onVesselWasModified.Fire(vessel);
+        }
 
-            switch (HighLogic.CurrentGame.Mode)
+        protected void PlaySound(string category, bool success)
+        {
+            if (!HighLogic.CurrentGame.Parameters.CustomParams<MoarKerbalsGameplaySettings>().soundOn) return;
+            var settings = HighLogic.CurrentGame.Parameters.CustomParams<MoarKerbalsGeneralSettings>();
+            string[] clips;
+            int choice;
+            switch (category)
             {
-                case Game.Modes.SANDBOX:
-                    Logging.DLog(logMsg: "MoarKerbals: Sandbox");
-                    return true;
-                case Game.Modes.CAREER:
-                    Logging.DLog(logMsg: "MoarKerbals: Career");
-                    Logging.DLog(logMsg: $"MoarKerbals: Funds {Funding.Instance.Funds:F4} need {costFunds:F2}.");
-                    Logging.DLog(logMsg: $"MoarKerbals: Rep: {Reputation.Instance.reputation:F4} need {costReputation:F2}.");
-                    Logging.DLog(logMsg: $"MoarKerbals: Science: {ResearchAndDevelopment.Instance.Science:F4} need {costScience:F2}.");
-                    if ((costReputation < Reputation.Instance.reputation) &&
-                        (costScience < ResearchAndDevelopment.Instance.Science) &&
-                        (costFunds < Funding.Instance.Funds))
-                    {
-                        return true;
-                    }
-                    else
-                    {
-                        Logging.Msg(Localizer.Format("#MOAR-Insufficient-Rep", Reputation.Instance.reputation, costReputation));
-                        Logging.Msg(Localizer.Format("#MOAR-Insufficient-Funds", Funding.Instance.Funds, costFunds));
-                        Logging.Msg(Localizer.Format("#MOAR-Insufficient-Sci", ResearchAndDevelopment.Instance.Science, costScience));
-                    }
+                case "A":
+                    clips = success ? new[] { "kloning", "save" } : new[] { "overload", "negative", "wilhelm" };
+                    choice = success ? settings.soundClipA0 : settings.soundClipA1;
                     break;
-                case Game.Modes.SCENARIO:
-                    Logging.DLog(logMsg: "MoarKerbals: Scenario");
-                    return true;
-                case Game.Modes.SCIENCE_SANDBOX:
-                    Logging.DLog(logMsg: "MoarKerbals: Science Sandbox");
-                    Logging.DLog(logMsg: $"MoarKerbals: Science: {ResearchAndDevelopment.Instance.Science:F4} need {costScience:F2}.");
-                    if ((costScience < ResearchAndDevelopment.Instance.Science) &&
-                        (costFunds < Funding.Instance.Funds))
-                        return true;
-                    else Logging.Msg(Localizer.Format("#MOAR-Insufficient-Sci", ResearchAndDevelopment.Instance.Science, costScience));
+                case "B":
+                    clips = success ? new[] { "kuddleshack", "positive" } : new[] { "misc_sound", "negative" };
+                    choice = success ? settings.soundClipB0 : settings.soundClipB1;
                     break;
                 default:
-                    Logging.DLog("CurrentGame.Mode: Other");
-                    return true;
+                    clips = success ? new[] { "positive", "Rise05" } : new[] { "negative", "misc_sound" };
+                    choice = success ? settings.soundClipC0 : settings.soundClipC1;
+                    break;
             }
-            return false;
+            if (choice == 0) choice = Random.Next(1, clips.Length + 1);
+            string clip = clips[Math.Max(0, Math.Min(clips.Length - 1, choice - 1))];
+            var sound = GameDatabase.Instance.GetAudioClip("KerbthulhuKineticsProgram/MoarKerbals/Sounds/" + clip);
+            if (sound != null) AudioSource.PlayClipAtPoint(sound, part.transform.position,
+                settings.soundVolume);
         }
 
-        /// <summary>spend science, reputation, and funds</summary>
-        /// <returns>true = success</returns>
-        private protected bool DebitCurrencies()
-        {
-            //Debug.Log(message: "MoarKerbals: DebitCurrencies");
-            Logging.DLog(logMsg: "MoarKerbals: DebitCurrencies");
-
-            switch (HighLogic.CurrentGame.Mode)
-            {
-                case Game.Modes.SANDBOX:
-                    Logging.DLog(logMsg: "MoarKerbals: Sandbox");
-                    return true;
-                case Game.Modes.CAREER:
-                    Logging.DLog(logMsg: "MoarKerbals: Career");
-                    Logging.DLog(logMsg: $"MoarKerbals: Funds: {Funding.Instance.Funds:F4} need {costFunds:F2}.");
-                    Logging.DLog(logMsg: $"MoarKerbals: Rep: {Reputation.Instance.reputation:F4} need {costReputation:F2}.");
-                    Logging.DLog(logMsg: $"MoarKerbals: Science: {ResearchAndDevelopment.Instance.Science:F4} need {costScience:F2}.");
-
-                    Reputation.Instance.AddReputation((float)-costReputation, TransactionReasons.CrewRecruited);
-                    Funding.Instance.AddFunds((float)-costFunds, TransactionReasons.CrewRecruited);
-                    ResearchAndDevelopment.Instance.AddScience((float)-costScience, TransactionReasons.CrewRecruited);
-                    return true;
-                case Game.Modes.SCENARIO:
-                    Logging.DLog(logMsg: "MoarKerbals: Scenario");
-                    return true;
-                case Game.Modes.SCIENCE_SANDBOX:
-                    Logging.DLog(logMsg: "MoarKerbals: Science Sandbox");
-                    Logging.DLog(logMsg: $"MoarKerbals: Science: {ResearchAndDevelopment.Instance.Science:F4} need {costScience:F2}.");
-
-                    Funding.Instance.AddFunds((float)-costFunds, TransactionReasons.CrewRecruited);
-                    ResearchAndDevelopment.Instance.AddScience((float)-costScience, TransactionReasons.CrewRecruited);
-                    return true;
-
-                default:
-                    Logging.DLog(logMsg: "CurrentGame.Mode: Other");
-                    return true;
-            }
-        }
+        protected string RecipeInfo(string description) => "MoarKerbals " + Version.Number + "\n" + description +
+            "\nResources: " + recipeIngredients + " (" + recipeAmounts + ")\nCost per operation: " + costFunds + " funds, " + costScience + " science, " + costReputation + " reputation.";
     }
 }
