@@ -1,491 +1,276 @@
+// Derived from MoarKerbals by strideknight and zer0Kerbal; CC-BY-NC-SA-4.0.
 using System;
-using System.Collections;
+using System.Linq;
 using System.Collections.Generic;
+using System.Globalization;
 using UnityEngine;
-using static MoarKerbals.Logging;
-using KSP.Localization;
+using MoarKerbals.Core;
 
 namespace MoarKerbals
 {
-    /// <summary>KuddleShack module</summary>
     [KSPModule("KuddleShack")]
     public class KuddleShack : MoarKerbalsBase
     {
-        [KSPField(guiName = "#MOAR-Kuddle-00",
-                  groupName = "MoarKerbals",
-                  groupDisplayName = "#MOAR-001",
-                  groupStartCollapsed = true,
-                  guiActive = true,
-                  guiActiveEditor = true,
-                  isPersistant = true),
-                  UI_Toggle(disabledText = "Off", enabledText = "On")]
-        public bool KuddleShackEnabled = false;
+        [KSPField(guiName = "#MOAR-Kuddle-00", groupName = "MoarKerbals", guiActive = true, guiActiveEditor = true, isPersistant = true),
+            UI_Toggle(disabledText = "Off", enabledText = "On")]
+        public bool KuddleShackEnabled;
+        [KSPField(guiName = "Next offspring", groupName = "MoarKerbals", guiActive = true)]
+        public string timeRemaining = "--";
+        [KSPField(guiName = "Status", groupName = "MoarKerbals", guiActive = true)]
+        public string activityStatus = "Starting";
+        [KSPField(guiName = "Pairs", groupName = "MoarKerbals", guiActive = true)]
+        public string currentPair = "None";
+        [KSPField(guiName = "Ready pairs", groupName = "MoarKerbals", guiActive = true)]
+        public string readyPairs = "0 / 0";
+        // Legacy fields mirror the first pair for migration and limited older-version recovery.
+        [KSPField(isPersistant = true)] public double progressSeconds;
+        [KSPField(isPersistant = true)] public string pairSignature = "";
+        [KSPField(isPersistant = true)] public double timeCheckpointUT = -1;
+        [KSPField(isPersistant = true)] public bool wasProgressing;
+        [KSPField(isPersistant = true)] public int pairStateVersion;
+        internal readonly List<KuddlePair> pairs = new List<KuddlePair>();
+        private bool pairsInitialized;
+        private bool hasPair;
+        private List<PartModule> lights = new List<PartModule>();
+        private bool? lightsOn;
+        private bool started;
+        private float nextDisplayTime;
+        private bool lastCompletionFailed;
+        private float nextHeadingTime;
+        private double RequiredTime => Math.Max(0, SettingsInterface.kuddleTimeNeeded());
 
-
-        [KSPField(guiName = "#MOAR-Kuddle-12",
-                  groupName = "MoarKerbals",
-                  guiActive = true,
-                  guiActiveEditor = true,
-                  isPersistant = false)]
-        public string timeRemaining = Localizer.Format("#MOAR-Kuddle-13");
-
-        #region SoundVars
-
-        /// <summary>kuddling success sound</summary>
-        protected AudioSource kuddling_success0;
-
-        /// <summary>kuddling success sound</summary>
-        protected AudioSource kuddling_success1;
-
-        /// <summary>kuddling success sound</summary>
-        protected AudioSource kuddling_failure0;
-
-        /// <summary>kuddling success sound</summary>
-        protected AudioSource kuddling_failure1;
-        #endregion
-
-        /// <summary>
-        /// Unity OnStart()
-        /// </summary>
-        /// <param name="state"></param>
-        public override void OnStart(PartModule.StartState state)
+        public override void OnLoad(ConfigNode node)
         {
-            //Logging.DLog("KuddleShack.OnStart");
+            base.OnLoad(node);
+            pairs.Clear();
+            var saved = node.GetNodes("KUDDLE_PAIR");
+            foreach (var record in saved)
+            {
+                var pair = KuddlePair.Read(record);
+                if (pair != null) pairs.Add(pair);
+                else Logging.DLogWarning("Ignoring an invalid saved KuddleShack pair.");
+            }
+            int version;
+            pairStateVersion = int.TryParse(node.GetValue("pairStateVersion"), out version) ? version : 0;
+            pairsInitialized = pairStateVersion >= 1 || saved.Length > 0;
+        }
+
+        public override void OnStart(StartState state)
+        {
             base.OnStart(state);
-
-            if (HighLogic.CurrentGame.Parameters.CustomParams<Settings3>().coloredPAW)
-                Fields["KuddleShackEnabled"].group.displayName = System.String.Format("<color=#BADA55>" + groupName + "</color>");
-            else
-                Fields["KuddleShackEnabled"].group.displayName = groupName;
-
-            kuddling_success0 = gameObject.AddComponent<AudioSource>();
-            kuddling_success0.clip = GameDatabase.Instance.GetAudioClip("KerbthulhuKineticsProgram/MoarKerbals/Sounds/kuddleshack");
-            kuddling_success0.volume = 0.9f;
-            kuddling_success0.panStereo = 0;
-            kuddling_success0.rolloffMode = AudioRolloffMode.Linear;
-            kuddling_success0.Stop();
-
-            kuddling_success1 = gameObject.AddComponent<AudioSource>();
-            kuddling_success1.clip = GameDatabase.Instance.GetAudioClip("KerbthulhuKineticsProgram/MoarKerbals/Sounds/positive");
-            kuddling_success1.volume = 0.9f;
-            kuddling_success1.panStereo = 0;
-            kuddling_success1.rolloffMode = AudioRolloffMode.Linear;
-            kuddling_success1.Stop();
-
-            kuddling_failure0 = gameObject.AddComponent<AudioSource>();
-            kuddling_failure0.clip = GameDatabase.Instance.GetAudioClip("KerbthulhuKineticsProgram/MoarKerbals/Sounds/misc_sound");
-            kuddling_failure0.volume = 0.9f;
-            kuddling_failure0.panStereo = 0;
-            kuddling_failure0.rolloffMode = AudioRolloffMode.Linear;
-            kuddling_failure0.Stop();
-
-            kuddling_failure1 = gameObject.AddComponent<AudioSource>();
-            kuddling_failure1.clip = GameDatabase.Instance.GetAudioClip("KerbthulhuKineticsProgram/MoarKerbals/Sounds/negative");
-            kuddling_failure1.volume = 0.9f;
-            kuddling_failure1.panStereo = 0;
-            kuddling_failure1.rolloffMode = AudioRolloffMode.Linear;
-            kuddling_failure1.Stop();
-
-            Events["ActivateKuddling"].guiName = "#MOAR-Kuddle-00"; // initiateAction;
-            Events["ActivateKuddling"].guiActive = false;
-            GameEvents.onCrewBoardVessel.Add(onCrewBoardVessel);
-            GameEvents.onCrewTransferred.Add(onCrewTransferred);
-            GameEvents.onCrewOnEva.Add(onCrewOnEva);
-
-            GetLightingModules();
-            GetMatingStatus();
-            StartCoroutine(SlowUpdate());
+            if (!HighLogic.LoadedSceneIsFlight) return;
+            lights = SwitchLight.GetLightModule(part);
+            started = true;
+            SynchronizeProgress(false);
+            UpdateDisplay();
         }
 
-        /// <summary>
-        /// Unity OnFixedUpdate ()
-        /// </summary>
-        private protected void OnFixedUpdate()
+        public override void OnSave(ConfigNode node)
         {
-            if (HighLogic.CurrentGame.Parameters.CustomParams<Settings3>().coloredPAW)
-                Fields["KuddleShackEnabled"].group.displayName = System.String.Format("<color=#BADA55>" + groupName + "</color>");
-            else
-                Fields["KuddleShackEnabled"].group.displayName = groupName;
+            if (started && HighLogic.LoadedSceneIsFlight && vessel != null) SynchronizeProgress(FlightDriver.Pause);
+            base.OnSave(node);
+            node.RemoveNodes("KUDDLE_PAIR");
+            foreach (var pair in pairs) pair.Write(node.AddNode("KUDDLE_PAIR"));
+            node.SetValue("pairStateVersion", pairsInitialized ? 1 : pairStateVersion, true);
+            node.SetValue("progressSeconds", progressSeconds.ToString("R", CultureInfo.InvariantCulture), true);
+            node.SetValue("timeCheckpointUT", timeCheckpointUT.ToString("R", CultureInfo.InvariantCulture), true);
+            node.SetValue("wasProgressing", wasProgressing, true);
+            node.SetValue("pairSignature", pairSignature, true);
         }
 
-        private List<PartModule> modulesLight = new List<PartModule>();
-
-        void GetLightingModules()
+        // Unity Update also runs on IDLE cabins; stock OnFixedUpdate only runs on ACTIVE parts.
+        public void Update()
         {
-            Logging.DLog(logMsg: $"Kuddle: GetLightingModules");
-            // Check for lightable modules
-            if (part.Modules.Contains<ModuleColorChanger>())
+            if (!started || !HighLogic.LoadedSceneIsFlight || vessel == null) return;
+            bool changed = SynchronizeProgress(FlightDriver.Pause);
+            if (changed || Time.unscaledTime >= nextDisplayTime)
             {
-                ModuleColorChanger partM = part.Modules.GetModule<ModuleColorChanger>();
-                modulesLight.Add(partM);
+                UpdateDisplay();
+                nextDisplayTime = Time.unscaledTime + 0.5f;
             }
-            if (part.Modules.Contains<ModuleLight>())
+        }
+
+        public void LateUpdate()
+        {
+            if (!started || !HighLogic.LoadedSceneIsFlight || Time.unscaledTime < nextHeadingTime) return;
+            nextHeadingTime = Time.unscaledTime + 0.5f;
+            try { KuddleCrewHeadings.Refresh(part); }
+            catch (Exception error) { Logging.DLogWarning("KuddleShack crew heading refresh: " + error.Message); }
+        }
+
+        private bool SynchronizeProgress(bool paused)
+        {
+            double now = Planetarium.GetUniversalTime();
+            var crew = part.protoModuleCrew.Where(k => k.type == ProtoCrewMember.KerbalType.Crew).ToArray();
+            var males = crew.Where(k => k.gender == ProtoCrewMember.Gender.Male).Select(k => k.name).OrderBy(n => n, StringComparer.Ordinal).ToArray();
+            var females = crew.Where(k => k.gender == ProtoCrewMember.Gender.Female).Select(k => k.name).OrderBy(n => n, StringComparer.Ordinal).ToArray();
+            if (!pairsInitialized)
             {
-                foreach (ModuleLight partM in part.Modules.GetModules<ModuleLight>())
-                    modulesLight.Add(partM);
+                // Carry the old pair's earned progress/checkpoint into exactly that pair, once.
+                foreach (var male in males)
+                    foreach (var female in females)
+                        if (KuddlePair.Signature(male, female) == pairSignature)
+                            pairs.Add(new KuddlePair { Male = male, Female = female, Progress = progressSeconds,
+                                Checkpoint = timeCheckpointUT, Running = wasProgressing });
+                pairsInitialized = true;
             }
-            if (part.Modules.Contains<ModuleAnimateGeneric>())
-            {
-                foreach (ModuleAnimateGeneric partM in part.Modules.GetModules<ModuleAnimateGeneric>())
-                    modulesLight.Add(partM);
-            }
-            if (part.Modules.Contains("WBILight"))
-            {
-                foreach (PartModule partM in part.Modules)
+            int limit = Math.Max(0, part.CrewCapacity / 2);
+            var retained = new List<KuddlePair>();
+            var used = new HashSet<string>(StringComparer.Ordinal);
+            // Preserve partners and independent clocks; do not reshuffle on crew ordering or arrivals.
+            foreach (var pair in pairs)
+                if (retained.Count < limit && males.Contains(pair.Male) && females.Contains(pair.Female) &&
+                    !used.Contains(pair.Male) && !used.Contains(pair.Female))
                 {
-                    if (partM.ClassName == "WBILight")
-                        modulesLight.Add(partM);
+                    used.Add(pair.Male); used.Add(pair.Female); retained.Add(pair);
                 }
-            }
-            if (part.Modules.Contains("ModuleKELight"))
+            var freeMales = males.Where(n => !used.Contains(n)).ToArray();
+            var freeFemales = females.Where(n => !used.Contains(n)).ToArray();
+            for (int i = 0; i < Math.Min(freeMales.Length, freeFemales.Length) && retained.Count < limit; i++)
+                retained.Add(new KuddlePair { Male = freeMales[i], Female = freeFemales[i], Checkpoint = now });
+            bool changed = pairs.Count != retained.Count || !pairs.SequenceEqual(retained);
+            pairs.Clear(); pairs.AddRange(retained);
+            hasPair = pairs.Count > 0;
+            foreach (var pair in pairs)
             {
-                foreach (PartModule partM in part.Modules)
+                bool progressing = KuddleShackEnabled && isEnabled;
+                double elapsed = pair.Checkpoint >= 0 ? now - pair.Checkpoint : 0;
+                pair.Progress = Rules.Advance(pair.Progress, elapsed, RequiredTime, pair.Running && progressing && !paused, true);
+                pair.Checkpoint = now;
+                pair.Running = progressing;
+            }
+            if (changed) lastCompletionFailed = false;
+            currentPair = pairs.Count == 1 ? GenderLabels.Pair(pairs[0].Male, pairs[0].Female) : hasPair ? pairs.Count + " pairs" :
+                males.Length == 0 && females.Length == 0 ? "No eligible crew" : males.Length == 0 ?
+                "Needs a male crew member" : females.Length == 0 ? "Needs a female crew member" : "Needs at least two seats";
+            pairStateVersion = 1;
+            MirrorLegacy(now);
+            return changed;
+        }
+
+        private void MirrorLegacy(double now)
+        {
+            var pair = pairs.FirstOrDefault();
+            progressSeconds = pair != null ? pair.Progress : 0;
+            pairSignature = pair != null ? KuddlePair.Signature(pair.Male, pair.Female) : "";
+            timeCheckpointUT = pair != null ? pair.Checkpoint : now;
+            wasProgressing = pair != null && pair.Running;
+        }
+
+        private static string Duration(double remaining)
+        {
+            double seconds = Math.Ceiling(Math.Max(0, remaining));
+            return string.Format("{0}h {1}m {2}s", (int)(seconds / 3600), (int)(seconds / 60) % 60, (int)seconds % 60);
+        }
+
+        private void UpdateDisplay()
+        {
+            int ready = pairs.Count(p => p.Progress >= RequiredTime);
+            readyPairs = ready + " / " + pairs.Count;
+            bool room = Rules.HasRoom(part.protoModuleCrew.Count, part.CrewCapacity, false);
+            string blocker = ready > 0 ? CompletionBlocker() : "";
+            string action = ready > 1 ? "Welcome ready Kerbals" : "Welcome new Kerbal";
+            activityStatus = !isEnabled ? "Paused: module disabled" : !KuddleShackEnabled ? "Off: progress paused" :
+                !hasPair ? "Waiting: " + currentPair : FlightDriver.Pause ? "Paused: game paused" : ready == 0 ?
+                (room ? "In progress" : "In progress; needs a free seat to finish") : !room ? "Blocked: cabin full" :
+                blocker.Length != 0 ? "Blocked: " + blocker : lastCompletionFailed ?
+                "Ready: previous attempt failed; retry or check KSP.log" : "Ready: select " + action;
+            var completion = Events["ActivateKuddling"];
+            completion.guiName = action;
+            completion.guiActive = completion.guiActiveUnfocused = isEnabled && KuddleShackEnabled && ready > 0 &&
+                !FlightDriver.Pause && vessel.loaded && room && blocker.Length == 0;
+            timeRemaining = hasPair ? Duration(RequiredTime - pairs.Max(p => p.Progress)) : "--";
+            bool illuminate = isEnabled && KuddleShackEnabled && hasPair;
+            if (lightsOn != illuminate)
+            {
+                foreach (var light in lights)
                 {
-                    if (partM.ClassName == "ModuleKELight")
-                        modulesLight.Add(partM);
+                    try { if (illuminate) SwitchLight.On(light); else SwitchLight.Off(light); }
+                    catch (Exception error) { Logging.DLogWarning("Optional cabin light: " + error.Message); }
                 }
+                lightsOn = illuminate;
             }
         }
 
-
-        bool readyToKuddle = false;
-        const int SECS_IN_DAY = 21600;
-        const int SECS_IN_HOUR = 3600;
-        const int SECS_IN_MINUTE = 60;
-        IEnumerator SlowUpdate()
+        [KSPEvent(guiName = "Pair details", groupName = "MoarKerbals", guiActive = true)]
+        public void ShowPairDetails()
         {
-            while (true)
-            {
-                yield return new WaitForSeconds((float)SettingsInterface.slowUpdateTime());
-                if (!readyToKuddle)
-                    Events["ActivateKuddling"].guiActive = false;
-                if (hasMatingPair && KuddleShackEnabled)
-                {
-                    if (GatherResources(part, (float)SettingsInterface.slowUpdateTime() / SettingsInterface.kuddleTimeNeeded()))
-                    {
-                        int t = (int)(Planetarium.GetUniversalTime() - startMatingTimer);
-                        if (t > 1f)
-                        {
-                            int days = t / SECS_IN_DAY;
-                            int hours = (t - days * SECS_IN_DAY) / SECS_IN_HOUR;
-                            int minutes = (t - days * SECS_IN_DAY - hours * SECS_IN_HOUR) / SECS_IN_MINUTE;
-                            int seconds = t - days * SECS_IN_DAY - hours * SECS_IN_HOUR - minutes * SECS_IN_MINUTE;
-
-                            string time = "";
-                            if (t >= SECS_IN_DAY)
-                                time += days + " days";
-                            if (t >= SECS_IN_HOUR)
-                            {
-                                if (time.Length > 0) time += ", ";
-                                time += hours + " hours";
-                            }
-                            if (t >= SECS_IN_MINUTE)
-                            {
-                                if (time.Length > 0) time += ", ";
-                                time += minutes + " minutes";
-                            }
-                            if (time.Length > 0) time += ", ";
-                            time += seconds + " seconds";
-                            Logging.Msg(Localizer.Format("#MOAR-Kuddle-01", time.ToString()));
-
-                            timeRemaining = $" {time}";
-                        }
-
-                        if (Planetarium.GetUniversalTime() - startMatingTimer >= SettingsInterface.kuddleTimeNeeded())
-                        {
-                            readyToKuddle = true;
-                            Events["ActivateKuddling"].guiActive = true;
-                            Logging.Msg(s: Localizer.Format("#MOAR-Kuddle-02")); // "Minimum Kuddle Time Reached"
-                        }
-                    }
-                    else
-                        readyToKuddle = false;
-                }
-            }
+            if (!HighLogic.LoadedSceneIsFlight) return;
+            GenderSymbolFont.Ensure();
+            SynchronizeProgress(FlightDriver.Pause);
+            string details = hasPair ? string.Join("\n", pairs.Select(p => GenderLabels.Pair(p.Male, p.Female) + ": " +
+                (p.Progress >= RequiredTime ? "Ready" : Duration(RequiredTime - p.Progress))).ToArray()) : currentPair;
+            ScreenMessages.PostScreenMessage(details, 12f, ScreenMessageStyle.UPPER_CENTER);
         }
 
-        /// <summary>has a male kerbal</summary>
-        [KSPField]
-        bool hasMale = false; /// <summary>has x kerbal</summary>
-
-        /// <summary>has a femalmale kerbal</summary>
-        [KSPField]
-        bool hasFemale = false;  /// <summary>has y kerbal</summary>
-
-        /// <summary>has a male and female kerbal</summary>
-        [KSPField]
-        bool hasMatingPair = false; /// <summary>has mating pair of kerbals</summary>
-
-        /// <summary>the mating timer (how long has there been a mating pair)</summary>
-        [KSPField]
-        double startMatingTimer = 0;  /// <summary>start mating timer</summary>
-
-
-        /// <summary>GetMatingStatus</summary>
-        void GetMatingStatus()
-        {
-            Logging.DLog(logMsg: $"Kuddle: GetMatingStatus");
-            hasMale = false;
-            hasFemale = false;
-
-            foreach (var k in part.protoModuleCrew)
-            {
-                if (k.gender == ProtoCrewMember.Gender.Male)
-                    hasMale = true;
-                if (k.gender == ProtoCrewMember.Gender.Female)
-                    hasFemale = true;
-            }
-
-            bool newHasMatingPair = hasMale && hasFemale;
-            if (!hasMatingPair && newHasMatingPair)
-            {
-                startMatingTimer = Planetarium.GetUniversalTime();
-                hasMatingPair = true;
-                SwitchLight.On(modulesLight);
-            }
-            else
-            {
-                if (!newHasMatingPair)
-                {
-                    hasMatingPair = false;
-                    SwitchLight.Off(modulesLight);
-                }
-            }
-        }
-
-        /// <summary> GameEvent: crew boards vessel.</summary>
-        /// <param name="fta">The FromToAction.</param>
-        void onCrewBoardVessel(GameEvents.FromToAction<Part, Part> fta)
-        {
-            Logging.DLog(logMsg: $"Kuddle: onCrewBoardVessel");
-            GetMatingStatus();
-        }
-
-        /// <summary> GameEvent: crew transfers.</summary>
-        /// <param name="hfta">The HostedFromToAction.</param>
-        void onCrewTransferred(GameEvents.HostedFromToAction<ProtoCrewMember, Part> hfta)
-        {
-            Logging.DLog(logMsg: $"Kuddle: HostedFromToAction");
-            GetMatingStatus();
-        }
-
-        /// <summary> GameEvent: crew on EVA.</summary>
-        /// /// <param name="hfta">The hfta.</param>
-        /// <param name="fta">The FromToAction.</param>
-        void onCrewOnEva(GameEvents.FromToAction<Part, Part> fta)
-        {
-            Logging.DLog(logMsg: $"Kuddle: FromToAction");
-            GetMatingStatus();
-        }
-
-        /// <summary>KSPEvent: Complete Kuddling</summary>
-        [KSPEvent(guiName = "#MOAR-Kuddle-03",
-                  groupName = "MoarKerbals",
-                  active = true,
-                  guiActiveUncommand = true,
-                  guiActiveUnfocused = true,
-                  guiActive = true)]
+        [KSPEvent(guiName = "Welcome new Kerbal", groupName = "MoarKerbals", guiActive = false, guiActiveUnfocused = false)]
         public void ActivateKuddling()
         {
-            Logging.DLog(logMsg: $"Kuddle: ActivateKuddling");
-            //{
-            //Logging.DLog(logMsg: $"Kuddle: KuddleShackEnabled");
-
-            //if (hasMatingPair && Planetarium.GetUniversalTime() - startMatingTimer >= SettingsInterface.kuddleTimeNeeded())
-            if (hasMatingPair)
+            if (!HighLogic.LoadedSceneIsFlight || vessel == null) return;
+            SynchronizeProgress(FlightDriver.Pause);
+            UpdateDisplay();
+            if (!KuddleShackEnabled || !isEnabled || FlightDriver.Pause || !vessel.loaded) return;
+            // Snapshot the ready cohort. Newborns/new pairs never enter this completion batch.
+            var ready = pairs.Where(p => p.Progress >= RequiredTime).ToArray();
+            int births = 0;
+            foreach (var pair in ready)
             {
-                if (PartHasRoom(part) && GatherResources(part))
+                SynchronizeProgress(FlightDriver.Pause);
+                if (!KuddleShackEnabled || !isEnabled || FlightDriver.Pause || !vessel.loaded) break;
+                if (!pairs.Contains(pair) || pair.Progress < RequiredTime) continue;
+                if (!Rules.HasRoom(part.protoModuleCrew.Count, part.CrewCapacity, false)) break;
+                string blocker = CompletionBlocker();
+                if (blocker.Length != 0) { Logging.Msg("KuddleShack: " + blocker); break; }
+                if (!ExecutePaid(() => CreateCrew(HighLogic.CurrentGame.Parameters.CustomParams<MoarKerbalsGameplaySettings>().kuddleCivilians)))
                 {
-                    KuddleKerbal();
-                    //startMatingTimer = 0d;
-                    GameEvents.onVesselChange.Fire(FlightGlobals.ActiveVessel);
+                    lastCompletionFailed = true;
+                    break;
                 }
+                births++;
+                pair.Progress = 0;
+                pair.Checkpoint = Planetarium.GetUniversalTime();
+                lastCompletionFailed = false;
             }
-            else
+            SynchronizeProgress(FlightDriver.Pause);
+            UpdateDisplay();
+            if (births == 0 && lastCompletionFailed) activityStatus = "Completion failed: see on-screen message or KSP.log";
+            if (births > 0)
             {
-                if (hasMatingPair)
-                    Logging.Msg(s: Localizer.Format("#MOAR-Kuddle-04")); // "Insufficient time for reproduction"
-                else
-                {
-                    if (part.protoModuleCrew.Count == 2) Logging.Msg(Localizer.Format("#MOAR-Kuddle-05")); // "One kerbal of each gender is needed for kuddling"
-                    else Logging.Msg(s: Localizer.Format("#MOAR-Kuddle-06")); // Two kerbals are needed for kuddling
-                }
+                Logging.Msg(births == 1 ? "A new Kerbal has joined the crew." : births + " new Kerbals have joined the crew.");
+                PlaySound("B", true);
+                NotifyCrewChanged();
             }
-            //}
         }
 
-        /// <summary>
-        /// Where kerbal meets kerbal
-        /// </summary>
-        private protected void KuddleKerbal()
+        public override string GetInfo() => RecipeInfo("Independent simultaneous male/female pairs, up to half the seat capacity. Stable partners and separate timers persist while elsewhere. Each offspring needs a free seat and one recipe payment. Consumables use unlocked tanks on this vessel.");
+    }
+
+    internal sealed class KuddlePair
+    {
+        public string Male, Female;
+        public double Progress;
+        public double Checkpoint = -1;
+        public bool Running;
+        public static string Signature(string male, string female) => male.Length + ":" + male + female;
+        public void Write(ConfigNode node)
         {
-            Logging.DLog(logMsg: "Kuddle: KuddleKerbal");
-            DebitCurrencies();
-            ProtoCrewMember kerbal = HighLogic.CurrentGame.CrewRoster.GetNewKerbal();
-            kerbal.suit = (ProtoCrewMember.KerbalSuit)HighLogic.CurrentGame.Parameters.CustomParams<Settings2>().birthdaySuit;
-            kerbal.trait = Localizer.Format("#MOAR-004");
-
-            if (HighLogic.CurrentGame.Parameters.CustomParams<Settings2>().kloneCivilians) KerbalRoster.SetExperienceTrait(kerbal, Localizer.Format("#MOAR-004")); ;
-            part.AddCrewmember(kerbal);
-
-            if (kerbal.seat != null)
-                kerbal.seat.SpawnCrew();
-
-            kerbal.rosterStatus = ProtoCrewMember.RosterStatus.Assigned;
-
-            if (HighLogic.CurrentGame.Parameters.CustomParams<Settings2>().kuddleCivilians) KerbalRoster.SetExperienceTrait(kerbal, Localizer.Format("#MOAR-004"));
-
-            // "Kuddling Success!  " + kerbal.name + "(Lv " + kerbal.experienceLevel.ToString() + " " + kerbal.experienceTrait.Title + ") has joined your space program");
-            Logging.Msg(s: Localizer.Format("#MOAR-Kuddle-11", kerbal.name, kerbal.experienceLevel.ToString(), kerbal.experienceTrait.Title), true);
-
-            if (HighLogic.CurrentGame.Parameters.CustomParams<Settings2>().soundOn) SuccessSound();
+            node.SetValue("male", Male, true); node.SetValue("female", Female, true);
+            node.SetValue("progress", Progress.ToString("R", CultureInfo.InvariantCulture), true);
+            node.SetValue("checkpoint", Checkpoint.ToString("R", CultureInfo.InvariantCulture), true);
+            node.SetValue("running", Running, true);
         }
-
-        //Checks to make sure there are two kerbals and that there is room to store the new kerbal
-        private bool PartHasRoom(Part part)
+        public static KuddlePair Read(ConfigNode node)
         {
-            Logging.DLog(logMsg: $"Kuddle: PartHasRoom");
-            if ((part.protoModuleCrew.Count < part.CrewCapacity) && ((part.protoModuleCrew.Count > 0)))
-            {
-                bool male = false, female = false;
-                foreach (var k in part.protoModuleCrew)
-                {
-                    if (!male)
-                        male = (k.gender == ProtoCrewMember.Gender.Male);
-                    Logging.DLog(logMsg: "Found a male");
-                    if (!female)
-                        female = (k.gender == ProtoCrewMember.Gender.Female);
-                    Logging.DLog(logMsg: "Found a female");
-                }
-                if (male && female)
-                {
-                    Logging.DLog(logMsg: "Found a mating pair");
-                    return true;
-                }
-                else Logging.Msg(Localizer.Format("#MOAR-Kuddle-08"));  // "Kuddling requires both a male and female kerbal"
-            }
-            else
-            {
-                if (part.protoModuleCrew.Count == 0) Logging.Msg(Localizer.Format("#MOAR-Kuddle-06")); // Two kerbals are needed for reproduction
-                else if (part.protoModuleCrew.Count == part.CrewCapacity) Logging.Msg(Localizer.Format("#MOAR-Kuddle-09")); // "No room left to kuddle"
-            }
-            return false;
+            string male = node.GetValue("male"), female = node.GetValue("female");
+            double progress, checkpoint;
+            bool running;
+            if (string.IsNullOrEmpty(male) || string.IsNullOrEmpty(female) || male == female ||
+                !double.TryParse(node.GetValue("progress"), NumberStyles.Float, CultureInfo.InvariantCulture, out progress) ||
+                !Rules.FiniteNonNegative(progress) ||
+                !double.TryParse(node.GetValue("checkpoint"), NumberStyles.Float, CultureInfo.InvariantCulture, out checkpoint) ||
+                double.IsNaN(checkpoint) || double.IsInfinity(checkpoint) || checkpoint < -1 ||
+                !bool.TryParse(node.GetValue("running"), out running)) return null;
+            return new KuddlePair { Male = male, Female = female, Progress = progress, Checkpoint = checkpoint, Running = running };
         }
-
-        /// <summary>Play sound upon failure</summary>
-        private void FailureSound()
-        {
-            Logging.DLog(logMsg: $"Kuddle: Failure Sound");
-            int _soundSelection = HighLogic.CurrentGame.Parameters.CustomParams<Settings>().soundClipB0;
-            if (_soundSelection == 0)
-            {
-                System.Random newRand = new System.Random();
-                _soundSelection = newRand.Next(1, 2);
-            }
-            switch (_soundSelection)
-            {
-                case 1:
-                    kuddling_failure0.volume = HighLogic.CurrentGame.Parameters.CustomParams<Settings>().soundVolume;
-                    kuddling_failure0.Play();
-                    return;
-                case 2:
-                    kuddling_failure1.volume = HighLogic.CurrentGame.Parameters.CustomParams<Settings>().soundVolume;
-                    kuddling_failure1.Play();
-                    return;
-                default:
-                    return;
-            }
-        }
-
-        /// <summary>Play sound upon success</summary>
-        private void SuccessSound()
-        {
-            Logging.DLog(logMsg: $"Kuddle: Success Sound");
-            int _soundSelection = HighLogic.CurrentGame.Parameters.CustomParams<Settings>().soundClipB1;
-            if (_soundSelection == 0)
-            {
-                System.Random newRand = new System.Random();
-                _soundSelection = newRand.Next(1, 2);
-            }
-            switch (_soundSelection)
-            {
-                case 1:
-                    kuddling_success0.volume = HighLogic.CurrentGame.Parameters.CustomParams<Settings>().soundVolume;
-                    kuddling_success0.Play();
-                    return;
-                case 2:
-                    kuddling_success1.volume = HighLogic.CurrentGame.Parameters.CustomParams<Settings>().soundVolume;
-                    kuddling_success1.Play();
-                    return;
-                default:
-                    return;
-            }
-        }
-
-        /// <summary>Module information shown in editors</summary>
-        private string info = string.Empty;
-
-        /// <summary>What shows up in editor for the part</summary>
-        /// <returns></returns>
-        public override string GetInfo()
-        {
-            base.OnStart(StartState.None);
-
-            /* :::This is what it should look like with default settings:::
-             * 
-             * MoarKerbals
-             * Kerbthulhu Kinetics Program
-             * v 1.3.0.0
-             * 
-             * Input: (color)
-             * One kerbal of each gender is needed for kuddling
-             * 
-             * Required Resources: (color)
-             * - ElectricCharge: 8000
-             * - Oxidizer: 100
-             * - Ore: 500
-             * 
-             * Required Currency: (color)
-             * - Funds 1000
-             * - Science: 1
-             * - Reputation: 2
-             * 
-             * Output:
-             * A brand new Kerbal.
-             * 
-             */
-            info += Localizer.Format("#MOAR-Manu") + "\r\n"; // Kerbthulhu Kinetics Program
-            info += Localizer.Format("#MOAR-003", Version.SText) + "\r\n"; // MoarKerbals v Version Number text
-
-            info += $"\r\n<color=#FFFF19>{Localizer.Format("#MOAR-005")}:</color>\r\n"; // Input
-            info += $"{Localizer.Format("#MOAR-Kuddle-05")}\r\n"; // One kerbal of each gender is needed for kuddling
-
-            info += $"\r\n\t{Localizer.Format("#MOAR-Kuddle-13")}\r\n"; // "what, no disco music?"
-
-            // info += $"Global Cost Multiplier of {gblMult:P2} (is not included)\r\n";
-
-            // resource section header
-            info += String.Format("\r\n<color=#00CC00>" + Localizer.Format("#MOAR-008") + ":</color>\r\n"); // Resources: <color=#E600E6>
-
-            // create string with all resourceRequired.name and resourceRequired.amount
-            foreach (ResourceRequired resources in resourceRequired)
-                info += String.Format("- {0}: {1:n0}\r\n", resources.resource, resources.amount);
-
-            // currency section header
-            if ((costFunds != 0) || (costScience != 0) || (costReputation != 0))
-            {
-                info += String.Format("\r\n<color=#00CC00>" + Localizer.Format("#MOAR-009") + ":</color>"); // Currency:
-                if (costFunds != 0) info += $"\r\n- {Localizer.Format("#autoLOC_7001031")}: {costFunds:n0}";
-                if (costScience != 0) info += $"\r\n- {Localizer.Format("#autoLOC_7001032")}: {costScience:n0}";
-                if (costReputation != 0) info += $"\r\n- {Localizer.Format("#autoLOC_7001033")}: {costReputation:n0}";
-                info += "\r\n"; // line return
-            }
-
-            info += $"\r\n<color=#FFFF19>{Localizer.Format("#MOAR-006")}:</color>\r\n"; // Output:
-            info += $"{Localizer.Format("#MOAR-Kuddle-10")}."; // A brand new Kerbal.
-
-            return info;
-        }
-
     }
 }

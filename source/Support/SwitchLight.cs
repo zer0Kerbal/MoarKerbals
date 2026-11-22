@@ -12,6 +12,7 @@ namespace MoarKerbals
 	{
 		public static void On(PartModule light)
 		{
+			if (light == null) return;
 			switch (light.moduleName)
 			{
 				case "ModuleColorChanger":
@@ -48,6 +49,7 @@ namespace MoarKerbals
 
 		public static void Off(PartModule light)
 		{
+			if (light == null) return;
 			switch (light.moduleName)
 			{
 				case "ModuleColorChanger":
@@ -66,9 +68,9 @@ namespace MoarKerbals
 					castML.LightsOff();
 					break;
 				case "ModuleAnimateGeneric":
-				case "ModuleAnumateGenericConsumer":
+				case "ModuleAnimateGenericConsumer":
 					ModuleAnimateGeneric castMAG = (ModuleAnimateGeneric)light;
-					castMAG.Toggle();
+					if (!castMAG.animSwitch) castMAG.Toggle();
 					break;
 				case "WBILight":
 					light.GetType().InvokeMember("TurnOffLights", BindingFlags.InvokeMethod, null, light, null);
@@ -171,11 +173,12 @@ namespace MoarKerbals
 		public static bool IsOn(List<PartModule> modulesLight)
 		{
 			// not that usefull but needed for IsOn(Part)
-			return IsOn(modulesLight[0]);
+			return modulesLight != null && modulesLight.Count > 0 && IsOn(modulesLight[0]);
 		}
 
 		public static bool IsOn(PartModule light)
 		{
+			if (light == null) return false;
 			switch (light.moduleName)
 			{
 				case "ModuleColorChanger":
@@ -191,7 +194,7 @@ namespace MoarKerbals
 					return castML.isOn;
 
 				case "ModuleAnimateGeneric":
-				case "ModuleAnumateGenericConsumer":
+				case "ModuleAnimateGenericConsumer":
 					ModuleAnimateGeneric castMAG = (ModuleAnimateGeneric)light;
 					return !castMAG.animSwitch;
 

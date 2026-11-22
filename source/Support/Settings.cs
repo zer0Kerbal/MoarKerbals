@@ -1,4 +1,4 @@
-﻿// Settings.cs v1.0.0.0
+// Settings.cs v1.0.0.0
 #region CC BY-NC-SA 3.0
 /* Settings.cs
  * 
@@ -50,7 +50,7 @@ namespace MoarKerbals
 
     /// <summary>Game Settings</summary>
     /// <seealso cref="GameParameters.CustomParameterNode" />
-    public class Settings : GameParameters.CustomParameterNode
+    public class MoarKerbalsGeneralSettings : GameParameters.CustomParameterNode
     {
         /// <summary>Gets the game mode.</summary>
         /// <value>The game mode.</value>
@@ -191,7 +191,7 @@ namespace MoarKerbals
         /// <returns>null</returns>
         public override IList ValidValues(MemberInfo member) { return null; }
     }
-    class Settings2 : GameParameters.CustomParameterNode
+    public class MoarKerbalsGameplaySettings : GameParameters.CustomParameterNode
     {
         /// <summary>Gets the game mode.</summary>
         /// <value>The game mode.</value>
@@ -247,6 +247,10 @@ namespace MoarKerbals
             newGameOnly = false, unlockedDuringMission = true)]
         public bool kloneCivilians = true;
 
+        [GameParameters.CustomParameterUI("#MOAR-Settings-copy", toolTip = "#MOAR-Settings-copy-Tip",
+            newGameOnly = false, unlockedDuringMission = true)]
+        public bool cloneSourceAttributes = false;
+
         [GameParameters.CustomParameterUI("#MOAR-Settings-bc", toolTip = "#MOAR-Settings-bc-Tip",
             newGameOnly = false, unlockedDuringMission = true)]
         public bool kuddleCivilians = true;
@@ -267,7 +271,7 @@ namespace MoarKerbals
             minValue = 0, maxValue = 11, stepSize = 1)]
         public int QuentinTarantinoMode = 0;
     }
-    class Settings3 : GameParameters.CustomParameterNode
+    public class MoarKerbalsDisplaySettings : GameParameters.CustomParameterNode
     {
         /// <summary>Gets the game mode.</summary>
         /// <value>The game mode.</value>
