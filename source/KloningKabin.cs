@@ -186,8 +186,9 @@ namespace MoarKerbals
                     Logging.DLog(logMsg: "Situationally Aware");
                     switch (vessel.situation)
                     {
+                        case Vessel.Situations.PRELAUNCH:
                         case Vessel.Situations.LANDED:
-                            Logging.DLog(logMsg: $"Vessel Situation: {Vessel.Situations.LANDED}");
+                            Logging.DLog(logMsg: $"Vessel Situation: {vessel.situation}");
                             if (!allowSplashedOrLanded)
                             {
                                 Logging.Msg(Localizer.Format("#MOAR-KloneBay-02-l"));
