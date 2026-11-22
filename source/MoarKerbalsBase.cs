@@ -56,6 +56,8 @@ namespace MoarKerbals
             //Logging.DLog(logMsg: "MoarKerbalsBase.OnStart");
             // Debug.Log(message: "MoarKerbalsBase.OnStart");
 
+            // GetInfo can also initialise the recipe before OnStart runs.
+            resourceRequired.Clear();
             if (recipeIngredients != string.Empty && recipeAmounts != string.Empty)
             {
                 var resourceList = recipeIngredients.Split(',');

@@ -216,27 +216,26 @@ namespace MoarKerbals
                     }
                 }
 
-                // there has to be a better way to write the following. :D
-                if (PartHasRoom(part) && GatherResources(part) && GatherCurrencies())
+                // Pay once for the initial attempt, including an accident.
+                if (PartHasRoom(part) && GatherCurrencies() && GatherResources(part))
                 {
                     var rnd = new System.Random();
-                    double localDouble = rnd.Next(1, 101);
-                    // No accidents
                     if (accidentRate == 0)
                     {
-                        localDouble = 100d;
+                        KloneKerbal();
                     }
                     else
                     {
-                        if ((accidentRate <= localDouble) && PartHasRoom(part) && GatherResources(part) && GatherCurrencies())
+                        double localDouble = rnd.Next(1, 101);
+                        if (accidentRate <= localDouble)
                         {
                             Logging.DLog(logMsg: $"Accident: roll {localDouble:F0} vs {accidentRate}");
                             KloneKerbal();
                             // twins?
-                            if (AdditionalBirths(rnd))
+                            if (HighLogic.CurrentGame.Parameters.CustomParams<Settings2>().KribbleMode && AdditionalBirths(rnd))
                             {
                                 int count = 2;
-                                while (accidentRate <= localDouble && count <= 9 && PartHasRoom(part) && GatherResources(part) && GatherCurrencies() && HighLogic.CurrentGame.Parameters.CustomParams<Settings2>().KribbleMode)
+                                while (count <= 9 && PartHasRoom(part) && GatherCurrencies() && GatherResources(part))
                                 {
                                     KloneKerbal();
                                     switch (count)
@@ -303,14 +302,9 @@ namespace MoarKerbals
 
         private bool AdditionalBirths(System.Random rnd)
         {
-            double localDouble = 0d;
-            if (accidentRate != 0)
-            {
-                localDouble = rnd.Next(0, 250); // 500
-                Logging.DLog(logMsg: $"AdditionalBirths: roll: {localDouble:F0} vs. {accidentRate}");
-            }
-            else Logging.DLog(logMsg: $"Accidents disabled by setting accidentRate to {accidentRate}");
-            return (localDouble <= accidentRate) && PartHasRoom(part) && GatherResources(part) && GatherCurrencies();
+            double roll = rnd.Next(0, 250);
+            Logging.DLog(logMsg: $"AdditionalBirths: roll: {roll:F0} vs. {accidentRate}");
+            return roll <= accidentRate;
         }
 
         /// <summary>Let's get bloody. Checks settings to see if their is a limits to the number of accident victims</summary>
